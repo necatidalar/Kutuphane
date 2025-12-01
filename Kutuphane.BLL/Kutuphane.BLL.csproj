@@ -6,4 +6,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Core\Core.csproj" />
+    <ProjectReference Include="..\Kutuphane.DAL\Kutuphane.DAL.csproj" />
+    <ProjectReference Include="..\Kutuphane.Model\Kutuphane.Model.csproj" />
+  </ItemGroup>
+
 </Project>

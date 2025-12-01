@@ -8,4 +8,10 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Core\Core.csproj" />
+    <ProjectReference Include="..\Kutuphane.BLL\Kutuphane.BLL.csproj" />
+    <ProjectReference Include="..\Kutuphane.Model\Kutuphane.Model.csproj" />
+  </ItemGroup>
+
 </Project>
