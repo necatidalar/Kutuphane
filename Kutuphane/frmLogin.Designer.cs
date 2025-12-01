@@ -32,63 +32,87 @@
             txtSifre = new TextBox();
             label2 = new Label();
             label3 = new Label();
-            btnEkle = new Button();
+            btnGiris = new Button();
+            checkBox1 = new CheckBox();
             SuspendLayout();
             // 
             // txtKullaniciAdi
             // 
-            txtKullaniciAdi.Location = new Point(108, 41);
+            txtKullaniciAdi.Location = new Point(23, 44);
+            txtKullaniciAdi.Margin = new Padding(4, 4, 4, 4);
             txtKullaniciAdi.Name = "txtKullaniciAdi";
-            txtKullaniciAdi.Size = new Size(199, 23);
+            txtKullaniciAdi.Size = new Size(335, 29);
             txtKullaniciAdi.TabIndex = 2;
             // 
             // txtSifre
             // 
-            txtSifre.Location = new Point(108, 73);
+            txtSifre.Location = new Point(23, 112);
+            txtSifre.Margin = new Padding(4, 4, 4, 4);
             txtSifre.Name = "txtSifre";
-            txtSifre.Size = new Size(199, 23);
+            txtSifre.Size = new Size(335, 29);
             txtSifre.TabIndex = 3;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(29, 44);
+            label2.Location = new Point(23, 19);
+            label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new Size(73, 15);
+            label2.Size = new Size(115, 21);
             label2.TabIndex = 5;
-            label2.Text = "Kullanıcı Adı";
+            label2.Text = "Kullanıcı Adı: ";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(72, 73);
+            label3.Location = new Point(23, 87);
+            label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
-            label3.Size = new Size(30, 15);
+            label3.Size = new Size(53, 21);
             label3.TabIndex = 6;
-            label3.Text = "Şifre";
+            label3.Text = "Şifre: ";
             // 
-            // btnEkle
+            // btnGiris
             // 
-            btnEkle.Location = new Point(108, 102);
-            btnEkle.Name = "btnEkle";
-            btnEkle.Size = new Size(199, 32);
-            btnEkle.TabIndex = 8;
-            btnEkle.Text = "Ekle";
-            btnEkle.UseVisualStyleBackColor = true;
-            btnEkle.Click += btnEkle_Click;
+            btnGiris.FlatStyle = FlatStyle.Flat;
+            btnGiris.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 162);
+            btnGiris.Location = new Point(23, 200);
+            btnGiris.Margin = new Padding(4, 4, 4, 4);
+            btnGiris.Name = "btnGiris";
+            btnGiris.Size = new Size(335, 45);
+            btnGiris.TabIndex = 8;
+            btnGiris.Text = "Giriş";
+            btnGiris.UseVisualStyleBackColor = true;
+            btnGiris.Click += btnGiris_Click;
+            // 
+            // checkBox1
+            // 
+            checkBox1.AutoSize = true;
+            checkBox1.Location = new Point(23, 148);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new Size(119, 25);
+            checkBox1.TabIndex = 9;
+            checkBox1.Text = "Beni Hatırla";
+            checkBox1.UseVisualStyleBackColor = true;
             // 
             // frmLogin
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(345, 423);
-            Controls.Add(btnEkle);
+            BackColor = Color.FromArgb(17, 17, 17);
+            ClientSize = new Size(378, 258);
+            Controls.Add(checkBox1);
+            Controls.Add(btnGiris);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(txtSifre);
             Controls.Add(txtKullaniciAdi);
+            Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            ForeColor = Color.White;
+            Margin = new Padding(4, 4, 4, 4);
             Name = "frmLogin";
-            Text = "Form1";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Kütüphane Otomasyonu - Giriş";
             Load += frmLogin_Load;
             ResumeLayout(false);
             PerformLayout();
@@ -100,6 +124,7 @@
         private TextBox txtSifre;
         private Label label2;
         private Label label3;
-        private Button btnEkle;
+        private Button btnGiris;
+        private CheckBox checkBox1;
     }
 }

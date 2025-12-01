@@ -1,4 +1,4 @@
-﻿using Core;
+﻿using Core.Helpers;
 using Kutuphane.Model.Entity;
 
 namespace Kutuphane.DAL
