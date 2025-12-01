@@ -1,5 +1,4 @@
 ﻿using Kutuphane.BLL.Services;
-using Kutuphane.DAL;
 using Kutuphane.DAL.Repository;
 using Kutuphane.Model.Entity;
 
@@ -21,6 +20,18 @@ namespace Kutuphane.UI
 
         private void btnGiris_Click(object sender, EventArgs e)
         {
+            //var personel = new Personel
+            //{
+            //    AdSoyad = textBox1.Text,
+            //    KullaniciAdi = txtKullaniciAdi.Text,
+            //    Sifre = txtSifre.Text
+            //};
+
+            //_service.Add(personel);
+
+            //MessageBox.Show("Personel başarıyla kaydedildi.");
+
+
             string kullaniciAdi = txtKullaniciAdi.Text;
             string sifre = txtSifre.Text;
 
@@ -29,11 +40,19 @@ namespace Kutuphane.UI
             if (personel != null)
             {
                 MessageBox.Show($"Hoşgeldiniz {personel.AdSoyad}!");
+                frmDashboard dashboard = new frmDashboard();
+                dashboard.Show();
+                this.Hide();
             }
             else
             {
                 MessageBox.Show("Kullanıcı adı veya şifre hatalı!");
             }
+        }
+
+        private void frmLogin_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

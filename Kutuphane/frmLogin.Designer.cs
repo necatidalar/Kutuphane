@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmLogin));
             txtKullaniciAdi = new TextBox();
             txtSifre = new TextBox();
             label2 = new Label();
@@ -39,7 +40,7 @@
             // txtKullaniciAdi
             // 
             txtKullaniciAdi.Location = new Point(23, 44);
-            txtKullaniciAdi.Margin = new Padding(4, 4, 4, 4);
+            txtKullaniciAdi.Margin = new Padding(4);
             txtKullaniciAdi.Name = "txtKullaniciAdi";
             txtKullaniciAdi.Size = new Size(335, 29);
             txtKullaniciAdi.TabIndex = 2;
@@ -47,7 +48,7 @@
             // txtSifre
             // 
             txtSifre.Location = new Point(23, 112);
-            txtSifre.Margin = new Padding(4, 4, 4, 4);
+            txtSifre.Margin = new Padding(4);
             txtSifre.Name = "txtSifre";
             txtSifre.Size = new Size(335, 29);
             txtSifre.TabIndex = 3;
@@ -77,7 +78,7 @@
             btnGiris.FlatStyle = FlatStyle.Flat;
             btnGiris.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 162);
             btnGiris.Location = new Point(23, 200);
-            btnGiris.Margin = new Padding(4, 4, 4, 4);
+            btnGiris.Margin = new Padding(4);
             btnGiris.Name = "btnGiris";
             btnGiris.Size = new Size(335, 45);
             btnGiris.TabIndex = 8;
@@ -109,10 +110,12 @@
             Controls.Add(txtKullaniciAdi);
             Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             ForeColor = Color.White;
-            Margin = new Padding(4, 4, 4, 4);
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(4);
             Name = "frmLogin";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Kütüphane Otomasyonu - Giriş";
+            FormClosed += frmLogin_FormClosed;
             Load += frmLogin_Load;
             ResumeLayout(false);
             PerformLayout();

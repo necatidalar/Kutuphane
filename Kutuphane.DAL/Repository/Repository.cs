@@ -1,4 +1,5 @@
 ﻿using Core.IRepository;
+using Microsoft.EntityFrameworkCore;
 
 namespace Kutuphane.DAL.Repository
 {
@@ -8,6 +9,12 @@ namespace Kutuphane.DAL.Repository
         {
             using var db = new KutuphaneDbContext();
             return db.Set<T>().ToList();
+        }
+
+        public T GetById(int id)
+        {
+            using var db = new KutuphaneDbContext();
+            return db.Set<T>().Find(id);
         }
 
         public void Add(T entity)
@@ -20,7 +27,8 @@ namespace Kutuphane.DAL.Repository
         public void Update(T entity)
         {
             using var db = new KutuphaneDbContext();
-            db.Set<T>().Update(entity);
+            db.Set<T>().Attach(entity);
+            db.Entry(entity).State = EntityState.Modified;
             db.SaveChanges();
         }
 

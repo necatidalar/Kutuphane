@@ -13,8 +13,6 @@ namespace Kutuphane.Model.Entity
         public int? BasimYili { get; set; }
         public int? SayfaSayisi { get; set; }
         public string Dil { get; set; }
-        public decimal? Fiyat { get; set; }
-
         
         public Yazar Yazar { get; set; }
         public Yayinevi Yayinevi { get; set; }

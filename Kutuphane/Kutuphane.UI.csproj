@@ -6,7 +6,13 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationIcon>Kitapp.ico</ApplicationIcon>
+    <PackageIcon></PackageIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="Kitapp.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj" />

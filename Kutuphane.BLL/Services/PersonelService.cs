@@ -21,5 +21,12 @@ namespace Kutuphane.BLL.Services
                    .GetAll()
                    .FirstOrDefault(p => p.KullaniciAdi == kullaniciAdi && p.Sifre == sifreBase64);
         }
+
+        public void Add(Personel personel)
+        {
+            personel.Sifre = SecurityHelper.EncodeBase64(personel.Sifre);
+
+            _repository.Add(personel);
+        }
     }
 }
