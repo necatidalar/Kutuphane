@@ -16,10 +16,10 @@ namespace Kutuphane.UI
         {
             InitializeComponent();
         }
-
+        public string GirisYapanKullanici { get; set; }
         private void frmDashboard_Load(object sender, EventArgs e)
         {
-
+            lblKullaniciAdi.Text = "Hoşgeldiniz, " + GirisYapanKullanici;
         }
         private void kitapİşlemleriToolStripMenuItem_Click(object sender, EventArgs e)
         {

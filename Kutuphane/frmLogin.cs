@@ -14,6 +14,7 @@ namespace Kutuphane.UI
 
         private void frmLogin_Load(object sender, EventArgs e)
         {
+            txtSifre.UseSystemPasswordChar = true;
         }
 
         private readonly PersonelService _service;
@@ -35,19 +36,20 @@ namespace Kutuphane.UI
             string kullaniciAdi = txtKullaniciAdi.Text;
             string sifre = txtSifre.Text;
 
-            var personel = _service.Login(kullaniciAdi, sifre);
+            Personel personel;
+            var result = _service.Login(kullaniciAdi, sifre, out personel);
 
-            if (personel != null)
+            if (!result.Basarili)
             {
-                MessageBox.Show($"Hoşgeldiniz {personel.AdSoyad}!");
-                frmDashboard dashboard = new frmDashboard();
-                dashboard.Show();
-                this.Hide();
+                MessageBox.Show(result.Mesaj, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
-            else
-            {
-                MessageBox.Show("Kullanıcı adı veya şifre hatalı!");
-            }
+
+            frmDashboard dashboard = new frmDashboard();
+            dashboard.GirisYapanKullanici = personel.AdSoyad;
+            dashboard.Show();
+            this.Hide();
+
         }
 
         private void frmLogin_FormClosed(object sender, FormClosedEventArgs e)

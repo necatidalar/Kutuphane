@@ -37,12 +37,12 @@
             txtKullaniciAdi = new TextBox();
             label4 = new Label();
             groupBox1 = new GroupBox();
-            btnSil = new Button();
-            btnDuzenle = new Button();
             txtSifre = new TextBox();
             label3 = new Label();
-            btnKaydet = new Button();
             dataGridView1 = new DataGridView();
+            btnSil = new Button();
+            btnDuzenle = new Button();
+            btnKaydet = new Button();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
@@ -128,16 +128,16 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(btnSil);
+            groupBox1.Controls.Add(btnDuzenle);
+            groupBox1.Controls.Add(btnKaydet);
             groupBox1.Controls.Add(label9);
             groupBox1.Controls.Add(txtPersonelID);
             groupBox1.Controls.Add(label2);
             groupBox1.Controls.Add(txtAdSoyad);
-            groupBox1.Controls.Add(btnSil);
-            groupBox1.Controls.Add(btnDuzenle);
             groupBox1.Controls.Add(txtSifre);
             groupBox1.Controls.Add(txtKullaniciAdi);
             groupBox1.Controls.Add(label3);
-            groupBox1.Controls.Add(btnKaydet);
             groupBox1.Controls.Add(label4);
             groupBox1.ForeColor = Color.White;
             groupBox1.Location = new Point(20, 70);
@@ -146,30 +146,6 @@
             groupBox1.TabIndex = 42;
             groupBox1.TabStop = false;
             groupBox1.Text = "Personel İşlemleri";
-            // 
-            // btnSil
-            // 
-            btnSil.FlatStyle = FlatStyle.Flat;
-            btnSil.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 162);
-            btnSil.Location = new Point(153, 308);
-            btnSil.Margin = new Padding(4);
-            btnSil.Name = "btnSil";
-            btnSil.Size = new Size(250, 45);
-            btnSil.TabIndex = 28;
-            btnSil.Text = "Sil";
-            btnSil.UseVisualStyleBackColor = true;
-            // 
-            // btnDuzenle
-            // 
-            btnDuzenle.FlatStyle = FlatStyle.Flat;
-            btnDuzenle.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 162);
-            btnDuzenle.Location = new Point(153, 255);
-            btnDuzenle.Margin = new Padding(4);
-            btnDuzenle.Name = "btnDuzenle";
-            btnDuzenle.Size = new Size(250, 45);
-            btnDuzenle.TabIndex = 27;
-            btnDuzenle.Text = "Düzenle";
-            btnDuzenle.UseVisualStyleBackColor = true;
             // 
             // txtSifre
             // 
@@ -189,18 +165,6 @@
             label3.TabIndex = 26;
             label3.Text = "Şifre:";
             // 
-            // btnKaydet
-            // 
-            btnKaydet.FlatStyle = FlatStyle.Flat;
-            btnKaydet.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 162);
-            btnKaydet.Location = new Point(153, 202);
-            btnKaydet.Margin = new Padding(4);
-            btnKaydet.Name = "btnKaydet";
-            btnKaydet.Size = new Size(250, 45);
-            btnKaydet.TabIndex = 30;
-            btnKaydet.Text = "Kaydet";
-            btnKaydet.UseVisualStyleBackColor = true;
-            // 
             // dataGridView1
             // 
             dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
@@ -210,6 +174,46 @@
             dataGridView1.RowHeadersWidth = 51;
             dataGridView1.Size = new Size(801, 689);
             dataGridView1.TabIndex = 43;
+            dataGridView1.CellClick += dataGridView1_CellClick;
+            // 
+            // btnSil
+            // 
+            btnSil.FlatStyle = FlatStyle.Flat;
+            btnSil.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 162);
+            btnSil.Location = new Point(153, 308);
+            btnSil.Margin = new Padding(4);
+            btnSil.Name = "btnSil";
+            btnSil.Size = new Size(250, 45);
+            btnSil.TabIndex = 32;
+            btnSil.Text = "Sil";
+            btnSil.UseVisualStyleBackColor = true;
+            btnSil.Click += btnSil_Click;
+            // 
+            // btnDuzenle
+            // 
+            btnDuzenle.FlatStyle = FlatStyle.Flat;
+            btnDuzenle.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 162);
+            btnDuzenle.Location = new Point(153, 255);
+            btnDuzenle.Margin = new Padding(4);
+            btnDuzenle.Name = "btnDuzenle";
+            btnDuzenle.Size = new Size(250, 45);
+            btnDuzenle.TabIndex = 31;
+            btnDuzenle.Text = "Düzenle";
+            btnDuzenle.UseVisualStyleBackColor = true;
+            btnDuzenle.Click += btnDuzenle_Click;
+            // 
+            // btnKaydet
+            // 
+            btnKaydet.FlatStyle = FlatStyle.Flat;
+            btnKaydet.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 162);
+            btnKaydet.Location = new Point(153, 202);
+            btnKaydet.Margin = new Padding(4);
+            btnKaydet.Name = "btnKaydet";
+            btnKaydet.Size = new Size(250, 45);
+            btnKaydet.TabIndex = 33;
+            btnKaydet.Text = "Kaydet";
+            btnKaydet.UseVisualStyleBackColor = true;
+            btnKaydet.Click += btnKaydet_Click;
             // 
             // frmPersonelIslemleri
             // 
@@ -248,11 +252,11 @@
         private TextBox txtKullaniciAdi;
         private Label label4;
         private GroupBox groupBox1;
-        private Button btnSil;
-        private Button btnDuzenle;
-        private Button btnKaydet;
         private TextBox txtSifre;
         private Label label3;
         private DataGridView dataGridView1;
+        private Button btnSil;
+        private Button btnDuzenle;
+        private Button btnKaydet;
     }
 }

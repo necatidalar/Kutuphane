@@ -362,7 +362,6 @@
         private Button btnSil;
         private TextBox txtBasimYili;
         private Button btnDuzenle;
-        private TextBox textBox6;
         private Button btnKaydet;
         private TextBox txtDil;
         private Label label8;

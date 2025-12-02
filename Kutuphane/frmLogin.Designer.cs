@@ -39,37 +39,37 @@
             // 
             // txtKullaniciAdi
             // 
-            txtKullaniciAdi.Location = new Point(23, 44);
+            txtKullaniciAdi.Location = new Point(16, 52);
             txtKullaniciAdi.Margin = new Padding(4);
             txtKullaniciAdi.Name = "txtKullaniciAdi";
-            txtKullaniciAdi.Size = new Size(335, 29);
+            txtKullaniciAdi.Size = new Size(344, 34);
             txtKullaniciAdi.TabIndex = 2;
             // 
             // txtSifre
             // 
-            txtSifre.Location = new Point(23, 112);
+            txtSifre.Location = new Point(16, 132);
             txtSifre.Margin = new Padding(4);
             txtSifre.Name = "txtSifre";
-            txtSifre.Size = new Size(335, 29);
+            txtSifre.Size = new Size(344, 34);
             txtSifre.TabIndex = 3;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(23, 19);
+            label2.Location = new Point(13, 20);
             label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new Size(115, 21);
+            label2.Size = new Size(143, 28);
             label2.TabIndex = 5;
             label2.Text = "Kullanıcı Adı: ";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(23, 87);
+            label3.Location = new Point(15, 100);
             label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
-            label3.Size = new Size(53, 21);
+            label3.Size = new Size(67, 28);
             label3.TabIndex = 6;
             label3.Text = "Şifre: ";
             // 
@@ -77,10 +77,10 @@
             // 
             btnGiris.FlatStyle = FlatStyle.Flat;
             btnGiris.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 162);
-            btnGiris.Location = new Point(23, 200);
+            btnGiris.Location = new Point(13, 225);
             btnGiris.Margin = new Padding(4);
             btnGiris.Name = "btnGiris";
-            btnGiris.Size = new Size(335, 45);
+            btnGiris.Size = new Size(347, 45);
             btnGiris.TabIndex = 8;
             btnGiris.Text = "Giriş";
             btnGiris.UseVisualStyleBackColor = true;
@@ -89,19 +89,19 @@
             // checkBox1
             // 
             checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(23, 148);
+            checkBox1.Location = new Point(15, 173);
             checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(119, 25);
+            checkBox1.Size = new Size(147, 32);
             checkBox1.TabIndex = 9;
             checkBox1.Text = "Beni Hatırla";
             checkBox1.UseVisualStyleBackColor = true;
             // 
             // frmLogin
             // 
-            AutoScaleDimensions = new SizeF(10F, 21F);
+            AutoScaleDimensions = new SizeF(12F, 28F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(17, 17, 17);
-            ClientSize = new Size(378, 258);
+            ClientSize = new Size(382, 283);
             Controls.Add(checkBox1);
             Controls.Add(btnGiris);
             Controls.Add(label3);
@@ -112,6 +112,9 @@
             ForeColor = Color.White;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(4);
+            MaximizeBox = false;
+            MaximumSize = new Size(400, 330);
+            MinimumSize = new Size(400, 330);
             Name = "frmLogin";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Kütüphane Otomasyonu - Giriş";

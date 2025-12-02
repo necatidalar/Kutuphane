@@ -37,6 +37,7 @@
             üyeİşlemleriToolStripMenuItem = new ToolStripMenuItem();
             personelİşlemleriToolStripMenuItem = new ToolStripMenuItem();
             çıkışToolStripMenuItem = new ToolStripMenuItem();
+            lblKullaniciAdi = new Label();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -96,12 +97,23 @@
             çıkışToolStripMenuItem.Text = "Çıkış";
             çıkışToolStripMenuItem.Click += çıkışToolStripMenuItem_Click;
             // 
+            // lblKullaniciAdi
+            // 
+            lblKullaniciAdi.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            lblKullaniciAdi.AutoSize = true;
+            lblKullaniciAdi.Location = new Point(1322, 46);
+            lblKullaniciAdi.Name = "lblKullaniciAdi";
+            lblKullaniciAdi.Size = new Size(251, 28);
+            lblKullaniciAdi.TabIndex = 1;
+            lblKullaniciAdi.Text = "Hoşgeldiniz, Kullanıcı adı";
+            // 
             // frmDashboard
             // 
             AutoScaleDimensions = new SizeF(12F, 28F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(17, 17, 17);
             ClientSize = new Size(1585, 776);
+            Controls.Add(lblKullaniciAdi);
             Controls.Add(menuStrip1);
             Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             ForeColor = Color.White;
@@ -129,5 +141,6 @@
         private ToolStripMenuItem üyeİşlemleriToolStripMenuItem;
         private ToolStripMenuItem personelİşlemleriToolStripMenuItem;
         private ToolStripMenuItem çıkışToolStripMenuItem;
+        private Label lblKullaniciAdi;
     }
 }
