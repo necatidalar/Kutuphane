@@ -1,5 +1,7 @@
 ﻿using Kutuphane.BLL.Services;
+using Kutuphane.DAL;
 using Kutuphane.DAL.Repository;
+using Kutuphane.Model.DTO;
 using Kutuphane.Model.Entity;
 
 namespace Kutuphane.UI
@@ -20,32 +22,85 @@ namespace Kutuphane.UI
         {
             KitaplariListele();
             CombosDoldur();
+            dataGridView1.ForeColor = Color.Black;
         }
 
         private readonly KitapService _kitapService;
         private readonly YazarService _yazarService;
         private readonly YayineviService _yayineviService;
-        private readonly KategoriService _kategoriService;        
+        private readonly KategoriService _kategoriService;
 
         private void KitaplariListele()
         {
-            dataGridView1.DataSource = _kitapService.Listele();
+            using (var db = new KutuphaneDbContext())
+            {
+                var liste = db.Kitaplar
+                    .Select(x => new KitapDTO
+                    {
+                        KitapID = x.KitapID,
+                        KitapAdi = x.KitapAdi,
+                        ISBN = x.ISBN,
+                        BasimYili = x.BasimYili,
+                        SayfaSayisi = x.SayfaSayisi,
+                        Dil = x.Dil,
+
+                        YazarID = x.YazarID,
+                        YayineviID = x.YayineviID,
+                        KategoriID = x.KategoriID,
+
+                        YazarAdi = x.Yazar.Ad + " " + x.Yazar.Soyad,
+                        YayineviAdi = x.Yayinevi.Ad,
+                        KategoriAdi = x.Kategori.KategoriAdi
+                    })
+                    .OrderBy(x => x.KitapAdi)
+                    .ToList();
+
+                dataGridView1.DataSource = liste;
+
+                dataGridView1.Columns["KitapID"].Visible = false;
+                dataGridView1.Columns["YazarID"].Visible = false;
+                dataGridView1.Columns["YayineviID"].Visible = false;
+                dataGridView1.Columns["KategoriID"].Visible = false;
+
+                dataGridView1.Columns["YazarAdi"].HeaderText = "Yazar";
+                dataGridView1.Columns["YayineviAdi"].HeaderText = "Yayınevi";
+                dataGridView1.Columns["KategoriAdi"].HeaderText = "Kategori";
+            }
         }
+
         private void CombosDoldur()
         {
-            var yazarlar = _yazarService.Listele();
+            var yazarlar = _yazarService.Listele()
+                .Select(y => new
+                {
+                    YazarID = y.YazarID,
+                    AdSoyad = y.Ad + " " + y.Soyad
+                })
+                .ToList();
             cmbYazar.DataSource = yazarlar;
             cmbYazar.DisplayMember = "AdSoyad";
             cmbYazar.ValueMember = "YazarID";
             cmbYazar.SelectedIndex = -1;
 
-            var yayinevleri = _yayineviService.Listele();
+            var yayinevleri = _yayineviService.Listele()
+                .Select(y => new
+                {
+                    y.YayineviID,
+                    y.Ad
+                })
+                .ToList();
             cmbYayinevi.DataSource = yayinevleri;
             cmbYayinevi.DisplayMember = "Ad";
             cmbYayinevi.ValueMember = "YayineviID";
             cmbYayinevi.SelectedIndex = -1;
 
-            var kategoriler = _kategoriService.Listele();
+            var kategoriler = _kategoriService.Listele()
+                .Select(k => new
+                {
+                    k.KategoriID,
+                    k.KategoriAdi
+                })
+                .ToList();
             cmbKategori.DataSource = kategoriler;
             cmbKategori.DisplayMember = "KategoriAdi";
             cmbKategori.ValueMember = "KategoriID";
@@ -67,15 +122,16 @@ namespace Kutuphane.UI
                 YazarID = Convert.ToInt32(cmbYazar.SelectedValue),
                 YayineviID = Convert.ToInt32(cmbYayinevi.SelectedValue),
                 KategoriID = Convert.ToInt32(cmbKategori.SelectedValue),
-                BasimYili = string.IsNullOrEmpty(txtBasimYili.Text) ? null : int.Parse(txtBasimYili.Text),
-                SayfaSayisi = string.IsNullOrEmpty(txtSayfaSayisi.Text) ? null : int.Parse(txtSayfaSayisi.Text),
+                BasimYili = string.IsNullOrEmpty(txtBasimYili.Text) ? (int?)null : int.Parse(txtBasimYili.Text),
+                SayfaSayisi = string.IsNullOrEmpty(txtSayfaSayisi.Text) ? (int?)null : int.Parse(txtSayfaSayisi.Text),
                 Dil = txtDil.Text
             };
 
-            _kitapService.Ekle(kitap);
+            var result = _kitapService.Ekle(kitap);
+            MessageBox.Show(result.Mesaj);
+            if (result.Basarili)
+                KitaplariListele();
 
-            MessageBox.Show("Kitap eklendi.");
-            KitaplariListele();
         }
 
         private void btnDuzenle_Click(object sender, EventArgs e)
@@ -88,15 +144,16 @@ namespace Kutuphane.UI
                 YazarID = Convert.ToInt32(cmbYazar.SelectedValue),
                 YayineviID = Convert.ToInt32(cmbYayinevi.SelectedValue),
                 KategoriID = Convert.ToInt32(cmbKategori.SelectedValue),
-                BasimYili = string.IsNullOrEmpty(txtBasimYili.Text) ? null : int.Parse(txtBasimYili.Text),
-                SayfaSayisi = string.IsNullOrEmpty(txtSayfaSayisi.Text) ? null : int.Parse(txtSayfaSayisi.Text),
+                BasimYili = string.IsNullOrEmpty(txtBasimYili.Text) ? (int?)null : int.Parse(txtBasimYili.Text),
+                SayfaSayisi = string.IsNullOrEmpty(txtSayfaSayisi.Text) ? (int?)null : int.Parse(txtSayfaSayisi.Text),
                 Dil = txtDil.Text
             };
 
-            _kitapService.Guncelle(kitap);
+            var result = _kitapService.Guncelle(kitap);
+            MessageBox.Show(result.Mesaj);
 
-            MessageBox.Show("Kitap güncellendi.");
-            KitaplariListele();
+            if (result.Basarili)
+                KitaplariListele();
         }
 
         private void btnSil_Click(object sender, EventArgs e)
@@ -109,11 +166,27 @@ namespace Kutuphane.UI
 
             int id = (int)dataGridView1.SelectedRows[0].Cells["KitapID"].Value;
 
-            _kitapService.Sil(id);
+            var confirmResult = MessageBox.Show(
+                "Bu kitabı silmek istediğinizden emin misiniz?",
+                "Onay",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            );
 
-            MessageBox.Show("Kitap silindi.");
-            KitaplariListele();
+            if (confirmResult == DialogResult.Yes)
+            {
+                var result = _kitapService.Sil(id);
+                MessageBox.Show(result.Mesaj);
+
+                if (result.Basarili)
+                    KitaplariListele();
+            }
+            else
+            {
+                return;
+            }
         }
+
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {

@@ -44,54 +44,55 @@
             // menuStrip1
             // 
             menuStrip1.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            menuStrip1.ImageScalingSize = new Size(20, 20);
             menuStrip1.Items.AddRange(new ToolStripItem[] { göstergePaneliToolStripMenuItem, çokluKatYönetimiToolStripMenuItem, kitapİşlemleriToolStripMenuItem, ödünçİşlemleriToolStripMenuItem, üyeİşlemleriToolStripMenuItem, personelİşlemleriToolStripMenuItem, çıkışToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(1339, 29);
+            menuStrip1.Size = new Size(1339, 36);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
             // göstergePaneliToolStripMenuItem
             // 
             göstergePaneliToolStripMenuItem.Name = "göstergePaneliToolStripMenuItem";
-            göstergePaneliToolStripMenuItem.Size = new Size(142, 25);
+            göstergePaneliToolStripMenuItem.Size = new Size(175, 32);
             göstergePaneliToolStripMenuItem.Text = "Gösterge Paneli";
             // 
             // çokluKatYönetimiToolStripMenuItem
             // 
             çokluKatYönetimiToolStripMenuItem.Name = "çokluKatYönetimiToolStripMenuItem";
-            çokluKatYönetimiToolStripMenuItem.Size = new Size(168, 25);
+            çokluKatYönetimiToolStripMenuItem.Size = new Size(206, 32);
             çokluKatYönetimiToolStripMenuItem.Text = "Çoklu Kat Yönetimi";
             // 
             // kitapİşlemleriToolStripMenuItem
             // 
             kitapİşlemleriToolStripMenuItem.Name = "kitapİşlemleriToolStripMenuItem";
-            kitapİşlemleriToolStripMenuItem.Size = new Size(132, 25);
+            kitapİşlemleriToolStripMenuItem.Size = new Size(163, 32);
             kitapİşlemleriToolStripMenuItem.Text = "Kitap İşlemleri";
             kitapİşlemleriToolStripMenuItem.Click += kitapİşlemleriToolStripMenuItem_Click;
             // 
             // ödünçİşlemleriToolStripMenuItem
             // 
             ödünçİşlemleriToolStripMenuItem.Name = "ödünçİşlemleriToolStripMenuItem";
-            ödünçİşlemleriToolStripMenuItem.Size = new Size(142, 25);
+            ödünçİşlemleriToolStripMenuItem.Size = new Size(174, 32);
             ödünçİşlemleriToolStripMenuItem.Text = "Ödünç İşlemleri";
             // 
             // üyeİşlemleriToolStripMenuItem
             // 
             üyeİşlemleriToolStripMenuItem.Name = "üyeİşlemleriToolStripMenuItem";
-            üyeİşlemleriToolStripMenuItem.Size = new Size(122, 25);
+            üyeİşlemleriToolStripMenuItem.Size = new Size(149, 32);
             üyeİşlemleriToolStripMenuItem.Text = "Üye İşlemleri";
             // 
             // personelİşlemleriToolStripMenuItem
             // 
             personelİşlemleriToolStripMenuItem.Name = "personelİşlemleriToolStripMenuItem";
-            personelİşlemleriToolStripMenuItem.Size = new Size(158, 25);
+            personelİşlemleriToolStripMenuItem.Size = new Size(193, 32);
             personelİşlemleriToolStripMenuItem.Text = "Personel İşlemleri";
             // 
             // çıkışToolStripMenuItem
             // 
             çıkışToolStripMenuItem.Name = "çıkışToolStripMenuItem";
-            çıkışToolStripMenuItem.Size = new Size(58, 25);
+            çıkışToolStripMenuItem.Size = new Size(70, 32);
             çıkışToolStripMenuItem.Text = "Çıkış";
             çıkışToolStripMenuItem.Click += çıkışToolStripMenuItem_Click;
             // 
@@ -104,7 +105,7 @@
             // 
             // frmDashboard
             // 
-            AutoScaleDimensions = new SizeF(10F, 21F);
+            AutoScaleDimensions = new SizeF(12F, 28F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(17, 17, 17);
             ClientSize = new Size(1339, 718);
@@ -112,12 +113,11 @@
             Controls.Add(menuStrip1);
             Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             ForeColor = Color.White;
-            FormBorderStyle = FormBorderStyle.None;
             Icon = (Icon)resources.GetObject("$this.Icon");
             MainMenuStrip = menuStrip1;
             Margin = new Padding(4);
             Name = "frmDashboard";
-            StartPosition = FormStartPosition.CenterScreen;
+            StartPosition = FormStartPosition.CenterParent;
             Text = "Kütüphane Otomasyonu - Gösterge Paneli";
             WindowState = FormWindowState.Maximized;
             Load += frmDashboard_Load;

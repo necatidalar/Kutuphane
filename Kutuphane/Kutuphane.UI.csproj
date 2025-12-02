@@ -8,6 +8,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <ApplicationIcon>Kitapp.ico</ApplicationIcon>
     <PackageIcon></PackageIcon>
+    <AssemblyVersion>1.0.0.53</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>
