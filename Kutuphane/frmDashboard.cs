@@ -19,7 +19,7 @@ namespace Kutuphane.UI
 
         private void frmDashboard_Load(object sender, EventArgs e)
         {
-            
+
         }
         private void kitapİşlemleriToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -32,6 +32,12 @@ namespace Kutuphane.UI
             this.Close();
             frmLogin frmLogin = new frmLogin();
             frmLogin.Show();
+        }
+
+        private void personelİşlemleriToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmPersonelIslemleri personelIslemleriForm = new frmPersonelIslemleri();
+            personelIslemleriForm.ShowDialog();
         }
     }
 }

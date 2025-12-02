@@ -243,9 +243,10 @@
             // 
             // dataGridView1
             // 
+            dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(459, 83);
+            dataGridView1.Location = new Point(466, 83);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -282,12 +283,13 @@
             // 
             // btnCikis
             // 
+            btnCikis.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnCikis.FlatAppearance.BorderSize = 0;
             btnCikis.FlatAppearance.MouseOverBackColor = Color.Red;
             btnCikis.FlatStyle = FlatStyle.Flat;
             btnCikis.Font = new Font("Segoe UI Black", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 162);
             btnCikis.ForeColor = Color.White;
-            btnCikis.Location = new Point(1668, 12);
+            btnCikis.Location = new Point(1684, 12);
             btnCikis.Name = "btnCikis";
             btnCikis.Size = new Size(30, 30);
             btnCikis.TabIndex = 39;
@@ -331,7 +333,7 @@
             AutoScaleDimensions = new SizeF(12F, 28F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(17, 17, 17);
-            ClientSize = new Size(1710, 957);
+            ClientSize = new Size(1726, 957);
             Controls.Add(groupBox1);
             Controls.Add(btnCikis);
             Controls.Add(label10);

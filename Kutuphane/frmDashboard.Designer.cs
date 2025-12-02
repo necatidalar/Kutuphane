@@ -37,7 +37,6 @@
             üyeİşlemleriToolStripMenuItem = new ToolStripMenuItem();
             personelİşlemleriToolStripMenuItem = new ToolStripMenuItem();
             çıkışToolStripMenuItem = new ToolStripMenuItem();
-            panel1 = new Panel();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -48,7 +47,7 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { göstergePaneliToolStripMenuItem, çokluKatYönetimiToolStripMenuItem, kitapİşlemleriToolStripMenuItem, ödünçİşlemleriToolStripMenuItem, üyeİşlemleriToolStripMenuItem, personelİşlemleriToolStripMenuItem, çıkışToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(1339, 36);
+            menuStrip1.Size = new Size(1585, 36);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -88,6 +87,7 @@
             personelİşlemleriToolStripMenuItem.Name = "personelİşlemleriToolStripMenuItem";
             personelİşlemleriToolStripMenuItem.Size = new Size(193, 32);
             personelİşlemleriToolStripMenuItem.Text = "Personel İşlemleri";
+            personelİşlemleriToolStripMenuItem.Click += personelİşlemleriToolStripMenuItem_Click;
             // 
             // çıkışToolStripMenuItem
             // 
@@ -96,20 +96,12 @@
             çıkışToolStripMenuItem.Text = "Çıkış";
             çıkışToolStripMenuItem.Click += çıkışToolStripMenuItem_Click;
             // 
-            // panel1
-            // 
-            panel1.Location = new Point(34, 63);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(957, 643);
-            panel1.TabIndex = 1;
-            // 
             // frmDashboard
             // 
             AutoScaleDimensions = new SizeF(12F, 28F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(17, 17, 17);
-            ClientSize = new Size(1339, 718);
-            Controls.Add(panel1);
+            ClientSize = new Size(1585, 776);
             Controls.Add(menuStrip1);
             Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             ForeColor = Color.White;
@@ -136,7 +128,6 @@
         private ToolStripMenuItem ödünçİşlemleriToolStripMenuItem;
         private ToolStripMenuItem üyeİşlemleriToolStripMenuItem;
         private ToolStripMenuItem personelİşlemleriToolStripMenuItem;
-        private Panel panel1;
         private ToolStripMenuItem çıkışToolStripMenuItem;
     }
 }
