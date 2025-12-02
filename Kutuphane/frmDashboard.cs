@@ -39,5 +39,11 @@ namespace Kutuphane.UI
             frmPersonelIslemleri personelIslemleriForm = new frmPersonelIslemleri();
             personelIslemleriForm.ShowDialog();
         }
+
+        private void üyeİşlemleriToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmUyeIslemleri frmUye = new frmUyeIslemleri();
+            frmUye.ShowDialog();
+        }
     }
 }

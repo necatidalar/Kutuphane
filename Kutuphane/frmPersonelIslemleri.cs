@@ -20,12 +20,12 @@ namespace Kutuphane.UI
             LoadPersoneller();
         }
 
-        // Personelleri DataGridView'e listele
         private void LoadPersoneller()
         {
             dataGridView1.DataSource = null;
-            var personeller = _service.GetAll(); // Servisten tüm personelleri çek
+            var personeller = _service.GetAll();
             dataGridView1.DataSource = personeller;
+            dataGridView1.Columns["Oduncler"].Visible = false;
         }
 
         private void btnKaydet_Click(object sender, EventArgs e)
