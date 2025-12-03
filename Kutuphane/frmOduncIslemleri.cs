@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Kutuphane.BLL.Services;
+using Kutuphane.Model.Entity;
 using System.Windows.Forms;
 
 namespace Kutuphane.UI
@@ -15,7 +9,11 @@ namespace Kutuphane.UI
         public frmOduncIslemleri()
         {
             InitializeComponent();
+            _oduncService = new OduncService();
+            _oduncler = new List<Odunc>();
         }
+        private readonly OduncService _oduncService;
+        private List<Odunc> _oduncler;
 
         private void frmOduncIslemleri_Load(object sender, EventArgs e)
         {
@@ -40,6 +38,55 @@ namespace Kutuphane.UI
                                     borderColor, borderSize, ButtonBorderStyle.Solid);
         }
 
-       
+        private void btnKaydet_Click(object sender, EventArgs e)
+        {
+            if (dgvUyeOdunc.CurrentRow == null)
+            {
+                MessageBox.Show("Lütfen teslim edilecek satırı seçin.");
+                return;
+            }
+
+            int oduncId = (int)dgvUyeOdunc.CurrentRow.Cells["OduncID"].Value;
+            _oduncService.TeslimEt(oduncId);
+
+            MessageBox.Show("Kitap teslim edildi.");
+
+            string deger = txtAra.Text.Trim();
+            _oduncler = _oduncService.GetOdunclerByUye(deger);
+            dgvUyeOdunc.DataSource = _oduncler.Select(o => new
+            {
+                o.OduncID,
+                Kitap = o.Kitap.KitapAdi,
+                o.AlisTarihi,
+                TeslimEdildi = o.TeslimEdildi
+            }).ToList();
+        }
+
+        private void btnAra_Click(object sender, EventArgs e)
+        {
+            string deger = txtAra.Text.Trim();
+            if (string.IsNullOrEmpty(deger))
+            {
+                MessageBox.Show("Lütfen Üye ID veya TcPass girin.");
+                return;
+            }
+
+            _oduncler = _oduncService.GetOdunclerByUye(deger);
+
+            if (_oduncler.Count == 0)
+            {
+                MessageBox.Show("Bu üyeye ait ödünç kitap bulunamadı.");
+                dgvUyeOdunc.DataSource = null;
+                return;
+            }
+
+            dgvUyeOdunc.DataSource = _oduncler.Select(o => new
+            {
+                o.OduncID,
+                Kitap = o.Kitap.KitapAdi,
+                o.AlisTarihi,
+                TeslimEdildi = o.TeslimEdildi
+            }).ToList();
+        }
     }
 }

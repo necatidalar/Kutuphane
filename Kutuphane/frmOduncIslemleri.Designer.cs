@@ -31,11 +31,13 @@
             label1 = new Label();
             btnCikis = new Button();
             groupBox1 = new GroupBox();
-            listBox1 = new ListBox();
+            dgvUyeOdunc = new DataGridView();
+            btnAra = new Button();
+            btnKaydet = new Button();
             label2 = new Label();
-            txtDil = new TextBox();
-            button1 = new Button();
+            txtAra = new TextBox();
             groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvUyeOdunc).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -65,26 +67,52 @@
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(button1);
-            groupBox1.Controls.Add(listBox1);
+            groupBox1.Controls.Add(dgvUyeOdunc);
+            groupBox1.Controls.Add(btnAra);
+            groupBox1.Controls.Add(btnKaydet);
             groupBox1.Controls.Add(label2);
-            groupBox1.Controls.Add(txtDil);
+            groupBox1.Controls.Add(txtAra);
             groupBox1.ForeColor = Color.White;
             groupBox1.Location = new Point(12, 50);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(376, 418);
+            groupBox1.Size = new Size(916, 380);
             groupBox1.TabIndex = 41;
             groupBox1.TabStop = false;
             groupBox1.Text = "Üye İşlemleri";
             // 
-            // listBox1
+            // dgvUyeOdunc
             // 
-            listBox1.FormattingEnabled = true;
-            listBox1.ItemHeight = 21;
-            listBox1.Location = new Point(6, 65);
-            listBox1.Name = "listBox1";
-            listBox1.Size = new Size(360, 235);
-            listBox1.TabIndex = 42;
+            dgvUyeOdunc.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvUyeOdunc.Location = new Point(55, 65);
+            dgvUyeOdunc.Name = "dgvUyeOdunc";
+            dgvUyeOdunc.Size = new Size(840, 238);
+            dgvUyeOdunc.TabIndex = 44;
+            // 
+            // btnAra
+            // 
+            btnAra.FlatStyle = FlatStyle.Flat;
+            btnAra.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 162);
+            btnAra.Location = new Point(373, 29);
+            btnAra.Margin = new Padding(4);
+            btnAra.Name = "btnAra";
+            btnAra.Size = new Size(57, 29);
+            btnAra.TabIndex = 43;
+            btnAra.Text = "Ara";
+            btnAra.UseVisualStyleBackColor = true;
+            btnAra.Click += btnAra_Click;
+            // 
+            // btnKaydet
+            // 
+            btnKaydet.FlatStyle = FlatStyle.Flat;
+            btnKaydet.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 162);
+            btnKaydet.Location = new Point(55, 310);
+            btnKaydet.Margin = new Padding(4);
+            btnKaydet.Name = "btnKaydet";
+            btnKaydet.Size = new Size(105, 51);
+            btnKaydet.TabIndex = 43;
+            btnKaydet.Text = "Kaydet";
+            btnKaydet.UseVisualStyleBackColor = true;
+            btnKaydet.Click += btnKaydet_Click;
             // 
             // label2
             // 
@@ -92,29 +120,17 @@
             label2.Location = new Point(7, 32);
             label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new Size(107, 21);
+            label2.Size = new Size(40, 21);
             label2.TabIndex = 32;
-            label2.Text = "TC/PASS Ara:";
+            label2.Text = "Ara:";
             // 
-            // txtDil
+            // txtAra
             // 
-            txtDil.Location = new Point(122, 29);
-            txtDil.Margin = new Padding(4);
-            txtDil.Name = "txtDil";
-            txtDil.Size = new Size(244, 29);
-            txtDil.TabIndex = 31;
-            // 
-            // button1
-            // 
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 162);
-            button1.Location = new Point(32, 338);
-            button1.Margin = new Padding(4);
-            button1.Name = "button1";
-            button1.Size = new Size(114, 51);
-            button1.TabIndex = 43;
-            button1.Text = "Ödünç Ver";
-            button1.UseVisualStyleBackColor = true;
+            txtAra.Location = new Point(55, 29);
+            txtAra.Margin = new Padding(4);
+            txtAra.Name = "txtAra";
+            txtAra.Size = new Size(311, 29);
+            txtAra.TabIndex = 31;
             // 
             // frmOduncIslemleri
             // 
@@ -136,6 +152,7 @@
             Paint += frmOduncIslemleri_Paint;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvUyeOdunc).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -146,8 +163,9 @@
         private Button btnCikis;
         private GroupBox groupBox1;
         private Label label2;
-        private TextBox txtDil;
-        private ListBox listBox1;
-        private Button button1;
+        private TextBox txtAra;
+        private Button btnKaydet;
+        private DataGridView dgvUyeOdunc;
+        private Button btnAra;
     }
 }
