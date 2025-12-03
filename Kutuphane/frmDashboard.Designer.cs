@@ -43,76 +43,78 @@
             // 
             // menuStrip1
             // 
+            menuStrip1.BackColor = Color.DarkSlateGray;
             menuStrip1.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             menuStrip1.ImageScalingSize = new Size(20, 20);
             menuStrip1.Items.AddRange(new ToolStripItem[] { göstergePaneliToolStripMenuItem, çokluKatYönetimiToolStripMenuItem, kitapİşlemleriToolStripMenuItem, ödünçİşlemleriToolStripMenuItem, üyeİşlemleriToolStripMenuItem, personelİşlemleriToolStripMenuItem, çıkışToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(1585, 36);
+            menuStrip1.Size = new Size(1294, 29);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
             // göstergePaneliToolStripMenuItem
             // 
             göstergePaneliToolStripMenuItem.Name = "göstergePaneliToolStripMenuItem";
-            göstergePaneliToolStripMenuItem.Size = new Size(175, 32);
+            göstergePaneliToolStripMenuItem.Size = new Size(142, 25);
             göstergePaneliToolStripMenuItem.Text = "Gösterge Paneli";
             // 
             // çokluKatYönetimiToolStripMenuItem
             // 
             çokluKatYönetimiToolStripMenuItem.Name = "çokluKatYönetimiToolStripMenuItem";
-            çokluKatYönetimiToolStripMenuItem.Size = new Size(206, 32);
+            çokluKatYönetimiToolStripMenuItem.Size = new Size(168, 25);
             çokluKatYönetimiToolStripMenuItem.Text = "Çoklu Kat Yönetimi";
             // 
             // kitapİşlemleriToolStripMenuItem
             // 
             kitapİşlemleriToolStripMenuItem.Name = "kitapİşlemleriToolStripMenuItem";
-            kitapİşlemleriToolStripMenuItem.Size = new Size(163, 32);
+            kitapİşlemleriToolStripMenuItem.Size = new Size(132, 25);
             kitapİşlemleriToolStripMenuItem.Text = "Kitap İşlemleri";
             kitapİşlemleriToolStripMenuItem.Click += kitapİşlemleriToolStripMenuItem_Click;
             // 
             // ödünçİşlemleriToolStripMenuItem
             // 
             ödünçİşlemleriToolStripMenuItem.Name = "ödünçİşlemleriToolStripMenuItem";
-            ödünçİşlemleriToolStripMenuItem.Size = new Size(174, 32);
+            ödünçİşlemleriToolStripMenuItem.Size = new Size(142, 25);
             ödünçİşlemleriToolStripMenuItem.Text = "Ödünç İşlemleri";
+            ödünçİşlemleriToolStripMenuItem.Click += ödünçİşlemleriToolStripMenuItem_Click;
             // 
             // üyeİşlemleriToolStripMenuItem
             // 
             üyeİşlemleriToolStripMenuItem.Name = "üyeİşlemleriToolStripMenuItem";
-            üyeİşlemleriToolStripMenuItem.Size = new Size(149, 32);
+            üyeİşlemleriToolStripMenuItem.Size = new Size(122, 25);
             üyeİşlemleriToolStripMenuItem.Text = "Üye İşlemleri";
+            üyeİşlemleriToolStripMenuItem.Click += üyeİşlemleriToolStripMenuItem_Click;
             // 
             // personelİşlemleriToolStripMenuItem
             // 
             personelİşlemleriToolStripMenuItem.Name = "personelİşlemleriToolStripMenuItem";
-            personelİşlemleriToolStripMenuItem.Size = new Size(193, 32);
+            personelİşlemleriToolStripMenuItem.Size = new Size(158, 25);
             personelİşlemleriToolStripMenuItem.Text = "Personel İşlemleri";
             personelİşlemleriToolStripMenuItem.Click += personelİşlemleriToolStripMenuItem_Click;
             // 
             // çıkışToolStripMenuItem
             // 
             çıkışToolStripMenuItem.Name = "çıkışToolStripMenuItem";
-            çıkışToolStripMenuItem.Size = new Size(70, 32);
+            çıkışToolStripMenuItem.Size = new Size(58, 25);
             çıkışToolStripMenuItem.Text = "Çıkış";
             çıkışToolStripMenuItem.Click += çıkışToolStripMenuItem_Click;
             // 
             // lblKullaniciAdi
             // 
-            lblKullaniciAdi.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             lblKullaniciAdi.AutoSize = true;
-            lblKullaniciAdi.Location = new Point(1322, 46);
+            lblKullaniciAdi.Location = new Point(12, 42);
             lblKullaniciAdi.Name = "lblKullaniciAdi";
-            lblKullaniciAdi.Size = new Size(251, 28);
+            lblKullaniciAdi.Size = new Size(204, 21);
             lblKullaniciAdi.TabIndex = 1;
             lblKullaniciAdi.Text = "Hoşgeldiniz, Kullanıcı adı";
             // 
             // frmDashboard
             // 
-            AutoScaleDimensions = new SizeF(12F, 28F);
+            AutoScaleDimensions = new SizeF(10F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(17, 17, 17);
-            ClientSize = new Size(1585, 776);
+            ClientSize = new Size(1294, 748);
             Controls.Add(lblKullaniciAdi);
             Controls.Add(menuStrip1);
             Font = new Font("Segoe UI", 12F, FontStyle.Bold);

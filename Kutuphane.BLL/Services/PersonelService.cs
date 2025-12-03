@@ -46,7 +46,7 @@ namespace Kutuphane.BLL.Services
                     return new ServiceResult { Basarili = false, Mesaj = "Personel nesnesi boş olamaz." };
 
                 if (string.IsNullOrWhiteSpace(personel.AdSoyad))
-                    return new ServiceResult { Basarili = false, Mesaj = "AdSoyad boş olamaz." };
+                    return new ServiceResult { Basarili = false, Mesaj = "Ad veya Soyad boş olamaz." };
 
                 if (string.IsNullOrWhiteSpace(personel.KullaniciAdi))
                     return new ServiceResult { Basarili = false, Mesaj = "Kullanıcı adı boş olamaz." };
