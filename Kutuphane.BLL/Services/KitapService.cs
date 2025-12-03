@@ -50,7 +50,8 @@ namespace Kutuphane.BLL.Services
             if (!Regex.IsMatch(kitap.ISBN, @"^\d{10}(\d{3})?$"))
                 return new ServiceResult { Basarili = false, Mesaj = "Geçersiz ISBN formatı." };
 
-            var mevcutKitap = _repository.GetAll().FirstOrDefault(k => k.ISBN == kitap.ISBN);
+            //var mevcutKitap = _repository.GetAll().FirstOrDefault(k => k.ISBN == kitap.ISBN);
+            var mevcutKitap = _repository.GetByFilter(k => k.ISBN == kitap.ISBN);
             if (mevcutKitap != null)
                 return new ServiceResult { Basarili = false, Mesaj = "Bu ISBN ile zaten bir kitap kayıtlı." };
 

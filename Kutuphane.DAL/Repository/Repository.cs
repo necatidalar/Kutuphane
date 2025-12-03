@@ -1,5 +1,8 @@
-﻿using Core.IRepository;
+﻿using Core.Entity;
+using Core.IRepository;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Kutuphane.DAL.Repository
 {
@@ -9,6 +12,13 @@ namespace Kutuphane.DAL.Repository
         {
             using var db = new KutuphaneDbContext();
             return db.Set<T>().ToList();
+        }
+        public List<T> GetByFilter(Expression<Func<T, bool>>? predicate = null)
+        {
+            using var db = new KutuphaneDbContext();
+            var query = db.Set<T>().AsQueryable();
+            if (predicate != null) query = query.Where(predicate);
+            return query.ToList();
         }
 
         public T GetById(int id)
