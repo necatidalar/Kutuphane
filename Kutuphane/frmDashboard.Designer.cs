@@ -77,6 +77,7 @@
             ödünçİşlemleriToolStripMenuItem.Name = "ödünçİşlemleriToolStripMenuItem";
             ödünçİşlemleriToolStripMenuItem.Size = new Size(142, 25);
             ödünçİşlemleriToolStripMenuItem.Text = "Ödünç İşlemleri";
+            ödünçİşlemleriToolStripMenuItem.Click += ödünçİşlemleriToolStripMenuItem_Click;
             // 
             // üyeİşlemleriToolStripMenuItem
             // 

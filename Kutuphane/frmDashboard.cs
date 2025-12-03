@@ -45,5 +45,11 @@ namespace Kutuphane.UI
             frmUyeIslemleri frmUye = new frmUyeIslemleri();
             frmUye.ShowDialog();
         }
+
+        private void ödünçİşlemleriToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmOduncIslemleri frmOdunc = new frmOduncIslemleri();
+            frmOdunc.ShowDialog();
+        }
     }
 }
