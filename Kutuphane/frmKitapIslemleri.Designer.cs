@@ -54,6 +54,10 @@
             label10 = new Label();
             btnCikis = new Button();
             groupBox1 = new GroupBox();
+            label11 = new Label();
+            txtStok = new TextBox();
+            btnSilinenleriGoster = new Button();
+            btnGeriYukle = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             groupBox1.SuspendLayout();
             SuspendLayout();
@@ -61,18 +65,18 @@
             // cmbKategori
             // 
             cmbKategori.FormattingEnabled = true;
-            cmbKategori.Location = new Point(153, 243);
+            cmbKategori.Location = new Point(153, 214);
             cmbKategori.Name = "cmbKategori";
-            cmbKategori.Size = new Size(250, 36);
+            cmbKategori.Size = new Size(250, 29);
             cmbKategori.TabIndex = 31;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(40, 79);
+            label2.Location = new Point(61, 74);
             label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new Size(105, 28);
+            label2.Size = new Size(84, 21);
             label2.TabIndex = 14;
             label2.Text = "Kitap Adı:";
             // 
@@ -80,7 +84,7 @@
             // 
             btnSil.FlatStyle = FlatStyle.Flat;
             btnSil.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 162);
-            btnSil.Location = new Point(153, 518);
+            btnSil.Location = new Point(153, 504);
             btnSil.Margin = new Padding(4);
             btnSil.Name = "btnSil";
             btnSil.Size = new Size(250, 45);
@@ -91,17 +95,17 @@
             // 
             // txtBasimYili
             // 
-            txtBasimYili.Location = new Point(153, 286);
+            txtBasimYili.Location = new Point(153, 250);
             txtBasimYili.Margin = new Padding(4);
             txtBasimYili.Name = "txtBasimYili";
-            txtBasimYili.Size = new Size(250, 34);
+            txtBasimYili.Size = new Size(250, 29);
             txtBasimYili.TabIndex = 16;
             // 
             // btnDuzenle
             // 
             btnDuzenle.FlatStyle = FlatStyle.Flat;
             btnDuzenle.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 162);
-            btnDuzenle.Location = new Point(153, 465);
+            btnDuzenle.Location = new Point(153, 451);
             btnDuzenle.Margin = new Padding(4);
             btnDuzenle.Name = "btnDuzenle";
             btnDuzenle.Size = new Size(250, 45);
@@ -114,7 +118,7 @@
             // 
             btnKaydet.FlatStyle = FlatStyle.Flat;
             btnKaydet.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 162);
-            btnKaydet.Location = new Point(153, 412);
+            btnKaydet.Location = new Point(153, 398);
             btnKaydet.Margin = new Padding(4);
             btnKaydet.Name = "btnKaydet";
             btnKaydet.Size = new Size(250, 45);
@@ -125,120 +129,120 @@
             // 
             // txtDil
             // 
-            txtDil.Location = new Point(153, 370);
+            txtDil.Location = new Point(153, 324);
             txtDil.Margin = new Padding(4);
             txtDil.Name = "txtDil";
-            txtDil.Size = new Size(250, 34);
+            txtDil.Size = new Size(250, 29);
             txtDil.TabIndex = 18;
             // 
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(101, 373);
+            label8.Location = new Point(109, 327);
             label8.Margin = new Padding(4, 0, 4, 0);
             label8.Name = "label8";
-            label8.Size = new Size(44, 28);
+            label8.Size = new Size(36, 21);
             label8.TabIndex = 24;
             label8.Text = "Dil:";
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(82, 121);
+            label1.Location = new Point(94, 111);
             label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(63, 28);
+            label1.Size = new Size(51, 21);
             label1.TabIndex = 26;
             label1.Text = "ISBN:";
             // 
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(16, 331);
+            label7.Location = new Point(41, 290);
             label7.Margin = new Padding(4, 0, 4, 0);
             label7.Name = "label7";
-            label7.Size = new Size(129, 28);
+            label7.Size = new Size(104, 21);
             label7.TabIndex = 23;
             label7.Text = "Sayfa Sayısı:";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(78, 162);
+            label3.Location = new Point(90, 147);
             label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
-            label3.Size = new Size(68, 28);
+            label3.Size = new Size(56, 21);
             label3.TabIndex = 22;
             label3.Text = "Yazar:";
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(35, 289);
+            label6.Location = new Point(56, 253);
             label6.Margin = new Padding(4, 0, 4, 0);
             label6.Name = "label6";
-            label6.Size = new Size(110, 28);
+            label6.Size = new Size(89, 21);
             label6.TabIndex = 21;
             label6.Text = "Basım Yılı:";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(51, 204);
+            label4.Location = new Point(67, 182);
             label4.Margin = new Padding(4, 0, 4, 0);
             label4.Name = "label4";
-            label4.Size = new Size(95, 28);
+            label4.Size = new Size(79, 21);
             label4.TabIndex = 20;
             label4.Text = "Yayınevi:";
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(48, 246);
+            label5.Location = new Point(67, 217);
             label5.Margin = new Padding(4, 0, 4, 0);
             label5.Name = "label5";
-            label5.Size = new Size(98, 28);
+            label5.Size = new Size(79, 21);
             label5.TabIndex = 25;
             label5.Text = "Kategori:";
             // 
             // cmbYayinevi
             // 
             cmbYayinevi.FormattingEnabled = true;
-            cmbYayinevi.Location = new Point(153, 201);
+            cmbYayinevi.Location = new Point(153, 179);
             cmbYayinevi.Name = "cmbYayinevi";
-            cmbYayinevi.Size = new Size(250, 36);
+            cmbYayinevi.Size = new Size(250, 29);
             cmbYayinevi.TabIndex = 32;
             // 
             // txtKitapAdi
             // 
-            txtKitapAdi.Location = new Point(153, 76);
+            txtKitapAdi.Location = new Point(153, 71);
             txtKitapAdi.Margin = new Padding(4);
             txtKitapAdi.Name = "txtKitapAdi";
-            txtKitapAdi.Size = new Size(250, 34);
+            txtKitapAdi.Size = new Size(250, 29);
             txtKitapAdi.TabIndex = 13;
             // 
             // txtISBN
             // 
-            txtISBN.Location = new Point(153, 118);
+            txtISBN.Location = new Point(153, 108);
             txtISBN.Margin = new Padding(4);
             txtISBN.Name = "txtISBN";
-            txtISBN.Size = new Size(250, 34);
+            txtISBN.Size = new Size(250, 29);
             txtISBN.TabIndex = 19;
             // 
             // cmbYazar
             // 
             cmbYazar.FormattingEnabled = true;
-            cmbYazar.Location = new Point(153, 159);
+            cmbYazar.Location = new Point(153, 144);
             cmbYazar.Name = "cmbYazar";
-            cmbYazar.Size = new Size(250, 36);
+            cmbYazar.Size = new Size(250, 29);
             cmbYazar.TabIndex = 33;
             // 
             // txtSayfaSayisi
             // 
-            txtSayfaSayisi.Location = new Point(153, 328);
+            txtSayfaSayisi.Location = new Point(153, 287);
             txtSayfaSayisi.Margin = new Padding(4);
             txtSayfaSayisi.Name = "txtSayfaSayisi";
-            txtSayfaSayisi.Size = new Size(250, 34);
+            txtSayfaSayisi.Size = new Size(250, 29);
             txtSayfaSayisi.TabIndex = 34;
             // 
             // dataGridView1
@@ -246,11 +250,11 @@
             dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(466, 83);
+            dataGridView1.Location = new Point(451, 112);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView1.Size = new Size(1239, 862);
+            dataGridView1.Size = new Size(1239, 804);
             dataGridView1.TabIndex = 35;
             dataGridView1.CellClick += dataGridView1_CellClick;
             // 
@@ -259,16 +263,16 @@
             txtKitapID.Location = new Point(153, 34);
             txtKitapID.Margin = new Padding(4);
             txtKitapID.Name = "txtKitapID";
-            txtKitapID.Size = new Size(250, 34);
+            txtKitapID.Size = new Size(250, 29);
             txtKitapID.TabIndex = 13;
             // 
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(51, 37);
+            label9.Location = new Point(70, 37);
             label9.Margin = new Padding(4, 0, 4, 0);
             label9.Name = "label9";
-            label9.Size = new Size(94, 28);
+            label9.Size = new Size(75, 21);
             label9.TabIndex = 14;
             label9.Text = "Kitap ID:";
             // 
@@ -277,7 +281,7 @@
             label10.AutoSize = true;
             label10.Location = new Point(12, 9);
             label10.Name = "label10";
-            label10.Size = new Size(398, 28);
+            label10.Size = new Size(320, 21);
             label10.TabIndex = 37;
             label10.Text = "Kütüphane Otomasyonu - Kitap İşlemleri";
             // 
@@ -318,22 +322,70 @@
             groupBox1.Controls.Add(label1);
             groupBox1.Controls.Add(cmbKategori);
             groupBox1.Controls.Add(txtBasimYili);
+            groupBox1.Controls.Add(label11);
             groupBox1.Controls.Add(label8);
+            groupBox1.Controls.Add(txtStok);
             groupBox1.Controls.Add(txtDil);
             groupBox1.ForeColor = Color.White;
-            groupBox1.Location = new Point(20, 70);
+            groupBox1.Location = new Point(12, 103);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(433, 588);
+            groupBox1.Size = new Size(433, 562);
             groupBox1.TabIndex = 41;
             groupBox1.TabStop = false;
             groupBox1.Text = "Kitap İşlemleri";
             // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Location = new Point(96, 364);
+            label11.Margin = new Padding(4, 0, 4, 0);
+            label11.Name = "label11";
+            label11.Size = new Size(49, 21);
+            label11.TabIndex = 24;
+            label11.Text = "Stok:";
+            // 
+            // txtStok
+            // 
+            txtStok.Location = new Point(153, 361);
+            txtStok.Margin = new Padding(4);
+            txtStok.Name = "txtStok";
+            txtStok.Size = new Size(250, 29);
+            txtStok.TabIndex = 18;
+            // 
+            // btnSilinenleriGoster
+            // 
+            btnSilinenleriGoster.FlatStyle = FlatStyle.Flat;
+            btnSilinenleriGoster.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 162);
+            btnSilinenleriGoster.Location = new Point(165, 681);
+            btnSilinenleriGoster.Margin = new Padding(4);
+            btnSilinenleriGoster.Name = "btnSilinenleriGoster";
+            btnSilinenleriGoster.Size = new Size(250, 45);
+            btnSilinenleriGoster.TabIndex = 35;
+            btnSilinenleriGoster.Text = "Silinenleri Göster";
+            btnSilinenleriGoster.UseVisualStyleBackColor = true;
+            btnSilinenleriGoster.Click += btnSilinenleriGoster_Click;
+            // 
+            // btnGeriYukle
+            // 
+            btnGeriYukle.FlatStyle = FlatStyle.Flat;
+            btnGeriYukle.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 162);
+            btnGeriYukle.Location = new Point(165, 734);
+            btnGeriYukle.Margin = new Padding(4);
+            btnGeriYukle.Name = "btnGeriYukle";
+            btnGeriYukle.Size = new Size(250, 45);
+            btnGeriYukle.TabIndex = 42;
+            btnGeriYukle.Text = "Geri Yükle";
+            btnGeriYukle.UseVisualStyleBackColor = true;
+            btnGeriYukle.Click += btnGeriYukle_Click;
+            // 
             // frmKitapIslemleri
             // 
-            AutoScaleDimensions = new SizeF(12F, 28F);
+            AutoScaleDimensions = new SizeF(10F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(17, 17, 17);
             ClientSize = new Size(1726, 957);
+            Controls.Add(btnGeriYukle);
+            Controls.Add(btnSilinenleriGoster);
             Controls.Add(groupBox1);
             Controls.Add(btnCikis);
             Controls.Add(label10);
@@ -382,5 +434,9 @@
         private Label label10;
         private Button btnCikis;
         private GroupBox groupBox1;
+        private Label label11;
+        private TextBox txtStok;
+        private Button btnSilinenleriGoster;
+        private Button btnGeriYukle;
     }
 }

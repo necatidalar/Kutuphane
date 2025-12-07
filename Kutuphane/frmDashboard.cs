@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace Kutuphane.UI
+﻿namespace Kutuphane.UI
 {
     public partial class frmDashboard : Form
     {
@@ -17,6 +7,7 @@ namespace Kutuphane.UI
             InitializeComponent();
         }
         public string GirisYapanKullanici { get; set; }
+        public int GirisYapanPersonelID { get; set; }
         private void frmDashboard_Load(object sender, EventArgs e)
         {
             lblKullaniciAdi.Text = "Hoşgeldiniz, " + GirisYapanKullanici;
@@ -32,6 +23,7 @@ namespace Kutuphane.UI
             this.Close();
             frmLogin frmLogin = new frmLogin();
             frmLogin.Show();
+
         }
 
         private void personelİşlemleriToolStripMenuItem_Click(object sender, EventArgs e)
@@ -49,6 +41,7 @@ namespace Kutuphane.UI
         private void ödünçİşlemleriToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmOduncIslemleri frmOdunc = new frmOduncIslemleri();
+            frmOdunc.GuncelPersonelID = GirisYapanPersonelID;
             frmOdunc.ShowDialog();
         }
     }

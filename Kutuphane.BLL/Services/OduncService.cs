@@ -1,42 +1,96 @@
-﻿using Kutuphane.DAL;
-using Kutuphane.DAL.Repository;
+﻿using Core.IRepository;
 using Kutuphane.Model.Entity;
-using System.Data.Entity;
 
 namespace Kutuphane.BLL.Services
 {
     public class OduncService
     {
-        private readonly Repository<Odunc> _repository;
+        private readonly IRepository<Odunc> _repository;
+        private readonly KitapService _kitapService;
 
-        public OduncService()
+        public OduncService(IRepository<Odunc> repository, KitapService kitapService)
         {
-            _repository = new Repository<Odunc>();
+            _repository = repository ?? throw new ArgumentNullException(nameof(repository));
+            _kitapService = kitapService ?? throw new ArgumentNullException(nameof(kitapService));
+        }
+        public class ServiceResult
+        {
+            public bool Basarili { get; set; }
+            public string Mesaj { get; set; }
         }
 
-        
-        public List<Odunc> GetOdunclerByUye(string deger)
+        public ServiceResult OduncVer(int uyeId, int kitapId, int personelId, DateTime alisTarihi, DateTime teslimTarihi)
         {
-            using var db = new KutuphaneDbContext();
+            if (uyeId <= 0 || kitapId <= 0)
+                return new ServiceResult { Basarili = false, Mesaj = "Geçersiz ID." };
 
-            return db.Oduncler
-                .Include(o => o.Kitap)
-                .Include(o => o.Uye)
-                .Where(o =>
-                    (o.Uye.TcPass == deger || o.UyeID.ToString() == deger) &&
-                    !o.TeslimEdildi)
-                .ToList();
-        }
+            if ((teslimTarihi - alisTarihi).TotalDays > 45)
+                return new ServiceResult { Basarili = false, Mesaj = "Teslim süresi 45 günden fazla olamaz." };
 
-        public void TeslimEt(int oduncId)
-        {
-            var odunc = _repository.GetById(oduncId);
-            if (odunc != null && !odunc.TeslimEdildi)
+            var kitap = _kitapService.GetById(kitapId);
+            if (kitap == null)
+                return new ServiceResult { Basarili = false, Mesaj = "Kitap bulunamadı." };
+
+            if (kitap.Stok <= 0)
+                return new ServiceResult { Basarili = false, Mesaj = "Kitap stokta yok." };
+
+            var mevcutAyniUyeOdunc = _repository.GetByFilter(o => o.KitapID == kitapId && o.UyeID == uyeId && o.TeslimEdildi == false)
+                                                .FirstOrDefault();
+            if (mevcutAyniUyeOdunc != null)
+                return new ServiceResult { Basarili = false, Mesaj = "Aynı kitabı aynı kişi birden fazla kez ödünç alamaz." };
+
+            int aktifOduncler = _repository.GetByFilter(o => o.KitapID == kitapId && o.TeslimEdildi == false).Count();
+
+            if (aktifOduncler >= kitap.Stok)
+                return new ServiceResult { Basarili = false, Mesaj = "Kitap stokta yok." };
+
+            var stokSonuc = _kitapService.StokAzalt(kitapId);
+            if (!stokSonuc.Basarili)
+                return new ServiceResult { Basarili = false, Mesaj = stokSonuc.Mesaj };
+
+            var odunc = new Odunc
             {
-                odunc.TeslimEdildi = true;
-                odunc.TeslimTarihi = DateTime.Now;
-                _repository.Update(odunc);
-            }
+                UyeID = uyeId,
+                KitapID = kitapId,
+                PersonelID = personelId,
+                AlisTarihi = alisTarihi,
+                TeslimTarihi = teslimTarihi,
+                TeslimEdildi = false
+            };
+
+            _repository.Add(odunc);
+
+            return new ServiceResult { Basarili = true, Mesaj = "Kitap ödünç verildi." };
         }
+
+        public ServiceResult TeslimEt(int oduncId)
+        {
+            var o = _repository.GetById(oduncId);
+            if (o == null)
+                return new ServiceResult { Basarili = false, Mesaj = "Kayıt bulunamadı." };
+
+            if (o.TeslimEdildi)
+                return new ServiceResult { Basarili = false, Mesaj = "Zaten teslim edilmiş." };
+
+            o.TeslimEdildi = true;
+            o.TeslimTarihi = DateTime.Now;
+
+            _repository.Update(o);
+
+            return new ServiceResult { Basarili = true, Mesaj = "Teslim edildi." };
+        }
+        public Odunc GetById(int id)
+        {
+            return _repository
+                .GetByFilter(x => x.OduncID == id)
+                .FirstOrDefault();
+        }
+        public List<Odunc> GetTeslimEdilmeyenler() =>
+            _repository.GetByFilter(x => x.TeslimEdildi == false).ToList();
+
+        public List<Odunc> GetByUye(int uyeId) =>
+            _repository.GetByFilter(x => x.UyeID == uyeId).ToList();
+
+        public List<Odunc> GetAll() => _repository.GetAll();
     }
 }

@@ -49,7 +49,7 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { göstergePaneliToolStripMenuItem, çokluKatYönetimiToolStripMenuItem, kitapİşlemleriToolStripMenuItem, ödünçİşlemleriToolStripMenuItem, üyeİşlemleriToolStripMenuItem, personelİşlemleriToolStripMenuItem, çıkışToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(1294, 29);
+            menuStrip1.Size = new Size(1223, 29);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -114,7 +114,7 @@
             AutoScaleDimensions = new SizeF(10F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(17, 17, 17);
-            ClientSize = new Size(1294, 748);
+            ClientSize = new Size(1223, 748);
             Controls.Add(lblKullaniciAdi);
             Controls.Add(menuStrip1);
             Font = new Font("Segoe UI", 12F, FontStyle.Bold);

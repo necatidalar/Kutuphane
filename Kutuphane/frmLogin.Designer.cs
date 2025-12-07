@@ -42,16 +42,16 @@
             txtKullaniciAdi.Location = new Point(16, 52);
             txtKullaniciAdi.Margin = new Padding(4);
             txtKullaniciAdi.Name = "txtKullaniciAdi";
-            txtKullaniciAdi.Size = new Size(344, 34);
-            txtKullaniciAdi.TabIndex = 2;
+            txtKullaniciAdi.Size = new Size(344, 29);
+            txtKullaniciAdi.TabIndex = 1;
             // 
             // txtSifre
             // 
             txtSifre.Location = new Point(16, 132);
             txtSifre.Margin = new Padding(4);
             txtSifre.Name = "txtSifre";
-            txtSifre.Size = new Size(344, 34);
-            txtSifre.TabIndex = 3;
+            txtSifre.Size = new Size(344, 29);
+            txtSifre.TabIndex = 2;
             // 
             // label2
             // 
@@ -59,7 +59,7 @@
             label2.Location = new Point(13, 20);
             label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new Size(143, 28);
+            label2.Size = new Size(115, 21);
             label2.TabIndex = 5;
             label2.Text = "Kullanıcı Adı: ";
             // 
@@ -69,7 +69,7 @@
             label3.Location = new Point(15, 100);
             label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
-            label3.Size = new Size(67, 28);
+            label3.Size = new Size(53, 21);
             label3.TabIndex = 6;
             label3.Text = "Şifre: ";
             // 
@@ -81,7 +81,7 @@
             btnGiris.Margin = new Padding(4);
             btnGiris.Name = "btnGiris";
             btnGiris.Size = new Size(347, 45);
-            btnGiris.TabIndex = 8;
+            btnGiris.TabIndex = 3;
             btnGiris.Text = "Giriş";
             btnGiris.UseVisualStyleBackColor = true;
             btnGiris.Click += btnGiris_Click;
@@ -91,17 +91,18 @@
             checkBox1.AutoSize = true;
             checkBox1.Location = new Point(15, 173);
             checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(147, 32);
+            checkBox1.Size = new Size(119, 25);
             checkBox1.TabIndex = 9;
             checkBox1.Text = "Beni Hatırla";
             checkBox1.UseVisualStyleBackColor = true;
             // 
             // frmLogin
             // 
-            AutoScaleDimensions = new SizeF(12F, 28F);
+            AcceptButton = btnGiris;
+            AutoScaleDimensions = new SizeF(10F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(17, 17, 17);
-            ClientSize = new Size(382, 283);
+            ClientSize = new Size(384, 291);
             Controls.Add(checkBox1);
             Controls.Add(btnGiris);
             Controls.Add(label3);

@@ -15,13 +15,30 @@ namespace Kutuphane.BLL.Services
 
         public List<Uye> Listele() => _repository.GetAll();
 
-        public Uye Getir(int id) => _repository.GetById(id);
+        public List<Uye> GetAll()
+        {
+            return _repository.GetAll();
+        }
 
 
         public class ServiceResult
         {
             public bool Basarili { get; set; }
             public string Mesaj { get; set; }
+        }
+
+        public Uye GetById(int id)
+        {
+            return _repository
+                .GetByFilter(x => x.UyeID == id)
+                .FirstOrDefault();
+        }
+
+        public Uye UyeBul(string tcPass)
+        {
+            return _repository
+                .GetByFilter(x => x.TcPass == tcPass)
+                .FirstOrDefault();
         }
 
         private ServiceResult Validate(Uye uye)

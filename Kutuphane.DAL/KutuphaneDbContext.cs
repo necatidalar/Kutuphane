@@ -15,8 +15,8 @@ namespace Kutuphane.DAL
         {
             if (!optionsBuilder.IsConfigured)
             {
-                //optionsBuilder.UseSqlServer("Server=localhost;Database=KutuphaneOtomasyonu;Trusted_Connection=True;TrustServerCertificate=True;");
-                optionsBuilder.UseSqlServer("Server=CLK-STAJERPC\\STAJYERSQL;Database=KutuphaneOtomasyonu;User Id=sa;Password=Yesilyurt.55; TrustServerCertificate=True;");
+                optionsBuilder.UseSqlServer("Server=localhost;Database=KutuphaneOtomasyonu;Trusted_Connection=True;TrustServerCertificate=True;");
+                //optionsBuilder.UseSqlServer("Server=CLK-STAJERPC\\STAJYERSQL;Database=KutuphaneOtomasyonu;User Id=sa;Password=Yesilyurt.55; TrustServerCertificate=True;");
                 //optionsBuilder.UseSqlServer("Server=YDC-TUNAAKSU-LE\\YDCLENOVO;Database=StajyerKutuphane;User Id=stajyer;Password=Yesilyurt.55; TrustServerCertificate=True;");
             }
         }
@@ -31,7 +31,7 @@ namespace Kutuphane.DAL
         public DbSet<Raf> Raflar { get; set; }
         public DbSet<KitapSirasi> KitapSirasi { get; set; }
         public DbSet<Uye> Uyeler { get; set; }
-        public DbSet<Odunc> Oduncler { get; set; }
+        public DbSet<Odunc> Odunc { get; set; }
         public DbSet<Personel> Personel { get; set; }
 
     }

@@ -26,11 +26,32 @@ namespace Kutuphane.BLL.Services
                      .ToList();
         }
 
-
+        public List<Kitap> GetAll()
+        {
+            return _repository.GetAll();
+        }
+        public Kitap GetById(int id)
+        {
+            return _repository.GetById(id);
+        }
         public class ServiceResult
         {
             public bool Basarili { get; set; }
             public string Mesaj { get; set; }
+        }
+        public List<Kitap> Ara(string kelime)
+        {
+            if (string.IsNullOrWhiteSpace(kelime) || kelime.Length < 3)
+                return new List<Kitap>();
+
+            return _repository.GetByFilter(k =>
+                   (k.KitapAdi.Contains(kelime)) ||
+                   (k.ISBN.Contains(kelime)) ||
+                   (k.Yazar != null &&
+                    (k.Yazar.Ad + " " + k.Yazar.Soyad).Contains(kelime)) ||
+                   (k.Kategori != null && k.Kategori.KategoriAdi.Contains(kelime)) ||
+                   (k.Yayinevi != null && k.Yayinevi.Ad.Contains(kelime))
+            );
         }
 
         public ServiceResult Ekle(Kitap kitap)
@@ -65,8 +86,6 @@ namespace Kutuphane.BLL.Services
 
             return new ServiceResult { Basarili = true, Mesaj = "Kitap başarıyla eklendi." };
         }
-
-
         public ServiceResult Guncelle(Kitap kitap)
         {
             if (kitap == null)
@@ -75,32 +94,35 @@ namespace Kutuphane.BLL.Services
             if (kitap.KitapID <= 0)
                 return new ServiceResult { Basarili = false, Mesaj = "Geçersiz kitap ID." };
 
-            if (string.IsNullOrWhiteSpace(kitap.KitapAdi))
-                return new ServiceResult { Basarili = false, Mesaj = "Kitap adı boş olamaz." };
+            var mevcut = _repository.GetById(kitap.KitapID);
 
-            if (kitap.KitapAdi.Length > 200)
-                return new ServiceResult { Basarili = false, Mesaj = "Kitap adı çok uzun olamaz." };
+            if (mevcut == null)
+                return new ServiceResult { Basarili = false, Mesaj = "Kitap bulunamadı." };
 
-            if (!string.IsNullOrWhiteSpace(kitap.ISBN) && !Regex.IsMatch(kitap.ISBN, @"^\d{10}(\d{3})?$"))
+            if (!string.IsNullOrWhiteSpace(kitap.ISBN) &&
+                !Regex.IsMatch(kitap.ISBN, @"^\d{10}(\d{3})?$"))
                 return new ServiceResult { Basarili = false, Mesaj = "Geçersiz ISBN formatı." };
 
-            var mevcutKitap = _repository.GetAll()
+            var isbnKontrol = _repository.GetAll()
                 .FirstOrDefault(k => k.ISBN == kitap.ISBN && k.KitapID != kitap.KitapID);
 
-            if (mevcutKitap != null)
+            if (isbnKontrol != null)
                 return new ServiceResult { Basarili = false, Mesaj = "Bu ISBN ile zaten başka bir kitap kayıtlı." };
 
-            if (kitap.YazarID <= 0)
-                return new ServiceResult { Basarili = false, Mesaj = "Geçersiz Yazar ID." };
+            mevcut.KitapAdi = kitap.KitapAdi;
+            mevcut.ISBN = kitap.ISBN;
+            mevcut.YazarID = kitap.YazarID;
+            mevcut.YayineviID = kitap.YayineviID;
+            mevcut.KategoriID = kitap.KategoriID;
+            mevcut.BasimYili = kitap.BasimYili;
+            mevcut.SayfaSayisi = kitap.SayfaSayisi;
+            mevcut.Dil = kitap.Dil;
+            mevcut.Stok = kitap.Stok;
 
-            if (kitap.YayineviID <= 0)
-                return new ServiceResult { Basarili = false, Mesaj = "Geçersiz Yayınevi ID." };
-
-            _repository.Update(kitap);
+            _repository.Update(mevcut);
 
             return new ServiceResult { Basarili = true, Mesaj = "Kitap başarıyla güncellendi." };
         }
-
 
         public ServiceResult Sil(int id)
         {
@@ -111,10 +133,52 @@ namespace Kutuphane.BLL.Services
             if (kitap == null)
                 return new ServiceResult { Basarili = false, Mesaj = $"ID'si {id} olan kitap bulunamadı." };
 
-            _repository.Delete(id);
+            kitap.Aktif = false;
 
-            return new ServiceResult { Basarili = true, Mesaj = "Kitap başarıyla silindi." };
+            _repository.Update(kitap);
+
+            return new ServiceResult
+            {
+                Basarili = true,
+                Mesaj = "Kitap silinmedi. Pasif hale getirildi."
+            };
+        }
+        public ServiceResult GeriYukle(int id)
+        {
+            if (id <= 0)
+                return new ServiceResult { Basarili = false, Mesaj = "Geçersiz kitap ID." };
+
+            var kitap = _repository.GetById(id);
+
+            if (kitap == null)
+                return new ServiceResult { Basarili = false, Mesaj = "Kitap bulunamadı." };
+
+            if (kitap.Aktif)
+                return new ServiceResult { Basarili = false, Mesaj = "Bu kitap zaten aktif." };
+
+            kitap.Aktif = true;
+            _repository.Update(kitap);
+
+            return new ServiceResult
+            {
+                Basarili = true,
+                Mesaj = "Kitap başarıyla geri yüklendi."
+            };
         }
 
+        public ServiceResult StokAzalt(int kitapId, int miktar = 1)
+        {
+            var kitap = _repository.GetById(kitapId);
+            if (kitap == null)
+                return new ServiceResult { Basarili = false, Mesaj = "Kitap bulunamadı." };
+
+            if (kitap.Stok < miktar)
+                return new ServiceResult { Basarili = false, Mesaj = "Yeterli stok yok." };
+
+            kitap.Stok -= miktar;
+            _repository.Update(kitap);
+
+            return new ServiceResult { Basarili = true, Mesaj = "Stok güncellendi." };
+        }
     }
 }

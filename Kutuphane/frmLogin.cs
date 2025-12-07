@@ -21,18 +21,6 @@ namespace Kutuphane.UI
 
         private void btnGiris_Click(object sender, EventArgs e)
         {
-            //var personel = new Personel
-            //{
-            //    AdSoyad = textBox1.Text,
-            //    KullaniciAdi = txtKullaniciAdi.Text,
-            //    Sifre = txtSifre.Text
-            //};
-
-            //_service.Add(personel);
-
-            //MessageBox.Show("Personel başarıyla kaydedildi.");
-
-
             string kullaniciAdi = txtKullaniciAdi.Text;
             string sifre = txtSifre.Text;
 
@@ -47,6 +35,7 @@ namespace Kutuphane.UI
 
             frmDashboard dashboard = new frmDashboard();
             dashboard.GirisYapanKullanici = personel.AdSoyad;
+            dashboard.GirisYapanPersonelID = personel.PersonelID;
             dashboard.Show();
             this.Hide();
 

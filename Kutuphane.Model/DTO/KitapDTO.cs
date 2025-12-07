@@ -1,5 +1,4 @@
 ﻿using Core.Entity;
-using Kutuphane.Model.Entity;
 
 namespace Kutuphane.Model.DTO
 {
@@ -11,6 +10,7 @@ namespace Kutuphane.Model.DTO
         public int? BasimYili { get; set; }
         public int? SayfaSayisi { get; set; }
         public string Dil { get; set; }
+        public int Stok { get; set; }
 
         public int YazarID { get; set; }
         public int YayineviID { get; set; }

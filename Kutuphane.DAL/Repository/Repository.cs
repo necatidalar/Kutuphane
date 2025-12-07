@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 
 namespace Kutuphane.DAL.Repository
 {
-    public class Repository<T> : IRepository<T> where T : class
+    public class Repository<T> : IRepository<T>  where T : class
     {
         public List<T> GetAll()
         {
