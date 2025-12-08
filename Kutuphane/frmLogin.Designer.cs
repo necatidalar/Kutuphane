@@ -84,6 +84,7 @@
             btnGiris.TabIndex = 3;
             btnGiris.Text = "Giriş";
             btnGiris.UseVisualStyleBackColor = true;
+            btnGiris.Click += btnGiris_Click;
             // 
             // checkBox1
             // 
@@ -118,6 +119,7 @@
             Name = "frmLogin";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Kütüphane Otomasyonu - Giriş";
+            FormClosed += frmLogin_FormClosed;
             ResumeLayout(false);
             PerformLayout();
         }

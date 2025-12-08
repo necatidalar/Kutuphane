@@ -84,12 +84,12 @@
             dataGrid_kitap.Columns.AddRange(new DataGridViewColumn[] { kitapIDDataGridViewTextBoxColumn, kitapAdiDataGridViewTextBoxColumn, ıSBNDataGridViewTextBoxColumn, yazarIDDataGridViewTextBoxColumn, yayineviIDDataGridViewTextBoxColumn, kategoriIDDataGridViewTextBoxColumn, basimYiliDataGridViewTextBoxColumn, sayfaSayisiDataGridViewTextBoxColumn, dilDataGridViewTextBoxColumn, stokDataGridViewTextBoxColumn, aktifDataGridViewCheckBoxColumn, yazarDataGridViewTextBoxColumn, yayineviDataGridViewTextBoxColumn, kategoriDataGridViewTextBoxColumn, kitapSiralariDataGridViewTextBoxColumn });
             dataGrid_kitap.DataSource = kitapBindingSource;
             dataGrid_kitap.Dock = DockStyle.Fill;
-            dataGrid_kitap.Location = new Point(3, 3);
+            dataGrid_kitap.Location = new Point(3, 2);
+            dataGrid_kitap.Margin = new Padding(3, 2, 3, 2);
             dataGrid_kitap.Name = "dataGrid_kitap";
             dataGrid_kitap.RowHeadersWidth = 51;
-            dataGrid_kitap.Size = new Size(1198, 317);
+            dataGrid_kitap.Size = new Size(1048, 238);
             dataGrid_kitap.TabIndex = 0;
-            dataGrid_kitap.RowsAdded += dataGrid_kitap_RowsAdded;
             // 
             // kitapIDDataGridViewTextBoxColumn
             // 
@@ -222,10 +222,11 @@
             dataGrid_kitapDto.Columns.AddRange(new DataGridViewColumn[] { kitapIDDataGridViewTextBoxColumn1, kitapAdiDataGridViewTextBoxColumn1, ıSBNDataGridViewTextBoxColumn1, yazarIDDataGridViewTextBoxColumn1, yazarAdDataGridViewTextBoxColumn, yazarSoyadDataGridViewTextBoxColumn, yayineviIDDataGridViewTextBoxColumn1, yayineviAdDataGridViewTextBoxColumn, kategoriIDDataGridViewTextBoxColumn1, kategoriAdiDataGridViewTextBoxColumn, basimYiliDataGridViewTextBoxColumn1, sayfaSayisiDataGridViewTextBoxColumn1, dilDataGridViewTextBoxColumn1, stokDataGridViewTextBoxColumn1, aktifDataGridViewCheckBoxColumn1 });
             dataGrid_kitapDto.DataSource = kitapDtoBindingSource;
             dataGrid_kitapDto.Dock = DockStyle.Fill;
-            dataGrid_kitapDto.Location = new Point(3, 326);
+            dataGrid_kitapDto.Location = new Point(3, 244);
+            dataGrid_kitapDto.Margin = new Padding(3, 2, 3, 2);
             dataGrid_kitapDto.Name = "dataGrid_kitapDto";
             dataGrid_kitapDto.RowHeadersWidth = 51;
-            dataGrid_kitapDto.Size = new Size(1198, 317);
+            dataGrid_kitapDto.Size = new Size(1048, 239);
             dataGrid_kitapDto.TabIndex = 1;
             // 
             // kitapIDDataGridViewTextBoxColumn1
@@ -365,11 +366,12 @@
             tablePanelGrid.Controls.Add(dataGrid_kitapDto, 0, 1);
             tablePanelGrid.Dock = DockStyle.Fill;
             tablePanelGrid.Location = new Point(0, 0);
+            tablePanelGrid.Margin = new Padding(3, 2, 3, 2);
             tablePanelGrid.Name = "tablePanelGrid";
             tablePanelGrid.RowCount = 2;
             tablePanelGrid.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tablePanelGrid.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tablePanelGrid.Size = new Size(1204, 646);
+            tablePanelGrid.Size = new Size(1054, 485);
             tablePanelGrid.TabIndex = 2;
             // 
             // panelBtn
@@ -378,24 +380,27 @@
             panelBtn.Controls.Add(button_dto);
             panelBtn.Controls.Add(button_entity);
             panelBtn.Dock = DockStyle.Bottom;
-            panelBtn.Location = new Point(0, 646);
+            panelBtn.Location = new Point(0, 485);
+            panelBtn.Margin = new Padding(3, 2, 3, 2);
             panelBtn.Name = "panelBtn";
-            panelBtn.Size = new Size(1204, 110);
+            panelBtn.Size = new Size(1054, 82);
             panelBtn.TabIndex = 3;
             // 
             // textBox_arama
             // 
-            textBox_arama.Location = new Point(576, 37);
+            textBox_arama.Location = new Point(362, 27);
+            textBox_arama.Margin = new Padding(3, 2, 3, 2);
             textBox_arama.Name = "textBox_arama";
             textBox_arama.PlaceholderText = "arama için ad gir";
-            textBox_arama.Size = new Size(467, 27);
+            textBox_arama.Size = new Size(409, 23);
             textBox_arama.TabIndex = 1;
             // 
             // button_dto
             // 
-            button_dto.Location = new Point(302, 37);
+            button_dto.Location = new Point(264, 28);
+            button_dto.Margin = new Padding(3, 2, 3, 2);
             button_dto.Name = "button_dto";
-            button_dto.Size = new Size(94, 29);
+            button_dto.Size = new Size(82, 22);
             button_dto.TabIndex = 0;
             button_dto.Text = "dto getir";
             button_dto.UseVisualStyleBackColor = true;
@@ -403,9 +408,10 @@
             // 
             // button_entity
             // 
-            button_entity.Location = new Point(93, 37);
+            button_entity.Location = new Point(81, 28);
+            button_entity.Margin = new Padding(3, 2, 3, 2);
             button_entity.Name = "button_entity";
-            button_entity.Size = new Size(94, 29);
+            button_entity.Size = new Size(82, 22);
             button_entity.TabIndex = 0;
             button_entity.Text = "entity getir";
             button_entity.UseVisualStyleBackColor = true;
@@ -413,14 +419,16 @@
             // 
             // testForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1204, 756);
+            ClientSize = new Size(1054, 567);
             Controls.Add(tablePanelGrid);
             Controls.Add(panelBtn);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "testForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "testForm";
+            Load += testForm_Load;
             ((System.ComponentModel.ISupportInitialize)dataGrid_kitap).EndInit();
             ((System.ComponentModel.ISupportInitialize)kitapBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGrid_kitapDto).EndInit();

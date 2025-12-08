@@ -16,6 +16,11 @@ namespace Kutuphane.UI
             dataGrid_kitap.DataSource = bilKitap;
             dataGrid_kitapDto.DataSource = bilKitapDto;
         }
+        private void testForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
         BindingList<Kitap> bilKitap = new BindingList<Kitap>();
         BindingList<KitapDto> bilKitapDto = new BindingList<KitapDto>();
 
@@ -28,7 +33,7 @@ namespace Kutuphane.UI
                 MessageBox.Show(kitapResult.Message, "Hata");
                 return;
             }
-
+            bilKitap.Clear();
             //dataGrid_kitap.DataSource = kitapResult.Data;
             bilKitapDto.AllowNew = true;
             foreach (var item in kitapResult.Data)
@@ -46,18 +51,12 @@ namespace Kutuphane.UI
                 MessageBox.Show(kitapResult.Message, "Hata");
                 return;
             }
-
+            bilKitapDto.Clear();
             bilKitapDto.AllowNew = true;
             foreach (var item in kitapResult.Data)
             {
                 bilKitapDto.Add(item);
             }
-
-        }
-
-        private void dataGrid_kitap_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
-        {
-
         }
     }
 }

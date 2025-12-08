@@ -20,7 +20,7 @@
             base.Dispose(disposing);
         }
 
-        #region Windows Form Desig#region Windows Form Designer generated code
+        #region Windows Form Designer generated code
 
         /// <summary>
         /// Required method for Designer support - do not modify
@@ -28,356 +28,396 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmUyeIslemleri));
+            dataGrid_Uye = new DataGridView();
+            tcPassDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            adDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            soyadDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            cinsiyetIDDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            dogumYiliDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            telefonDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            epostaDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            adresDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            adresDetayDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            uyeDtoBindingSource = new BindingSource(components);
+            textBox_Ara = new TextBox();
             label1 = new Label();
-            btnCikis = new Button();
-            dgvUyeler = new DataGridView();
             groupBox1 = new GroupBox();
-            richTextAdresDetay = new RichTextBox();
-            rbKadin = new RadioButton();
-            rbErkek = new RadioButton();
+            comboBox_Cinsiyet = new ComboBox();
             btnSil = new Button();
             btnDuzenle = new Button();
             btnKaydet = new Button();
-            label8 = new Label();
-            label9 = new Label();
-            label7 = new Label();
-            txtID = new TextBox();
-            txtDogumYili = new TextBox();
-            label2 = new Label();
-            txtEposta = new TextBox();
-            txtTCPASS = new TextBox();
-            txtAdres = new TextBox();
-            txtTel = new TextBox();
+            richTextBox_AdresDetay = new RichTextBox();
             label11 = new Label();
-            txtSoyad = new TextBox();
-            label6 = new Label();
             label10 = new Label();
-            txtAd = new TextBox();
+            label9 = new Label();
+            label8 = new Label();
+            label7 = new Label();
+            label6 = new Label();
             label5 = new Label();
-            label3 = new Label();
             label4 = new Label();
-            ((System.ComponentModel.ISupportInitialize)dgvUyeler).BeginInit();
+            label3 = new Label();
+            label2 = new Label();
+            textBox_Adres = new TextBox();
+            textBox_Eposta = new TextBox();
+            textBox_Telefon = new TextBox();
+            textBox_DogumYili = new TextBox();
+            textBox_Soyad = new TextBox();
+            textBox_Ad = new TextBox();
+            textBox_TcPass = new TextBox();
+            textBox_Uye = new TextBox();
+            btnAra = new Button();
+            ((System.ComponentModel.ISupportInitialize)dataGrid_Uye).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)uyeDtoBindingSource).BeginInit();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
+            // dataGrid_Uye
+            // 
+            dataGrid_Uye.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dataGrid_Uye.AutoGenerateColumns = false;
+            dataGrid_Uye.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGrid_Uye.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGrid_Uye.Columns.AddRange(new DataGridViewColumn[] { tcPassDataGridViewTextBoxColumn, adDataGridViewTextBoxColumn, soyadDataGridViewTextBoxColumn, cinsiyetIDDataGridViewTextBoxColumn, dogumYiliDataGridViewTextBoxColumn, telefonDataGridViewTextBoxColumn, epostaDataGridViewTextBoxColumn, adresDataGridViewTextBoxColumn, adresDetayDataGridViewTextBoxColumn });
+            dataGrid_Uye.DataSource = uyeDtoBindingSource;
+            dataGrid_Uye.Location = new Point(332, 41);
+            dataGrid_Uye.Name = "dataGrid_Uye";
+            dataGrid_Uye.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGrid_Uye.Size = new Size(791, 622);
+            dataGrid_Uye.TabIndex = 0;
+            dataGrid_Uye.CellClick += dataGrid_Uye_CellClick;
+            // 
+            // tcPassDataGridViewTextBoxColumn
+            // 
+            tcPassDataGridViewTextBoxColumn.DataPropertyName = "TcPass";
+            tcPassDataGridViewTextBoxColumn.HeaderText = "TcPass";
+            tcPassDataGridViewTextBoxColumn.Name = "tcPassDataGridViewTextBoxColumn";
+            // 
+            // adDataGridViewTextBoxColumn
+            // 
+            adDataGridViewTextBoxColumn.DataPropertyName = "Ad";
+            adDataGridViewTextBoxColumn.HeaderText = "Ad";
+            adDataGridViewTextBoxColumn.Name = "adDataGridViewTextBoxColumn";
+            // 
+            // soyadDataGridViewTextBoxColumn
+            // 
+            soyadDataGridViewTextBoxColumn.DataPropertyName = "Soyad";
+            soyadDataGridViewTextBoxColumn.HeaderText = "Soyad";
+            soyadDataGridViewTextBoxColumn.Name = "soyadDataGridViewTextBoxColumn";
+            // 
+            // cinsiyetIDDataGridViewTextBoxColumn
+            // 
+            cinsiyetIDDataGridViewTextBoxColumn.DataPropertyName = "CinsiyetID";
+            cinsiyetIDDataGridViewTextBoxColumn.HeaderText = "CinsiyetID";
+            cinsiyetIDDataGridViewTextBoxColumn.Name = "cinsiyetIDDataGridViewTextBoxColumn";
+            // 
+            // dogumYiliDataGridViewTextBoxColumn
+            // 
+            dogumYiliDataGridViewTextBoxColumn.DataPropertyName = "DogumYili";
+            dogumYiliDataGridViewTextBoxColumn.HeaderText = "DogumYili";
+            dogumYiliDataGridViewTextBoxColumn.Name = "dogumYiliDataGridViewTextBoxColumn";
+            // 
+            // telefonDataGridViewTextBoxColumn
+            // 
+            telefonDataGridViewTextBoxColumn.DataPropertyName = "Telefon";
+            telefonDataGridViewTextBoxColumn.HeaderText = "Telefon";
+            telefonDataGridViewTextBoxColumn.Name = "telefonDataGridViewTextBoxColumn";
+            // 
+            // epostaDataGridViewTextBoxColumn
+            // 
+            epostaDataGridViewTextBoxColumn.DataPropertyName = "Eposta";
+            epostaDataGridViewTextBoxColumn.HeaderText = "Eposta";
+            epostaDataGridViewTextBoxColumn.Name = "epostaDataGridViewTextBoxColumn";
+            // 
+            // adresDataGridViewTextBoxColumn
+            // 
+            adresDataGridViewTextBoxColumn.DataPropertyName = "Adres";
+            adresDataGridViewTextBoxColumn.HeaderText = "Adres";
+            adresDataGridViewTextBoxColumn.Name = "adresDataGridViewTextBoxColumn";
+            // 
+            // adresDetayDataGridViewTextBoxColumn
+            // 
+            adresDetayDataGridViewTextBoxColumn.DataPropertyName = "AdresDetay";
+            adresDetayDataGridViewTextBoxColumn.HeaderText = "AdresDetay";
+            adresDetayDataGridViewTextBoxColumn.Name = "adresDetayDataGridViewTextBoxColumn";
+            // 
+            // uyeDtoBindingSource
+            // 
+            uyeDtoBindingSource.DataSource = typeof(Model.DTO.UyeDto);
+            // 
+            // textBox_Ara
+            // 
+            textBox_Ara.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            textBox_Ara.Location = new Point(841, 12);
+            textBox_Ara.Name = "textBox_Ara";
+            textBox_Ara.PlaceholderText = "Arama için TC/PASS gir";
+            textBox_Ara.Size = new Size(200, 23);
+            textBox_Ara.TabIndex = 1;
+            // 
             // label1
             // 
+            label1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label1.AutoSize = true;
-            label1.Location = new Point(12, 9);
+            label1.Location = new Point(807, 16);
             label1.Name = "label1";
-            label1.Size = new Size(310, 21);
-            label1.TabIndex = 1;
-            label1.Text = "Kütüphane Otomasyonu - Üye İşlemleri";
-            // 
-            // btnCikis
-            // 
-            btnCikis.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnCikis.FlatAppearance.BorderSize = 0;
-            btnCikis.FlatAppearance.MouseOverBackColor = Color.Red;
-            btnCikis.FlatStyle = FlatStyle.Flat;
-            btnCikis.Font = new Font("Segoe UI Black", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 162);
-            btnCikis.ForeColor = Color.White;
-            btnCikis.Location = new Point(1228, 12);
-            btnCikis.Name = "btnCikis";
-            btnCikis.Size = new Size(30, 30);
-            btnCikis.TabIndex = 41;
-            btnCikis.Text = "X";
-            btnCikis.UseVisualStyleBackColor = true;
-            // 
-            // dgvUyeler
-            // 
-            dgvUyeler.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            dgvUyeler.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvUyeler.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvUyeler.Location = new Point(444, 86);
-            dgvUyeler.Name = "dgvUyeler";
-            dgvUyeler.RowHeadersWidth = 51;
-            dgvUyeler.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvUyeler.Size = new Size(814, 620);
-            dgvUyeler.TabIndex = 45;
+            label1.Size = new Size(28, 15);
+            label1.TabIndex = 2;
+            label1.Text = "Ara:";
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(richTextAdresDetay);
-            groupBox1.Controls.Add(rbKadin);
-            groupBox1.Controls.Add(rbErkek);
+            groupBox1.Controls.Add(comboBox_Cinsiyet);
             groupBox1.Controls.Add(btnSil);
             groupBox1.Controls.Add(btnDuzenle);
             groupBox1.Controls.Add(btnKaydet);
-            groupBox1.Controls.Add(label8);
-            groupBox1.Controls.Add(label9);
-            groupBox1.Controls.Add(label7);
-            groupBox1.Controls.Add(txtID);
-            groupBox1.Controls.Add(txtDogumYili);
-            groupBox1.Controls.Add(label2);
-            groupBox1.Controls.Add(txtEposta);
-            groupBox1.Controls.Add(txtTCPASS);
-            groupBox1.Controls.Add(txtAdres);
-            groupBox1.Controls.Add(txtTel);
+            groupBox1.Controls.Add(richTextBox_AdresDetay);
             groupBox1.Controls.Add(label11);
-            groupBox1.Controls.Add(txtSoyad);
-            groupBox1.Controls.Add(label6);
             groupBox1.Controls.Add(label10);
-            groupBox1.Controls.Add(txtAd);
+            groupBox1.Controls.Add(label9);
+            groupBox1.Controls.Add(label8);
+            groupBox1.Controls.Add(label7);
+            groupBox1.Controls.Add(label6);
             groupBox1.Controls.Add(label5);
-            groupBox1.Controls.Add(label3);
             groupBox1.Controls.Add(label4);
-            groupBox1.ForeColor = Color.White;
-            groupBox1.Location = new Point(21, 76);
+            groupBox1.Controls.Add(label3);
+            groupBox1.Controls.Add(label2);
+            groupBox1.Controls.Add(textBox_Adres);
+            groupBox1.Controls.Add(textBox_Eposta);
+            groupBox1.Controls.Add(textBox_Telefon);
+            groupBox1.Controls.Add(textBox_DogumYili);
+            groupBox1.Controls.Add(textBox_Soyad);
+            groupBox1.Controls.Add(textBox_Ad);
+            groupBox1.Controls.Add(textBox_TcPass);
+            groupBox1.Controls.Add(textBox_Uye);
+            groupBox1.Location = new Point(12, 41);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(417, 630);
-            groupBox1.TabIndex = 44;
+            groupBox1.Size = new Size(308, 622);
+            groupBox1.TabIndex = 3;
             groupBox1.TabStop = false;
             groupBox1.Text = "Üye İşlemleri";
             // 
-            // richTextAdresDetay
+            // comboBox_Cinsiyet
             // 
-            richTextAdresDetay.Location = new Point(153, 366);
-            richTextAdresDetay.Name = "richTextAdresDetay";
-            richTextAdresDetay.Size = new Size(250, 96);
-            richTextAdresDetay.TabIndex = 35;
-            richTextAdresDetay.Text = "";
-            // 
-            // rbKadin
-            // 
-            rbKadin.AutoSize = true;
-            rbKadin.Location = new Point(228, 183);
-            rbKadin.Name = "rbKadin";
-            rbKadin.Size = new Size(72, 25);
-            rbKadin.TabIndex = 34;
-            rbKadin.Text = "Kadın";
-            rbKadin.UseVisualStyleBackColor = true;
-            // 
-            // rbErkek
-            // 
-            rbErkek.AutoSize = true;
-            rbErkek.Location = new Point(152, 183);
-            rbErkek.Name = "rbErkek";
-            rbErkek.Size = new Size(70, 25);
-            rbErkek.TabIndex = 34;
-            rbErkek.Text = "Erkek";
-            rbErkek.UseVisualStyleBackColor = true;
+            comboBox_Cinsiyet.FormattingEnabled = true;
+            comboBox_Cinsiyet.Location = new Point(92, 150);
+            comboBox_Cinsiyet.Name = "comboBox_Cinsiyet";
+            comboBox_Cinsiyet.Size = new Size(201, 23);
+            comboBox_Cinsiyet.TabIndex = 9;
             // 
             // btnSil
             // 
-            btnSil.FlatStyle = FlatStyle.Flat;
-            btnSil.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 162);
-            btnSil.Location = new Point(152, 575);
-            btnSil.Margin = new Padding(4);
+            btnSil.Location = new Point(119, 455);
             btnSil.Name = "btnSil";
-            btnSil.Size = new Size(250, 45);
-            btnSil.TabIndex = 32;
+            btnSil.Size = new Size(146, 23);
+            btnSil.TabIndex = 8;
             btnSil.Text = "Sil";
             btnSil.UseVisualStyleBackColor = true;
+            btnSil.Click += btnSil_Click;
             // 
             // btnDuzenle
             // 
-            btnDuzenle.FlatStyle = FlatStyle.Flat;
-            btnDuzenle.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 162);
-            btnDuzenle.Location = new Point(152, 522);
-            btnDuzenle.Margin = new Padding(4);
+            btnDuzenle.Location = new Point(119, 426);
             btnDuzenle.Name = "btnDuzenle";
-            btnDuzenle.Size = new Size(250, 45);
-            btnDuzenle.TabIndex = 31;
+            btnDuzenle.Size = new Size(146, 23);
+            btnDuzenle.TabIndex = 7;
             btnDuzenle.Text = "Düzenle";
             btnDuzenle.UseVisualStyleBackColor = true;
+            btnDuzenle.Click += btnDuzenle_Click;
             // 
             // btnKaydet
             // 
-            btnKaydet.FlatStyle = FlatStyle.Flat;
-            btnKaydet.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 162);
-            btnKaydet.Location = new Point(153, 469);
-            btnKaydet.Margin = new Padding(4);
+            btnKaydet.Location = new Point(119, 397);
             btnKaydet.Name = "btnKaydet";
-            btnKaydet.Size = new Size(250, 45);
-            btnKaydet.TabIndex = 33;
+            btnKaydet.Size = new Size(146, 23);
+            btnKaydet.TabIndex = 6;
             btnKaydet.Text = "Kaydet";
             btnKaydet.UseVisualStyleBackColor = true;
+            btnKaydet.Click += btnKaydet_Click;
             // 
-            // label8
+            // richTextBox_AdresDetay
             // 
-            label8.AutoSize = true;
-            label8.Location = new Point(70, 185);
-            label8.Margin = new Padding(4, 0, 4, 0);
-            label8.Name = "label8";
-            label8.Size = new Size(75, 21);
-            label8.TabIndex = 14;
-            label8.Text = "Cinsiyet:";
-            // 
-            // label9
-            // 
-            label9.AutoSize = true;
-            label9.Location = new Point(80, 37);
-            label9.Margin = new Padding(4, 0, 4, 0);
-            label9.Name = "label9";
-            label9.Size = new Size(65, 21);
-            label9.TabIndex = 14;
-            label9.Text = "Üye ID:";
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Location = new Point(45, 222);
-            label7.Margin = new Padding(4, 0, 4, 0);
-            label7.Name = "label7";
-            label7.Size = new Size(100, 21);
-            label7.TabIndex = 14;
-            label7.Text = "Doğum Yılı:";
-            // 
-            // txtID
-            // 
-            txtID.Location = new Point(153, 34);
-            txtID.Margin = new Padding(4);
-            txtID.Name = "txtID";
-            txtID.Size = new Size(250, 29);
-            txtID.TabIndex = 13;
-            // 
-            // txtDogumYili
-            // 
-            txtDogumYili.Location = new Point(153, 219);
-            txtDogumYili.Margin = new Padding(4);
-            txtDogumYili.Name = "txtDogumYili";
-            txtDogumYili.Size = new Size(250, 29);
-            txtDogumYili.TabIndex = 13;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(68, 74);
-            label2.Margin = new Padding(4, 0, 4, 0);
-            label2.Name = "label2";
-            label2.Size = new Size(77, 21);
-            label2.TabIndex = 14;
-            label2.Text = "TC/PASS:";
-            // 
-            // txtEposta
-            // 
-            txtEposta.Location = new Point(153, 293);
-            txtEposta.Margin = new Padding(4);
-            txtEposta.Name = "txtEposta";
-            txtEposta.Size = new Size(250, 29);
-            txtEposta.TabIndex = 19;
-            // 
-            // txtTCPASS
-            // 
-            txtTCPASS.Location = new Point(153, 71);
-            txtTCPASS.Margin = new Padding(4);
-            txtTCPASS.Name = "txtTCPASS";
-            txtTCPASS.Size = new Size(250, 29);
-            txtTCPASS.TabIndex = 13;
-            // 
-            // txtAdres
-            // 
-            txtAdres.Location = new Point(153, 330);
-            txtAdres.Margin = new Padding(4);
-            txtAdres.Name = "txtAdres";
-            txtAdres.Size = new Size(250, 29);
-            txtAdres.TabIndex = 19;
-            // 
-            // txtTel
-            // 
-            txtTel.Location = new Point(153, 256);
-            txtTel.Margin = new Padding(4);
-            txtTel.Name = "txtTel";
-            txtTel.Size = new Size(250, 29);
-            txtTel.TabIndex = 19;
+            richTextBox_AdresDetay.Location = new Point(92, 295);
+            richTextBox_AdresDetay.Name = "richTextBox_AdresDetay";
+            richTextBox_AdresDetay.Size = new Size(201, 96);
+            richTextBox_AdresDetay.TabIndex = 5;
+            richTextBox_AdresDetay.Text = "";
             // 
             // label11
             // 
             label11.AutoSize = true;
-            label11.Location = new Point(39, 370);
-            label11.Margin = new Padding(4, 0, 4, 0);
+            label11.Location = new Point(13, 298);
             label11.Name = "label11";
-            label11.Size = new Size(106, 21);
-            label11.TabIndex = 26;
+            label11.Size = new Size(73, 15);
+            label11.TabIndex = 1;
             label11.Text = "Adres Detay:";
-            // 
-            // txtSoyad
-            // 
-            txtSoyad.Location = new Point(153, 145);
-            txtSoyad.Margin = new Padding(4);
-            txtSoyad.Name = "txtSoyad";
-            txtSoyad.Size = new Size(250, 29);
-            txtSoyad.TabIndex = 19;
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Location = new Point(74, 296);
-            label6.Margin = new Padding(4, 0, 4, 0);
-            label6.Name = "label6";
-            label6.Size = new Size(71, 21);
-            label6.TabIndex = 26;
-            label6.Text = "E-Posta:";
             // 
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new Point(88, 333);
-            label10.Margin = new Padding(4, 0, 4, 0);
+            label10.Location = new Point(46, 269);
             label10.Name = "label10";
-            label10.Size = new Size(57, 21);
-            label10.TabIndex = 26;
+            label10.Size = new Size(40, 15);
+            label10.TabIndex = 1;
             label10.Text = "Adres:";
             // 
-            // txtAd
+            // label9
             // 
-            txtAd.Location = new Point(153, 108);
-            txtAd.Margin = new Padding(4);
-            txtAd.Name = "txtAd";
-            txtAd.Size = new Size(250, 29);
-            txtAd.TabIndex = 19;
+            label9.AutoSize = true;
+            label9.Location = new Point(36, 240);
+            label9.Name = "label9";
+            label9.Size = new Size(50, 15);
+            label9.TabIndex = 1;
+            label9.Text = "E-Posta:";
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new Point(38, 211);
+            label8.Name = "label8";
+            label8.Size = new Size(48, 15);
+            label8.TabIndex = 1;
+            label8.Text = "Telefon:";
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(17, 182);
+            label7.Name = "label7";
+            label7.Size = new Size(69, 15);
+            label7.TabIndex = 1;
+            label7.Text = "Doğum Yılı:";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(34, 153);
+            label6.Name = "label6";
+            label6.Size = new Size(52, 15);
+            label6.TabIndex = 1;
+            label6.Text = "Cinsiyet:";
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(74, 259);
-            label5.Margin = new Padding(4, 0, 4, 0);
+            label5.Location = new Point(44, 124);
             label5.Name = "label5";
-            label5.Size = new Size(71, 21);
-            label5.TabIndex = 26;
-            label5.Text = "Telefon:";
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(84, 148);
-            label3.Margin = new Padding(4, 0, 4, 0);
-            label3.Name = "label3";
-            label3.Size = new Size(61, 21);
-            label3.TabIndex = 26;
-            label3.Text = "Soyad:";
+            label5.Size = new Size(42, 15);
+            label5.TabIndex = 1;
+            label5.Text = "Soyad:";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(110, 111);
-            label4.Margin = new Padding(4, 0, 4, 0);
+            label4.Location = new Point(61, 95);
             label4.Name = "label4";
-            label4.Size = new Size(35, 21);
-            label4.TabIndex = 26;
+            label4.Size = new Size(25, 15);
+            label4.TabIndex = 1;
             label4.Text = "Ad:";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(37, 66);
+            label3.Name = "label3";
+            label3.Size = new Size(49, 15);
+            label3.TabIndex = 1;
+            label3.Text = "Tc/Pass:";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(42, 37);
+            label2.Name = "label2";
+            label2.Size = new Size(44, 15);
+            label2.TabIndex = 1;
+            label2.Text = "Üye ID:";
+            // 
+            // textBox_Adres
+            // 
+            textBox_Adres.Location = new Point(92, 266);
+            textBox_Adres.Name = "textBox_Adres";
+            textBox_Adres.Size = new Size(201, 23);
+            textBox_Adres.TabIndex = 0;
+            // 
+            // textBox_Eposta
+            // 
+            textBox_Eposta.Location = new Point(92, 237);
+            textBox_Eposta.Name = "textBox_Eposta";
+            textBox_Eposta.Size = new Size(201, 23);
+            textBox_Eposta.TabIndex = 0;
+            // 
+            // textBox_Telefon
+            // 
+            textBox_Telefon.Location = new Point(92, 208);
+            textBox_Telefon.Name = "textBox_Telefon";
+            textBox_Telefon.Size = new Size(201, 23);
+            textBox_Telefon.TabIndex = 0;
+            // 
+            // textBox_DogumYili
+            // 
+            textBox_DogumYili.Location = new Point(92, 179);
+            textBox_DogumYili.Name = "textBox_DogumYili";
+            textBox_DogumYili.Size = new Size(201, 23);
+            textBox_DogumYili.TabIndex = 0;
+            // 
+            // textBox_Soyad
+            // 
+            textBox_Soyad.Location = new Point(92, 121);
+            textBox_Soyad.Name = "textBox_Soyad";
+            textBox_Soyad.Size = new Size(201, 23);
+            textBox_Soyad.TabIndex = 0;
+            // 
+            // textBox_Ad
+            // 
+            textBox_Ad.Location = new Point(92, 92);
+            textBox_Ad.Name = "textBox_Ad";
+            textBox_Ad.Size = new Size(201, 23);
+            textBox_Ad.TabIndex = 0;
+            // 
+            // textBox_TcPass
+            // 
+            textBox_TcPass.Location = new Point(92, 63);
+            textBox_TcPass.Name = "textBox_TcPass";
+            textBox_TcPass.Size = new Size(201, 23);
+            textBox_TcPass.TabIndex = 0;
+            // 
+            // textBox_Uye
+            // 
+            textBox_Uye.Location = new Point(92, 34);
+            textBox_Uye.Name = "textBox_Uye";
+            textBox_Uye.Size = new Size(201, 23);
+            textBox_Uye.TabIndex = 0;
+            // 
+            // btnAra
+            // 
+            btnAra.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnAra.Location = new Point(1047, 12);
+            btnAra.Name = "btnAra";
+            btnAra.Size = new Size(75, 23);
+            btnAra.TabIndex = 4;
+            btnAra.Text = "Ara";
+            btnAra.UseVisualStyleBackColor = true;
+            btnAra.Click += btnAra_Click;
             // 
             // frmUyeIslemleri
             // 
-            AutoScaleDimensions = new SizeF(10F, 21F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(17, 17, 17);
-            ClientSize = new Size(1270, 721);
-            Controls.Add(dgvUyeler);
+            BackColor = SystemColors.Control;
+            ClientSize = new Size(1135, 675);
+            Controls.Add(btnAra);
             Controls.Add(groupBox1);
-            Controls.Add(btnCikis);
             Controls.Add(label1);
-            Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 162);
-            ForeColor = Color.White;
-            FormBorderStyle = FormBorderStyle.None;
+            Controls.Add(textBox_Ara);
+            Controls.Add(dataGrid_Uye);
             Icon = (Icon)resources.GetObject("$this.Icon");
-            Margin = new Padding(4);
             Name = "frmUyeIslemleri";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Kütüphane Otomasyonu - Üye İşlemleri";
-            ((System.ComponentModel.ISupportInitialize)dgvUyeler).EndInit();
+            Load += frmUyeIslemleri_Load;
+            ((System.ComponentModel.ISupportInitialize)dataGrid_Uye).EndInit();
+            ((System.ComponentModel.ISupportInitialize)uyeDtoBindingSource).EndInit();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             ResumeLayout(false);
@@ -386,38 +426,43 @@
 
         #endregion
 
+        private DataGridView dataGrid_Uye;
+        private DataGridViewTextBoxColumn tcPassDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn adDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn soyadDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn cinsiyetIDDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn dogumYiliDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn telefonDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn epostaDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn adresDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn adresDetayDataGridViewTextBoxColumn;
+        private BindingSource uyeDtoBindingSource;
+        private TextBox textBox_Ara;
         private Label label1;
-        private Button btnCikis;
-        private DataGridView dgvUyeler;
         private GroupBox groupBox1;
+        private Label label2;
+        private TextBox textBox_Uye;
+        private Button btnAra;
+        private Label label8;
+        private Label label7;
+        private Label label6;
+        private Label label5;
+        private Label label4;
+        private Label label3;
+        private TextBox textBox_Telefon;
+        private TextBox textBox_DogumYili;
+        private TextBox textBox_Soyad;
+        private TextBox textBox_Ad;
+        private TextBox textBox_TcPass;
+        private RichTextBox richTextBox_AdresDetay;
+        private Label label11;
+        private Label label10;
+        private Label label9;
+        private TextBox textBox_Adres;
+        private TextBox textBox_Eposta;
         private Button btnSil;
         private Button btnDuzenle;
         private Button btnKaydet;
-        private Label label9;
-        private TextBox txtID;
-        private TextBox txtPersonelID;
-        private Label label2;
-        private TextBox txtTCPASS;
-        private TextBox txtAdSoyad;
-        private TextBox txtSifre;
-        private TextBox txtSoyad;
-        private TextBox txtAd;
-        private Label label3;
-        private Label label4;
-        private Label label8;
-        private TextBox textBox4;
-        private Label label7;
-        private TextBox txtDogumYili;
-        private TextBox txtEposta;
-        private TextBox txtAdres;
-        private TextBox txtTel;
-        private Label label11;
-        private Label label6;
-        private Label label10;
-        private Label label5;
-        private RadioButton radioKadin;
-        private RadioButton rbErkek;
-        private RichTextBox richTextAdresDetay;
-        private RadioButton rbKadin;
+        private ComboBox comboBox_Cinsiyet;
     }
 }

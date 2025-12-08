@@ -11,7 +11,7 @@ namespace Kutuphane.UI
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new testForm());
+            Application.Run(new frmLogin());
         }
 
     }

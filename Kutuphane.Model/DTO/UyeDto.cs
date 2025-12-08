@@ -1,10 +1,9 @@
 ﻿using Core.Entity;
 
-namespace Kutuphane.Model.Entity
+namespace Kutuphane.Model.DTO
 {
-    public class Uye : IEntity
+    public class UyeDto : IDto
     {
-        public int UyeID { get; set; }
         public string TcPass { get; set; }
         public string Ad { get; set; }
         public string Soyad { get; set; }
@@ -15,7 +14,5 @@ namespace Kutuphane.Model.Entity
         public string Adres { get; set; }
         public string AdresDetay { get; set; }
         public bool AktifMi { get; set; }
-        public ICollection<Odunc> Oduncler { get; set; }
-        public Cinsiyet Cinsiyet { get; set; }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using Core.Entity;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Kutuphane.Model.Entity
 {
