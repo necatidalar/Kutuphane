@@ -70,35 +70,30 @@
             kitapİşlemleriToolStripMenuItem.Name = "kitapİşlemleriToolStripMenuItem";
             kitapİşlemleriToolStripMenuItem.Size = new Size(132, 25);
             kitapİşlemleriToolStripMenuItem.Text = "Kitap İşlemleri";
-            kitapİşlemleriToolStripMenuItem.Click += kitapİşlemleriToolStripMenuItem_Click;
             // 
             // ödünçİşlemleriToolStripMenuItem
             // 
             ödünçİşlemleriToolStripMenuItem.Name = "ödünçİşlemleriToolStripMenuItem";
             ödünçİşlemleriToolStripMenuItem.Size = new Size(142, 25);
             ödünçİşlemleriToolStripMenuItem.Text = "Ödünç İşlemleri";
-            ödünçİşlemleriToolStripMenuItem.Click += ödünçİşlemleriToolStripMenuItem_Click;
             // 
             // üyeİşlemleriToolStripMenuItem
             // 
             üyeİşlemleriToolStripMenuItem.Name = "üyeİşlemleriToolStripMenuItem";
             üyeİşlemleriToolStripMenuItem.Size = new Size(122, 25);
             üyeİşlemleriToolStripMenuItem.Text = "Üye İşlemleri";
-            üyeİşlemleriToolStripMenuItem.Click += üyeİşlemleriToolStripMenuItem_Click;
             // 
             // personelİşlemleriToolStripMenuItem
             // 
             personelİşlemleriToolStripMenuItem.Name = "personelİşlemleriToolStripMenuItem";
             personelİşlemleriToolStripMenuItem.Size = new Size(158, 25);
             personelİşlemleriToolStripMenuItem.Text = "Personel İşlemleri";
-            personelİşlemleriToolStripMenuItem.Click += personelİşlemleriToolStripMenuItem_Click;
             // 
             // çıkışToolStripMenuItem
             // 
             çıkışToolStripMenuItem.Name = "çıkışToolStripMenuItem";
             çıkışToolStripMenuItem.Size = new Size(58, 25);
             çıkışToolStripMenuItem.Text = "Çıkış";
-            çıkışToolStripMenuItem.Click += çıkışToolStripMenuItem_Click;
             // 
             // lblKullaniciAdi
             // 
@@ -126,7 +121,6 @@
             StartPosition = FormStartPosition.CenterParent;
             Text = "Kütüphane Otomasyonu - Gösterge Paneli";
             WindowState = FormWindowState.Maximized;
-            Load += frmDashboard_Load;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             ResumeLayout(false);

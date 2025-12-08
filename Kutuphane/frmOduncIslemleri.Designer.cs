@@ -64,7 +64,7 @@
             label1.AutoSize = true;
             label1.Location = new Point(12, 9);
             label1.Name = "label1";
-            label1.Size = new Size(330, 21);
+            label1.Size = new Size(409, 28);
             label1.TabIndex = 0;
             label1.Text = "Kütüphane Otomasyonu - Ödünç İşlemleri";
             // 
@@ -82,16 +82,15 @@
             btnCikis.TabIndex = 40;
             btnCikis.Text = "X";
             btnCikis.UseVisualStyleBackColor = true;
-            btnCikis.Click += btnCikis_Click;
             // 
             // txtKitapAra
             // 
+            txtKitapAra.BackColor = SystemColors.InfoText;
             txtKitapAra.Location = new Point(7, 54);
             txtKitapAra.Margin = new Padding(4);
             txtKitapAra.Name = "txtKitapAra";
-            txtKitapAra.Size = new Size(399, 29);
+            txtKitapAra.Size = new Size(399, 34);
             txtKitapAra.TabIndex = 41;
-            txtKitapAra.TextChanged += txtKitapAra_TextChanged;
             // 
             // btnKaydet
             // 
@@ -104,7 +103,6 @@
             btnKaydet.TabIndex = 43;
             btnKaydet.Text = "Ödünç Ver";
             btnKaydet.UseVisualStyleBackColor = true;
-            btnKaydet.Click += btnKaydet_Click;
             // 
             // label2
             // 
@@ -112,17 +110,17 @@
             label2.Location = new Point(7, 39);
             label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new Size(111, 21);
+            label2.Size = new Size(138, 28);
             label2.TabIndex = 42;
             label2.Text = "Üye TC/PASS:";
             // 
             // txtTcPass
             // 
             txtTcPass.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
-            txtTcPass.Location = new Point(126, 33);
+            txtTcPass.Location = new Point(150, 33);
             txtTcPass.Margin = new Padding(4);
             txtTcPass.Name = "txtTcPass";
-            txtTcPass.Size = new Size(227, 32);
+            txtTcPass.Size = new Size(203, 39);
             txtTcPass.TabIndex = 41;
             // 
             // label3
@@ -131,7 +129,7 @@
             label3.Location = new Point(7, 29);
             label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
-            label3.Size = new Size(88, 21);
+            label3.Size = new Size(112, 28);
             label3.TabIndex = 42;
             label3.Text = "Kitap  Ara:";
             // 
@@ -141,7 +139,7 @@
             label4.Location = new Point(6, 474);
             label4.Margin = new Padding(4, 0, 4, 0);
             label4.Name = "label4";
-            label4.Size = new Size(93, 21);
+            label4.Size = new Size(117, 28);
             label4.TabIndex = 42;
             label4.Text = "Alış Tarihi: ";
             // 
@@ -151,22 +149,23 @@
             label5.Location = new Point(7, 534);
             label5.Margin = new Padding(4, 0, 4, 0);
             label5.Name = "label5";
-            label5.Size = new Size(155, 21);
+            label5.Size = new Size(194, 28);
             label5.TabIndex = 42;
             label5.Text = "Teslim Tarihi(+45): ";
             // 
             // lvKitaplar
             // 
+            lvKitaplar.BackColor = SystemColors.InfoText;
             lvKitaplar.Location = new Point(6, 132);
             lvKitaplar.Name = "lvKitaplar";
             lvKitaplar.Size = new Size(400, 173);
             lvKitaplar.TabIndex = 45;
             lvKitaplar.UseCompatibleStateImageBehavior = false;
             lvKitaplar.View = View.Details;
-            lvKitaplar.DoubleClick += lvKitaplar_DoubleClick;
             // 
             // lvSepet
             // 
+            lvSepet.BackColor = SystemColors.InfoText;
             lvSepet.Location = new Point(7, 332);
             lvSepet.Name = "lvSepet";
             lvSepet.Size = new Size(399, 129);
@@ -180,7 +179,7 @@
             label7.Location = new Point(7, 308);
             label7.Margin = new Padding(4, 0, 4, 0);
             label7.Name = "label7";
-            label7.Size = new Size(57, 21);
+            label7.Size = new Size(70, 28);
             label7.TabIndex = 42;
             label7.Text = "Sepet:";
             // 
@@ -190,7 +189,7 @@
             label8.Location = new Point(7, 108);
             label8.Margin = new Padding(4, 0, 4, 0);
             label8.Name = "label8";
-            label8.Size = new Size(105, 21);
+            label8.Size = new Size(132, 28);
             label8.TabIndex = 42;
             label8.Text = "Kitap Listesi:";
             // 
@@ -199,16 +198,15 @@
             dtpAlis.Enabled = false;
             dtpAlis.Location = new Point(7, 499);
             dtpAlis.Name = "dtpAlis";
-            dtpAlis.Size = new Size(230, 29);
+            dtpAlis.Size = new Size(230, 34);
             dtpAlis.TabIndex = 47;
-            dtpAlis.ValueChanged += dtpAlis_ValueChanged;
             // 
             // dtpTeslim
             // 
             dtpTeslim.Enabled = false;
             dtpTeslim.Location = new Point(7, 561);
             dtpTeslim.Name = "dtpTeslim";
-            dtpTeslim.Size = new Size(230, 29);
+            dtpTeslim.Size = new Size(230, 34);
             dtpTeslim.TabIndex = 47;
             // 
             // btnUyeAra
@@ -216,18 +214,17 @@
             btnUyeAra.FlatStyle = FlatStyle.Flat;
             btnUyeAra.Location = new Point(360, 33);
             btnUyeAra.Name = "btnUyeAra";
-            btnUyeAra.Size = new Size(46, 32);
+            btnUyeAra.Size = new Size(58, 39);
             btnUyeAra.TabIndex = 48;
             btnUyeAra.Text = "Ara";
             btnUyeAra.UseVisualStyleBackColor = true;
-            btnUyeAra.Click += btnUyeAra_Click;
             // 
             // lblUyeBilgi
             // 
             lblUyeBilgi.AutoSize = true;
             lblUyeBilgi.Location = new Point(126, 69);
             lblUyeBilgi.Name = "lblUyeBilgi";
-            lblUyeBilgi.Size = new Size(14, 21);
+            lblUyeBilgi.Size = new Size(17, 28);
             lblUyeBilgi.TabIndex = 49;
             lblUyeBilgi.Text = ".";
             // 
@@ -261,7 +258,7 @@
             groupBox2.ForeColor = Color.White;
             groupBox2.Location = new Point(12, 50);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(412, 124);
+            groupBox2.Size = new Size(458, 124);
             groupBox2.TabIndex = 51;
             groupBox2.TabStop = false;
             groupBox2.Text = "Üye İşlemleri";
@@ -289,10 +286,10 @@
             btnTeslimEt.TabIndex = 48;
             btnTeslimEt.Text = "Teslim Al";
             btnTeslimEt.UseVisualStyleBackColor = true;
-            btnTeslimEt.Click += btnTeslimEt_Click;
             // 
             // lvOdunclar
             // 
+            lvOdunclar.BackColor = SystemColors.MenuText;
             lvOdunclar.Location = new Point(6, 54);
             lvOdunclar.Name = "lvOdunclar";
             lvOdunclar.Size = new Size(475, 551);
@@ -302,6 +299,7 @@
             // 
             // lvTumGecikenler
             // 
+            lvTumGecikenler.BackColor = SystemColors.MenuText;
             lvTumGecikenler.Location = new Point(6, 54);
             lvTumGecikenler.Name = "lvTumGecikenler";
             lvTumGecikenler.Size = new Size(475, 551);
@@ -332,11 +330,10 @@
             btnTeslimEtTumGecikenler.TabIndex = 49;
             btnTeslimEtTumGecikenler.Text = "Teslim Al";
             btnTeslimEtTumGecikenler.UseVisualStyleBackColor = true;
-            btnTeslimEtTumGecikenler.Click += btnTeslimEtTumGecikenler_Click;
             // 
             // frmOduncIslemleri
             // 
-            AutoScaleDimensions = new SizeF(10F, 21F);
+            AutoScaleDimensions = new SizeF(12F, 28F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(17, 17, 17);
             ClientSize = new Size(1420, 868);
@@ -353,8 +350,6 @@
             Name = "frmOduncIslemleri";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Kütüphane Otomasyonu - Ödünç İşlemleri";
-            Load += frmOduncIslemleri_Load;
-            Paint += frmOduncIslemleri_Paint;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             groupBox2.ResumeLayout(false);

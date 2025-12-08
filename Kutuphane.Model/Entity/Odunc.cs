@@ -1,4 +1,5 @@
 ﻿using Core.Entity;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Kutuphane.Model.Entity
 {
@@ -10,10 +11,12 @@ namespace Kutuphane.Model.Entity
         public DateTime AlisTarihi { get; set; }
         public DateTime? TeslimTarihi { get; set; }
         public bool TeslimEdildi { get; set; }
-        public int PersonelID { get; set; }
+        public int TeslimEdenPersonelID { get; set; }
+        public int? TeslimAlanPersonelID { get; set; }
 
         public Uye Uye { get; set; }
-        public Kitap Kitap { get; set; }
-        public Personel Personel { get; set; }
+        //public Kitap Kitap { get; set; }
+        //public Personel TeslimEdenPersonel { get; set; }
+        //public Personel? TeslimAlanPersonel { get; set; }
     }
 }

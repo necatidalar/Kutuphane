@@ -70,7 +70,6 @@
             btnCikis.TabIndex = 40;
             btnCikis.Text = "X";
             btnCikis.UseVisualStyleBackColor = true;
-            btnCikis.Click += btnCikis_Click;
             // 
             // label9
             // 
@@ -158,7 +157,6 @@
             btnSil.TabIndex = 32;
             btnSil.Text = "Sil";
             btnSil.UseVisualStyleBackColor = true;
-            btnSil.Click += btnSil_Click;
             // 
             // btnDuzenle
             // 
@@ -171,7 +169,6 @@
             btnDuzenle.TabIndex = 31;
             btnDuzenle.Text = "Düzenle";
             btnDuzenle.UseVisualStyleBackColor = true;
-            btnDuzenle.Click += btnDuzenle_Click;
             // 
             // btnKaydet
             // 
@@ -184,7 +181,6 @@
             btnKaydet.TabIndex = 33;
             btnKaydet.Text = "Kaydet";
             btnKaydet.UseVisualStyleBackColor = true;
-            btnKaydet.Click += btnKaydet_Click;
             // 
             // txtSifre
             // 
@@ -215,7 +211,6 @@
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView1.Size = new Size(812, 676);
             dataGridView1.TabIndex = 43;
-            dataGridView1.CellClick += dataGridView1_CellClick;
             // 
             // frmPersonelIslemleri
             // 
@@ -234,8 +229,6 @@
             Name = "frmPersonelIslemleri";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Kütüphane Otomasyonu - Personel İşlemleri";
-            Load += frmPersonelIslemleri_Load;
-            Paint += frmPersonelIslemleri_Paint;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();

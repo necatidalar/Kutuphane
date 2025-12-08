@@ -21,6 +21,6 @@ namespace Kutuphane.Model.Entity
         public Kategori Kategori { get; set; }
 
         public ICollection<KitapSirasi> KitapSiralari { get; set; }
-        public ICollection<Odunc> Oduncler { get; set; }
+        //public ICollection<Odunc> Oduncler { get; set; }
     }
 }

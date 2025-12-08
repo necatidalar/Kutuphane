@@ -84,7 +84,6 @@
             btnCikis.TabIndex = 41;
             btnCikis.Text = "X";
             btnCikis.UseVisualStyleBackColor = true;
-            btnCikis.Click += btnCikis_Click;
             // 
             // dgvUyeler
             // 
@@ -97,7 +96,6 @@
             dgvUyeler.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvUyeler.Size = new Size(814, 620);
             dgvUyeler.TabIndex = 45;
-            dgvUyeler.CellClick += dgvUyeler_CellClick;
             // 
             // groupBox1
             // 
@@ -172,7 +170,6 @@
             btnSil.TabIndex = 32;
             btnSil.Text = "Sil";
             btnSil.UseVisualStyleBackColor = true;
-            btnSil.Click += btnSil_Click;
             // 
             // btnDuzenle
             // 
@@ -185,7 +182,6 @@
             btnDuzenle.TabIndex = 31;
             btnDuzenle.Text = "Düzenle";
             btnDuzenle.UseVisualStyleBackColor = true;
-            btnDuzenle.Click += btnDuzenle_Click;
             // 
             // btnKaydet
             // 
@@ -198,7 +194,6 @@
             btnKaydet.TabIndex = 33;
             btnKaydet.Text = "Kaydet";
             btnKaydet.UseVisualStyleBackColor = true;
-            btnKaydet.Click += btnKaydet_Click;
             // 
             // label8
             // 
@@ -382,8 +377,6 @@
             Name = "frmUyeIslemleri";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Kütüphane Otomasyonu - Üye İşlemleri";
-            Load += frmUyeIslemleri_Load;
-            Paint += frmUyeIslemleri_Paint;
             ((System.ComponentModel.ISupportInitialize)dgvUyeler).EndInit();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();

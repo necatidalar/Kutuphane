@@ -8,7 +8,7 @@ namespace Kutuphane.Model.Entity
         public string TcPass { get; set; }
         public string Ad { get; set; }
         public string Soyad { get; set; }
-        public string Cinsiyet { get; set; }
+        public byte CinsiyetId { get; set; }
         public int? DogumYili { get; set; }
         public string Telefon { get; set; }
         public string Eposta { get; set; }
@@ -16,5 +16,6 @@ namespace Kutuphane.Model.Entity
         public string AdresDetay { get; set; }
 
         public ICollection<Odunc> Oduncler { get; set; }
+        public Cinsiyet Cinsiyet { get; set; }
     }
 }

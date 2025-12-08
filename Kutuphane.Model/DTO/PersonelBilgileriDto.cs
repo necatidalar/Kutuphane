@@ -1,0 +1,14 @@
+﻿
+
+using Core.Entity;
+
+namespace Kutuphane.Model.DTO
+{
+    public class PersonelBilgileriDto :IDto
+    {
+        public int PersonelID { get; set; }
+        public string Ad { get; set; }
+        public string Soyad { get; set; }
+        public byte Cinsiyet { get; set; }
+    }
+}

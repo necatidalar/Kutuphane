@@ -1,6 +1,5 @@
-﻿using Kutuphane.BLL.Services;
+﻿using Kutuphane.BLL.Abstract;
 using Kutuphane.DAL;
-using Kutuphane.DAL.Repository;
 using Kutuphane.Model.DTO;
 using Kutuphane.Model.Entity;
 
@@ -12,10 +11,6 @@ namespace Kutuphane.UI
         {
             InitializeComponent();
 
-            _kitapService = new KitapService(new Repository<Kitap>());
-            _yazarService = new YazarService(new Repository<Yazar>());
-            _yayineviService = new YayineviService(new Repository<Yayinevi>());
-            _kategoriService = new KategoriService(new Repository<Kategori>());
         }
 
         private void frmKitapIslemleri_Load(object sender, EventArgs e)
@@ -25,18 +20,18 @@ namespace Kutuphane.UI
             dataGridView1.ForeColor = Color.Black;
         }
 
-        private readonly KitapService _kitapService;
-        private readonly YazarService _yazarService;
-        private readonly YayineviService _yayineviService;
-        private readonly KategoriService _kategoriService;
+        //private readonly YazarService _yazarService;
+        //private readonly YayineviService _yayineviService;
+        //private readonly KategoriService _kategoriService;
 
         private void KitaplariListele()
         {
+            
             using (var db = new KutuphaneDbContext())
             {
                 var liste = db.Kitaplar
                     .Where(k => k.Aktif)
-                    .Select(x => new KitapDTO
+                    .Select(x => new KitapDto
                     {
                         KitapID = x.KitapID,
                         KitapAdi = x.KitapAdi,
@@ -48,9 +43,9 @@ namespace Kutuphane.UI
                         YazarID = x.YazarID,
                         YayineviID = x.YayineviID,
                         KategoriID = x.KategoriID,
-                        YazarAdi = x.Yazar.Ad + " " + x.Yazar.Soyad,
-                        YayineviAdi = x.Yayinevi.Ad,
-                        KategoriAdi = x.Kategori.KategoriAdi
+                        //YazarAdi = x.Yazar.Ad + " " + x.Yazar.Soyad,
+                        //YayineviAdi = x.Yayinevi.Ad,
+                        //KategoriAdi = x.Kategori.KategoriAdi
                     })
                     .OrderBy(x => x.KitapAdi)
                     .ToList();
@@ -76,41 +71,41 @@ namespace Kutuphane.UI
 
         private void CombosDoldur()
         {
-            var yazarlar = _yazarService.Listele()
-                .Select(y => new
-                {
-                    YazarID = y.YazarID,
-                    AdSoyad = y.Ad + " " + y.Soyad
-                })
-                .ToList();
-            cmbYazar.DataSource = yazarlar;
-            cmbYazar.DisplayMember = "AdSoyad";
-            cmbYazar.ValueMember = "YazarID";
-            cmbYazar.SelectedIndex = -1;
+            //var yazarlar = _yazarService.Listele()
+            //    .Select(y => new
+            //    {
+            //        YazarID = y.YazarID,
+            //        AdSoyad = y.Ad + " " + y.Soyad
+            //    })
+            //    .ToList();
+            //cmbYazar.DataSource = yazarlar;
+            //cmbYazar.DisplayMember = "AdSoyad";
+            //cmbYazar.ValueMember = "YazarID";
+            //cmbYazar.SelectedIndex = -1;
 
-            var yayinevleri = _yayineviService.Listele()
-                .Select(y => new
-                {
-                    y.YayineviID,
-                    y.Ad
-                })
-                .ToList();
-            cmbYayinevi.DataSource = yayinevleri;
-            cmbYayinevi.DisplayMember = "Ad";
-            cmbYayinevi.ValueMember = "YayineviID";
-            cmbYayinevi.SelectedIndex = -1;
+            //var yayinevleri = _yayineviService.Listele()
+            //    .Select(y => new
+            //    {
+            //        y.YayineviID,
+            //        y.Ad
+            //    })
+            //    .ToList();
+            //cmbYayinevi.DataSource = yayinevleri;
+            //cmbYayinevi.DisplayMember = "Ad";
+            //cmbYayinevi.ValueMember = "YayineviID";
+            //cmbYayinevi.SelectedIndex = -1;
 
-            var kategoriler = _kategoriService.Listele()
-                .Select(k => new
-                {
-                    k.KategoriID,
-                    k.KategoriAdi
-                })
-                .ToList();
-            cmbKategori.DataSource = kategoriler;
-            cmbKategori.DisplayMember = "KategoriAdi";
-            cmbKategori.ValueMember = "KategoriID";
-            cmbKategori.SelectedIndex = -1;
+            //var kategoriler = _kategoriService.Listele()
+            //    .Select(k => new
+            //    {
+            //        k.KategoriID,
+            //        k.KategoriAdi
+            //    })
+            //    .ToList();
+            //cmbKategori.DataSource = kategoriler;
+            //cmbKategori.DisplayMember = "KategoriAdi";
+            //cmbKategori.ValueMember = "KategoriID";
+            //cmbKategori.SelectedIndex = -1;
         }
 
         private void btnKaydet_Click(object sender, EventArgs e)
@@ -134,10 +129,10 @@ namespace Kutuphane.UI
                 Stok = string.IsNullOrEmpty(txtStok.Text) ? 0 : int.Parse(txtStok.Text)
             };
 
-            var result = _kitapService.Ekle(kitap);
-            MessageBox.Show(result.Mesaj);
-            if (result.Basarili)
-                KitaplariListele();
+            //var result = _kitapService.Ekle(kitap);
+            //MessageBox.Show(result.Mesaj);
+            //if (result.Basarili)
+            //    KitaplariListele();
 
         }
 
@@ -157,42 +152,42 @@ namespace Kutuphane.UI
                 Stok = string.IsNullOrEmpty(txtStok.Text) ? 0 : int.Parse(txtStok.Text)
             };
 
-            var result = _kitapService.Guncelle(kitap);
-            MessageBox.Show(result.Mesaj);
+            //var result = _kitapService.Guncelle(kitap);
+            //MessageBox.Show(result.Mesaj);
 
-            if (result.Basarili)
-                KitaplariListele();
+            //if (result.Basarili)
+            //    KitaplariListele();
         }
 
         private void btnSil_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.SelectedRows.Count == 0)
-            {
-                MessageBox.Show("Bir kitap seç.");
-                return;
-            }
+            //if (dataGridView1.SelectedRows.Count == 0)
+            //{
+            //    MessageBox.Show("Bir kitap seç.");
+            //    return;
+            //}
 
-            int id = (int)dataGridView1.SelectedRows[0].Cells["KitapID"].Value;
+            //int id = (int)dataGridView1.SelectedRows[0].Cells["KitapID"].Value;
 
-            var confirmResult = MessageBox.Show(
-                "Bu kitabı silmek istediğinizden emin misiniz?",
-                "Onay",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question
-            );
+            //var confirmResult = MessageBox.Show(
+            //    "Bu kitabı silmek istediğinizden emin misiniz?",
+            //    "Onay",
+            //    MessageBoxButtons.YesNo,
+            //    MessageBoxIcon.Question
+            //);
 
-            if (confirmResult == DialogResult.Yes)
-            {
-                var result = _kitapService.Sil(id);
-                MessageBox.Show(result.Mesaj);
+            //if (confirmResult == DialogResult.Yes)
+            //{
+            //    var result = _kitapService.Sil(id);
+            //    MessageBox.Show(result.Mesaj);
 
-                if (result.Basarili)
-                    KitaplariListele();
-            }
-            else
-            {
-                return;
-            }
+            //    if (result.Basarili)
+            //        KitaplariListele();
+            //}
+            //else
+            //{
+            //    return;
+            //}
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -234,70 +229,70 @@ namespace Kutuphane.UI
 
         private void btnSilinenleriGoster_Click(object sender, EventArgs e)
         {
-            using (var db = new KutuphaneDbContext())
-            {
-                var liste = db.Kitaplar
-                    .Where(k => k.Aktif)
-                    .Select(x => new KitapDTO
-                    {
-                        KitapID = x.KitapID,
-                        KitapAdi = x.KitapAdi,
-                        ISBN = x.ISBN,
-                        BasimYili = x.BasimYili,
-                        SayfaSayisi = x.SayfaSayisi,
-                        Dil = x.Dil,
-                        Stok = x.Stok,
-                        YazarID = x.YazarID,
-                        YayineviID = x.YayineviID,
-                        KategoriID = x.KategoriID,
-                        YazarAdi = x.Yazar.Ad + " " + x.Yazar.Soyad,
-                        YayineviAdi = x.Yayinevi.Ad,
-                        KategoriAdi = x.Kategori.KategoriAdi
-                    })
-                    .OrderBy(x => x.KitapAdi)
-                    .ToList();
+            //using (var db = new KutuphaneDbContext())
+            //{
+            //    var liste = db.Kitaplar
+            //        .Where(k => k.Aktif)
+            //        .Select(x => new KitapDTO
+            //        {
+            //            KitapID = x.KitapID,
+            //            KitapAdi = x.KitapAdi,
+            //            ISBN = x.ISBN,
+            //            BasimYili = x.BasimYili,
+            //            SayfaSayisi = x.SayfaSayisi,
+            //            Dil = x.Dil,
+            //            Stok = x.Stok,
+            //            YazarID = x.YazarID,
+            //            YayineviID = x.YayineviID,
+            //            KategoriID = x.KategoriID,
+            //            YazarAdi = x.Yazar.Ad + " " + x.Yazar.Soyad,
+            //            YayineviAdi = x.Yayinevi.Ad,
+            //            KategoriAdi = x.Kategori.KategoriAdi
+            //        })
+            //        .OrderBy(x => x.KitapAdi)
+            //        .ToList();
 
 
-                dataGridView1.DataSource = liste;
+            //    dataGridView1.DataSource = liste;
 
-                btnGeriYukle.Visible = liste.Any();
-            }
+            //    btnGeriYukle.Visible = liste.Any();
+            //}
         }
         private void btnGeriYukle_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.SelectedRows.Count == 0)
-            {
-                MessageBox.Show("Geri yüklemek için bir kitap seçin.");
-                return;
-            }
+            //if (dataGridView1.SelectedRows.Count == 0)
+            //{
+            //    MessageBox.Show("Geri yüklemek için bir kitap seçin.");
+            //    return;
+            //}
 
-            int id = (int)dataGridView1.SelectedRows[0].Cells["KitapID"].Value;
+            //int id = (int)dataGridView1.SelectedRows[0].Cells["KitapID"].Value;
 
-            var confirmResult = MessageBox.Show(
-                "Bu kitabı tekrar aktif hale getirmek istiyor musunuz?",
-                "Onay",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question
-            );
+            //var confirmResult = MessageBox.Show(
+            //    "Bu kitabı tekrar aktif hale getirmek istiyor musunuz?",
+            //    "Onay",
+            //    MessageBoxButtons.YesNo,
+            //    MessageBoxIcon.Question
+            //);
 
-            if (confirmResult == DialogResult.Yes)
-            {
-                var result = _kitapService.GeriYukle(id);
-                MessageBox.Show(result.Mesaj);
+            //if (confirmResult == DialogResult.Yes)
+            //{
+            //    var result = _kitapService.GeriYukle(id);
+            //    MessageBox.Show(result.Mesaj);
 
-                if (result.Basarili)
-                {
-                    btnSilinenleriGoster_Click(null, null);
+            //    if (result.Basarili)
+            //    {
+            //        btnSilinenleriGoster_Click(null, null);
 
-                    using (var db = new KutuphaneDbContext())
-                    {
-                        var silinenVar = db.Kitaplar.Any(k => !k.Aktif);
-                        btnSilinenleriGoster.Visible = silinenVar;
-                        btnGeriYukle.Visible = silinenVar;
-                    }
-                }
-            }
-            KitaplariListele();
+            //        using (var db = new KutuphaneDbContext())
+            //        {
+            //            var silinenVar = db.Kitaplar.Any(k => !k.Aktif);
+            //            btnSilinenleriGoster.Visible = silinenVar;
+            //            btnGeriYukle.Visible = silinenVar;
+            //        }
+            //    }
+            //}
+            //KitaplariListele();
         }
     }
 }
