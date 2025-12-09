@@ -2,7 +2,6 @@
 using Kutuphane.DAL;
 using Kutuphane.DAL.Concrete;
 using Kutuphane.Model.Entity;
-using System.Data.Entity;
 using System.Text.RegularExpressions;
 
 namespace Kutuphane.BLL.Services

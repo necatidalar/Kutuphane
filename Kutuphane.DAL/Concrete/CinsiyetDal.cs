@@ -18,7 +18,7 @@ namespace Kutuphane.DAL.Concrete
                     .Where(predicate ?? (x => true))
                     .Select(k => new CinsiyetDto
                     {
-                        CinsiyetID = k.CinsiyetID,
+                        CinsiyetID = k.CinsiyetId,
                         CinsiyetAdi = k.CinsiyetAdi
                     }).ToList();
                 return new SuccessDataResult<List<CinsiyetDto>>(dto);

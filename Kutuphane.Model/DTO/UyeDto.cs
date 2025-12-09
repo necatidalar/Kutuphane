@@ -8,7 +8,7 @@ namespace Kutuphane.Model.DTO
         public string Ad { get; set; }
         public string Soyad { get; set; }
         public byte CinsiyetID { get; set; }
-        public int? DogumYili { get; set; }
+        public DateTime? DogumYili { get; set; }
         public string Telefon { get; set; }
         public string Eposta { get; set; }
         public string Adres { get; set; }

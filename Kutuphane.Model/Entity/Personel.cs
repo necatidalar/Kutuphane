@@ -3,10 +3,10 @@
 namespace Kutuphane.Model.Entity{
     public class Personel : IEntity
     {
-        public int PersonelID { get; set; }
+        public int PersonelId { get; set; }
         public string Ad { get; set; }
         public string Soyad { get; set; }
-        public byte CinsiyetID { get; set; }
+        public byte CinsiyetId { get; set; }
         public string KullaniciAdi { get; set; }
         public string Sifre { get; set; }
 

@@ -9,6 +9,6 @@ namespace Kutuphane.Model.Entity
         public string Soyad { get; set; }
         public DateTime? DogumTarihi { get; set; }
 
-        public ICollection<Kitap> Kitaplar { get; set; }
+        public ICollection<YazarKitap> YazarKitaplari { get; set; }
     }
 }
