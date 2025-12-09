@@ -4,10 +4,12 @@ namespace Kutuphane.Model.DTO
 {
     public class UyeDto : IDto
     {
+        public int UyeId { get; set; }
         public string TcPass { get; set; }
         public string Ad { get; set; }
         public string Soyad { get; set; }
-        public byte CinsiyetID { get; set; }
+        public byte CinsiyetId { get; set; }
+        public string? Cinsiyet { get; set; }
         public DateTime? DogumYili { get; set; }
         public string Telefon { get; set; }
         public string Eposta { get; set; }

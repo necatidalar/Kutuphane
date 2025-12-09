@@ -8,6 +8,5 @@ namespace Kutuphane.BLL.Abstract
 {
     public interface ICinsiyetService : IBLLVeriCekme<Cinsiyet>, IBLLVeriGuncelleme<Cinsiyet>, IBLLVeriOlusturma<Cinsiyet>
     {
-        IDataResult<List<CinsiyetDto>> CinsiyetListeDetayliGetirServis(Expression<Func<Cinsiyet, bool>>? predicate = null);
     }
 }

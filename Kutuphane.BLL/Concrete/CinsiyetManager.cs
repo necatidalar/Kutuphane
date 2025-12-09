@@ -36,9 +36,6 @@ namespace Kutuphane.BLL.Concrete
         {
             return _cinsiyetDal.Update(entity);
         }
-        public IDataResult<List<CinsiyetDto>> CinsiyetListeDetayliGetirServis(Expression<Func<Cinsiyet, bool>>? predicate = null)
-        {
-            return _cinsiyetDal.CinsiyetListeDetayliGetir(predicate);
-        }
+
     }
 }
