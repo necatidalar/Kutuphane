@@ -28,415 +28,228 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmKitapIslemleri));
-            cmbKategori = new ComboBox();
-            label2 = new Label();
-            btnSil = new Button();
-            txtBasimYili = new TextBox();
-            btnDuzenle = new Button();
-            btnKaydet = new Button();
-            txtDil = new TextBox();
-            label8 = new Label();
+            btnAra = new Button();
             label1 = new Label();
-            label7 = new Label();
-            label3 = new Label();
-            label6 = new Label();
-            label4 = new Label();
-            label5 = new Label();
-            cmbYayinevi = new ComboBox();
-            txtKitapAdi = new TextBox();
-            txtISBN = new TextBox();
-            cmbYazar = new ComboBox();
-            txtSayfaSayisi = new TextBox();
-            dataGridView1 = new DataGridView();
-            txtKitapID = new TextBox();
-            label9 = new Label();
-            label10 = new Label();
-            btnCikis = new Button();
+            textBox_Ara = new TextBox();
+            dataGrid_Kitap = new DataGridView();
+            kitapDtoBindingSource = new BindingSource(components);
             groupBox1 = new GroupBox();
-            label11 = new Label();
-            txtStok = new TextBox();
-            btnSilinenleriGoster = new Button();
-            btnGeriYukle = new Button();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
-            groupBox1.SuspendLayout();
+            kitapIDDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            kitapAdiDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            ıSBNDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            yazarIDDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            yazarAdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            yazarSoyadDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            yayineviIDDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            yayineviAdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            kategoriIDDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            kategoriAdiDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            basimYiliDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            sayfaSayisiDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            dilDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            stokDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            aktifDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)dataGrid_Kitap).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)kitapDtoBindingSource).BeginInit();
             SuspendLayout();
             // 
-            // cmbKategori
+            // btnAra
             // 
-            cmbKategori.FormattingEnabled = true;
-            cmbKategori.Location = new Point(153, 214);
-            cmbKategori.Name = "cmbKategori";
-            cmbKategori.Size = new Size(250, 36);
-            cmbKategori.TabIndex = 31;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(61, 74);
-            label2.Margin = new Padding(4, 0, 4, 0);
-            label2.Name = "label2";
-            label2.Size = new Size(105, 28);
-            label2.TabIndex = 14;
-            label2.Text = "Kitap Adı:";
-            // 
-            // btnSil
-            // 
-            btnSil.FlatStyle = FlatStyle.Flat;
-            btnSil.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 162);
-            btnSil.Location = new Point(153, 504);
-            btnSil.Margin = new Padding(4);
-            btnSil.Name = "btnSil";
-            btnSil.Size = new Size(250, 45);
-            btnSil.TabIndex = 28;
-            btnSil.Text = "Sil";
-            btnSil.UseVisualStyleBackColor = true;
-            btnSil.Click += btnSil_Click;
-            // 
-            // txtBasimYili
-            // 
-            txtBasimYili.Location = new Point(153, 250);
-            txtBasimYili.Margin = new Padding(4);
-            txtBasimYili.Name = "txtBasimYili";
-            txtBasimYili.Size = new Size(250, 34);
-            txtBasimYili.TabIndex = 16;
-            // 
-            // btnDuzenle
-            // 
-            btnDuzenle.FlatStyle = FlatStyle.Flat;
-            btnDuzenle.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 162);
-            btnDuzenle.Location = new Point(153, 451);
-            btnDuzenle.Margin = new Padding(4);
-            btnDuzenle.Name = "btnDuzenle";
-            btnDuzenle.Size = new Size(250, 45);
-            btnDuzenle.TabIndex = 27;
-            btnDuzenle.Text = "Düzenle";
-            btnDuzenle.UseVisualStyleBackColor = true;
-            btnDuzenle.Click += btnDuzenle_Click;
-            // 
-            // btnKaydet
-            // 
-            btnKaydet.FlatStyle = FlatStyle.Flat;
-            btnKaydet.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 162);
-            btnKaydet.Location = new Point(153, 398);
-            btnKaydet.Margin = new Padding(4);
-            btnKaydet.Name = "btnKaydet";
-            btnKaydet.Size = new Size(250, 45);
-            btnKaydet.TabIndex = 30;
-            btnKaydet.Text = "Kaydet";
-            btnKaydet.UseVisualStyleBackColor = true;
-            btnKaydet.Click += btnKaydet_Click;
-            // 
-            // txtDil
-            // 
-            txtDil.Location = new Point(153, 324);
-            txtDil.Margin = new Padding(4);
-            txtDil.Name = "txtDil";
-            txtDil.Size = new Size(250, 34);
-            txtDil.TabIndex = 18;
-            // 
-            // label8
-            // 
-            label8.AutoSize = true;
-            label8.Location = new Point(109, 327);
-            label8.Margin = new Padding(4, 0, 4, 0);
-            label8.Name = "label8";
-            label8.Size = new Size(44, 28);
-            label8.TabIndex = 24;
-            label8.Text = "Dil:";
+            btnAra.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnAra.Location = new Point(1056, 12);
+            btnAra.Name = "btnAra";
+            btnAra.Size = new Size(75, 23);
+            btnAra.TabIndex = 8;
+            btnAra.Text = "Ara";
+            btnAra.UseVisualStyleBackColor = true;
+            btnAra.Click += btnAra_Click;
             // 
             // label1
             // 
+            label1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label1.AutoSize = true;
-            label1.Location = new Point(94, 111);
-            label1.Margin = new Padding(4, 0, 4, 0);
+            label1.Location = new Point(816, 16);
             label1.Name = "label1";
-            label1.Size = new Size(63, 28);
-            label1.TabIndex = 26;
-            label1.Text = "ISBN:";
+            label1.Size = new Size(28, 15);
+            label1.TabIndex = 7;
+            label1.Text = "Ara:";
             // 
-            // label7
+            // textBox_Ara
             // 
-            label7.AutoSize = true;
-            label7.Location = new Point(41, 290);
-            label7.Margin = new Padding(4, 0, 4, 0);
-            label7.Name = "label7";
-            label7.Size = new Size(129, 28);
-            label7.TabIndex = 23;
-            label7.Text = "Sayfa Sayısı:";
+            textBox_Ara.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            textBox_Ara.Location = new Point(850, 12);
+            textBox_Ara.Name = "textBox_Ara";
+            textBox_Ara.PlaceholderText = "Arama için Kitap adı gir";
+            textBox_Ara.Size = new Size(200, 23);
+            textBox_Ara.TabIndex = 6;
             // 
-            // label3
+            // dataGrid_Kitap
             // 
-            label3.AutoSize = true;
-            label3.Location = new Point(90, 147);
-            label3.Margin = new Padding(4, 0, 4, 0);
-            label3.Name = "label3";
-            label3.Size = new Size(68, 28);
-            label3.TabIndex = 22;
-            label3.Text = "Yazar:";
+            dataGrid_Kitap.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dataGrid_Kitap.AutoGenerateColumns = false;
+            dataGrid_Kitap.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGrid_Kitap.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGrid_Kitap.Columns.AddRange(new DataGridViewColumn[] { kitapIDDataGridViewTextBoxColumn, kitapAdiDataGridViewTextBoxColumn, ıSBNDataGridViewTextBoxColumn, yazarIDDataGridViewTextBoxColumn, yazarAdDataGridViewTextBoxColumn, yazarSoyadDataGridViewTextBoxColumn, yayineviIDDataGridViewTextBoxColumn, yayineviAdDataGridViewTextBoxColumn, kategoriIDDataGridViewTextBoxColumn, kategoriAdiDataGridViewTextBoxColumn, basimYiliDataGridViewTextBoxColumn, sayfaSayisiDataGridViewTextBoxColumn, dilDataGridViewTextBoxColumn, stokDataGridViewTextBoxColumn, aktifDataGridViewCheckBoxColumn });
+            dataGrid_Kitap.DataSource = kitapDtoBindingSource;
+            dataGrid_Kitap.Location = new Point(341, 41);
+            dataGrid_Kitap.Name = "dataGrid_Kitap";
+            dataGrid_Kitap.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGrid_Kitap.Size = new Size(791, 578);
+            dataGrid_Kitap.TabIndex = 5;
             // 
-            // label6
+            // kitapDtoBindingSource
             // 
-            label6.AutoSize = true;
-            label6.Location = new Point(56, 253);
-            label6.Margin = new Padding(4, 0, 4, 0);
-            label6.Name = "label6";
-            label6.Size = new Size(110, 28);
-            label6.TabIndex = 21;
-            label6.Text = "Basım Yılı:";
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Location = new Point(67, 182);
-            label4.Margin = new Padding(4, 0, 4, 0);
-            label4.Name = "label4";
-            label4.Size = new Size(95, 28);
-            label4.TabIndex = 20;
-            label4.Text = "Yayınevi:";
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Location = new Point(67, 217);
-            label5.Margin = new Padding(4, 0, 4, 0);
-            label5.Name = "label5";
-            label5.Size = new Size(98, 28);
-            label5.TabIndex = 25;
-            label5.Text = "Kategori:";
-            // 
-            // cmbYayinevi
-            // 
-            cmbYayinevi.FormattingEnabled = true;
-            cmbYayinevi.Location = new Point(153, 179);
-            cmbYayinevi.Name = "cmbYayinevi";
-            cmbYayinevi.Size = new Size(250, 36);
-            cmbYayinevi.TabIndex = 32;
-            // 
-            // txtKitapAdi
-            // 
-            txtKitapAdi.Location = new Point(153, 71);
-            txtKitapAdi.Margin = new Padding(4);
-            txtKitapAdi.Name = "txtKitapAdi";
-            txtKitapAdi.Size = new Size(250, 34);
-            txtKitapAdi.TabIndex = 13;
-            // 
-            // txtISBN
-            // 
-            txtISBN.Location = new Point(153, 108);
-            txtISBN.Margin = new Padding(4);
-            txtISBN.Name = "txtISBN";
-            txtISBN.Size = new Size(250, 34);
-            txtISBN.TabIndex = 19;
-            // 
-            // cmbYazar
-            // 
-            cmbYazar.FormattingEnabled = true;
-            cmbYazar.Location = new Point(153, 144);
-            cmbYazar.Name = "cmbYazar";
-            cmbYazar.Size = new Size(250, 36);
-            cmbYazar.TabIndex = 33;
-            // 
-            // txtSayfaSayisi
-            // 
-            txtSayfaSayisi.Location = new Point(153, 287);
-            txtSayfaSayisi.Margin = new Padding(4);
-            txtSayfaSayisi.Name = "txtSayfaSayisi";
-            txtSayfaSayisi.Size = new Size(250, 34);
-            txtSayfaSayisi.TabIndex = 34;
-            // 
-            // dataGridView1
-            // 
-            dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(451, 112);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView1.Size = new Size(1239, 804);
-            dataGridView1.TabIndex = 35;
-            dataGridView1.CellClick += dataGridView1_CellClick;
-            // 
-            // txtKitapID
-            // 
-            txtKitapID.Location = new Point(153, 34);
-            txtKitapID.Margin = new Padding(4);
-            txtKitapID.Name = "txtKitapID";
-            txtKitapID.Size = new Size(250, 34);
-            txtKitapID.TabIndex = 13;
-            // 
-            // label9
-            // 
-            label9.AutoSize = true;
-            label9.Location = new Point(70, 37);
-            label9.Margin = new Padding(4, 0, 4, 0);
-            label9.Name = "label9";
-            label9.Size = new Size(94, 28);
-            label9.TabIndex = 14;
-            label9.Text = "Kitap ID:";
-            // 
-            // label10
-            // 
-            label10.AutoSize = true;
-            label10.Location = new Point(12, 9);
-            label10.Name = "label10";
-            label10.Size = new Size(398, 28);
-            label10.TabIndex = 37;
-            label10.Text = "Kütüphane Otomasyonu - Kitap İşlemleri";
-            // 
-            // btnCikis
-            // 
-            btnCikis.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnCikis.FlatAppearance.BorderSize = 0;
-            btnCikis.FlatAppearance.MouseOverBackColor = Color.Red;
-            btnCikis.FlatStyle = FlatStyle.Flat;
-            btnCikis.Font = new Font("Segoe UI Black", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 162);
-            btnCikis.ForeColor = Color.White;
-            btnCikis.Location = new Point(1684, 12);
-            btnCikis.Name = "btnCikis";
-            btnCikis.Size = new Size(30, 30);
-            btnCikis.TabIndex = 39;
-            btnCikis.Text = "X";
-            btnCikis.UseVisualStyleBackColor = true;
-            btnCikis.Click += btnCikis_Click;
+            kitapDtoBindingSource.DataSource = typeof(Model.DTO.KitapDto);
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(label9);
-            groupBox1.Controls.Add(txtKitapID);
-            groupBox1.Controls.Add(label2);
-            groupBox1.Controls.Add(label5);
-            groupBox1.Controls.Add(label4);
-            groupBox1.Controls.Add(txtKitapAdi);
-            groupBox1.Controls.Add(label6);
-            groupBox1.Controls.Add(btnSil);
-            groupBox1.Controls.Add(cmbYayinevi);
-            groupBox1.Controls.Add(txtSayfaSayisi);
-            groupBox1.Controls.Add(label3);
-            groupBox1.Controls.Add(btnDuzenle);
-            groupBox1.Controls.Add(cmbYazar);
-            groupBox1.Controls.Add(txtISBN);
-            groupBox1.Controls.Add(label7);
-            groupBox1.Controls.Add(btnKaydet);
-            groupBox1.Controls.Add(label1);
-            groupBox1.Controls.Add(cmbKategori);
-            groupBox1.Controls.Add(txtBasimYili);
-            groupBox1.Controls.Add(label11);
-            groupBox1.Controls.Add(label8);
-            groupBox1.Controls.Add(txtStok);
-            groupBox1.Controls.Add(txtDil);
-            groupBox1.ForeColor = Color.White;
-            groupBox1.Location = new Point(12, 103);
+            groupBox1.Location = new Point(12, 41);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(433, 562);
-            groupBox1.TabIndex = 41;
+            groupBox1.Size = new Size(323, 578);
+            groupBox1.TabIndex = 9;
             groupBox1.TabStop = false;
             groupBox1.Text = "Kitap İşlemleri";
             // 
-            // label11
+            // kitapIDDataGridViewTextBoxColumn
             // 
-            label11.AutoSize = true;
-            label11.Location = new Point(96, 364);
-            label11.Margin = new Padding(4, 0, 4, 0);
-            label11.Name = "label11";
-            label11.Size = new Size(60, 28);
-            label11.TabIndex = 24;
-            label11.Text = "Stok:";
+            kitapIDDataGridViewTextBoxColumn.DataPropertyName = "KitapID";
+            kitapIDDataGridViewTextBoxColumn.HeaderText = "KitapID";
+            kitapIDDataGridViewTextBoxColumn.Name = "kitapIDDataGridViewTextBoxColumn";
+            kitapIDDataGridViewTextBoxColumn.Visible = false;
             // 
-            // txtStok
+            // kitapAdiDataGridViewTextBoxColumn
             // 
-            txtStok.Location = new Point(153, 361);
-            txtStok.Margin = new Padding(4);
-            txtStok.Name = "txtStok";
-            txtStok.Size = new Size(250, 34);
-            txtStok.TabIndex = 18;
+            kitapAdiDataGridViewTextBoxColumn.DataPropertyName = "KitapAdi";
+            kitapAdiDataGridViewTextBoxColumn.HeaderText = "Kitap Adı";
+            kitapAdiDataGridViewTextBoxColumn.Name = "kitapAdiDataGridViewTextBoxColumn";
             // 
-            // btnSilinenleriGoster
+            // ıSBNDataGridViewTextBoxColumn
             // 
-            btnSilinenleriGoster.FlatStyle = FlatStyle.Flat;
-            btnSilinenleriGoster.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 162);
-            btnSilinenleriGoster.Location = new Point(165, 681);
-            btnSilinenleriGoster.Margin = new Padding(4);
-            btnSilinenleriGoster.Name = "btnSilinenleriGoster";
-            btnSilinenleriGoster.Size = new Size(250, 45);
-            btnSilinenleriGoster.TabIndex = 35;
-            btnSilinenleriGoster.Text = "Silinenleri Göster";
-            btnSilinenleriGoster.UseVisualStyleBackColor = true;
-            btnSilinenleriGoster.Click += btnSilinenleriGoster_Click;
+            ıSBNDataGridViewTextBoxColumn.DataPropertyName = "ISBN";
+            ıSBNDataGridViewTextBoxColumn.HeaderText = "ISBN";
+            ıSBNDataGridViewTextBoxColumn.Name = "ıSBNDataGridViewTextBoxColumn";
             // 
-            // btnGeriYukle
+            // yazarIDDataGridViewTextBoxColumn
             // 
-            btnGeriYukle.FlatStyle = FlatStyle.Flat;
-            btnGeriYukle.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 162);
-            btnGeriYukle.Location = new Point(165, 734);
-            btnGeriYukle.Margin = new Padding(4);
-            btnGeriYukle.Name = "btnGeriYukle";
-            btnGeriYukle.Size = new Size(250, 45);
-            btnGeriYukle.TabIndex = 42;
-            btnGeriYukle.Text = "Geri Yükle";
-            btnGeriYukle.UseVisualStyleBackColor = true;
-            btnGeriYukle.Click += btnGeriYukle_Click;
+            yazarIDDataGridViewTextBoxColumn.DataPropertyName = "YazarID";
+            yazarIDDataGridViewTextBoxColumn.HeaderText = "YazarID";
+            yazarIDDataGridViewTextBoxColumn.Name = "yazarIDDataGridViewTextBoxColumn";
+            yazarIDDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // yazarAdDataGridViewTextBoxColumn
+            // 
+            yazarAdDataGridViewTextBoxColumn.DataPropertyName = "YazarAd";
+            yazarAdDataGridViewTextBoxColumn.HeaderText = "Yazar Adı";
+            yazarAdDataGridViewTextBoxColumn.Name = "yazarAdDataGridViewTextBoxColumn";
+            // 
+            // yazarSoyadDataGridViewTextBoxColumn
+            // 
+            yazarSoyadDataGridViewTextBoxColumn.DataPropertyName = "YazarSoyad";
+            yazarSoyadDataGridViewTextBoxColumn.HeaderText = "Yazar Soyadı";
+            yazarSoyadDataGridViewTextBoxColumn.Name = "yazarSoyadDataGridViewTextBoxColumn";
+            // 
+            // yayineviIDDataGridViewTextBoxColumn
+            // 
+            yayineviIDDataGridViewTextBoxColumn.DataPropertyName = "YayineviID";
+            yayineviIDDataGridViewTextBoxColumn.HeaderText = "YayineviID";
+            yayineviIDDataGridViewTextBoxColumn.Name = "yayineviIDDataGridViewTextBoxColumn";
+            yayineviIDDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // yayineviAdDataGridViewTextBoxColumn
+            // 
+            yayineviAdDataGridViewTextBoxColumn.DataPropertyName = "YayineviAd";
+            yayineviAdDataGridViewTextBoxColumn.HeaderText = "Yayınevi Adı";
+            yayineviAdDataGridViewTextBoxColumn.Name = "yayineviAdDataGridViewTextBoxColumn";
+            // 
+            // kategoriIDDataGridViewTextBoxColumn
+            // 
+            kategoriIDDataGridViewTextBoxColumn.DataPropertyName = "KategoriID";
+            kategoriIDDataGridViewTextBoxColumn.HeaderText = "KategoriID";
+            kategoriIDDataGridViewTextBoxColumn.Name = "kategoriIDDataGridViewTextBoxColumn";
+            kategoriIDDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // kategoriAdiDataGridViewTextBoxColumn
+            // 
+            kategoriAdiDataGridViewTextBoxColumn.DataPropertyName = "KategoriAdi";
+            kategoriAdiDataGridViewTextBoxColumn.HeaderText = "Kategori Adı";
+            kategoriAdiDataGridViewTextBoxColumn.Name = "kategoriAdiDataGridViewTextBoxColumn";
+            // 
+            // basimYiliDataGridViewTextBoxColumn
+            // 
+            basimYiliDataGridViewTextBoxColumn.DataPropertyName = "BasimYili";
+            basimYiliDataGridViewTextBoxColumn.HeaderText = "Basım Yılı";
+            basimYiliDataGridViewTextBoxColumn.Name = "basimYiliDataGridViewTextBoxColumn";
+            // 
+            // sayfaSayisiDataGridViewTextBoxColumn
+            // 
+            sayfaSayisiDataGridViewTextBoxColumn.DataPropertyName = "SayfaSayisi";
+            sayfaSayisiDataGridViewTextBoxColumn.HeaderText = "Sayfa Sayısı";
+            sayfaSayisiDataGridViewTextBoxColumn.Name = "sayfaSayisiDataGridViewTextBoxColumn";
+            // 
+            // dilDataGridViewTextBoxColumn
+            // 
+            dilDataGridViewTextBoxColumn.DataPropertyName = "Dil";
+            dilDataGridViewTextBoxColumn.HeaderText = "Dil";
+            dilDataGridViewTextBoxColumn.Name = "dilDataGridViewTextBoxColumn";
+            // 
+            // stokDataGridViewTextBoxColumn
+            // 
+            stokDataGridViewTextBoxColumn.DataPropertyName = "Stok";
+            stokDataGridViewTextBoxColumn.HeaderText = "Stok";
+            stokDataGridViewTextBoxColumn.Name = "stokDataGridViewTextBoxColumn";
+            // 
+            // aktifDataGridViewCheckBoxColumn
+            // 
+            aktifDataGridViewCheckBoxColumn.DataPropertyName = "Aktif";
+            aktifDataGridViewCheckBoxColumn.HeaderText = "Aktif";
+            aktifDataGridViewCheckBoxColumn.Name = "aktifDataGridViewCheckBoxColumn";
+            aktifDataGridViewCheckBoxColumn.Visible = false;
             // 
             // frmKitapIslemleri
             // 
-            AutoScaleDimensions = new SizeF(12F, 28F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(17, 17, 17);
-            ClientSize = new Size(1726, 957);
-            Controls.Add(btnGeriYukle);
-            Controls.Add(btnSilinenleriGoster);
+            ClientSize = new Size(1143, 631);
             Controls.Add(groupBox1);
-            Controls.Add(btnCikis);
-            Controls.Add(label10);
-            Controls.Add(dataGridView1);
-            Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 162);
-            ForeColor = Color.White;
-            FormBorderStyle = FormBorderStyle.None;
+            Controls.Add(btnAra);
+            Controls.Add(label1);
+            Controls.Add(textBox_Ara);
+            Controls.Add(dataGrid_Kitap);
             Icon = (Icon)resources.GetObject("$this.Icon");
-            Margin = new Padding(4);
             Name = "frmKitapIslemleri";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Kütüphane Otomasyonu - Kitap İşlemleri";
             Load += frmKitapIslemleri_Load;
-            Paint += frmKitapIslemleri_Paint;
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
-            groupBox1.ResumeLayout(false);
-            groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGrid_Kitap).EndInit();
+            ((System.ComponentModel.ISupportInitialize)kitapDtoBindingSource).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private ComboBox cmbKategori;
-        private Label label2;
-        private Button btnSil;
-        private TextBox txtBasimYili;
-        private Button btnDuzenle;
-        private Button btnKaydet;
-        private TextBox txtDil;
-        private Label label8;
+        private Button btnAra;
         private Label label1;
-        private Label label7;
-        private Label label3;
-        private Label label6;
-        private Label label4;
-        private Label label5;
-        private ComboBox cmbYayinevi;
-        private TextBox txtKitapAdi;
-        private TextBox txtISBN;
-        private ComboBox cmbYazar;
-        private TextBox txtSayfaSayisi;
-        private DataGridView dataGridView1;
-        private TextBox txtKitapID;
-        private Label label9;
-        private Label label10;
-        private Button btnCikis;
+        private TextBox textBox_Ara;
+        private DataGridView dataGrid_Kitap;
         private GroupBox groupBox1;
-        private Label label11;
-        private TextBox txtStok;
-        private Button btnSilinenleriGoster;
-        private Button btnGeriYukle;
+        private BindingSource kitapDtoBindingSource;
+        private DataGridViewTextBoxColumn kitapIDDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn kitapAdiDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn ıSBNDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn yazarIDDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn yazarAdDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn yazarSoyadDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn yayineviIDDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn yayineviAdDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn kategoriIDDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn kategoriAdiDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn basimYiliDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn sayfaSayisiDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn dilDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn stokDataGridViewTextBoxColumn;
+        private DataGridViewCheckBoxColumn aktifDataGridViewCheckBoxColumn;
     }
 }

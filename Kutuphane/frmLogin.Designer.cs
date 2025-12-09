@@ -120,6 +120,7 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Kütüphane Otomasyonu - Giriş";
             FormClosed += frmLogin_FormClosed;
+            Load += frmLogin_Load;
             ResumeLayout(false);
             PerformLayout();
         }
