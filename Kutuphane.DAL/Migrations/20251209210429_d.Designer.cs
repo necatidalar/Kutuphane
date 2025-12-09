@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Kutuphane.DAL.Migrations
 {
     [DbContext(typeof(KutuphaneDbContext))]
-    [Migration("20251209120221_s")]
-    partial class s
+    [Migration("20251209210429_d")]
+    partial class d
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -469,6 +469,12 @@ namespace Kutuphane.DAL.Migrations
 
                     b.HasIndex("DilId");
 
+                    b.HasIndex("KategoriId");
+
+                    b.HasIndex("YayineviId");
+
+                    b.HasIndex("YazarId");
+
                     b.ToTable("Kitaplar");
                 });
 
@@ -554,6 +560,11 @@ namespace Kutuphane.DAL.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("varchar");
 
+                    b.Property<bool>("AktifMi")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
                     b.Property<byte>("CinsiyetId")
                         .HasColumnType("tinyint");
 
@@ -583,6 +594,7 @@ namespace Kutuphane.DAL.Migrations
                         {
                             PersonelId = 1,
                             Ad = "Necati",
+                            AktifMi = true,
                             CinsiyetId = (byte)1,
                             KullaniciAdi = "neco",
                             Sifre = "MTIzNDU=",
@@ -592,6 +604,7 @@ namespace Kutuphane.DAL.Migrations
                         {
                             PersonelId = 2,
                             Ad = "Necoş",
+                            AktifMi = true,
                             CinsiyetId = (byte)1,
                             KullaniciAdi = "neci",
                             Sifre = "MTIz",
@@ -630,7 +643,7 @@ namespace Kutuphane.DAL.Migrations
                     b.Property<byte>("CinsiyetId")
                         .HasColumnType("tinyint");
 
-                    b.Property<DateTime?>("DogumTarihi")
+                    b.Property<DateTime>("DogumTarihi")
                         .HasColumnType("datetime");
 
                     b.Property<string>("Eposta")
@@ -712,13 +725,13 @@ namespace Kutuphane.DAL.Migrations
 
             modelBuilder.Entity("Kutuphane.Model.Entity.Yazar", b =>
                 {
-                    b.Property<int>("YazarID")
+                    b.Property<int>("YazarId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("YazarID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("YazarId"));
 
-                    b.Property<string>("Ad")
+                    b.Property<string>("AdSoyad")
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
@@ -726,12 +739,7 @@ namespace Kutuphane.DAL.Migrations
                     b.Property<DateTime?>("DogumTarihi")
                         .HasColumnType("datetime");
 
-                    b.Property<string>("Soyad")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.HasKey("YazarID");
+                    b.HasKey("YazarId");
 
                     b.ToTable("Yazarlar");
                 });
@@ -767,7 +775,31 @@ namespace Kutuphane.DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Kutuphane.Model.Entity.Kategori", "Kategori")
+                        .WithMany()
+                        .HasForeignKey("KategoriId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Kutuphane.Model.Entity.Yayinevi", "Yayinevi")
+                        .WithMany()
+                        .HasForeignKey("YayineviId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Kutuphane.Model.Entity.Yazar", "Yazar")
+                        .WithMany()
+                        .HasForeignKey("YazarId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Diller");
+
+                    b.Navigation("Kategori");
+
+                    b.Navigation("Yayinevi");
+
+                    b.Navigation("Yazar");
                 });
 
             modelBuilder.Entity("Kutuphane.Model.Entity.KitapKategori", b =>
@@ -775,13 +807,13 @@ namespace Kutuphane.DAL.Migrations
                     b.HasOne("Kutuphane.Model.Entity.Kategori", "Kategori")
                         .WithMany("KitapKategoriler")
                         .HasForeignKey("KategoriId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("Kutuphane.Model.Entity.Kitap", "Kitap")
                         .WithMany("KitapKategoriler")
                         .HasForeignKey("KitapId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Kategori");
@@ -850,13 +882,13 @@ namespace Kutuphane.DAL.Migrations
                     b.HasOne("Kutuphane.Model.Entity.Kitap", "Kitap")
                         .WithMany("KitapYayinevleri")
                         .HasForeignKey("KitapId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("Kutuphane.Model.Entity.Yayinevi", "Yayinevi")
                         .WithMany("YayineviKitaplari")
                         .HasForeignKey("YayineviId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Kitap");
@@ -869,13 +901,13 @@ namespace Kutuphane.DAL.Migrations
                     b.HasOne("Kutuphane.Model.Entity.Kitap", "Kitap")
                         .WithMany("KitapYazarlari")
                         .HasForeignKey("KitapId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("Kutuphane.Model.Entity.Yazar", "Yazar")
                         .WithMany("YazarKitaplari")
                         .HasForeignKey("YazarId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Kitap");

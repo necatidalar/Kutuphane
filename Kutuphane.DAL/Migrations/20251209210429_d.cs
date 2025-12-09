@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Kutuphane.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class s : Migration
+    public partial class d : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -70,15 +70,14 @@ namespace Kutuphane.DAL.Migrations
                 name: "Yazarlar",
                 columns: table => new
                 {
-                    YazarID = table.Column<int>(type: "int", nullable: false)
+                    YazarId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Ad = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    Soyad = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    AdSoyad = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     DogumTarihi = table.Column<DateTime>(type: "datetime", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Yazarlar", x => x.YazarID);
+                    table.PrimaryKey("PK_Yazarlar", x => x.YazarId);
                 });
 
             migrationBuilder.CreateTable(
@@ -91,7 +90,8 @@ namespace Kutuphane.DAL.Migrations
                     Soyad = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
                     CinsiyetId = table.Column<byte>(type: "tinyint", nullable: false),
                     KullaniciAdi = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    Sifre = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false)
+                    Sifre = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
+                    AktifMi = table.Column<bool>(type: "bit", nullable: false, defaultValue: true)
                 },
                 constraints: table =>
                 {
@@ -114,7 +114,7 @@ namespace Kutuphane.DAL.Migrations
                     Ad = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Soyad = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     CinsiyetId = table.Column<byte>(type: "tinyint", nullable: false),
-                    DogumTarihi = table.Column<DateTime>(type: "datetime", nullable: true),
+                    DogumTarihi = table.Column<DateTime>(type: "datetime", nullable: false),
                     Telefon = table.Column<string>(type: "varchar(15)", maxLength: 15, nullable: false),
                     Eposta = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Adres = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
@@ -157,6 +157,24 @@ namespace Kutuphane.DAL.Migrations
                         principalTable: "Diller",
                         principalColumn: "DilId",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Kitaplar_Kategoriler_KategoriId",
+                        column: x => x.KategoriId,
+                        principalTable: "Kategoriler",
+                        principalColumn: "KategoriId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Kitaplar_Yayinevleri_YayineviId",
+                        column: x => x.YayineviId,
+                        principalTable: "Yayinevleri",
+                        principalColumn: "YayineviId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Kitaplar_Yazarlar_YazarId",
+                        column: x => x.YazarId,
+                        principalTable: "Yazarlar",
+                        principalColumn: "YazarId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -175,14 +193,12 @@ namespace Kutuphane.DAL.Migrations
                         name: "FK_KitapKategori_Kategoriler_KategoriId",
                         column: x => x.KategoriId,
                         principalTable: "Kategoriler",
-                        principalColumn: "KategoriId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "KategoriId");
                     table.ForeignKey(
                         name: "FK_KitapKategori_Kitaplar_KitapId",
                         column: x => x.KitapId,
                         principalTable: "Kitaplar",
-                        principalColumn: "KitapId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "KitapId");
                 });
 
             migrationBuilder.CreateTable(
@@ -244,14 +260,12 @@ namespace Kutuphane.DAL.Migrations
                         name: "FK_YayineviKitaplari_Kitaplar_KitapId",
                         column: x => x.KitapId,
                         principalTable: "Kitaplar",
-                        principalColumn: "KitapId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "KitapId");
                     table.ForeignKey(
                         name: "FK_YayineviKitaplari_Yayinevleri_YayineviId",
                         column: x => x.YayineviId,
                         principalTable: "Yayinevleri",
-                        principalColumn: "YayineviId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "YayineviId");
                 });
 
             migrationBuilder.CreateTable(
@@ -270,14 +284,12 @@ namespace Kutuphane.DAL.Migrations
                         name: "FK_YazarKitaplari_Kitaplar_KitapId",
                         column: x => x.KitapId,
                         principalTable: "Kitaplar",
-                        principalColumn: "KitapId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "KitapId");
                     table.ForeignKey(
                         name: "FK_YazarKitaplari_Yazarlar_YazarId",
                         column: x => x.YazarId,
                         principalTable: "Yazarlar",
-                        principalColumn: "YazarID",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "YazarId");
                 });
 
             migrationBuilder.InsertData(
@@ -364,11 +376,11 @@ namespace Kutuphane.DAL.Migrations
 
             migrationBuilder.InsertData(
                 table: "Personeller",
-                columns: new[] { "PersonelId", "Ad", "CinsiyetId", "KullaniciAdi", "Sifre", "Soyad" },
+                columns: new[] { "PersonelId", "Ad", "AktifMi", "CinsiyetId", "KullaniciAdi", "Sifre", "Soyad" },
                 values: new object[,]
                 {
-                    { 1, "Necati", (byte)1, "neco", "MTIzNDU=", "Dalar" },
-                    { 2, "Necoş", (byte)1, "neci", "MTIz", "Dalmaz" }
+                    { 1, "Necati", true, (byte)1, "neco", "MTIzNDU=", "Dalar" },
+                    { 2, "Necoş", true, (byte)1, "neci", "MTIz", "Dalmaz" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -385,6 +397,21 @@ namespace Kutuphane.DAL.Migrations
                 name: "IX_Kitaplar_DilId",
                 table: "Kitaplar",
                 column: "DilId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Kitaplar_KategoriId",
+                table: "Kitaplar",
+                column: "KategoriId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Kitaplar_YayineviId",
+                table: "Kitaplar",
+                column: "YayineviId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Kitaplar_YazarId",
+                table: "Kitaplar",
+                column: "YazarId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Oduncler_KitapId",
@@ -453,28 +480,28 @@ namespace Kutuphane.DAL.Migrations
                 name: "YazarKitaplari");
 
             migrationBuilder.DropTable(
-                name: "Kategoriler");
-
-            migrationBuilder.DropTable(
                 name: "Personeller");
 
             migrationBuilder.DropTable(
                 name: "Uyeler");
 
             migrationBuilder.DropTable(
-                name: "Yayinevleri");
-
-            migrationBuilder.DropTable(
                 name: "Kitaplar");
-
-            migrationBuilder.DropTable(
-                name: "Yazarlar");
 
             migrationBuilder.DropTable(
                 name: "Cinsiyetler");
 
             migrationBuilder.DropTable(
                 name: "Diller");
+
+            migrationBuilder.DropTable(
+                name: "Kategoriler");
+
+            migrationBuilder.DropTable(
+                name: "Yayinevleri");
+
+            migrationBuilder.DropTable(
+                name: "Yazarlar");
         }
     }
 }

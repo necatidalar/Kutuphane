@@ -16,11 +16,11 @@ namespace Kutuphane.DAL.Concrete.Configuration
             builder.HasOne(yk => yk.Yazar)
                    .WithMany(y => y.YazarKitaplari)
                    .HasForeignKey(yk => yk.YazarId)
-                   .OnDelete(DeleteBehavior.Cascade);
+                   .OnDelete(DeleteBehavior.NoAction);
             builder.HasOne(yk => yk.Kitap)
                    .WithMany(k => k.KitapYazarlari)
                    .HasForeignKey(yk => yk.KitapId)
-                   .OnDelete(DeleteBehavior.Cascade);
+                   .OnDelete(DeleteBehavior.NoAction);
 
         }
     }

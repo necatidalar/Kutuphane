@@ -6,5 +6,5 @@
     cause the file to be unrecognizable by the program.
 -->
 <GenericObjectDataSource DisplayName="UyeDto" Version="1.0" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
-  <TypeInfo>Kutuphane.Model.DTO.UyeDto, Kutuphane.Model, Version=1.0.0.18, Culture=neutral, PublicKeyToken=null</TypeInfo>
+  <TypeInfo>Kutuphane.Model.DTO.UyeDto, Kutuphane.Model, Version=1.0.0.25, Culture=neutral, PublicKeyToken=null</TypeInfo>
 </GenericObjectDataSource>

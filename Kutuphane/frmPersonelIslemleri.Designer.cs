@@ -28,230 +28,396 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label1 = new Label();
-            btnCikis = new Button();
-            label9 = new Label();
-            txtPersonelID = new TextBox();
-            label2 = new Label();
-            txtAdSoyad = new TextBox();
-            txtKullaniciAdi = new TextBox();
-            label4 = new Label();
+            components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPersonelIslemleri));
             groupBox1 = new GroupBox();
+            comboBox_Cinsiyet = new ComboBox();
+            btnGeriYukle = new Button();
+            btnSilinenleriGoster = new Button();
+            btnTemizle = new Button();
             btnSil = new Button();
             btnDuzenle = new Button();
             btnKaydet = new Button();
-            txtSifre = new TextBox();
+            textBox_Sifre = new TextBox();
+            label4 = new Label();
+            textBox_KullaniciAdi = new TextBox();
+            label6 = new Label();
             label3 = new Label();
-            dataGridView1 = new DataGridView();
+            textBox_Soyad = new TextBox();
+            label7 = new Label();
+            textBox_Ad = new TextBox();
+            label2 = new Label();
+            textBox_PersonelId = new TextBox();
+            label1 = new Label();
+            dataGrid_Personel = new DataGridView();
+            personelIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            adDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            soyadDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            cinsiyetIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            kullaniciAdiDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            sifreDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            teslimEdilenlerDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            terslimAlinanlarDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            cinsiyetDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            personelBindingSource = new BindingSource(components);
+            btnAra = new Button();
+            label5 = new Label();
+            textBox_Ara = new TextBox();
             groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGrid_Personel).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)personelBindingSource).BeginInit();
             SuspendLayout();
             // 
-            // label1
+            // groupBox1
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(12, 9);
-            label1.Name = "label1";
-            label1.Size = new Size(346, 21);
-            label1.TabIndex = 0;
-            label1.Text = "Kütüphane Otomasyonu - Personel İşlemleri";
+            groupBox1.Controls.Add(comboBox_Cinsiyet);
+            groupBox1.Controls.Add(btnGeriYukle);
+            groupBox1.Controls.Add(btnSilinenleriGoster);
+            groupBox1.Controls.Add(btnTemizle);
+            groupBox1.Controls.Add(btnSil);
+            groupBox1.Controls.Add(btnDuzenle);
+            groupBox1.Controls.Add(btnKaydet);
+            groupBox1.Controls.Add(textBox_Sifre);
+            groupBox1.Controls.Add(label4);
+            groupBox1.Controls.Add(textBox_KullaniciAdi);
+            groupBox1.Controls.Add(label6);
+            groupBox1.Controls.Add(label3);
+            groupBox1.Controls.Add(textBox_Soyad);
+            groupBox1.Controls.Add(label7);
+            groupBox1.Controls.Add(textBox_Ad);
+            groupBox1.Controls.Add(label2);
+            groupBox1.Controls.Add(textBox_PersonelId);
+            groupBox1.Controls.Add(label1);
+            groupBox1.Location = new Point(12, 12);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(328, 485);
+            groupBox1.TabIndex = 0;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "groupBox1";
             // 
-            // btnCikis
+            // comboBox_Cinsiyet
             // 
-            btnCikis.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnCikis.FlatAppearance.BorderSize = 0;
-            btnCikis.FlatAppearance.MouseOverBackColor = Color.Red;
-            btnCikis.FlatStyle = FlatStyle.Flat;
-            btnCikis.Font = new Font("Segoe UI Black", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 162);
-            btnCikis.ForeColor = Color.White;
-            btnCikis.Location = new Point(1228, 12);
-            btnCikis.Name = "btnCikis";
-            btnCikis.Size = new Size(30, 30);
-            btnCikis.TabIndex = 40;
-            btnCikis.Text = "X";
-            btnCikis.UseVisualStyleBackColor = true;
+            comboBox_Cinsiyet.FormattingEnabled = true;
+            comboBox_Cinsiyet.Location = new Point(99, 135);
+            comboBox_Cinsiyet.Name = "comboBox_Cinsiyet";
+            comboBox_Cinsiyet.Size = new Size(198, 23);
+            comboBox_Cinsiyet.TabIndex = 19;
             // 
-            // label9
+            // btnGeriYukle
             // 
-            label9.AutoSize = true;
-            label9.Location = new Point(21, 37);
-            label9.Margin = new Padding(4, 0, 4, 0);
-            label9.Name = "label9";
-            label9.Size = new Size(101, 21);
-            label9.TabIndex = 14;
-            label9.Text = "Personel ID:";
+            btnGeriYukle.Location = new Point(121, 399);
+            btnGeriYukle.Name = "btnGeriYukle";
+            btnGeriYukle.Size = new Size(154, 25);
+            btnGeriYukle.TabIndex = 18;
+            btnGeriYukle.Text = "Geri Yükle";
+            btnGeriYukle.UseVisualStyleBackColor = true;
+            btnGeriYukle.Visible = false;
+            btnGeriYukle.Click += btnGeriYukle_Click;
             // 
-            // txtPersonelID
+            // btnSilinenleriGoster
             // 
-            txtPersonelID.Location = new Point(153, 34);
-            txtPersonelID.Margin = new Padding(4);
-            txtPersonelID.Name = "txtPersonelID";
-            txtPersonelID.Size = new Size(250, 29);
-            txtPersonelID.TabIndex = 13;
+            btnSilinenleriGoster.Location = new Point(121, 368);
+            btnSilinenleriGoster.Name = "btnSilinenleriGoster";
+            btnSilinenleriGoster.Size = new Size(154, 25);
+            btnSilinenleriGoster.TabIndex = 17;
+            btnSilinenleriGoster.Text = "Silinen Personelleri Göster";
+            btnSilinenleriGoster.UseVisualStyleBackColor = true;
+            btnSilinenleriGoster.Visible = false;
+            btnSilinenleriGoster.Click += btnSilinenleriGoster_Click;
             // 
-            // label2
+            // btnTemizle
             // 
-            label2.AutoSize = true;
-            label2.Location = new Point(39, 79);
-            label2.Margin = new Padding(4, 0, 4, 0);
-            label2.Name = "label2";
-            label2.Size = new Size(86, 21);
-            label2.TabIndex = 14;
-            label2.Text = "Ad Soyad:";
+            btnTemizle.Location = new Point(121, 337);
+            btnTemizle.Name = "btnTemizle";
+            btnTemizle.Size = new Size(154, 25);
+            btnTemizle.TabIndex = 15;
+            btnTemizle.Text = "Temizle";
+            btnTemizle.UseVisualStyleBackColor = true;
+            btnTemizle.Click += btnTemizle_Click;
             // 
-            // txtAdSoyad
+            // btnSil
             // 
-            txtAdSoyad.Location = new Point(153, 76);
-            txtAdSoyad.Margin = new Padding(4);
-            txtAdSoyad.Name = "txtAdSoyad";
-            txtAdSoyad.Size = new Size(250, 29);
-            txtAdSoyad.TabIndex = 13;
+            btnSil.Location = new Point(121, 306);
+            btnSil.Name = "btnSil";
+            btnSil.Size = new Size(154, 25);
+            btnSil.TabIndex = 16;
+            btnSil.Text = "Sil";
+            btnSil.UseVisualStyleBackColor = true;
+            btnSil.Click += btnSil_Click;
             // 
-            // txtKullaniciAdi
+            // btnDuzenle
             // 
-            txtKullaniciAdi.Location = new Point(153, 118);
-            txtKullaniciAdi.Margin = new Padding(4);
-            txtKullaniciAdi.Name = "txtKullaniciAdi";
-            txtKullaniciAdi.Size = new Size(250, 29);
-            txtKullaniciAdi.TabIndex = 19;
+            btnDuzenle.Location = new Point(121, 275);
+            btnDuzenle.Name = "btnDuzenle";
+            btnDuzenle.Size = new Size(154, 25);
+            btnDuzenle.TabIndex = 14;
+            btnDuzenle.Text = "Düzenle";
+            btnDuzenle.UseVisualStyleBackColor = true;
+            btnDuzenle.Click += btnDuzenle_Click;
+            // 
+            // btnKaydet
+            // 
+            btnKaydet.Location = new Point(121, 244);
+            btnKaydet.Name = "btnKaydet";
+            btnKaydet.Size = new Size(154, 25);
+            btnKaydet.TabIndex = 13;
+            btnKaydet.Text = "Kaydet";
+            btnKaydet.UseVisualStyleBackColor = true;
+            btnKaydet.Click += btnKaydet_Click;
+            // 
+            // textBox_Sifre
+            // 
+            textBox_Sifre.Location = new Point(99, 193);
+            textBox_Sifre.Name = "textBox_Sifre";
+            textBox_Sifre.Size = new Size(198, 23);
+            textBox_Sifre.TabIndex = 1;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(8, 121);
-            label4.Margin = new Padding(4, 0, 4, 0);
+            label4.Location = new Point(60, 196);
             label4.Name = "label4";
-            label4.Size = new Size(111, 21);
-            label4.TabIndex = 26;
-            label4.Text = "Kullanıcı Adı:";
+            label4.Size = new Size(33, 15);
+            label4.TabIndex = 0;
+            label4.Text = "Şifre:";
             // 
-            // groupBox1
+            // textBox_KullaniciAdi
             // 
-            groupBox1.Controls.Add(btnSil);
-            groupBox1.Controls.Add(btnDuzenle);
-            groupBox1.Controls.Add(btnKaydet);
-            groupBox1.Controls.Add(label9);
-            groupBox1.Controls.Add(txtPersonelID);
-            groupBox1.Controls.Add(label2);
-            groupBox1.Controls.Add(txtAdSoyad);
-            groupBox1.Controls.Add(txtSifre);
-            groupBox1.Controls.Add(txtKullaniciAdi);
-            groupBox1.Controls.Add(label3);
-            groupBox1.Controls.Add(label4);
-            groupBox1.ForeColor = Color.White;
-            groupBox1.Location = new Point(20, 70);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(417, 372);
-            groupBox1.TabIndex = 42;
-            groupBox1.TabStop = false;
-            groupBox1.Text = "Personel İşlemleri";
+            textBox_KullaniciAdi.Location = new Point(99, 164);
+            textBox_KullaniciAdi.Name = "textBox_KullaniciAdi";
+            textBox_KullaniciAdi.Size = new Size(198, 23);
+            textBox_KullaniciAdi.TabIndex = 1;
             // 
-            // btnSil
+            // label6
             // 
-            btnSil.FlatStyle = FlatStyle.Flat;
-            btnSil.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 162);
-            btnSil.Location = new Point(153, 308);
-            btnSil.Margin = new Padding(4);
-            btnSil.Name = "btnSil";
-            btnSil.Size = new Size(250, 45);
-            btnSil.TabIndex = 32;
-            btnSil.Text = "Sil";
-            btnSil.UseVisualStyleBackColor = true;
-            // 
-            // btnDuzenle
-            // 
-            btnDuzenle.FlatStyle = FlatStyle.Flat;
-            btnDuzenle.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 162);
-            btnDuzenle.Location = new Point(153, 255);
-            btnDuzenle.Margin = new Padding(4);
-            btnDuzenle.Name = "btnDuzenle";
-            btnDuzenle.Size = new Size(250, 45);
-            btnDuzenle.TabIndex = 31;
-            btnDuzenle.Text = "Düzenle";
-            btnDuzenle.UseVisualStyleBackColor = true;
-            // 
-            // btnKaydet
-            // 
-            btnKaydet.FlatStyle = FlatStyle.Flat;
-            btnKaydet.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 162);
-            btnKaydet.Location = new Point(153, 202);
-            btnKaydet.Margin = new Padding(4);
-            btnKaydet.Name = "btnKaydet";
-            btnKaydet.Size = new Size(250, 45);
-            btnKaydet.TabIndex = 33;
-            btnKaydet.Text = "Kaydet";
-            btnKaydet.UseVisualStyleBackColor = true;
-            // 
-            // txtSifre
-            // 
-            txtSifre.Location = new Point(153, 160);
-            txtSifre.Margin = new Padding(4);
-            txtSifre.Name = "txtSifre";
-            txtSifre.Size = new Size(250, 29);
-            txtSifre.TabIndex = 19;
+            label6.AutoSize = true;
+            label6.Location = new Point(41, 138);
+            label6.Name = "label6";
+            label6.Size = new Size(52, 15);
+            label6.TabIndex = 0;
+            label6.Text = "Cinsiyet:";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(84, 163);
-            label3.Margin = new Padding(4, 0, 4, 0);
+            label3.Location = new Point(17, 167);
             label3.Name = "label3";
-            label3.Size = new Size(49, 21);
-            label3.TabIndex = 26;
-            label3.Text = "Şifre:";
+            label3.Size = new Size(76, 15);
+            label3.TabIndex = 0;
+            label3.Text = "Kullanıcı Adı:";
             // 
-            // dataGridView1
+            // textBox_Soyad
             // 
-            dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(446, 82);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView1.Size = new Size(812, 676);
-            dataGridView1.TabIndex = 43;
+            textBox_Soyad.Location = new Point(99, 106);
+            textBox_Soyad.Name = "textBox_Soyad";
+            textBox_Soyad.Size = new Size(198, 23);
+            textBox_Soyad.TabIndex = 1;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(51, 109);
+            label7.Name = "label7";
+            label7.Size = new Size(42, 15);
+            label7.TabIndex = 0;
+            label7.Text = "Soyad:";
+            // 
+            // textBox_Ad
+            // 
+            textBox_Ad.Location = new Point(99, 77);
+            textBox_Ad.Name = "textBox_Ad";
+            textBox_Ad.Size = new Size(198, 23);
+            textBox_Ad.TabIndex = 1;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(68, 80);
+            label2.Name = "label2";
+            label2.Size = new Size(25, 15);
+            label2.TabIndex = 0;
+            label2.Text = "Ad:";
+            // 
+            // textBox_PersonelId
+            // 
+            textBox_PersonelId.Location = new Point(99, 48);
+            textBox_PersonelId.Name = "textBox_PersonelId";
+            textBox_PersonelId.Size = new Size(198, 23);
+            textBox_PersonelId.TabIndex = 1;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(25, 51);
+            label1.Name = "label1";
+            label1.Size = new Size(68, 15);
+            label1.TabIndex = 0;
+            label1.Text = "Personel Id:";
+            // 
+            // dataGrid_Personel
+            // 
+            dataGrid_Personel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dataGrid_Personel.AutoGenerateColumns = false;
+            dataGrid_Personel.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGrid_Personel.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGrid_Personel.Columns.AddRange(new DataGridViewColumn[] { personelIdDataGridViewTextBoxColumn, adDataGridViewTextBoxColumn, soyadDataGridViewTextBoxColumn, cinsiyetIdDataGridViewTextBoxColumn, kullaniciAdiDataGridViewTextBoxColumn, sifreDataGridViewTextBoxColumn, teslimEdilenlerDataGridViewTextBoxColumn, terslimAlinanlarDataGridViewTextBoxColumn, cinsiyetDataGridViewTextBoxColumn });
+            dataGrid_Personel.DataSource = personelBindingSource;
+            dataGrid_Personel.Location = new Point(346, 42);
+            dataGrid_Personel.Name = "dataGrid_Personel";
+            dataGrid_Personel.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGrid_Personel.Size = new Size(711, 558);
+            dataGrid_Personel.TabIndex = 1;
+            dataGrid_Personel.SelectionChanged += dataGrid_Personel_SelectionChanged;
+            // 
+            // personelIdDataGridViewTextBoxColumn
+            // 
+            personelIdDataGridViewTextBoxColumn.DataPropertyName = "PersonelId";
+            personelIdDataGridViewTextBoxColumn.HeaderText = "PersonelId";
+            personelIdDataGridViewTextBoxColumn.Name = "personelIdDataGridViewTextBoxColumn";
+            personelIdDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // adDataGridViewTextBoxColumn
+            // 
+            adDataGridViewTextBoxColumn.DataPropertyName = "Ad";
+            adDataGridViewTextBoxColumn.HeaderText = "Ad";
+            adDataGridViewTextBoxColumn.Name = "adDataGridViewTextBoxColumn";
+            // 
+            // soyadDataGridViewTextBoxColumn
+            // 
+            soyadDataGridViewTextBoxColumn.DataPropertyName = "Soyad";
+            soyadDataGridViewTextBoxColumn.HeaderText = "Soyad";
+            soyadDataGridViewTextBoxColumn.Name = "soyadDataGridViewTextBoxColumn";
+            // 
+            // cinsiyetIdDataGridViewTextBoxColumn
+            // 
+            cinsiyetIdDataGridViewTextBoxColumn.DataPropertyName = "CinsiyetId";
+            cinsiyetIdDataGridViewTextBoxColumn.HeaderText = "CinsiyetId";
+            cinsiyetIdDataGridViewTextBoxColumn.Name = "cinsiyetIdDataGridViewTextBoxColumn";
+            cinsiyetIdDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // kullaniciAdiDataGridViewTextBoxColumn
+            // 
+            kullaniciAdiDataGridViewTextBoxColumn.DataPropertyName = "KullaniciAdi";
+            kullaniciAdiDataGridViewTextBoxColumn.HeaderText = "KullaniciAdi";
+            kullaniciAdiDataGridViewTextBoxColumn.Name = "kullaniciAdiDataGridViewTextBoxColumn";
+            // 
+            // sifreDataGridViewTextBoxColumn
+            // 
+            sifreDataGridViewTextBoxColumn.DataPropertyName = "Sifre";
+            sifreDataGridViewTextBoxColumn.HeaderText = "Sifre";
+            sifreDataGridViewTextBoxColumn.Name = "sifreDataGridViewTextBoxColumn";
+            // 
+            // teslimEdilenlerDataGridViewTextBoxColumn
+            // 
+            teslimEdilenlerDataGridViewTextBoxColumn.DataPropertyName = "TeslimEdilenler";
+            teslimEdilenlerDataGridViewTextBoxColumn.HeaderText = "TeslimEdilenler";
+            teslimEdilenlerDataGridViewTextBoxColumn.Name = "teslimEdilenlerDataGridViewTextBoxColumn";
+            teslimEdilenlerDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // terslimAlinanlarDataGridViewTextBoxColumn
+            // 
+            terslimAlinanlarDataGridViewTextBoxColumn.DataPropertyName = "TerslimAlinanlar";
+            terslimAlinanlarDataGridViewTextBoxColumn.HeaderText = "TerslimAlinanlar";
+            terslimAlinanlarDataGridViewTextBoxColumn.Name = "terslimAlinanlarDataGridViewTextBoxColumn";
+            terslimAlinanlarDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // cinsiyetDataGridViewTextBoxColumn
+            // 
+            cinsiyetDataGridViewTextBoxColumn.DataPropertyName = "Cinsiyet";
+            cinsiyetDataGridViewTextBoxColumn.HeaderText = "Cinsiyet";
+            cinsiyetDataGridViewTextBoxColumn.Name = "cinsiyetDataGridViewTextBoxColumn";
+            // 
+            // personelBindingSource
+            // 
+            personelBindingSource.DataSource = typeof(Model.Entity.Personel);
+            // 
+            // btnAra
+            // 
+            btnAra.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnAra.Location = new Point(982, 12);
+            btnAra.Name = "btnAra";
+            btnAra.Size = new Size(75, 23);
+            btnAra.TabIndex = 7;
+            btnAra.Text = "Ara";
+            btnAra.UseVisualStyleBackColor = true;
+            btnAra.Click += btnAra_Click;
+            // 
+            // label5
+            // 
+            label5.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            label5.AutoSize = true;
+            label5.Location = new Point(662, 16);
+            label5.Name = "label5";
+            label5.Size = new Size(28, 15);
+            label5.TabIndex = 6;
+            label5.Text = "Ara:";
+            // 
+            // textBox_Ara
+            // 
+            textBox_Ara.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            textBox_Ara.Location = new Point(696, 13);
+            textBox_Ara.Name = "textBox_Ara";
+            textBox_Ara.PlaceholderText = "TC Kimlik No / Pasaport No / Ad Soyad ile arayın";
+            textBox_Ara.Size = new Size(280, 23);
+            textBox_Ara.TabIndex = 5;
             // 
             // frmPersonelIslemleri
             // 
-            AutoScaleDimensions = new SizeF(10F, 21F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(17, 17, 17);
-            ClientSize = new Size(1270, 770);
-            Controls.Add(dataGridView1);
+            ClientSize = new Size(1069, 612);
+            Controls.Add(btnAra);
+            Controls.Add(label5);
+            Controls.Add(textBox_Ara);
+            Controls.Add(dataGrid_Personel);
             Controls.Add(groupBox1);
-            Controls.Add(btnCikis);
-            Controls.Add(label1);
-            Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            ForeColor = Color.White;
-            FormBorderStyle = FormBorderStyle.None;
-            Margin = new Padding(4);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "frmPersonelIslemleri";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Kütüphane Otomasyonu - Personel İşlemleri";
+            Load += frmPersonelIslemleri_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGrid_Personel).EndInit();
+            ((System.ComponentModel.ISupportInitialize)personelBindingSource).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private Label label1;
-        private Button btnCikis;
-        private Label label9;
-        private TextBox txtPersonelID;
-        private Label label2;
-        private TextBox txtAdSoyad;
-        private TextBox txtKullaniciAdi;
-        private Label label4;
         private GroupBox groupBox1;
-        private TextBox txtSifre;
+        private TextBox textBox_PersonelId;
+        private Label label1;
+        private DataGridView dataGrid_Personel;
+        private TextBox textBox_Sifre;
+        private Label label4;
+        private TextBox textBox_KullaniciAdi;
         private Label label3;
-        private DataGridView dataGridView1;
+        private TextBox textBox_Ad;
+        private Label label2;
+        private Button btnGeriYukle;
+        private Button btnSilinenleriGoster;
+        private Button btnTemizle;
         private Button btnSil;
         private Button btnDuzenle;
         private Button btnKaydet;
+        private BindingSource personelBindingSource;
+        private Button btnAra;
+        private Label label5;
+        private TextBox textBox_Ara;
+        private DataGridViewTextBoxColumn personelIdDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn adDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn soyadDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn cinsiyetIdDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn kullaniciAdiDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn sifreDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn teslimEdilenlerDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn terslimAlinanlarDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn cinsiyetDataGridViewTextBoxColumn;
+        private ComboBox comboBox_Cinsiyet;
+        private Label label6;
+        private TextBox textBox_Soyad;
+        private Label label7;
     }
 }

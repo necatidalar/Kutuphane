@@ -20,7 +20,7 @@
 
         private void çıkışToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            
         }
 
         private void personelİşlemleriToolStripMenuItem_Click(object sender, EventArgs e)
@@ -43,8 +43,8 @@
 
         private void frmDashboard_FormClosed(object sender, FormClosedEventArgs e)
         {
-            frmLogin frmLogin = new frmLogin();
-            frmLogin.Show();
+            frmLogin loginForm = new frmLogin();
+            loginForm.Show();
         }
     }
 }

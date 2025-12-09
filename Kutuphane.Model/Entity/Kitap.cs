@@ -16,6 +16,11 @@ namespace Kutuphane.Model.Entity
         public int Stok { get; set; }
         public bool Aktif { get; set; }
         public Dil Diller { get; set; }
+
+        public Yazar Yazar { get; set; }
+        public Yayinevi Yayinevi { get; set; }
+        public Kategori Kategori { get; set; }
+
         public ICollection<KitapKategori> KitapKategoriler { get; set; }
         public ICollection<YazarKitap> KitapYazarlari { get; set; }
         public ICollection<YayineviKitap> KitapYayinevleri { get; set; }

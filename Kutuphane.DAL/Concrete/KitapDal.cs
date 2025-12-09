@@ -46,6 +46,6 @@ namespace Kutuphane.DAL.Concrete
             //    return new ErrorDataResult<List<KitapDto>>(e.Message);
             //}            
 
-        } 
+        }
     }
 }

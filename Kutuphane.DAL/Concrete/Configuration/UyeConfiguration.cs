@@ -13,7 +13,7 @@ namespace Kutuphane.DAL.Concrete.Configuration
             builder.Property(u => u.Ad).IsRequired().HasColumnType("nvarchar").HasMaxLength(50);
             builder.Property(u => u.Soyad).IsRequired().HasColumnType("nvarchar").HasMaxLength(50);
             builder.Property(u => u.CinsiyetId).HasColumnType("tinyint").IsRequired();
-            builder.Property(u => u.DogumTarihi).HasColumnType("datetime").IsRequired(false);
+            builder.Property(u => u.DogumTarihi).HasColumnType("datetime").IsRequired();
             builder.Property(u => u.Telefon).IsRequired().HasColumnType("varchar").HasMaxLength(15);
             builder.Property(u => u.Eposta).IsRequired().HasColumnType("nvarchar").HasMaxLength(100);
             builder.Property(u => u.Adres).IsRequired().HasColumnType("nvarchar").HasMaxLength(200);

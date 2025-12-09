@@ -14,10 +14,13 @@ namespace Kutuphane.DAL.Concrete.Configuration
             builder.HasKey(kk => kk.Id);
             builder.HasOne(kk => kk.Kitap)
                    .WithMany(k => k.KitapKategoriler)
-                   .HasForeignKey(kk => kk.KitapId);
+                   .HasForeignKey(kk => kk.KitapId)
+                   .OnDelete(DeleteBehavior.NoAction);
+
             builder.HasOne(kk => kk.Kategori)
                    .WithMany(kat => kat.KitapKategoriler)
-                   .HasForeignKey(kk => kk.KategoriId);
+                   .HasForeignKey(kk => kk.KategoriId)
+                   .OnDelete(DeleteBehavior.NoAction);
 
         }
     }

@@ -9,7 +9,7 @@ namespace Kutuphane.Model.Entity{
         public byte CinsiyetId { get; set; }
         public string KullaniciAdi { get; set; }
         public string Sifre { get; set; }
-
+        public bool AktifMi { get; set; } = true;
         public ICollection<Odunc> TeslimEdilenler { get; set; }
         public ICollection<Odunc> TerslimAlinanlar { get; set; }
         public Cinsiyet Cinsiyet { get; set; } 

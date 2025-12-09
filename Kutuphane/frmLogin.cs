@@ -15,16 +15,11 @@ namespace Kutuphane.UI
             txtSifre.UseSystemPasswordChar = true;
         }
 
-        private readonly PersonelService _service;
-
         private void btnGiris_Click(object sender, EventArgs e)
         {
-
-
             frmDashboard dashboard = new frmDashboard();
             dashboard.Show();
             this.Hide();
-
         }
 
         private void frmLogin_FormClosed(object sender, FormClosedEventArgs e)

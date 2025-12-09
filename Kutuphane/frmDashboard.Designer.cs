@@ -43,13 +43,13 @@
             // 
             // menuStrip1
             // 
-            menuStrip1.BackColor = Color.DarkSlateGray;
+            menuStrip1.BackColor = SystemColors.Control;
             menuStrip1.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             menuStrip1.ImageScalingSize = new Size(20, 20);
             menuStrip1.Items.AddRange(new ToolStripItem[] { göstergePaneliToolStripMenuItem, çokluKatYönetimiToolStripMenuItem, kitapİşlemleriToolStripMenuItem, ödünçİşlemleriToolStripMenuItem, üyeİşlemleriToolStripMenuItem, personelİşlemleriToolStripMenuItem, çıkışToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(1223, 29);
+            menuStrip1.Size = new Size(1199, 29);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -77,6 +77,7 @@
             ödünçİşlemleriToolStripMenuItem.Name = "ödünçİşlemleriToolStripMenuItem";
             ödünçİşlemleriToolStripMenuItem.Size = new Size(142, 25);
             ödünçİşlemleriToolStripMenuItem.Text = "Ödünç İşlemleri";
+            ödünçİşlemleriToolStripMenuItem.Click += ödünçİşlemleriToolStripMenuItem_Click;
             // 
             // üyeİşlemleriToolStripMenuItem
             // 
@@ -112,12 +113,12 @@
             // 
             AutoScaleDimensions = new SizeF(10F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(17, 17, 17);
-            ClientSize = new Size(1223, 748);
+            BackColor = Color.DarkSlateGray;
+            ClientSize = new Size(1199, 748);
             Controls.Add(lblKullaniciAdi);
             Controls.Add(menuStrip1);
             Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            ForeColor = Color.White;
+            ForeColor = SystemColors.ControlText;
             Icon = (Icon)resources.GetObject("$this.Icon");
             MainMenuStrip = menuStrip1;
             Margin = new Padding(4);
