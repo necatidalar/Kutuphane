@@ -836,7 +836,7 @@ namespace Kutuphane.DAL.Migrations
                     b.HasOne("Kutuphane.Model.Entity.Cinsiyet", "Cinsiyet")
                         .WithMany()
                         .HasForeignKey("CinsiyetId")
-                        .OnDelete(DeleteBehavior.SetNull)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Cinsiyet");

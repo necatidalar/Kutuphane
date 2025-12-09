@@ -45,6 +45,7 @@
             groupBox1 = new GroupBox();
             dateTimePicker1 = new DateTimePicker();
             comboBox_Cinsiyet = new ComboBox();
+            btnTemizle = new Button();
             btnSil = new Button();
             btnDuzenle = new Button();
             btnKaydet = new Button();
@@ -65,9 +66,8 @@
             textBox_Soyad = new TextBox();
             textBox_Ad = new TextBox();
             textBox_TcPass = new TextBox();
-            textBox_Uye = new TextBox();
+            textBox_UyeId = new TextBox();
             btnAra = new Button();
-            btnTemizle = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGrid_Uye).BeginInit();
             ((System.ComponentModel.ISupportInitialize)uyeDtoBindingSource).BeginInit();
             groupBox1.SuspendLayout();
@@ -81,12 +81,11 @@
             dataGrid_Uye.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGrid_Uye.Columns.AddRange(new DataGridViewColumn[] { tcPassDataGridViewTextBoxColumn, adDataGridViewTextBoxColumn, soyadDataGridViewTextBoxColumn, dogumYiliDataGridViewTextBoxColumn, telefonDataGridViewTextBoxColumn, epostaDataGridViewTextBoxColumn, adresDataGridViewTextBoxColumn, adresDetayDataGridViewTextBoxColumn });
             dataGrid_Uye.DataSource = uyeDtoBindingSource;
-            dataGrid_Uye.Location = new Point(379, 55);
-            dataGrid_Uye.Margin = new Padding(3, 4, 3, 4);
+            dataGrid_Uye.Location = new Point(332, 41);
             dataGrid_Uye.Name = "dataGrid_Uye";
             dataGrid_Uye.RowHeadersWidth = 51;
             dataGrid_Uye.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGrid_Uye.Size = new Size(904, 829);
+            dataGrid_Uye.Size = new Size(791, 622);
             dataGrid_Uye.TabIndex = 0;
             dataGrid_Uye.SelectionChanged += dataGrid_Uye_SelectionChanged;
             // 
@@ -153,20 +152,19 @@
             // textBox_Ara
             // 
             textBox_Ara.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            textBox_Ara.Location = new Point(961, 16);
-            textBox_Ara.Margin = new Padding(3, 4, 3, 4);
+            textBox_Ara.Location = new Point(841, 12);
             textBox_Ara.Name = "textBox_Ara";
             textBox_Ara.PlaceholderText = "Arama için TC/PASS gir";
-            textBox_Ara.Size = new Size(228, 27);
+            textBox_Ara.Size = new Size(200, 23);
             textBox_Ara.TabIndex = 1;
             // 
             // label1
             // 
             label1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label1.AutoSize = true;
-            label1.Location = new Point(922, 21);
+            label1.Location = new Point(807, 16);
             label1.Name = "label1";
-            label1.Size = new Size(35, 20);
+            label1.Size = new Size(28, 15);
             label1.TabIndex = 2;
             label1.Text = "Ara:";
             // 
@@ -195,38 +193,45 @@
             groupBox1.Controls.Add(textBox_Soyad);
             groupBox1.Controls.Add(textBox_Ad);
             groupBox1.Controls.Add(textBox_TcPass);
-            groupBox1.Controls.Add(textBox_Uye);
-            groupBox1.Location = new Point(14, 55);
-            groupBox1.Margin = new Padding(3, 4, 3, 4);
+            groupBox1.Controls.Add(textBox_UyeId);
+            groupBox1.Location = new Point(12, 41);
             groupBox1.Name = "groupBox1";
-            groupBox1.Padding = new Padding(3, 4, 3, 4);
-            groupBox1.Size = new Size(352, 829);
+            groupBox1.Size = new Size(308, 622);
             groupBox1.TabIndex = 3;
             groupBox1.TabStop = false;
             groupBox1.Text = "Üye İşlemleri";
             // 
             // dateTimePicker1
             // 
-            dateTimePicker1.Location = new Point(110, 244);
+            dateTimePicker1.Location = new Point(92, 180);
+            dateTimePicker1.Margin = new Padding(3, 2, 3, 2);
             dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(224, 27);
+            dateTimePicker1.Size = new Size(201, 23);
             dateTimePicker1.TabIndex = 10;
             // 
             // comboBox_Cinsiyet
             // 
             comboBox_Cinsiyet.FormattingEnabled = true;
-            comboBox_Cinsiyet.Location = new Point(105, 200);
-            comboBox_Cinsiyet.Margin = new Padding(3, 4, 3, 4);
+            comboBox_Cinsiyet.Location = new Point(92, 150);
             comboBox_Cinsiyet.Name = "comboBox_Cinsiyet";
-            comboBox_Cinsiyet.Size = new Size(229, 28);
+            comboBox_Cinsiyet.Size = new Size(201, 23);
             comboBox_Cinsiyet.TabIndex = 9;
+            // 
+            // btnTemizle
+            // 
+            btnTemizle.Location = new Point(119, 484);
+            btnTemizle.Name = "btnTemizle";
+            btnTemizle.Size = new Size(146, 23);
+            btnTemizle.TabIndex = 8;
+            btnTemizle.Text = "Temizle";
+            btnTemizle.UseVisualStyleBackColor = true;
+            btnTemizle.Click += btnTemizle_Click;
             // 
             // btnSil
             // 
-            btnSil.Location = new Point(136, 607);
-            btnSil.Margin = new Padding(3, 4, 3, 4);
+            btnSil.Location = new Point(119, 455);
             btnSil.Name = "btnSil";
-            btnSil.Size = new Size(167, 31);
+            btnSil.Size = new Size(146, 23);
             btnSil.TabIndex = 8;
             btnSil.Text = "Sil";
             btnSil.UseVisualStyleBackColor = true;
@@ -234,10 +239,9 @@
             // 
             // btnDuzenle
             // 
-            btnDuzenle.Location = new Point(136, 568);
-            btnDuzenle.Margin = new Padding(3, 4, 3, 4);
+            btnDuzenle.Location = new Point(119, 426);
             btnDuzenle.Name = "btnDuzenle";
-            btnDuzenle.Size = new Size(167, 31);
+            btnDuzenle.Size = new Size(146, 23);
             btnDuzenle.TabIndex = 7;
             btnDuzenle.Text = "Düzenle";
             btnDuzenle.UseVisualStyleBackColor = true;
@@ -245,10 +249,9 @@
             // 
             // btnKaydet
             // 
-            btnKaydet.Location = new Point(136, 529);
-            btnKaydet.Margin = new Padding(3, 4, 3, 4);
+            btnKaydet.Location = new Point(119, 397);
             btnKaydet.Name = "btnKaydet";
-            btnKaydet.Size = new Size(167, 31);
+            btnKaydet.Size = new Size(146, 23);
             btnKaydet.TabIndex = 6;
             btnKaydet.Text = "Kaydet";
             btnKaydet.UseVisualStyleBackColor = true;
@@ -256,195 +259,174 @@
             // 
             // richTextBox_AdresDetay
             // 
-            richTextBox_AdresDetay.Location = new Point(105, 393);
-            richTextBox_AdresDetay.Margin = new Padding(3, 4, 3, 4);
+            richTextBox_AdresDetay.Location = new Point(92, 295);
             richTextBox_AdresDetay.Name = "richTextBox_AdresDetay";
-            richTextBox_AdresDetay.Size = new Size(229, 127);
+            richTextBox_AdresDetay.Size = new Size(201, 96);
             richTextBox_AdresDetay.TabIndex = 5;
             richTextBox_AdresDetay.Text = "";
             // 
             // label11
             // 
             label11.AutoSize = true;
-            label11.Location = new Point(15, 397);
+            label11.Location = new Point(13, 298);
             label11.Name = "label11";
-            label11.Size = new Size(93, 20);
+            label11.Size = new Size(73, 15);
             label11.TabIndex = 1;
             label11.Text = "Adres Detay:";
             // 
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new Point(53, 359);
+            label10.Location = new Point(46, 269);
             label10.Name = "label10";
-            label10.Size = new Size(50, 20);
+            label10.Size = new Size(40, 15);
             label10.TabIndex = 1;
             label10.Text = "Adres:";
             // 
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(41, 320);
+            label9.Location = new Point(36, 240);
             label9.Name = "label9";
-            label9.Size = new Size(61, 20);
+            label9.Size = new Size(50, 15);
             label9.TabIndex = 1;
             label9.Text = "E-Posta:";
             // 
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(43, 281);
+            label8.Location = new Point(38, 211);
             label8.Name = "label8";
-            label8.Size = new Size(61, 20);
+            label8.Size = new Size(48, 15);
             label8.TabIndex = 1;
             label8.Text = "Telefon:";
             // 
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(19, 243);
+            label7.Location = new Point(17, 182);
             label7.Name = "label7";
-            label7.Size = new Size(86, 20);
+            label7.Size = new Size(69, 15);
             label7.TabIndex = 1;
             label7.Text = "Doğum Yılı:";
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(39, 204);
+            label6.Location = new Point(34, 153);
             label6.Name = "label6";
-            label6.Size = new Size(63, 20);
+            label6.Size = new Size(52, 15);
             label6.TabIndex = 1;
             label6.Text = "Cinsiyet:";
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(50, 165);
+            label5.Location = new Point(44, 124);
             label5.Name = "label5";
-            label5.Size = new Size(53, 20);
+            label5.Size = new Size(42, 15);
             label5.TabIndex = 1;
             label5.Text = "Soyad:";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(70, 127);
+            label4.Location = new Point(61, 95);
             label4.Name = "label4";
-            label4.Size = new Size(31, 20);
+            label4.Size = new Size(25, 15);
             label4.TabIndex = 1;
             label4.Text = "Ad:";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(42, 88);
+            label3.Location = new Point(37, 66);
             label3.Name = "label3";
-            label3.Size = new Size(59, 20);
+            label3.Size = new Size(49, 15);
             label3.TabIndex = 1;
             label3.Text = "Tc/Pass:";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(48, 49);
+            label2.Location = new Point(42, 37);
             label2.Name = "label2";
-            label2.Size = new Size(56, 20);
+            label2.Size = new Size(44, 15);
             label2.TabIndex = 1;
             label2.Text = "Üye ID:";
             // 
             // textBox_Adres
             // 
-            textBox_Adres.Location = new Point(105, 355);
-            textBox_Adres.Margin = new Padding(3, 4, 3, 4);
+            textBox_Adres.Location = new Point(92, 266);
             textBox_Adres.Name = "textBox_Adres";
-            textBox_Adres.Size = new Size(229, 27);
+            textBox_Adres.Size = new Size(201, 23);
             textBox_Adres.TabIndex = 0;
             // 
             // textBox_Eposta
             // 
-            textBox_Eposta.Location = new Point(105, 316);
-            textBox_Eposta.Margin = new Padding(3, 4, 3, 4);
+            textBox_Eposta.Location = new Point(92, 237);
             textBox_Eposta.Name = "textBox_Eposta";
-            textBox_Eposta.Size = new Size(229, 27);
+            textBox_Eposta.Size = new Size(201, 23);
             textBox_Eposta.TabIndex = 0;
             // 
             // textBox_Telefon
             // 
-            textBox_Telefon.Location = new Point(105, 277);
-            textBox_Telefon.Margin = new Padding(3, 4, 3, 4);
+            textBox_Telefon.Location = new Point(92, 208);
             textBox_Telefon.Name = "textBox_Telefon";
-            textBox_Telefon.Size = new Size(229, 27);
+            textBox_Telefon.Size = new Size(201, 23);
             textBox_Telefon.TabIndex = 0;
             // 
             // textBox_Soyad
             // 
-            textBox_Soyad.Location = new Point(105, 161);
-            textBox_Soyad.Margin = new Padding(3, 4, 3, 4);
+            textBox_Soyad.Location = new Point(92, 121);
             textBox_Soyad.Name = "textBox_Soyad";
-            textBox_Soyad.Size = new Size(229, 27);
+            textBox_Soyad.Size = new Size(201, 23);
             textBox_Soyad.TabIndex = 0;
             // 
             // textBox_Ad
             // 
-            textBox_Ad.Location = new Point(105, 123);
-            textBox_Ad.Margin = new Padding(3, 4, 3, 4);
+            textBox_Ad.Location = new Point(92, 92);
             textBox_Ad.Name = "textBox_Ad";
-            textBox_Ad.Size = new Size(229, 27);
+            textBox_Ad.Size = new Size(201, 23);
             textBox_Ad.TabIndex = 0;
             // 
             // textBox_TcPass
             // 
-            textBox_TcPass.Location = new Point(105, 84);
-            textBox_TcPass.Margin = new Padding(3, 4, 3, 4);
+            textBox_TcPass.Location = new Point(92, 63);
             textBox_TcPass.Name = "textBox_TcPass";
-            textBox_TcPass.Size = new Size(229, 27);
+            textBox_TcPass.Size = new Size(201, 23);
             textBox_TcPass.TabIndex = 0;
             // 
-            // textBox_Uye
+            // textBox_UyeId
             // 
-            textBox_Uye.Location = new Point(105, 45);
-            textBox_Uye.Margin = new Padding(3, 4, 3, 4);
-            textBox_Uye.Name = "textBox_Uye";
-            textBox_Uye.Size = new Size(229, 27);
-            textBox_Uye.TabIndex = 0;
+            textBox_UyeId.Location = new Point(92, 34);
+            textBox_UyeId.Name = "textBox_UyeId";
+            textBox_UyeId.Size = new Size(201, 23);
+            textBox_UyeId.TabIndex = 0;
             // 
             // btnAra
             // 
             btnAra.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnAra.Location = new Point(1197, 16);
-            btnAra.Margin = new Padding(3, 4, 3, 4);
+            btnAra.Location = new Point(1047, 12);
             btnAra.Name = "btnAra";
-            btnAra.Size = new Size(86, 31);
+            btnAra.Size = new Size(75, 23);
             btnAra.TabIndex = 4;
             btnAra.Text = "Ara";
             btnAra.UseVisualStyleBackColor = true;
             btnAra.Click += btnAra_Click;
             // 
-            // btnTemizle
-            // 
-            btnTemizle.Location = new Point(136, 646);
-            btnTemizle.Margin = new Padding(3, 4, 3, 4);
-            btnTemizle.Name = "btnTemizle";
-            btnTemizle.Size = new Size(167, 31);
-            btnTemizle.TabIndex = 8;
-            btnTemizle.Text = "Temizle";
-            btnTemizle.UseVisualStyleBackColor = true;
-            btnTemizle.Click += btnTemizle_Click;
-            // 
             // frmUyeIslemleri
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
-            ClientSize = new Size(1297, 900);
+            ClientSize = new Size(1135, 675);
             Controls.Add(btnAra);
             Controls.Add(groupBox1);
             Controls.Add(label1);
             Controls.Add(textBox_Ara);
             Controls.Add(dataGrid_Uye);
             Icon = (Icon)resources.GetObject("$this.Icon");
-            Margin = new Padding(3, 4, 3, 4);
             Name = "frmUyeIslemleri";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Kütüphane Otomasyonu - Üye İşlemleri";
@@ -474,7 +456,7 @@
         private Label label1;
         private GroupBox groupBox1;
         private Label label2;
-        private TextBox textBox_Uye;
+        private TextBox textBox_UyeId;
         private Button btnAra;
         private Label label8;
         private Label label7;

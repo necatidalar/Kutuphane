@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Kutuphane.DAL.Migrations
 {
     [DbContext(typeof(KutuphaneDbContext))]
-    [Migration("20251209095722_tables")]
-    partial class tables
+    [Migration("20251209120221_s")]
+    partial class s
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -627,7 +627,7 @@ namespace Kutuphane.DAL.Migrations
                         .HasColumnType("bit")
                         .HasDefaultValue(true);
 
-                    b.Property<byte?>("CinsiyetId")
+                    b.Property<byte>("CinsiyetId")
                         .HasColumnType("tinyint");
 
                     b.Property<DateTime?>("DogumTarihi")
@@ -839,7 +839,8 @@ namespace Kutuphane.DAL.Migrations
                     b.HasOne("Kutuphane.Model.Entity.Cinsiyet", "Cinsiyet")
                         .WithMany()
                         .HasForeignKey("CinsiyetId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
                     b.Navigation("Cinsiyet");
                 });

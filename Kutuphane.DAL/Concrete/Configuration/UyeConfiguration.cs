@@ -23,7 +23,7 @@ namespace Kutuphane.DAL.Concrete.Configuration
             builder.HasOne(u => u.Cinsiyet)
                    .WithMany()
                    .HasForeignKey(u => u.CinsiyetId)
-                   .OnDelete(DeleteBehavior.SetNull);
+                   .OnDelete(DeleteBehavior.NoAction);
 
 
         }

@@ -86,7 +86,7 @@ namespace Kutuphane.UI
         private void btnDuzenle_Click(object sender, EventArgs e)
         {
             int idResult;
-            int.TryParse(textBox_Uye.Text, out idResult);
+            int.TryParse(textBox_UyeId.Text, out idResult);
             Uye yeniUye = new Uye
             {
                 UyeId = idResult,
@@ -105,7 +105,7 @@ namespace Kutuphane.UI
             var uyeResult = uyeService.UpdateService(yeniUye);
             if (uyeResult.IsSuccess)
             {
-                MessageBox.Show("Üye başarıyla updatelendi.", "Başarılı");
+                MessageBox.Show("Üye başarıyla güncellendi.", "Başarılı");
                 Listele();
             }
             else
@@ -116,7 +116,24 @@ namespace Kutuphane.UI
 
         private void btnSil_Click(object sender, EventArgs e)
         {
+            int idResult;
+            int.TryParse(textBox_UyeId.Text, out idResult);
+            Uye yeniUye = new Uye
+            {
+                UyeId = idResult,
+                AktifMi =false
+            };
 
+            var uyeResult = uyeService.UpdateService(yeniUye);
+            if (uyeResult.IsSuccess)
+            {
+                MessageBox.Show("Üye başarıyla silindi (pasif edildi).", "Başarılı");
+                Listele();
+            }
+            else
+            {
+                MessageBox.Show(uyeResult.Message, "Hata");
+            }
         }
 
         private void ComboDoldur()
@@ -141,7 +158,7 @@ namespace Kutuphane.UI
             if (view.CurrentRow != null)
             {
                 UyeDto row = (UyeDto)view.CurrentRow.DataBoundItem;
-                textBox_Uye.Text = row.UyeId.ToString();
+                textBox_UyeId.Text = row.UyeId.ToString();
                 textBox_TcPass.Text = row.TcPass;
                 textBox_Ad.Text = row.Ad;
                 textBox_Soyad.Text = row.Soyad;
@@ -159,7 +176,7 @@ namespace Kutuphane.UI
         private void KutulariTemizle()
         {
             
-            textBox_Uye.Text = string.Empty;
+            textBox_UyeId.Text = string.Empty;
             textBox_TcPass.Text = string.Empty;
             textBox_Ad.Text = string.Empty;
             textBox_Soyad.Text = string.Empty;

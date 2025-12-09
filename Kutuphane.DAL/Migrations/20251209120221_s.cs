@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Kutuphane.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class tables : Migration
+    public partial class s : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -113,7 +113,7 @@ namespace Kutuphane.DAL.Migrations
                     TcPass = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: false),
                     Ad = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Soyad = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    CinsiyetId = table.Column<byte>(type: "tinyint", nullable: true),
+                    CinsiyetId = table.Column<byte>(type: "tinyint", nullable: false),
                     DogumTarihi = table.Column<DateTime>(type: "datetime", nullable: true),
                     Telefon = table.Column<string>(type: "varchar(15)", maxLength: 15, nullable: false),
                     Eposta = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
@@ -128,8 +128,7 @@ namespace Kutuphane.DAL.Migrations
                         name: "FK_Uyeler_Cinsiyetler_CinsiyetId",
                         column: x => x.CinsiyetId,
                         principalTable: "Cinsiyetler",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.SetNull);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
