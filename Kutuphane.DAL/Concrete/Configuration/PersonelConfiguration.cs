@@ -1,6 +1,4 @@
-﻿
-
-using Kutuphane.Model.Entity;
+﻿using Kutuphane.Model.Entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -28,11 +26,13 @@ namespace Kutuphane.DAL.Concrete.Configuration
                 .HasColumnType("nvarchar")
                 .HasMaxLength(250);
             builder.Property(p => p.CinsiyetId)
-                .IsRequired();            
+                .IsRequired();
 
+            // Changed from one-to-one to many-to-one so multiple Personel can share a Cinsiyet
             builder.HasOne(p => p.Cinsiyet)
-                .WithOne()
-                .HasForeignKey<Personel>(p => p.CinsiyetId);
+                .WithMany(c=> c.Personeller)
+                .HasForeignKey(p => p.CinsiyetId);
+
             builder.HasMany(p => p.TeslimEdilenler)
                 .WithOne(o => o.TeslimEdenPersonel)
                 .HasForeignKey(o => o.TeslimEdenPersonelId)

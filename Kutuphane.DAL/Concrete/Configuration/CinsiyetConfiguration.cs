@@ -10,16 +10,16 @@ namespace Kutuphane.DAL.Concrete.Configuration
     {
         public void Configure(EntityTypeBuilder<Cinsiyet> builder)
         {
-            builder.HasKey(c => c.CinsiyetId);
-            builder.Property(c => c.CinsiyetId).HasColumnType("tinyint");
+            builder.HasKey(c => c.Id);
+            builder.Property(c => c.Id).HasColumnType("tinyint");
             builder.Property(c => c.CinsiyetAdi)
                    .IsRequired()
                    .HasColumnType("varchar")
                    .HasMaxLength(15);
             builder.HasData(
-                new Cinsiyet { CinsiyetId = 1, CinsiyetAdi = "Erkek" },
-                new Cinsiyet { CinsiyetId = 2, CinsiyetAdi = "Kadın" },
-                new Cinsiyet { CinsiyetId = 3, CinsiyetAdi = "Belirtilmemiş" }
+                new Cinsiyet { Id = 1, CinsiyetAdi = "Erkek" },
+                new Cinsiyet { Id = 2, CinsiyetAdi = "Kadın" },
+                new Cinsiyet { Id = 3, CinsiyetAdi = "Belirtilmemiş" }
             );
 
         }
