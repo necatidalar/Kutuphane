@@ -1,6 +1,7 @@
 ﻿using Core.DataAccess.Repository;
 using Core.Utility.Results;
 using Kutuphane.DAL.Abstract;
+using Kutuphane.DAL.Contexes;
 using Kutuphane.Model.DTO;
 using Kutuphane.Model.Entity;
 using Microsoft.EntityFrameworkCore;
@@ -8,14 +9,13 @@ using System.Linq.Expressions;
 
 namespace Kutuphane.DAL.Concrete
 {
-    public class PersonelDal<TContext> : EfRepositoryBase<Personel, TContext>, IPersonelDal
-        where TContext : DbContext, new()
+    public class PersonelDal : EfRepositoryBase<Personel, KutuphaneDbContext>, IPersonelDal
     {
         IDataResult<List<PersonelBilgileriDto>> IPersonelDal.PersonelBilgiGetir(Expression<Func<Personel, bool>>? predicate)
         {
             try
             {
-                using var db = new TContext();
+                using var db = new KutuphaneDbContext();
                 var dto = db.Set<Personel>()
                     .Include(p => p.Cinsiyet)
                     .Where(predicate ?? (x => true))
@@ -41,7 +41,7 @@ namespace Kutuphane.DAL.Concrete
         {
             try
             {
-                using var db = new TContext();
+                using var db = new KutuphaneDbContext();
                 var dto = db.Set<Personel>()
                     .Include(p => p.TeslimEdilenler)
                         .ThenInclude(o => o.Kitap)

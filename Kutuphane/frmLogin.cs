@@ -17,7 +17,7 @@ namespace Kutuphane.UI
 
         private void btnGiris_Click(object sender, EventArgs e)
         {
-            frmDashboard dashboard = new frmDashboard();
+            frmMain dashboard = new frmMain();
             dashboard.Show();
             this.Hide();
         }

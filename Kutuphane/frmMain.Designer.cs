@@ -1,6 +1,6 @@
 ﻿namespace Kutuphane.UI
 {
-    partial class frmDashboard
+    partial class frmMain
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmDashboard));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             menuStrip1 = new MenuStrip();
             göstergePaneliToolStripMenuItem = new ToolStripMenuItem();
             çokluKatYönetimiToolStripMenuItem = new ToolStripMenuItem();
@@ -38,7 +38,10 @@
             personelİşlemleriToolStripMenuItem = new ToolStripMenuItem();
             çıkışToolStripMenuItem = new ToolStripMenuItem();
             lblKullaniciAdi = new Label();
+            button1 = new Button();
+            panel1 = new Panel();
             menuStrip1.SuspendLayout();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
@@ -49,86 +52,109 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { göstergePaneliToolStripMenuItem, çokluKatYönetimiToolStripMenuItem, kitapİşlemleriToolStripMenuItem, ödünçİşlemleriToolStripMenuItem, üyeİşlemleriToolStripMenuItem, personelİşlemleriToolStripMenuItem, çıkışToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(1199, 29);
+            menuStrip1.Size = new Size(1199, 36);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
             // göstergePaneliToolStripMenuItem
             // 
             göstergePaneliToolStripMenuItem.Name = "göstergePaneliToolStripMenuItem";
-            göstergePaneliToolStripMenuItem.Size = new Size(142, 25);
+            göstergePaneliToolStripMenuItem.Size = new Size(175, 32);
             göstergePaneliToolStripMenuItem.Text = "Gösterge Paneli";
             // 
             // çokluKatYönetimiToolStripMenuItem
             // 
             çokluKatYönetimiToolStripMenuItem.Name = "çokluKatYönetimiToolStripMenuItem";
-            çokluKatYönetimiToolStripMenuItem.Size = new Size(168, 25);
+            çokluKatYönetimiToolStripMenuItem.Size = new Size(206, 32);
             çokluKatYönetimiToolStripMenuItem.Text = "Çoklu Kat Yönetimi";
             // 
             // kitapİşlemleriToolStripMenuItem
             // 
             kitapİşlemleriToolStripMenuItem.Name = "kitapİşlemleriToolStripMenuItem";
-            kitapİşlemleriToolStripMenuItem.Size = new Size(132, 25);
+            kitapİşlemleriToolStripMenuItem.Size = new Size(163, 32);
             kitapİşlemleriToolStripMenuItem.Text = "Kitap İşlemleri";
             kitapİşlemleriToolStripMenuItem.Click += kitapİşlemleriToolStripMenuItem_Click;
             // 
             // ödünçİşlemleriToolStripMenuItem
             // 
             ödünçİşlemleriToolStripMenuItem.Name = "ödünçİşlemleriToolStripMenuItem";
-            ödünçİşlemleriToolStripMenuItem.Size = new Size(142, 25);
+            ödünçİşlemleriToolStripMenuItem.Size = new Size(174, 32);
             ödünçİşlemleriToolStripMenuItem.Text = "Ödünç İşlemleri";
             ödünçİşlemleriToolStripMenuItem.Click += ödünçİşlemleriToolStripMenuItem_Click;
             // 
             // üyeİşlemleriToolStripMenuItem
             // 
             üyeİşlemleriToolStripMenuItem.Name = "üyeİşlemleriToolStripMenuItem";
-            üyeİşlemleriToolStripMenuItem.Size = new Size(122, 25);
+            üyeİşlemleriToolStripMenuItem.Size = new Size(149, 32);
             üyeİşlemleriToolStripMenuItem.Text = "Üye İşlemleri";
             üyeİşlemleriToolStripMenuItem.Click += üyeİşlemleriToolStripMenuItem_Click;
             // 
             // personelİşlemleriToolStripMenuItem
             // 
             personelİşlemleriToolStripMenuItem.Name = "personelİşlemleriToolStripMenuItem";
-            personelİşlemleriToolStripMenuItem.Size = new Size(158, 25);
+            personelİşlemleriToolStripMenuItem.Size = new Size(193, 32);
             personelİşlemleriToolStripMenuItem.Text = "Personel İşlemleri";
             personelİşlemleriToolStripMenuItem.Click += personelİşlemleriToolStripMenuItem_Click;
             // 
             // çıkışToolStripMenuItem
             // 
             çıkışToolStripMenuItem.Name = "çıkışToolStripMenuItem";
-            çıkışToolStripMenuItem.Size = new Size(58, 25);
+            çıkışToolStripMenuItem.Size = new Size(70, 32);
             çıkışToolStripMenuItem.Text = "Çıkış";
             çıkışToolStripMenuItem.Click += çıkışToolStripMenuItem_Click;
             // 
             // lblKullaniciAdi
             // 
             lblKullaniciAdi.AutoSize = true;
-            lblKullaniciAdi.Location = new Point(12, 42);
+            lblKullaniciAdi.Location = new Point(3, 11);
             lblKullaniciAdi.Name = "lblKullaniciAdi";
-            lblKullaniciAdi.Size = new Size(204, 21);
+            lblKullaniciAdi.Size = new Size(251, 28);
             lblKullaniciAdi.TabIndex = 1;
             lblKullaniciAdi.Text = "Hoşgeldiniz, Kullanıcı adı";
             // 
-            // frmDashboard
+            // button1
             // 
-            AutoScaleDimensions = new SizeF(10F, 21F);
+            button1.Location = new Point(410, 43);
+            button1.Name = "button1";
+            button1.Size = new Size(94, 29);
+            button1.TabIndex = 3;
+            button1.Text = "button1";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
+            // panel1
+            // 
+            panel1.Controls.Add(button1);
+            panel1.Controls.Add(lblKullaniciAdi);
+            panel1.Dock = DockStyle.Top;
+            panel1.Location = new Point(0, 36);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(1199, 88);
+            panel1.TabIndex = 4;
+            // 
+            // frmMain
+            // 
+            AutoScaleDimensions = new SizeF(12F, 28F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DarkSlateGray;
             ClientSize = new Size(1199, 748);
-            Controls.Add(lblKullaniciAdi);
+            Controls.Add(panel1);
             Controls.Add(menuStrip1);
             Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             ForeColor = SystemColors.ControlText;
             Icon = (Icon)resources.GetObject("$this.Icon");
+            IsMdiContainer = true;
             MainMenuStrip = menuStrip1;
             Margin = new Padding(4);
-            Name = "frmDashboard";
-            StartPosition = FormStartPosition.CenterParent;
+            Name = "frmMain";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Kütüphane Otomasyonu - Gösterge Paneli";
             WindowState = FormWindowState.Maximized;
             FormClosed += frmDashboard_FormClosed;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -144,5 +170,7 @@
         private ToolStripMenuItem personelİşlemleriToolStripMenuItem;
         private ToolStripMenuItem çıkışToolStripMenuItem;
         private Label lblKullaniciAdi;
+        private Button button1;
+        private Panel panel1;
     }
 }

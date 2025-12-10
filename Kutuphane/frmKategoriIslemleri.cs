@@ -1,7 +1,9 @@
 ﻿using Kutuphane.BLL.Abstract;
 using Kutuphane.BLL.Concrete;
 using Kutuphane.DAL.Concrete;
+using Kutuphane.DAL.Contexes;
 using Kutuphane.Model.Entity;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
 
 namespace Kutuphane.UI
@@ -12,6 +14,7 @@ namespace Kutuphane.UI
         {
             InitializeComponent();
             dataGrid_Kategori.DataSource = bilKategori;
+
         }
 
         BindingList<Kategori> bilKategori = new BindingList<Kategori>();
@@ -26,9 +29,10 @@ namespace Kutuphane.UI
             dataGrid_Kategori.ClearSelection();
         }
 
+       
         private void Listele()
         {
-            var kategoriResult = kategoriService.KategoriListeDetayliGetirServis(x =>
+            var kategoriResult = kategoriService.GetListByFilterService(x =>
                 x.AktifMi == true &&
                 (x.KategoriAdi.Contains(textBox_Ara.Text))
             );
@@ -146,7 +150,7 @@ namespace Kutuphane.UI
         {
             if (!silinenModu)
             {
-                var sonuc = kategoriService.KategoriListeDetayliGetirServis(x => x.AktifMi == false);
+                var sonuc = kategoriService.GetListByFilterService(x => x.AktifMi == false);
 
                 bilKategori.Clear();
                 foreach (var item in sonuc.Data)

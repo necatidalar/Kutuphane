@@ -1,20 +1,20 @@
 ﻿using Core.DataAccess.Repository;
 using Core.Utility.Results;
 using Kutuphane.DAL.Abstract;
+using Kutuphane.DAL.Contexes;
 using Kutuphane.Model.Entity;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 namespace Kutuphane.DAL.Concrete
 {
-    public class CinsiyetDal<TContext> : EfRepositoryBase<Cinsiyet, TContext>, ICinsiyetDal
-        where TContext : DbContext, new()
+    public class CinsiyetDal: EfRepositoryBase<Cinsiyet, KutuphaneDbContext>, ICinsiyetDal
     {
         public IDataResult<List<Cinsiyet>> CinsiyetListeDetayliGetir(Expression<Func<Cinsiyet, bool>>? predicate = null)
         {
             try
             {
-                using var db = new TContext();
+                using var db = new KutuphaneDbContext();
                 var dto = db.Set<Cinsiyet>()
                     .Select(x => new Cinsiyet
                     {

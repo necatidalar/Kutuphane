@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Kutuphane.DAL
 {
-    public class KutuphaneDbContext : DbContext
+    public class HomeDbContext : DbContext
     {
-        public KutuphaneDbContext()
+        public HomeDbContext()
         {
         }
 
@@ -14,17 +14,14 @@ namespace Kutuphane.DAL
         {
             if (!optionsBuilder.IsConfigured)
             {
-                //optionsBuilder.UseSqlServer("Server=localhost;Database=KutuphaneOtomasyonu;Trusted_Connection=True;TrustServerCertificate=True;");
-                optionsBuilder.UseSqlServer("Server=CLK-STAJERPC\\STAJYERSQL;Database=KutuphaneOtomasyonu;User Id=sa;Password=Yesilyurt.55; TrustServerCertificate=True;");
-                //optionsBuilder.UseSqlServer("Server=YDC-TUNAAKSU-LE\\YDCLENOVO;Database=StajyerKutuphane;User Id=stajyer;Password=Yesilyurt.55; TrustServerCertificate=True;");
-
+                optionsBuilder.UseSqlServer("Server=localhost;Database=KutuphaneOtomasyonu;Trusted_Connection=True;TrustServerCertificate=True;");
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Fluent API Configuration'ları otomatik yükle
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(KutuphaneDbContext).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(HomeDbContext).Assembly);
 
             base.OnModelCreating(modelBuilder);
         }

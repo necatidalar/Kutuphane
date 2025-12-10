@@ -1,6 +1,8 @@
 ﻿using Kutuphane.BLL.Abstract;
 using Kutuphane.BLL.Concrete;
+using Kutuphane.DAL.Abstract;
 using Kutuphane.DAL.Concrete;
+using Kutuphane.Model.DTO;
 using Kutuphane.Model.Entity;
 using System.ComponentModel;
 
@@ -13,7 +15,7 @@ namespace Kutuphane.UI
             InitializeComponent();
             dataGrid_Yazar.DataSource = bilYazar;
         }
-        BindingList<Yazar> bilYazar = new BindingList<Yazar>();
+        BindingList<YazarDto> bilYazar = new BindingList<YazarDto>();
         IYazarService yazarService = new YazarManager(new YazarDal());
         bool silinenModu = false;
 
@@ -26,9 +28,9 @@ namespace Kutuphane.UI
         }
         private void Listele()
         {
-            var yazarResult = yazarService.YazarListeDetayliGetirServis(x =>
+            var yazarResult = yazarService.YazarListeGetirServis(x =>
                 x.AktifMi == true &&
-                (x.AdSoyad.Contains(textBox_Ara.Text))
+                (x.Ad.Contains(textBox_Ara.Text) || x.Soyad.Contains(textBox_Ara.Text))
             );
 
             if (!yazarResult.IsSuccess)
@@ -51,7 +53,8 @@ namespace Kutuphane.UI
         {
             Yazar yeniYazar = new Yazar
             {
-                AdSoyad = textBox_AdSoyad.Text,
+                Ad = textBox_AdSoyad.Text,
+                //Soyad = textBox_Soyad.Text,
                 AktifMi = true
             };
 
@@ -73,7 +76,8 @@ namespace Kutuphane.UI
             Yazar yeniYazar = new Yazar
             {
                 YazarId = idResult,
-                AdSoyad = textBox_AdSoyad.Text,
+                Ad = textBox_AdSoyad.Text,
+                //Soyad = textBox_Soyad.Text,
                 AktifMi = true
             };
 
@@ -144,7 +148,7 @@ namespace Kutuphane.UI
         {
             if (!silinenModu)
             {
-                var sonuc = yazarService.YazarListeDetayliGetirServis(x => x.AktifMi == false);
+                var sonuc = yazarService.YazarListeGetirServis(x => x.AktifMi == false);
 
                 bilYazar.Clear();
                 foreach (var item in sonuc.Data)
@@ -223,7 +227,8 @@ namespace Kutuphane.UI
             {
                 Yazar row = (Yazar)dataGrid_Yazar.CurrentRow.DataBoundItem;
                 textBox_YazarId.Text = row.YazarId.ToString();
-                textBox_AdSoyad.Text = row.AdSoyad;
+                textBox_AdSoyad.Text = row.Ad;
+                //textBox_Soyad.Text = row.Soyad;
 
                 return;
             }

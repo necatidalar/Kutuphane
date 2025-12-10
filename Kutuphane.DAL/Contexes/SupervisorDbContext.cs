@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Kutuphane.DAL
+namespace Kutuphane.DAL.Contexes
 {
     public class SupervisorDbContext : DbContext
     {
@@ -27,7 +27,7 @@ namespace Kutuphane.DAL
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Fluent API Configuration'ları otomatik yükle
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(KutuphaneDbContext).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(SupervisorDbContext).Assembly);
 
             base.OnModelCreating(modelBuilder);
         }
