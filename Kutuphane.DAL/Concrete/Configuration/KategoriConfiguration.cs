@@ -15,7 +15,10 @@ namespace Kutuphane.DAL.Concrete.Configuration
                    .IsRequired()
                    .HasColumnType("nvarchar")
                    .HasMaxLength(150);
-            
+            builder.Property(k => k.AktifMi)
+                   .IsRequired()
+                   .HasDefaultValue(true);
+
             builder.HasData(
                 new Kategori { KategoriId = 1, KategoriAdi = "Roman" },
                 new Kategori { KategoriId = 2, KategoriAdi = "Hikaye" },

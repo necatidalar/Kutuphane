@@ -245,7 +245,7 @@
             btnSilinenleriGoster.Name = "btnSilinenleriGoster";
             btnSilinenleriGoster.Size = new Size(150, 25);
             btnSilinenleriGoster.TabIndex = 11;
-            btnSilinenleriGoster.Text = "Silinen Üyeleri Göster";
+            btnSilinenleriGoster.Text = "Silinenleri Göster";
             btnSilinenleriGoster.UseVisualStyleBackColor = true;
             btnSilinenleriGoster.Visible = false;
             btnSilinenleriGoster.Click += btnSilinenleriGoster_Click;

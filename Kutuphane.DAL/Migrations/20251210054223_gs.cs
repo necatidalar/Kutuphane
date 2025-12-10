@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Kutuphane.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class d : Migration
+    public partial class gs : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -45,7 +45,8 @@ namespace Kutuphane.DAL.Migrations
                 {
                     KategoriId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    KategoriAdi = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false)
+                    KategoriAdi = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
+                    AktifMi = table.Column<bool>(type: "bit", nullable: false, defaultValue: true)
                 },
                 constraints: table =>
                 {

@@ -23,6 +23,7 @@ namespace Kutuphane.DAL.Concrete
                         YazarId = x.YazarId,
                         AdSoyad = x.AdSoyad,
                         DogumTarihi = x.DogumTarihi,
+                        AktifMi = x.AktifMi,
                         YazarKitaplari = x.YazarKitaplari
                             .Select(yk => new YazarKitap
                             {

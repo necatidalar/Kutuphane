@@ -21,7 +21,8 @@ namespace Kutuphane.DAL.Concrete
                     {
                         KategoriId = x.KategoriId,
                         KategoriAdi = x.KategoriAdi,
-                        KitapKategoriler = x.KitapKategoriler
+                        KitapKategoriler = x.KitapKategoriler,
+                        AktifMi = x.AktifMi
 
                     }).ToList();
                 return new SuccessDataResult<List<Kategori>>(dto);

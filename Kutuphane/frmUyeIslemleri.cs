@@ -169,6 +169,9 @@ namespace Kutuphane.UI
                 textBox_UyeId.Text = row.UyeId.ToString();
                 textBox_TcPass.Text = row.TcPass;
                 textBox_Ad.Text = row.Ad;
+                textBox_UyeId.Text = row.UyeId.ToString();
+                textBox_TcPass.Text = row.TcPass;
+                textBox_Ad.Text = row.Ad;
                 textBox_Soyad.Text = row.Soyad;
                 comboBox_Cinsiyet.SelectedValue = row.CinsiyetId;
                 textBox_Telefon.Text = row.Telefon;
