@@ -6,6 +6,19 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationIcon>Kitapp.ico</ApplicationIcon>
+    <PackageIcon></PackageIcon>
+    <AssemblyVersion>1.0.0.86</AssemblyVersion>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="Kitapp.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Core\Core.csproj" />
+    <ProjectReference Include="..\Kutuphane.BLL\Kutuphane.BLL.csproj" />
+    <ProjectReference Include="..\Kutuphane.Model\Kutuphane.Model.csproj" />
+  </ItemGroup>
 
 </Project>
