@@ -41,7 +41,7 @@ namespace Kutuphane.DAL.Concrete.Configuration
                 .WithOne(o => o.TeslimEdenPersonel)
                 .HasForeignKey(o => o.TeslimEdenPersonelId)
                 .OnDelete(DeleteBehavior.NoAction);
-            builder.HasMany(p => p.TerslimAlinanlar)
+            builder.HasMany(p => p.TeslimAlinanlar)
                 .WithOne(o => o.TeslimAlanPersonel)
                 .HasForeignKey(o => o.TeslimAlanPersonelId)
                 .OnDelete(DeleteBehavior.NoAction);

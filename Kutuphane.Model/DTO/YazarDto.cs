@@ -7,18 +7,17 @@ namespace Kutuphane.Model.DTO
 {
     public class YazarDto :IDto
     {
-        public int YazarID { get; set; }
+        public int YazarId { get; set; }
         public string Ad { get; set; }
         public string Soyad { get; set; }
         public DateTime? DogumTarihi { get; set; }
+        public string AdSoyad { get { return $"{Ad} {Soyad}"; } }
         public int Yas 
         { get
             {
-                TimeSpan fark = DateTime.Now - (DogumTarihi ?? DateTime.Now);
+                TimeSpan fark = DateTime.Now - (DogumTarihi ?? DateTime.Now); 
                 return (int)(fark.TotalDays / 365.25);
             } 
         }
-
-        public List<Kitap>? Kitaplar { get; set; }
     }
 }

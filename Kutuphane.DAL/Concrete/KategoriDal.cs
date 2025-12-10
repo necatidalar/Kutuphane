@@ -1,14 +1,14 @@
 ﻿using Core.DataAccess.Repository;
-using Core.Utility.Results;
 using Kutuphane.DAL.Abstract;
 using Kutuphane.Model.Entity;
 using Microsoft.EntityFrameworkCore;
-using System.Linq.Expressions;
 
 namespace Kutuphane.DAL.Concrete
 {
-    public class KategoriDal : EfRepositoryBase<Kategori, KutuphaneDbContext>, IKategoriDal
+    public class KategoriDal<TContext> : EfRepositoryBase<Kategori, TContext>, IKategoriDal
+        where TContext : DbContext, new()
     {
+<<<<<<< Updated upstream
         public IDataResult<List<Kategori>> KategoriListeDetayliGetir(Expression<Func<Kategori, bool>>? predicate = null)
         {
             try
@@ -32,5 +32,8 @@ namespace Kutuphane.DAL.Concrete
                 return new ErrorDataResult<List<Kategori>>(e.Message);
             }
         }
+=======
+        
+>>>>>>> Stashed changes
     }
 }

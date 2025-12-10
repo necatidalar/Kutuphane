@@ -1,6 +1,7 @@
 ﻿using Core.Utility.Results;
 using Kutuphane.BLL.Abstract;
 using Kutuphane.DAL.Abstract;
+using Kutuphane.Model.DTO;
 using Kutuphane.Model.Entity;
 using System.Linq.Expressions;
 
@@ -35,9 +36,15 @@ namespace Kutuphane.BLL.Concrete
         {
             return _personelDal.Update(entity);
         }
-        public IDataResult<List<Personel>> PersonelListeDetayliGetirServis(Expression<Func<Personel, bool>>? predicate = null)
+
+        public IDataResult<List<PersonelBilgileriDto>> PersonelBilgiGetirServis(Expression<Func<Personel, bool>>? predicate = null)
         {
-            return _personelDal.PersonelListeDetayliGetir(predicate);
+            return _personelDal.PersonelBilgiGetir(predicate);
+        }
+
+        public IDataResult<List<PersonelOduncBilgileriDto>> PersonelOduncListeIleGetirServis(Expression<Func<Personel, bool>>? predicate = null)
+        {
+            return _personelDal.PersonelOduncListeIleGetir(predicate);
         }
     }
 }

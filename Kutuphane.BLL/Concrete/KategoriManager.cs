@@ -35,9 +35,5 @@ namespace Kutuphane.BLL.Concrete
         {
             return _kategoriDal.Update(entity);
         }
-        public IDataResult<List<Kategori>> KategoriListeDetayliGetirServis(Expression<Func<Kategori, bool>>? predicate = null)
-        {
-            return _kategoriDal.KategoriListeDetayliGetir(predicate);
-        }
     }
 }

@@ -2,17 +2,19 @@
 using Core.Utility.Results;
 using Kutuphane.DAL.Abstract;
 using Kutuphane.Model.Entity;
+using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 namespace Kutuphane.DAL.Concrete
 {
-    public class CinsiyetDal : EfRepositoryBase<Cinsiyet, KutuphaneDbContext>, ICinsiyetDal
+    public class CinsiyetDal<TContext> : EfRepositoryBase<Cinsiyet, TContext>, ICinsiyetDal
+        where TContext : DbContext, new()
     {
         public IDataResult<List<Cinsiyet>> CinsiyetListeDetayliGetir(Expression<Func<Cinsiyet, bool>>? predicate = null)
         {
             try
             {
-                using var db = new KutuphaneDbContext();
+                using var db = new TContext();
                 var dto = db.Set<Cinsiyet>()
                     .Select(x => new Cinsiyet
                     {

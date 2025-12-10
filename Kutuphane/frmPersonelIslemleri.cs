@@ -1,10 +1,8 @@
 ﻿using Kutuphane.BLL.Abstract;
 using Kutuphane.BLL.Concrete;
 using Kutuphane.DAL.Concrete;
-using Kutuphane.Model.DTO;
 using Kutuphane.Model.Entity;
 using System.ComponentModel;
-using System.Windows.Forms;
 namespace Kutuphane.UI
 {
     public partial class frmPersonelIslemleri : Form
@@ -50,7 +48,7 @@ namespace Kutuphane.UI
         }
         private void ComboDoldur()
         {
-            ICinsiyetService cinsiyetService = new CinsiyetManager(new CinsiyetDal());
+            ICinsiyetService cinsiyetService = new CinsiyetManager(new CinsiyetDal<>());
             var cinsiyetResult = cinsiyetService.GetListByFilterService();
 
             if (!cinsiyetResult.IsSuccess)

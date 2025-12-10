@@ -35,9 +35,5 @@ namespace Kutuphane.BLL.Concrete
         {
             return _dilDal.Update(entity);
         }
-        public IDataResult<List<Dil>> DilListeDetayliGetirServis(Expression<Func<Dil, bool>>? predicate = null)
-        {
-            return _dilDal.DilListeDetayliGetir(predicate);
-        }
     }
 }

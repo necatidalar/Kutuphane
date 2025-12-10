@@ -1,6 +1,7 @@
 ﻿using Core.Utility.Results;
 using Kutuphane.BLL.Abstract;
 using Kutuphane.DAL.Abstract;
+using Kutuphane.Model.DTO;
 using Kutuphane.Model.Entity;
 using System.Linq.Expressions;
 
@@ -35,9 +36,9 @@ namespace Kutuphane.BLL.Concrete
         {
             return _yazarDal.Update(entity);
         }
-        public IDataResult<List<Yazar>> YazarListeDetayliGetirServis(Expression<Func<Yazar, bool>>? predicate = null)
+        public IDataResult<List<YazarDto>> YazarListeGetirServis(Expression<Func<Yazar, bool>>? predicate = null)
         {
-            return _yazarDal.YazarListeDetayliGetir(predicate);
+            return _yazarDal.YazarListeGetir(predicate);
         }
     }
 }

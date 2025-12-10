@@ -1,38 +1,83 @@
 ﻿using Core.DataAccess.Repository;
 using Core.Utility.Results;
 using Kutuphane.DAL.Abstract;
+using Kutuphane.Model.DTO;
 using Kutuphane.Model.Entity;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 namespace Kutuphane.DAL.Concrete
 {
-    public class PersonelDal : EfRepositoryBase<Personel, KutuphaneDbContext>, IPersonelDal
+    public class PersonelDal<TContext> : EfRepositoryBase<Personel, TContext>, IPersonelDal
+        where TContext : DbContext, new()
     {
-        public IDataResult<List<Personel>> PersonelListeDetayliGetir(Expression<Func<Personel, bool>>? predicate = null)
+        IDataResult<List<PersonelBilgileriDto>> IPersonelDal.PersonelBilgiGetir(Expression<Func<Personel, bool>>? predicate)
         {
             try
             {
-                using var db = new KutuphaneDbContext();
+                using var db = new TContext();
                 var dto = db.Set<Personel>()
                     .Include(p => p.Cinsiyet)
                     .Where(predicate ?? (x => true))
-                    .Select(x => new Personel
+                    .Select(x => new PersonelBilgileriDto
+                    {
+                        PersonelID = x.PersonelId,
+                        Ad = x.Ad,
+                        Soyad = x.Soyad,
+                        CinsiyetId = x.CinsiyetId,
+                        CinsiyetAdi = x.Cinsiyet.CinsiyetAdi,
+                        AktifMi = x.AktifMi
+
+                    }).ToList();
+                return new SuccessDataResult<List<PersonelBilgileriDto>>(dto);
+            }
+            catch (Exception e)
+            {
+                return new ErrorDataResult<List<PersonelBilgileriDto>>(e.Message);
+            }
+        }
+
+        IDataResult<List<PersonelOduncBilgileriDto>> IPersonelDal.PersonelOduncListeIleGetir(Expression<Func<Personel, bool>>? predicate)
+        {
+            try
+            {
+                using var db = new TContext();
+                var dto = db.Set<Personel>()
+                    .Include(p => p.TeslimEdilenler)
+                        .ThenInclude(o => o.Kitap)
+                    .Include(p => p.TeslimEdilenler)
+                        .ThenInclude(o => o.Uye)
+                    .Include(p => p.TeslimAlinanlar)
+                        .ThenInclude(o => o.Kitap)
+                    .Include(p => p.TeslimAlinanlar)
+                        .ThenInclude(o => o.Uye)
+                    .Where(predicate ?? (x => true))
+                    .Select(x => new PersonelOduncBilgileriDto
                     {
                         PersonelId = x.PersonelId,
                         Ad = x.Ad,
                         Soyad = x.Soyad,
-                        CinsiyetId = x.CinsiyetId,
-                        KullaniciAdi = x.KullaniciAdi,
-                        Sifre = x.Sifre,
-                        Cinsiyet = x.Cinsiyet
-
+                        OduncSayisi = x.TeslimEdilenler.Count,
+                        TeslimAlinanlar = x.TeslimAlinanlar.Select(te => new OduncBilgileriDto
+                        {
+                            OduncId = te.OduncId,
+                            KitapId = te.KitapId,
+                            UyeId = te.UyeId,
+                            AlisTarihi = te.AlisTarihi,
+                            TeslimTarihi = te.TeslimTarihi,
+                            TeslimEdildi = te.TeslimEdildi,
+                            KitapAdi = te.Kitap.KitapAdi,
+                            UyeAd = te.Uye.Ad,
+                            UyeSoyad = te.Uye.Soyad,
+                            UyeEposta = te.Uye.Eposta,
+                            UyeTelefon = te.Uye.Telefon,
+                        }).ToList(),
                     }).ToList();
-                return new SuccessDataResult<List<Personel>>(dto);
+                return new SuccessDataResult<List<PersonelOduncBilgileriDto>>(dto);
             }
             catch (Exception e)
             {
-                return new ErrorDataResult<List<Personel>>(e.Message);
+                return new ErrorDataResult<List<PersonelOduncBilgileriDto>>(e.Message);
             }
         }
     }

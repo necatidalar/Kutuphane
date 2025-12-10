@@ -8,7 +8,8 @@ namespace Kutuphane.DAL.Concrete.Configuration
     {
         public void Configure(EntityTypeBuilder<Yazar> builder)
         {
-            builder.Property(y => y.AdSoyad).HasMaxLength(200).IsRequired();
+            builder.Property(y => y.Ad).HasMaxLength(200).IsRequired();
+            builder.Property(y => y.Soyad).HasMaxLength(200).IsRequired();
             builder.Property(y => y.DogumTarihi).HasColumnType("datetime").IsRequired(false);
             builder.Property(y => y.AktifMi).IsRequired().HasDefaultValue(true);
         }
