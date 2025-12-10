@@ -35,9 +35,5 @@ namespace Kutuphane.BLL.Concrete
         {
             return _yayineviDal.Update(entity);
         }
-        public IDataResult<List<Yayinevi>> YayineviListeDetayliGetirServis(Expression<Func<Yayinevi, bool>>? predicate = null)
-        {
-            return _yayineviDal.YayineviListeDetayliGetir(predicate);
-        }
     }
 }

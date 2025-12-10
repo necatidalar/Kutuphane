@@ -8,10 +8,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Kutuphane.DAL.Migrations
+namespace Kutuphane.DAL.Migrations.SupervisorDb
 {
-    [DbContext(typeof(KutuphaneDbContext))]
-    partial class KutuphaneDbContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(SupervisorDbContext))]
+    partial class SupervisorDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -255,11 +255,6 @@ namespace Kutuphane.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("KategoriId"));
 
-                    b.Property<bool>("AktifMi")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
-
                     b.Property<string>("KategoriAdi")
                         .IsRequired()
                         .HasMaxLength(150)
@@ -273,181 +268,151 @@ namespace Kutuphane.DAL.Migrations
                         new
                         {
                             KategoriId = 1,
-                            AktifMi = false,
                             KategoriAdi = "Roman"
                         },
                         new
                         {
                             KategoriId = 2,
-                            AktifMi = false,
                             KategoriAdi = "Hikaye"
                         },
                         new
                         {
                             KategoriId = 3,
-                            AktifMi = false,
                             KategoriAdi = "Şiir"
                         },
                         new
                         {
                             KategoriId = 4,
-                            AktifMi = false,
                             KategoriAdi = "Tarih"
                         },
                         new
                         {
                             KategoriId = 5,
-                            AktifMi = false,
                             KategoriAdi = "Bilim"
                         },
                         new
                         {
                             KategoriId = 6,
-                            AktifMi = false,
                             KategoriAdi = "Sanat"
                         },
                         new
                         {
                             KategoriId = 7,
-                            AktifMi = false,
                             KategoriAdi = "Felsefe"
                         },
                         new
                         {
                             KategoriId = 8,
-                            AktifMi = false,
                             KategoriAdi = "Çocuk"
                         },
                         new
                         {
                             KategoriId = 9,
-                            AktifMi = false,
                             KategoriAdi = "Gezi"
                         },
                         new
                         {
                             KategoriId = 10,
-                            AktifMi = false,
                             KategoriAdi = "Biyografi"
                         },
                         new
                         {
                             KategoriId = 11,
-                            AktifMi = false,
                             KategoriAdi = "Kişisel Gelişim"
                         },
                         new
                         {
                             KategoriId = 12,
-                            AktifMi = false,
                             KategoriAdi = "Psikoloji"
                         },
                         new
                         {
                             KategoriId = 13,
-                            AktifMi = false,
                             KategoriAdi = "Ekonomi"
                         },
                         new
                         {
                             KategoriId = 14,
-                            AktifMi = false,
                             KategoriAdi = "Politika"
                         },
                         new
                         {
                             KategoriId = 15,
-                            AktifMi = false,
                             KategoriAdi = "Din"
                         },
                         new
                         {
                             KategoriId = 16,
-                            AktifMi = false,
                             KategoriAdi = "Mitoloji"
                         },
                         new
                         {
                             KategoriId = 17,
-                            AktifMi = false,
                             KategoriAdi = "Fantastik"
                         },
                         new
                         {
                             KategoriId = 18,
-                            AktifMi = false,
                             KategoriAdi = "Bilim Kurgu"
                         },
                         new
                         {
                             KategoriId = 19,
-                            AktifMi = false,
                             KategoriAdi = "Macera"
                         },
                         new
                         {
                             KategoriId = 20,
-                            AktifMi = false,
                             KategoriAdi = "Korku"
                         },
                         new
                         {
                             KategoriId = 21,
-                            AktifMi = false,
                             KategoriAdi = "Polisiye"
                         },
                         new
                         {
                             KategoriId = 22,
-                            AktifMi = false,
                             KategoriAdi = "Dram"
                         },
                         new
                         {
                             KategoriId = 23,
-                            AktifMi = false,
                             KategoriAdi = "Komedi"
                         },
                         new
                         {
                             KategoriId = 24,
-                            AktifMi = false,
                             KategoriAdi = "Aşk"
                         },
                         new
                         {
                             KategoriId = 25,
-                            AktifMi = false,
                             KategoriAdi = "Dünya Klasikleri"
                         },
                         new
                         {
                             KategoriId = 26,
-                            AktifMi = false,
                             KategoriAdi = "Edebiyat"
                         },
                         new
                         {
                             KategoriId = 27,
-                            AktifMi = false,
                             KategoriAdi = "Sağlık"
                         },
                         new
                         {
                             KategoriId = 28,
-                            AktifMi = false,
                             KategoriAdi = "Yemek"
                         },
                         new
                         {
                             KategoriId = 29,
-                            AktifMi = false,
                             KategoriAdi = "Spor"
                         },
                         new
                         {
                             KategoriId = 30,
-                            AktifMi = false,
                             KategoriAdi = "Diğer"
                         });
                 });

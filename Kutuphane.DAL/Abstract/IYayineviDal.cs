@@ -7,6 +7,5 @@ namespace Kutuphane.DAL.Abstract
 {
     public interface IYayineviDal : IDalVeriCekme<Yayinevi>, IDalVeriOlusturma<Yayinevi>, IDalVeriGunceleme<Yayinevi>
     {
-        IDataResult<List<Yayinevi>> YayineviListeDetayliGetir(Expression<Func<Yayinevi, bool>>? predicate = null);
     }
 }

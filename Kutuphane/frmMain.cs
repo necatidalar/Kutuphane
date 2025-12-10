@@ -1,17 +1,27 @@
-﻿namespace Kutuphane.UI
+﻿using Kutuphane.BLL.Services;
+using Kutuphane.DAL.Contexes;
+
+namespace Kutuphane.UI
 {
-    public partial class frmDashboard : Form
+    public partial class frmMain : Form
     {
-        public frmDashboard()
+        public frmMain()
         {
             InitializeComponent();
+            ChangeDbContext(DbContextType.Supervisor);
         }
+
+        // DbContext değiştirme metodu
+        private void ChangeDbContext(DbContextType contextType)
+        {
+            DbContextSelector.CurrentContext = contextType;
+            MessageBox.Show($"Veritabanı bağlantısı {contextType} olarak değiştirildi.", "Bilgi");
+        }
+
+
         public string GirisYapanKullanici { get; set; }
         public int GirisYapanPersonelID { get; set; }
-        private void frmDashboard_Load(object sender, EventArgs e)
-        {
-            lblKullaniciAdi.Text = "Hoşgeldiniz, " + GirisYapanKullanici;
-        }
+
         private void kitapİşlemleriToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmKitapIslemleri kitapIslemleriForm = new frmKitapIslemleri();
@@ -20,7 +30,7 @@
 
         private void çıkışToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void personelİşlemleriToolStripMenuItem_Click(object sender, EventArgs e)
@@ -45,6 +55,13 @@
         {
             frmLogin loginForm = new frmLogin();
             loginForm.Show();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Form child = new frmKitapIslemleri();
+            child.MdiParent = this;
+            child.Show();
         }
     }
 }

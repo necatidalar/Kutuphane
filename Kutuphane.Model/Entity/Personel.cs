@@ -11,7 +11,7 @@ namespace Kutuphane.Model.Entity{
         public string Sifre { get; set; }
         public bool AktifMi { get; set; } = true;
         public ICollection<Odunc> TeslimEdilenler { get; set; }
-        public ICollection<Odunc> TerslimAlinanlar { get; set; }
+        public ICollection<Odunc> TeslimAlinanlar { get; set; }
         public Cinsiyet Cinsiyet { get; set; } 
     }
 }

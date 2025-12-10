@@ -1,11 +1,16 @@
 ﻿using Kutuphane.Model.Entity;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Kutuphane.DAL
+namespace Kutuphane.DAL.Contexes
 {
-    public class KutuphaneDbContext : DbContext
+    public class SupervisorDbContext : DbContext
     {
-        public KutuphaneDbContext()
+        public SupervisorDbContext()
         {
         }
 
@@ -14,9 +19,7 @@ namespace Kutuphane.DAL
         {
             if (!optionsBuilder.IsConfigured)
             {
-                //optionsBuilder.UseSqlServer("Server=localhost;Database=KutuphaneOtomasyonu;Trusted_Connection=True;TrustServerCertificate=True;");
-                optionsBuilder.UseSqlServer("Server=CLK-STAJERPC\\STAJYERSQL;Database=KutuphaneOtomasyonu;User Id=sa;Password=Yesilyurt.55; TrustServerCertificate=True;");
-                //optionsBuilder.UseSqlServer("Server=YDC-TUNAAKSU-LE\\YDCLENOVO;Database=StajyerKutuphane;User Id=stajyer;Password=Yesilyurt.55; TrustServerCertificate=True;");
+                optionsBuilder.UseSqlServer("Server=YDC-TUNAAKSU-LE\\YDCLENOVO;Database=StajyerKutuphane;User Id=stajyer;Password=Yesilyurt.55; TrustServerCertificate=True;");
 
             }
         }
@@ -24,7 +27,7 @@ namespace Kutuphane.DAL
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Fluent API Configuration'ları otomatik yükle
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(KutuphaneDbContext).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(SupervisorDbContext).Assembly);
 
             base.OnModelCreating(modelBuilder);
         }
@@ -40,6 +43,5 @@ namespace Kutuphane.DAL
         public DbSet<YayineviKitap> YayineviKitaplari { get; set; }
         public DbSet<Yazar> Yazarlar { get; set; }
         public DbSet<YazarKitap> YazarKitaplari { get; set; }
-
     }
 }

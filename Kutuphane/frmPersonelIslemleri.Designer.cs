@@ -329,7 +329,7 @@
             // 
             // personelBindingSource
             // 
-            personelBindingSource.DataSource = typeof(Model.Entity.Personel);
+            personelBindingSource.DataSource = typeof(Model.DTO.PersonelBilgileriDto);
             // 
             // btnAra
             // 

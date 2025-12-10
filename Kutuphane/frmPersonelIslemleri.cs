@@ -4,7 +4,6 @@ using Kutuphane.DAL.Concrete;
 using Kutuphane.Model.DTO;
 using Kutuphane.Model.Entity;
 using System.ComponentModel;
-using System.Windows.Forms;
 namespace Kutuphane.UI
 {
     public partial class frmPersonelIslemleri : Form
@@ -22,13 +21,13 @@ namespace Kutuphane.UI
             PasifUyeKontrol();
         }
 
-        BindingList<Personel> bilPersonel = new BindingList<Personel>();
+        BindingList<PersonelBilgileriDto> bilPersonel = new BindingList<PersonelBilgileriDto>();
         IPersonelService personelService = new PersonelManager(new PersonelDal());
         bool silinenModu = false;
 
         private void Listele()
         {
-            var uyeResult = personelService.PersonelListeDetayliGetirServis(x =>
+            var uyeResult = personelService.PersonelBilgiGetirServis(x =>
                 x.AktifMi == true &&
                 (x.Ad.Contains(textBox_Ara.Text) ||
                  x.Soyad.Contains(textBox_Ara.Text) ||
@@ -163,7 +162,7 @@ namespace Kutuphane.UI
         {
             if (!silinenModu)
             {
-                var sonuc = personelService.PersonelListeDetayliGetirServis(x => x.AktifMi == false);
+                var sonuc = personelService.PersonelBilgiGetirServis(x => x.AktifMi == false);
 
                 bilPersonel.Clear();
                 foreach (var item in sonuc.Data)

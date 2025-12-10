@@ -6,7 +6,7 @@ namespace Kutuphane.Model.DTO
 {
     public class PersonelOduncBilgileriDto : IDto
     {
-        public int PersonelID { get; set; }
+        public int PersonelId { get; set; }
         public string Ad { get; set; }
         public string Soyad { get; set; }
         public int OduncSayisi { get; set; }

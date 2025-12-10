@@ -7,6 +7,5 @@ namespace Kutuphane.DAL.Abstract
 {
     public interface IKategoriDal : IDalVeriCekme<Kategori>, IDalVeriOlusturma<Kategori>, IDalVeriGunceleme<Kategori>
     {
-        IDataResult<List<Kategori>> KategoriListeDetayliGetir(Expression<Func<Kategori, bool>>? predicate = null);
     }
 }
