@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Kutuphane.DAL.Migrations
 {
     [DbContext(typeof(KutuphaneDbContext))]
-    [Migration("20251210054223_gs")]
-    partial class gs
+    [Migration("20251211181759_gg")]
+    partial class gg
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -766,13 +766,23 @@ namespace Kutuphane.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("YazarId"));
 
-                    b.Property<string>("AdSoyad")
+                    b.Property<string>("Ad")
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
+                    b.Property<bool>("AktifMi")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
                     b.Property<DateTime?>("DogumTarihi")
                         .HasColumnType("datetime");
+
+                    b.Property<string>("Soyad")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.HasKey("YazarId");
 
@@ -865,7 +875,7 @@ namespace Kutuphane.DAL.Migrations
                         .IsRequired();
 
                     b.HasOne("Kutuphane.Model.Entity.Personel", "TeslimAlanPersonel")
-                        .WithMany("TerslimAlinanlar")
+                        .WithMany("TeslimAlinanlar")
                         .HasForeignKey("TeslimAlanPersonelId")
                         .OnDelete(DeleteBehavior.NoAction);
 
@@ -973,7 +983,7 @@ namespace Kutuphane.DAL.Migrations
 
             modelBuilder.Entity("Kutuphane.Model.Entity.Personel", b =>
                 {
-                    b.Navigation("TerslimAlinanlar");
+                    b.Navigation("TeslimAlinanlar");
 
                     b.Navigation("TeslimEdilenler");
                 });

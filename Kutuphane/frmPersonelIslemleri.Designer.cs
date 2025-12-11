@@ -56,16 +56,13 @@
             cinsiyetIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             kullaniciAdiDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             sifreDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            teslimEdilenlerDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            terslimAlinanlarDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            cinsiyetDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            personelBindingSource = new BindingSource(components);
+            personelBilgileriDtoBindingSource = new BindingSource(components);
             btnAra = new Button();
             label5 = new Label();
             textBox_Ara = new TextBox();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGrid_Personel).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)personelBindingSource).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)personelBilgileriDtoBindingSource).BeginInit();
             SuspendLayout();
             // 
             // groupBox1
@@ -93,7 +90,7 @@
             groupBox1.Size = new Size(328, 485);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
-            groupBox1.Text = "groupBox1";
+            groupBox1.Text = "Personel İşlemleri";
             // 
             // comboBox_Cinsiyet
             // 
@@ -171,6 +168,7 @@
             textBox_Sifre.Name = "textBox_Sifre";
             textBox_Sifre.Size = new Size(198, 23);
             textBox_Sifre.TabIndex = 1;
+            textBox_Sifre.UseSystemPasswordChar = true;
             // 
             // label4
             // 
@@ -260,13 +258,14 @@
             dataGrid_Personel.AutoGenerateColumns = false;
             dataGrid_Personel.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGrid_Personel.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGrid_Personel.Columns.AddRange(new DataGridViewColumn[] { personelIdDataGridViewTextBoxColumn, adDataGridViewTextBoxColumn, soyadDataGridViewTextBoxColumn, cinsiyetIdDataGridViewTextBoxColumn, kullaniciAdiDataGridViewTextBoxColumn, sifreDataGridViewTextBoxColumn, teslimEdilenlerDataGridViewTextBoxColumn, terslimAlinanlarDataGridViewTextBoxColumn, cinsiyetDataGridViewTextBoxColumn });
-            dataGrid_Personel.DataSource = personelBindingSource;
+            dataGrid_Personel.Columns.AddRange(new DataGridViewColumn[] { personelIdDataGridViewTextBoxColumn, adDataGridViewTextBoxColumn, soyadDataGridViewTextBoxColumn, cinsiyetIdDataGridViewTextBoxColumn, kullaniciAdiDataGridViewTextBoxColumn, sifreDataGridViewTextBoxColumn });
+            dataGrid_Personel.DataSource = personelBilgileriDtoBindingSource;
             dataGrid_Personel.Location = new Point(346, 42);
             dataGrid_Personel.Name = "dataGrid_Personel";
             dataGrid_Personel.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGrid_Personel.Size = new Size(711, 558);
             dataGrid_Personel.TabIndex = 1;
+            dataGrid_Personel.CellFormatting += dataGrid_Personel_CellFormatting;
             dataGrid_Personel.SelectionChanged += dataGrid_Personel_SelectionChanged;
             // 
             // personelIdDataGridViewTextBoxColumn
@@ -307,29 +306,9 @@
             sifreDataGridViewTextBoxColumn.HeaderText = "Sifre";
             sifreDataGridViewTextBoxColumn.Name = "sifreDataGridViewTextBoxColumn";
             // 
-            // teslimEdilenlerDataGridViewTextBoxColumn
+            // personelBilgileriDtoBindingSource
             // 
-            teslimEdilenlerDataGridViewTextBoxColumn.DataPropertyName = "TeslimEdilenler";
-            teslimEdilenlerDataGridViewTextBoxColumn.HeaderText = "TeslimEdilenler";
-            teslimEdilenlerDataGridViewTextBoxColumn.Name = "teslimEdilenlerDataGridViewTextBoxColumn";
-            teslimEdilenlerDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // terslimAlinanlarDataGridViewTextBoxColumn
-            // 
-            terslimAlinanlarDataGridViewTextBoxColumn.DataPropertyName = "TerslimAlinanlar";
-            terslimAlinanlarDataGridViewTextBoxColumn.HeaderText = "TerslimAlinanlar";
-            terslimAlinanlarDataGridViewTextBoxColumn.Name = "terslimAlinanlarDataGridViewTextBoxColumn";
-            terslimAlinanlarDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // cinsiyetDataGridViewTextBoxColumn
-            // 
-            cinsiyetDataGridViewTextBoxColumn.DataPropertyName = "Cinsiyet";
-            cinsiyetDataGridViewTextBoxColumn.HeaderText = "Cinsiyet";
-            cinsiyetDataGridViewTextBoxColumn.Name = "cinsiyetDataGridViewTextBoxColumn";
-            // 
-            // personelBindingSource
-            // 
-            personelBindingSource.DataSource = typeof(Model.DTO.PersonelBilgileriDto);
+            personelBilgileriDtoBindingSource.DataSource = typeof(Model.DTO.PersonelBilgileriDto);
             // 
             // btnAra
             // 
@@ -379,7 +358,7 @@
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGrid_Personel).EndInit();
-            ((System.ComponentModel.ISupportInitialize)personelBindingSource).EndInit();
+            ((System.ComponentModel.ISupportInitialize)personelBilgileriDtoBindingSource).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -402,7 +381,6 @@
         private Button btnSil;
         private Button btnDuzenle;
         private Button btnKaydet;
-        private BindingSource personelBindingSource;
         private Button btnAra;
         private Label label5;
         private TextBox textBox_Ara;
@@ -419,5 +397,6 @@
         private Label label6;
         private TextBox textBox_Soyad;
         private Label label7;
+        private BindingSource personelBilgileriDtoBindingSource;
     }
 }

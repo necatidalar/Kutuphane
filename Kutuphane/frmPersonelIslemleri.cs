@@ -19,6 +19,7 @@ namespace Kutuphane.UI
             Listele();
             ComboDoldur();
             PasifUyeKontrol();
+            btnTemizle.PerformClick();
         }
 
         BindingList<PersonelBilgileriDto> bilPersonel = new BindingList<PersonelBilgileriDto>();
@@ -27,120 +28,160 @@ namespace Kutuphane.UI
 
         private void Listele()
         {
-            var uyeResult = personelService.PersonelBilgiGetirServis(x =>
-                x.AktifMi == true &&
-                (x.Ad.Contains(textBox_Ara.Text) ||
-                 x.Soyad.Contains(textBox_Ara.Text) ||
-                 x.KullaniciAdi.Contains(textBox_Ara.Text))
-            );
-
-            if (!uyeResult.IsSuccess)
+            try
             {
-                MessageBox.Show(uyeResult.Message, "Hata");
-                return;
+                var uyeResult = personelService.PersonelBilgiGetirServis(x =>
+                    x.AktifMi == true &&
+                    (x.Ad.Contains(textBox_Ara.Text) ||
+                     x.Soyad.Contains(textBox_Ara.Text) ||
+                     x.KullaniciAdi.Contains(textBox_Ara.Text))
+                );
+
+                if (!uyeResult.IsSuccess)
+                {
+                    MessageBox.Show(uyeResult.Message, "Hata");
+                    return;
+                }
+
+                bilPersonel.Clear();
+                foreach (var item in uyeResult.Data)
+                    bilPersonel.Add(item);
+
+                dataGrid_Personel.ClearSelection();
             }
-
-            bilPersonel.Clear();
-
-            foreach (var item in uyeResult.Data)
-                bilPersonel.Add(item);
-
-            dataGrid_Personel.ClearSelection();
+            catch (Exception ex)
+            {
+                MessageBox.Show("Listeleme sırasında hata oluştu:\n" + ex.Message);
+            }
         }
         private void ComboDoldur()
         {
-            ICinsiyetService cinsiyetService = new CinsiyetManager(new CinsiyetDal());
-            var cinsiyetResult = cinsiyetService.GetListByFilterService();
-
-            if (!cinsiyetResult.IsSuccess)
+            try
             {
-                MessageBox.Show(cinsiyetResult.Message);
-                return;
-            }
+                ICinsiyetService cinsiyetService = new CinsiyetManager(new CinsiyetDal());
+                var cinsiyetResult = cinsiyetService.GetListByFilterService();
 
-            comboBox_Cinsiyet.DataSource = cinsiyetResult.Data;
-            comboBox_Cinsiyet.DisplayMember = "CinsiyetAdi";
-            comboBox_Cinsiyet.ValueMember = "Id";
-            comboBox_Cinsiyet.SelectedIndex = -1;
+                if (!cinsiyetResult.IsSuccess)
+                {
+                    MessageBox.Show(cinsiyetResult.Message);
+                    return;
+                }
+
+                comboBox_Cinsiyet.DataSource = cinsiyetResult.Data;
+                comboBox_Cinsiyet.DisplayMember = "CinsiyetAdi";
+                comboBox_Cinsiyet.ValueMember = "Id";
+                comboBox_Cinsiyet.SelectedIndex = -1;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Cinsiyet listesi yüklenemedi:\n" + ex.Message);
+            }
         }
         private void btnKaydet_Click(object sender, EventArgs e)
         {
-            Personel yeniPersonel = new Personel
+            try
             {
-                Ad = textBox_Ad.Text,
-                Soyad = textBox_Soyad.Text,
-                CinsiyetId = (byte)(comboBox_Cinsiyet.SelectedIndex + 1),
-                KullaniciAdi = textBox_KullaniciAdi.Text,
-                Sifre = textBox_Sifre.Text
-            };
+                if (!BoslukKontrol()) return;
 
-            var uyeResult = personelService.AddService(yeniPersonel);
+                Personel yeniPersonel = new Personel
+                {
+                    Ad = textBox_Ad.Text,
+                    Soyad = textBox_Soyad.Text,
+                    CinsiyetId = (byte)comboBox_Cinsiyet.SelectedValue,
+                    KullaniciAdi = textBox_KullaniciAdi.Text,
+                    Sifre = textBox_Sifre.Text
+                };
 
-            if (uyeResult.IsSuccess)
-            {
-                MessageBox.Show("Personel başarıyla kaydedildi.", "Başarılı");
-                Listele();
+                var uyeResult = personelService.AddService(yeniPersonel);
+
+                if (uyeResult.IsSuccess)
+                {
+                    MessageBox.Show("Personel başarıyla kaydedildi.", "Başarılı");
+                    Listele();
+                }
+                else
+                    MessageBox.Show(uyeResult.Message, "Hata");
             }
-            else
-                MessageBox.Show(uyeResult.Message, "Hata");
+            catch (Exception ex)
+            {
+                MessageBox.Show("Kayıt sırasında hata oluştu:\n" + ex.Message);
+            }
         }
-
         private void btnDuzenle_Click(object sender, EventArgs e)
         {
-            int.TryParse(textBox_PersonelId.Text, out int idResult);
-
-            Personel yeniPersonel = new Personel
+            try
             {
-                Ad = textBox_Ad.Text,
-                Soyad = textBox_Soyad.Text,
-                CinsiyetId = (byte)(comboBox_Cinsiyet.SelectedIndex + 1),
-                KullaniciAdi = textBox_KullaniciAdi.Text,
-                Sifre = textBox_Sifre.Text
-            };
+                if (!BoslukKontrol()) return;
 
-            var uyeResult = personelService.UpdateService(yeniPersonel);
+                if (!int.TryParse(textBox_PersonelId.Text, out int idResult))
+                {
+                    MessageBox.Show("Geçerli bir personel seçiniz.");
+                    return;
+                }
 
-            if (uyeResult.IsSuccess)
-            {
-                MessageBox.Show("Personel başarıyla güncellendi.", "Başarılı");
-                Listele();
+                Personel yeniPersonel = new Personel
+                {
+                    PersonelId = idResult,
+                    Ad = textBox_Ad.Text,
+                    Soyad = textBox_Soyad.Text,
+                    CinsiyetId = (byte)comboBox_Cinsiyet.SelectedValue,
+                    KullaniciAdi = textBox_KullaniciAdi.Text,
+                    Sifre = textBox_Sifre.Text
+                };
+
+                var uyeResult = personelService.UpdateService(yeniPersonel);
+
+                if (uyeResult.IsSuccess)
+                {
+                    MessageBox.Show("Personel başarıyla güncellendi.", "Başarılı");
+                    Listele();
+                }
+                else
+                    MessageBox.Show(uyeResult.Message, "Hata");
             }
-            else
-                MessageBox.Show(uyeResult.Message, "Hata");
+            catch (Exception ex)
+            {
+                MessageBox.Show("Güncelleme sırasında hata oluştu:\n" + ex.Message);
+            }
         }
-
         private void btnSil_Click(object sender, EventArgs e)
         {
-            if (!int.TryParse(textBox_PersonelId.Text, out int idResult))
+            try
             {
-                MessageBox.Show("Lütfen geçerli bir üye seçiniz.", "Hata");
-                return;
+                if (!int.TryParse(textBox_PersonelId.Text, out int idResult))
+                {
+                    MessageBox.Show("Lütfen geçerli bir üye seçiniz.", "Hata");
+                    return;
+                }
+
+                var uyeFromDbResult = personelService.GetByFilterService(x => x.PersonelId == idResult);
+
+                if (!uyeFromDbResult.IsSuccess || uyeFromDbResult.Data == null)
+                {
+                    MessageBox.Show("Üye bulunamadı.", "Hata");
+                    return;
+                }
+
+                var uyeFromDb = uyeFromDbResult.Data;
+                uyeFromDb.AktifMi = false;
+
+                var uyeResult = personelService.UpdateService(uyeFromDb);
+
+                if (uyeResult.IsSuccess)
+                {
+                    MessageBox.Show("Üye başarıyla silindi.", "Başarılı");
+                    Listele();
+                    PasifUyeKontrol();
+
+                }
+                else
+                    MessageBox.Show(uyeResult.Message, "Hata");
             }
-
-            var uyeFromDbResult = personelService.GetByFilterService(x => x.PersonelId == idResult);
-
-            if (!uyeFromDbResult.IsSuccess || uyeFromDbResult.Data == null)
+            catch (Exception ex)
             {
-                MessageBox.Show("Üye bulunamadı.", "Hata");
-                return;
+                MessageBox.Show("Silme sırasında hata oluştu:\n" + ex.Message);
             }
-
-            var uyeFromDb = uyeFromDbResult.Data;
-            uyeFromDb.AktifMi = false;
-
-            var uyeResult = personelService.UpdateService(uyeFromDb);
-
-            if (uyeResult.IsSuccess)
-            {
-                MessageBox.Show("Üye başarıyla silindi (pasif edildi).", "Başarılı");
-                Listele();
-                PasifUyeKontrol();
-
-            }
-            else
-                MessageBox.Show(uyeResult.Message, "Hata");
         }
-
         private void btnTemizle_Click(object sender, EventArgs e)
         {
             textBox_Ad.Clear();
@@ -149,6 +190,7 @@ namespace Kutuphane.UI
             textBox_KullaniciAdi.Clear();
             textBox_Sifre.Clear();
             textBox_PersonelId.Clear();
+            dataGrid_Personel.ClearSelection();
         }
         private void PasifUyeKontrol()
         {
@@ -186,65 +228,114 @@ namespace Kutuphane.UI
                 btnSilinenleriGoster.Text = "Silinen Üyeleri Göster";
             }
         }
-
         private void btnGeriYukle_Click(object sender, EventArgs e)
         {
-            if (!int.TryParse(textBox_PersonelId.Text, out int id))
+            try
             {
-                MessageBox.Show("Lütfen bir üye seçiniz.");
-                return;
+                if (!int.TryParse(textBox_PersonelId.Text, out int id))
+                {
+                    MessageBox.Show("Lütfen bir üye seçiniz.");
+                    return;
+                }
+
+                var uyeResult = personelService.GetByFilterService(x => x.PersonelId == id);
+
+                if (!uyeResult.IsSuccess || uyeResult.Data == null)
+                {
+                    MessageBox.Show("Üye bulunamadı.");
+                    return;
+                }
+
+                var uye = uyeResult.Data;
+                uye.AktifMi = true;
+
+                var updateResult = personelService.UpdateService(uye);
+
+                if (!updateResult.IsSuccess)
+                {
+                    MessageBox.Show(updateResult.Message);
+                    return;
+                }
+
+                MessageBox.Show("Üye başarıyla geri yüklendi.");
+                Listele();
+                silinenModu = false;
+                btnSilinenleriGoster.Text = "Silinen Üyeleri Göster";
+                btnGeriYukle.Visible = false;
+                btnKaydet.Enabled = true;
+                btnDuzenle.Enabled = true;
+                btnSil.Enabled = true;
+                PasifUyeKontrol();
             }
-
-            var uyeResult = personelService.GetByFilterService(x => x.PersonelId == id);
-
-            if (!uyeResult.IsSuccess || uyeResult.Data == null)
+            catch (Exception ex)
             {
-                MessageBox.Show("Üye bulunamadı.");
-                return;
+                MessageBox.Show("Üye geri yüklenirken hata oluştu:\n" + ex.Message);
             }
-
-            var uye = uyeResult.Data;
-            uye.AktifMi = true;
-
-            var updateResult = personelService.UpdateService(uye);
-
-            if (!updateResult.IsSuccess)
-            {
-                MessageBox.Show(updateResult.Message);
-                return;
-            }
-
-            MessageBox.Show("Üye başarıyla geri yüklendi.");
-            Listele();
-            silinenModu = false;
-            btnSilinenleriGoster.Text = "Silinen Üyeleri Göster";
-            btnGeriYukle.Visible = false;
-            btnKaydet.Enabled = true;
-            btnDuzenle.Enabled = true;
-            btnSil.Enabled = true;
-            PasifUyeKontrol();
         }
-
         private void btnAra_Click(object sender, EventArgs e)
         {
             Listele();
         }
-
         private void dataGrid_Personel_SelectionChanged(object sender, EventArgs e)
         {
             if (dataGrid_Personel.CurrentRow != null && !dataGrid_Personel.CurrentRow.IsNewRow)
             {
-                Personel row = (Personel)dataGrid_Personel.CurrentRow.DataBoundItem;
+                PersonelBilgileriDto row = (PersonelBilgileriDto)dataGrid_Personel.CurrentRow.DataBoundItem;
 
                 textBox_PersonelId.Text = row.PersonelId.ToString();
                 textBox_Ad.Text = row.Ad;
                 textBox_Soyad.Text = row.Soyad;
                 comboBox_Cinsiyet.SelectedValue = row.CinsiyetId;
                 textBox_KullaniciAdi.Text = row.KullaniciAdi;
-                textBox_Sifre.Text = row.Sifre;
                 return;
             }
             btnTemizle.PerformClick();
+        }
+        private void dataGrid_Personel_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (dataGrid_Personel.Columns[e.ColumnIndex].Name == "sifreDataGridViewTextBoxColumn")
+            {
+                if (e.Value != null)
+                {
+                    string sifre = e.Value.ToString();
+                    e.Value = new string('●', sifre.Length);
+                    e.FormattingApplied = true;
+                }
+            }
+        }
+        private bool BoslukKontrol()
+        {
+            if (string.IsNullOrWhiteSpace(textBox_Ad.Text))
+            {
+                MessageBox.Show("Ad boş bırakılamaz.");
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(textBox_Soyad.Text))
+            {
+                MessageBox.Show("Soyad boş bırakılamaz.");
+                return false;
+            }
+
+            if (comboBox_Cinsiyet.SelectedIndex == -1)
+            {
+                MessageBox.Show("Lütfen cinsiyet seçiniz.");
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(textBox_KullaniciAdi.Text))
+            {
+                MessageBox.Show("Kullanıcı adı boş bırakılamaz.");
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(textBox_Sifre.Text))
+            {
+                MessageBox.Show("Şifre boş bırakılamaz.");
+                return false;
+            }
+
+            return true;
         }
     }
 }

@@ -8,15 +8,15 @@ namespace Kutuphane.UI
         public frmMain()
         {
             InitializeComponent();
-            ChangeDbContext(DbContextType.Supervisor);
+            //ChangeDbContext(DbContextType.Supervisor);
         }
 
-        // DbContext değiştirme metodu
-        private void ChangeDbContext(DbContextType contextType)
-        {
-            DbContextSelector.CurrentContext = contextType;
-            MessageBox.Show($"Veritabanı bağlantısı {contextType} olarak değiştirildi.", "Bilgi");
-        }
+        //// DbContext değiştirme metodu
+        //private void ChangeDbContext(DbContextType contextType)
+        //{
+        //    DbContextSelector.CurrentContext = contextType;
+        //    MessageBox.Show($"Veritabanı bağlantısı {contextType} olarak değiştirildi.", "Bilgi");
+        //}
 
 
         public string GirisYapanKullanici { get; set; }
