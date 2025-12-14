@@ -39,7 +39,7 @@ namespace Kutuphane.UI
 
             foreach (var item in YayineviResult.Data)
                 bilYayinevi.Add(item);
-            
+
             dataGrid_Yayinevi.ClearSelection();
             KutulariTemizle();
             PasifUyeKontrol();
@@ -152,7 +152,7 @@ namespace Kutuphane.UI
                 btnDuzenle.Enabled = false;
                 btnSil.Enabled = false;
                 silinenModu = true;
-                btnSilinenleriGoster.Text = "Aktif Yayınevilerini Göster";
+                btnSilinenleriGoster.Text = "Yayınevilerini Göster";
             }
             else
             {
@@ -162,7 +162,7 @@ namespace Kutuphane.UI
                 btnDuzenle.Enabled = true;
                 btnSil.Enabled = true;
                 silinenModu = false;
-                btnSilinenleriGoster.Text = "Silinenleri Göster";
+                btnSilinenleriGoster.Text = "🗑️ Silinenleri Göster";
             }
             dataGrid_Yayinevi.ClearSelection();
             KutulariTemizle();
@@ -197,7 +197,7 @@ namespace Kutuphane.UI
             MessageBox.Show("Yayinevi başarıyla geri yüklendi.");
             Listele();
             silinenModu = false;
-            btnSilinenleriGoster.Text = "Silinenleri Göster";
+            btnSilinenleriGoster.Text = "🗑️ Silinenleri Göster";
             btnGeriYukle.Visible = false;
             btnKaydet.Enabled = true;
             btnDuzenle.Enabled = true;

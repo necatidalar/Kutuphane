@@ -6,7 +6,7 @@ using Kutuphane.Model.Entity;
 
 namespace Kutuphane.DAL.Concrete
 {
-    public class DilDal : EfRepositoryBase<Dil, KutuphaneDbContext> , IDilDal
+    public class DilDal : EfRepositoryBase<Dil, KutuphaneDbContext>, IDilDal
     {
 
     }

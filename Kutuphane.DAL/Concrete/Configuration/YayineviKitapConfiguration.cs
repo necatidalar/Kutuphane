@@ -11,10 +11,10 @@ namespace Kutuphane.DAL.Concrete.Configuration
     {
         public void Configure(EntityTypeBuilder<YayineviKitap> builder)
         {
-            builder.Property(yk=> yk.YayineviId).IsRequired();
-            builder.Property(yk=> yk.KitapId).IsRequired();
-            builder.Property(yk=> yk.DonemBaslangici).HasColumnType("datetime").IsRequired();
-            builder.Property(yk=> yk.DonemBitisi).HasColumnType("datetime").IsRequired(false);
+            builder.Property(yk => yk.YayineviId).IsRequired();
+            builder.Property(yk => yk.KitapId).IsRequired();
+            builder.Property(yk => yk.DonemBaslangici).HasColumnType("datetime").IsRequired();
+            builder.Property(yk => yk.DonemBitisi).HasColumnType("datetime").IsRequired(false);
             builder.HasOne(yk => yk.Yayinevi)
                    .WithMany(y => y.YayineviKitaplari)
                    .HasForeignKey(yk => yk.YayineviId)

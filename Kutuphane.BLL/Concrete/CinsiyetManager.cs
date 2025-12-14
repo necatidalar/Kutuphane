@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 
 namespace Kutuphane.BLL.Concrete
 {
-    public class CinsiyetManager:ICinsiyetService
+    public class CinsiyetManager : ICinsiyetService
     {
         readonly ICinsiyetDal _cinsiyetDal;
 

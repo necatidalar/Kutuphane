@@ -5,7 +5,7 @@ using Kutuphane.Model.Entity;
 
 namespace Kutuphane.DAL.Concrete
 {
-    public class YayineviDal: EfRepositoryBase<Yayinevi, KutuphaneDbContext>, IYayineviDal
+    public class YayineviDal : EfRepositoryBase<Yayinevi, KutuphaneDbContext>, IYayineviDal
     {
     }
 }

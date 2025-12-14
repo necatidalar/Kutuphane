@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 
 namespace Kutuphane.BLL.Concrete
 {
-    public class DilManager: IDilService
+    public class DilManager : IDilService
     {
         readonly IDilDal _dilDal;
 

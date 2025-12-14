@@ -7,6 +7,6 @@ namespace Kutuphane.Model.Entity
         public short DilId { get; set; }
         public string DilAdi { get; set; }
         public string DilKodu { get; set; }
-        public bool AktifMi { get; set; } =true;
+        public bool AktifMi { get; set; } = true;
     }
 }

@@ -1,0 +1,516 @@
+USE [master]
+GO
+/****** Object:  Database [KutuphaneOtomasyonu]    Script Date: 14.12.2025 21:15:13 ******/
+CREATE DATABASE [KutuphaneOtomasyonu]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'KutuphaneOtomasyonu', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\DATA\KutuphaneOtomasyonu.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+ LOG ON 
+( NAME = N'KutuphaneOtomasyonu_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\DATA\KutuphaneOtomasyonu_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+ WITH CATALOG_COLLATION = DATABASE_DEFAULT, LEDGER = OFF
+GO
+ALTER DATABASE [KutuphaneOtomasyonu] SET COMPATIBILITY_LEVEL = 160
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [KutuphaneOtomasyonu].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [KutuphaneOtomasyonu] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [KutuphaneOtomasyonu] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [KutuphaneOtomasyonu] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [KutuphaneOtomasyonu] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [KutuphaneOtomasyonu] SET ARITHABORT OFF 
+GO
+ALTER DATABASE [KutuphaneOtomasyonu] SET AUTO_CLOSE OFF 
+GO
+ALTER DATABASE [KutuphaneOtomasyonu] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [KutuphaneOtomasyonu] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [KutuphaneOtomasyonu] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [KutuphaneOtomasyonu] SET CURSOR_DEFAULT  GLOBAL 
+GO
+ALTER DATABASE [KutuphaneOtomasyonu] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [KutuphaneOtomasyonu] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [KutuphaneOtomasyonu] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [KutuphaneOtomasyonu] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [KutuphaneOtomasyonu] SET  ENABLE_BROKER 
+GO
+ALTER DATABASE [KutuphaneOtomasyonu] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [KutuphaneOtomasyonu] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+ALTER DATABASE [KutuphaneOtomasyonu] SET TRUSTWORTHY OFF 
+GO
+ALTER DATABASE [KutuphaneOtomasyonu] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+ALTER DATABASE [KutuphaneOtomasyonu] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [KutuphaneOtomasyonu] SET READ_COMMITTED_SNAPSHOT ON 
+GO
+ALTER DATABASE [KutuphaneOtomasyonu] SET HONOR_BROKER_PRIORITY OFF 
+GO
+ALTER DATABASE [KutuphaneOtomasyonu] SET RECOVERY FULL 
+GO
+ALTER DATABASE [KutuphaneOtomasyonu] SET  MULTI_USER 
+GO
+ALTER DATABASE [KutuphaneOtomasyonu] SET PAGE_VERIFY CHECKSUM  
+GO
+ALTER DATABASE [KutuphaneOtomasyonu] SET DB_CHAINING OFF 
+GO
+ALTER DATABASE [KutuphaneOtomasyonu] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+ALTER DATABASE [KutuphaneOtomasyonu] SET TARGET_RECOVERY_TIME = 60 SECONDS 
+GO
+ALTER DATABASE [KutuphaneOtomasyonu] SET DELAYED_DURABILITY = DISABLED 
+GO
+ALTER DATABASE [KutuphaneOtomasyonu] SET ACCELERATED_DATABASE_RECOVERY = OFF  
+GO
+EXEC sys.sp_db_vardecimal_storage_format N'KutuphaneOtomasyonu', N'ON'
+GO
+ALTER DATABASE [KutuphaneOtomasyonu] SET QUERY_STORE = ON
+GO
+ALTER DATABASE [KutuphaneOtomasyonu] SET QUERY_STORE (OPERATION_MODE = READ_WRITE, CLEANUP_POLICY = (STALE_QUERY_THRESHOLD_DAYS = 30), DATA_FLUSH_INTERVAL_SECONDS = 900, INTERVAL_LENGTH_MINUTES = 60, MAX_STORAGE_SIZE_MB = 1000, QUERY_CAPTURE_MODE = AUTO, SIZE_BASED_CLEANUP_MODE = AUTO, MAX_PLANS_PER_QUERY = 200, WAIT_STATS_CAPTURE_MODE = ON)
+GO
+USE [KutuphaneOtomasyonu]
+GO
+/****** Object:  Table [dbo].[__EFMigrationsHistory]    Script Date: 14.12.2025 21:15:13 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[__EFMigrationsHistory](
+	[MigrationId] [nvarchar](150) NOT NULL,
+	[ProductVersion] [nvarchar](32) NOT NULL,
+ CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY CLUSTERED 
+(
+	[MigrationId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Cinsiyetler]    Script Date: 14.12.2025 21:15:13 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Cinsiyetler](
+	[Id] [tinyint] NOT NULL,
+	[CinsiyetAdi] [varchar](15) NOT NULL,
+ CONSTRAINT [PK_Cinsiyetler] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Diller]    Script Date: 14.12.2025 21:15:13 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Diller](
+	[DilId] [smallint] IDENTITY(1,1) NOT NULL,
+	[DilAdi] [nvarchar](25) NOT NULL,
+	[DilKodu] [varchar](5) NOT NULL,
+	[AktifMi] [bit] NOT NULL,
+ CONSTRAINT [PK_Diller] PRIMARY KEY CLUSTERED 
+(
+	[DilId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Kategoriler]    Script Date: 14.12.2025 21:15:13 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Kategoriler](
+	[KategoriId] [int] IDENTITY(1,1) NOT NULL,
+	[KategoriAdi] [nvarchar](150) NOT NULL,
+	[AktifMi] [bit] NOT NULL,
+ CONSTRAINT [PK_Kategoriler] PRIMARY KEY CLUSTERED 
+(
+	[KategoriId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[KitapKategori]    Script Date: 14.12.2025 21:15:13 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[KitapKategori](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[KitapId] [int] NOT NULL,
+	[KategoriId] [int] NOT NULL,
+ CONSTRAINT [PK_KitapKategori] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Kitaplar]    Script Date: 14.12.2025 21:15:13 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Kitaplar](
+	[KitapId] [int] IDENTITY(1,1) NOT NULL,
+	[KitapAdi] [nvarchar](200) NOT NULL,
+	[ISBN] [nvarchar](25) NULL,
+	[YazarId] [int] NOT NULL,
+	[YayineviId] [int] NOT NULL,
+	[KategoriId] [int] NOT NULL,
+	[BasimYili] [int] NULL,
+	[SayfaSayisi] [int] NULL,
+	[DilId] [smallint] NOT NULL,
+	[Stok] [int] NOT NULL,
+	[Aktif] [bit] NOT NULL,
+ CONSTRAINT [PK_Kitaplar] PRIMARY KEY CLUSTERED 
+(
+	[KitapId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Oduncler]    Script Date: 14.12.2025 21:15:13 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Oduncler](
+	[OduncId] [int] IDENTITY(1,1) NOT NULL,
+	[UyeId] [int] NOT NULL,
+	[KitapId] [int] NOT NULL,
+	[AlisTarihi] [datetime] NOT NULL,
+	[TeslimTarihi] [datetime] NULL,
+	[TeslimEdildi] [bit] NOT NULL,
+	[TeslimEdenPersonelId] [int] NOT NULL,
+	[TeslimAlanPersonelId] [int] NULL,
+ CONSTRAINT [PK_Oduncler] PRIMARY KEY CLUSTERED 
+(
+	[OduncId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Personeller]    Script Date: 14.12.2025 21:15:13 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Personeller](
+	[PersonelId] [int] IDENTITY(1,1) NOT NULL,
+	[Ad] [varchar](50) NOT NULL,
+	[Soyad] [varchar](50) NOT NULL,
+	[CinsiyetId] [tinyint] NOT NULL,
+	[KullaniciAdi] [nvarchar](20) NOT NULL,
+	[Sifre] [nvarchar](250) NOT NULL,
+	[AktifMi] [bit] NOT NULL,
+ CONSTRAINT [PK_Personeller] PRIMARY KEY CLUSTERED 
+(
+	[PersonelId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Uyeler]    Script Date: 14.12.2025 21:15:13 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Uyeler](
+	[UyeId] [int] IDENTITY(1,1) NOT NULL,
+	[TcPass] [varchar](20) NOT NULL,
+	[Ad] [nvarchar](50) NOT NULL,
+	[Soyad] [nvarchar](50) NOT NULL,
+	[CinsiyetId] [tinyint] NOT NULL,
+	[DogumTarihi] [datetime] NOT NULL,
+	[Telefon] [varchar](15) NOT NULL,
+	[Eposta] [nvarchar](100) NOT NULL,
+	[Adres] [nvarchar](200) NOT NULL,
+	[AdresDetay] [nvarchar](500) NOT NULL,
+	[AktifMi] [bit] NOT NULL,
+ CONSTRAINT [PK_Uyeler] PRIMARY KEY CLUSTERED 
+(
+	[UyeId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[YayineviKitaplari]    Script Date: 14.12.2025 21:15:13 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[YayineviKitaplari](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[YayineviId] [int] NOT NULL,
+	[KitapId] [int] NOT NULL,
+	[DonemBaslangici] [datetime] NOT NULL,
+	[DonemBitisi] [datetime] NULL,
+ CONSTRAINT [PK_YayineviKitaplari] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Yayinevleri]    Script Date: 14.12.2025 21:15:13 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Yayinevleri](
+	[YayineviId] [int] IDENTITY(1,1) NOT NULL,
+	[Ad] [nvarchar](300) NOT NULL,
+	[KurulusYili] [int] NULL,
+	[AktifMi] [bit] NOT NULL,
+ CONSTRAINT [PK_Yayinevleri] PRIMARY KEY CLUSTERED 
+(
+	[YayineviId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[YazarKitaplari]    Script Date: 14.12.2025 21:15:13 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[YazarKitaplari](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[YazarId] [int] NOT NULL,
+	[KitapId] [int] NOT NULL,
+ CONSTRAINT [PK_YazarKitaplari] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Yazarlar]    Script Date: 14.12.2025 21:15:13 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Yazarlar](
+	[YazarId] [int] IDENTITY(1,1) NOT NULL,
+	[Ad] [nvarchar](200) NOT NULL,
+	[Soyad] [nvarchar](200) NOT NULL,
+	[DogumTarihi] [datetime] NULL,
+	[OlumTarihi] [datetime] NULL,
+	[AktifMi] [bit] NOT NULL,
+ CONSTRAINT [PK_Yazarlar] PRIMARY KEY CLUSTERED 
+(
+	[YazarId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_KitapKategori_KategoriId]    Script Date: 14.12.2025 21:15:13 ******/
+CREATE NONCLUSTERED INDEX [IX_KitapKategori_KategoriId] ON [dbo].[KitapKategori]
+(
+	[KategoriId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_KitapKategori_KitapId]    Script Date: 14.12.2025 21:15:13 ******/
+CREATE NONCLUSTERED INDEX [IX_KitapKategori_KitapId] ON [dbo].[KitapKategori]
+(
+	[KitapId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_Kitaplar_DilId]    Script Date: 14.12.2025 21:15:13 ******/
+CREATE NONCLUSTERED INDEX [IX_Kitaplar_DilId] ON [dbo].[Kitaplar]
+(
+	[DilId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_Kitaplar_KategoriId]    Script Date: 14.12.2025 21:15:13 ******/
+CREATE NONCLUSTERED INDEX [IX_Kitaplar_KategoriId] ON [dbo].[Kitaplar]
+(
+	[KategoriId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_Kitaplar_YayineviId]    Script Date: 14.12.2025 21:15:13 ******/
+CREATE NONCLUSTERED INDEX [IX_Kitaplar_YayineviId] ON [dbo].[Kitaplar]
+(
+	[YayineviId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_Kitaplar_YazarId]    Script Date: 14.12.2025 21:15:13 ******/
+CREATE NONCLUSTERED INDEX [IX_Kitaplar_YazarId] ON [dbo].[Kitaplar]
+(
+	[YazarId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_Oduncler_KitapId]    Script Date: 14.12.2025 21:15:13 ******/
+CREATE NONCLUSTERED INDEX [IX_Oduncler_KitapId] ON [dbo].[Oduncler]
+(
+	[KitapId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_Oduncler_TeslimAlanPersonelId]    Script Date: 14.12.2025 21:15:13 ******/
+CREATE NONCLUSTERED INDEX [IX_Oduncler_TeslimAlanPersonelId] ON [dbo].[Oduncler]
+(
+	[TeslimAlanPersonelId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_Oduncler_TeslimEdenPersonelId]    Script Date: 14.12.2025 21:15:13 ******/
+CREATE NONCLUSTERED INDEX [IX_Oduncler_TeslimEdenPersonelId] ON [dbo].[Oduncler]
+(
+	[TeslimEdenPersonelId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_Oduncler_UyeId]    Script Date: 14.12.2025 21:15:13 ******/
+CREATE NONCLUSTERED INDEX [IX_Oduncler_UyeId] ON [dbo].[Oduncler]
+(
+	[UyeId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_Personeller_CinsiyetId]    Script Date: 14.12.2025 21:15:13 ******/
+CREATE NONCLUSTERED INDEX [IX_Personeller_CinsiyetId] ON [dbo].[Personeller]
+(
+	[CinsiyetId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_Uyeler_CinsiyetId]    Script Date: 14.12.2025 21:15:13 ******/
+CREATE NONCLUSTERED INDEX [IX_Uyeler_CinsiyetId] ON [dbo].[Uyeler]
+(
+	[CinsiyetId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_YayineviKitaplari_KitapId]    Script Date: 14.12.2025 21:15:13 ******/
+CREATE NONCLUSTERED INDEX [IX_YayineviKitaplari_KitapId] ON [dbo].[YayineviKitaplari]
+(
+	[KitapId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_YayineviKitaplari_YayineviId]    Script Date: 14.12.2025 21:15:13 ******/
+CREATE NONCLUSTERED INDEX [IX_YayineviKitaplari_YayineviId] ON [dbo].[YayineviKitaplari]
+(
+	[YayineviId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_YazarKitaplari_KitapId]    Script Date: 14.12.2025 21:15:13 ******/
+CREATE NONCLUSTERED INDEX [IX_YazarKitaplari_KitapId] ON [dbo].[YazarKitaplari]
+(
+	[KitapId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_YazarKitaplari_YazarId]    Script Date: 14.12.2025 21:15:13 ******/
+CREATE NONCLUSTERED INDEX [IX_YazarKitaplari_YazarId] ON [dbo].[YazarKitaplari]
+(
+	[YazarId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[Diller] ADD  DEFAULT (CONVERT([bit],(1))) FOR [AktifMi]
+GO
+ALTER TABLE [dbo].[Kategoriler] ADD  DEFAULT (CONVERT([bit],(1))) FOR [AktifMi]
+GO
+ALTER TABLE [dbo].[Kitaplar] ADD  DEFAULT ((0)) FOR [Stok]
+GO
+ALTER TABLE [dbo].[Kitaplar] ADD  DEFAULT (CONVERT([bit],(1))) FOR [Aktif]
+GO
+ALTER TABLE [dbo].[Oduncler] ADD  DEFAULT (getdate()) FOR [AlisTarihi]
+GO
+ALTER TABLE [dbo].[Oduncler] ADD  DEFAULT (CONVERT([bit],(0))) FOR [TeslimEdildi]
+GO
+ALTER TABLE [dbo].[Personeller] ADD  DEFAULT (CONVERT([bit],(1))) FOR [AktifMi]
+GO
+ALTER TABLE [dbo].[Uyeler] ADD  DEFAULT (CONVERT([bit],(1))) FOR [AktifMi]
+GO
+ALTER TABLE [dbo].[Yayinevleri] ADD  DEFAULT (CONVERT([bit],(1))) FOR [AktifMi]
+GO
+ALTER TABLE [dbo].[Yazarlar] ADD  DEFAULT (CONVERT([bit],(1))) FOR [AktifMi]
+GO
+ALTER TABLE [dbo].[KitapKategori]  WITH CHECK ADD  CONSTRAINT [FK_KitapKategori_Kategoriler_KategoriId] FOREIGN KEY([KategoriId])
+REFERENCES [dbo].[Kategoriler] ([KategoriId])
+GO
+ALTER TABLE [dbo].[KitapKategori] CHECK CONSTRAINT [FK_KitapKategori_Kategoriler_KategoriId]
+GO
+ALTER TABLE [dbo].[KitapKategori]  WITH CHECK ADD  CONSTRAINT [FK_KitapKategori_Kitaplar_KitapId] FOREIGN KEY([KitapId])
+REFERENCES [dbo].[Kitaplar] ([KitapId])
+GO
+ALTER TABLE [dbo].[KitapKategori] CHECK CONSTRAINT [FK_KitapKategori_Kitaplar_KitapId]
+GO
+ALTER TABLE [dbo].[Kitaplar]  WITH CHECK ADD  CONSTRAINT [FK_Kitaplar_Diller_DilId] FOREIGN KEY([DilId])
+REFERENCES [dbo].[Diller] ([DilId])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Kitaplar] CHECK CONSTRAINT [FK_Kitaplar_Diller_DilId]
+GO
+ALTER TABLE [dbo].[Kitaplar]  WITH CHECK ADD  CONSTRAINT [FK_Kitaplar_Kategoriler_KategoriId] FOREIGN KEY([KategoriId])
+REFERENCES [dbo].[Kategoriler] ([KategoriId])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Kitaplar] CHECK CONSTRAINT [FK_Kitaplar_Kategoriler_KategoriId]
+GO
+ALTER TABLE [dbo].[Kitaplar]  WITH CHECK ADD  CONSTRAINT [FK_Kitaplar_Yayinevleri_YayineviId] FOREIGN KEY([YayineviId])
+REFERENCES [dbo].[Yayinevleri] ([YayineviId])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Kitaplar] CHECK CONSTRAINT [FK_Kitaplar_Yayinevleri_YayineviId]
+GO
+ALTER TABLE [dbo].[Kitaplar]  WITH CHECK ADD  CONSTRAINT [FK_Kitaplar_Yazarlar_YazarId] FOREIGN KEY([YazarId])
+REFERENCES [dbo].[Yazarlar] ([YazarId])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Kitaplar] CHECK CONSTRAINT [FK_Kitaplar_Yazarlar_YazarId]
+GO
+ALTER TABLE [dbo].[Oduncler]  WITH CHECK ADD  CONSTRAINT [FK_Oduncler_Kitaplar_KitapId] FOREIGN KEY([KitapId])
+REFERENCES [dbo].[Kitaplar] ([KitapId])
+GO
+ALTER TABLE [dbo].[Oduncler] CHECK CONSTRAINT [FK_Oduncler_Kitaplar_KitapId]
+GO
+ALTER TABLE [dbo].[Oduncler]  WITH CHECK ADD  CONSTRAINT [FK_Oduncler_Personeller_TeslimAlanPersonelId] FOREIGN KEY([TeslimAlanPersonelId])
+REFERENCES [dbo].[Personeller] ([PersonelId])
+GO
+ALTER TABLE [dbo].[Oduncler] CHECK CONSTRAINT [FK_Oduncler_Personeller_TeslimAlanPersonelId]
+GO
+ALTER TABLE [dbo].[Oduncler]  WITH CHECK ADD  CONSTRAINT [FK_Oduncler_Personeller_TeslimEdenPersonelId] FOREIGN KEY([TeslimEdenPersonelId])
+REFERENCES [dbo].[Personeller] ([PersonelId])
+GO
+ALTER TABLE [dbo].[Oduncler] CHECK CONSTRAINT [FK_Oduncler_Personeller_TeslimEdenPersonelId]
+GO
+ALTER TABLE [dbo].[Oduncler]  WITH CHECK ADD  CONSTRAINT [FK_Oduncler_Uyeler_UyeId] FOREIGN KEY([UyeId])
+REFERENCES [dbo].[Uyeler] ([UyeId])
+GO
+ALTER TABLE [dbo].[Oduncler] CHECK CONSTRAINT [FK_Oduncler_Uyeler_UyeId]
+GO
+ALTER TABLE [dbo].[Personeller]  WITH CHECK ADD  CONSTRAINT [FK_Personeller_Cinsiyetler_CinsiyetId] FOREIGN KEY([CinsiyetId])
+REFERENCES [dbo].[Cinsiyetler] ([Id])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Personeller] CHECK CONSTRAINT [FK_Personeller_Cinsiyetler_CinsiyetId]
+GO
+ALTER TABLE [dbo].[Uyeler]  WITH CHECK ADD  CONSTRAINT [FK_Uyeler_Cinsiyetler_CinsiyetId] FOREIGN KEY([CinsiyetId])
+REFERENCES [dbo].[Cinsiyetler] ([Id])
+GO
+ALTER TABLE [dbo].[Uyeler] CHECK CONSTRAINT [FK_Uyeler_Cinsiyetler_CinsiyetId]
+GO
+ALTER TABLE [dbo].[YayineviKitaplari]  WITH CHECK ADD  CONSTRAINT [FK_YayineviKitaplari_Kitaplar_KitapId] FOREIGN KEY([KitapId])
+REFERENCES [dbo].[Kitaplar] ([KitapId])
+GO
+ALTER TABLE [dbo].[YayineviKitaplari] CHECK CONSTRAINT [FK_YayineviKitaplari_Kitaplar_KitapId]
+GO
+ALTER TABLE [dbo].[YayineviKitaplari]  WITH CHECK ADD  CONSTRAINT [FK_YayineviKitaplari_Yayinevleri_YayineviId] FOREIGN KEY([YayineviId])
+REFERENCES [dbo].[Yayinevleri] ([YayineviId])
+GO
+ALTER TABLE [dbo].[YayineviKitaplari] CHECK CONSTRAINT [FK_YayineviKitaplari_Yayinevleri_YayineviId]
+GO
+ALTER TABLE [dbo].[YazarKitaplari]  WITH CHECK ADD  CONSTRAINT [FK_YazarKitaplari_Kitaplar_KitapId] FOREIGN KEY([KitapId])
+REFERENCES [dbo].[Kitaplar] ([KitapId])
+GO
+ALTER TABLE [dbo].[YazarKitaplari] CHECK CONSTRAINT [FK_YazarKitaplari_Kitaplar_KitapId]
+GO
+ALTER TABLE [dbo].[YazarKitaplari]  WITH CHECK ADD  CONSTRAINT [FK_YazarKitaplari_Yazarlar_YazarId] FOREIGN KEY([YazarId])
+REFERENCES [dbo].[Yazarlar] ([YazarId])
+GO
+ALTER TABLE [dbo].[YazarKitaplari] CHECK CONSTRAINT [FK_YazarKitaplari_Yazarlar_YazarId]
+GO
+USE [master]
+GO
+ALTER DATABASE [KutuphaneOtomasyonu] SET  READ_WRITE 
+GO

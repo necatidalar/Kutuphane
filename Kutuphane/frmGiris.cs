@@ -31,7 +31,21 @@ namespace Kutuphane.UI
                 checkBox_BeniHatirla.Checked = true;
             }
         }
+        private void btnCikis_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
 
+        protected override void OnMouseDown(MouseEventArgs e)
+        {
+            base.OnMouseDown(e);
+            if (e.Button == MouseButtons.Left)
+            {
+                this.Capture = false;
+                Message msg = Message.Create(this.Handle, 0XA1, new IntPtr(2), IntPtr.Zero);
+                this.WndProc(ref msg);
+            }
+        }
         private void btnGiris_Click(object sender, EventArgs e)
         {
             string kullaniciAdi = textBox_KullaniciAdi.Text;

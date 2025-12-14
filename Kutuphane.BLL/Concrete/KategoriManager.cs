@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 
 namespace Kutuphane.BLL.Concrete
 {
-    public class KategoriManager: IKategoriService
+    public class KategoriManager : IKategoriService
     {
         readonly IKategoriDal _kategoriDal;
 

@@ -4,7 +4,7 @@ using Core.Entity;
 
 namespace Kutuphane.Model.Entity
 {
-    public class YazarKitap :IEntity
+    public class YazarKitap : IEntity
     {
         public int Id { get; set; }
         public int YazarId { get; set; }

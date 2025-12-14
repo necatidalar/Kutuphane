@@ -1,0 +1,65 @@
+INSERT INTO Yazarlar (Ad, Soyad, DogumTarihi, AktifMi) VALUES
+(N'Orhan', N'Pamuk', '1952-06-07', 1),
+(N'Yaşar', N'Kemal', '1923-10-06', 1),
+(N'Sabahattin', N'Ali', '1907-02-25', 1),
+(N'Ahmet', N'Hamdi Tanpınar', '1901-06-23', 1),
+(N'Reşat', N'Nuri Güntekin', '1889-11-25', 1),
+(N'Halide', N'Edip Adıvar', '1884-06-30', 1),
+(N'Peyami', N'Safa', '1899-04-02', 1),
+(N'Nazım', N'Hikmet', '1902-01-15', 1),
+(N'Elif', N'Şafak', '1971-10-25', 1),
+(N'Oğuz', N'Atay', '1934-10-12', 1);
+
+INSERT INTO Yayinevleri (Ad, KurulusYili, AktifMi) VALUES
+(N'İş Bankası Kültür Yayınları', 1956, 1),
+(N'Can Yayınları', 1981, 1),
+(N'Yapı Kredi Yayınları', 1945, 1),
+(N'Remzi Kitabevi', 1927, 1),
+(N'Doğan Kitap', 1996, 1),
+(N'Everest Yayınları', 1997, 1),
+(N'Alfa Yayınları', 1986, 1),
+(N'İletişim Yayınları', 1982, 1),
+(N'Pegasus Yayınları', 2005, 1),
+(N'Timaş Yayınları', 1967, 1);
+
+INSERT INTO Uyeler
+(TcPass, Ad, Soyad, CinsiyetId, DogumTarihi, Telefon, Eposta, Adres, AdresDetay, AktifMi)
+VALUES
+('11111111111', N'Ahmet', N'Yılmaz', 1, '1990-01-01', '05550000001', 'ahmet@mail.com', N'İstanbul', N'Kadıköy', 1),
+('22222222222', N'Ayşe', N'Demir', 2, '1992-05-12', '05550000002', 'ayse@mail.com', N'Ankara', N'Çankaya', 1),
+('33333333333', N'Mehmet', N'Kaya', 1, '1988-03-22', '05550000003', 'mehmet@mail.com', N'İzmir', N'Bornova', 1),
+('44444444444', N'Fatma', N'Çelik', 2, '1995-07-10', '05550000004', 'fatma@mail.com', N'Bursa', N'Nilüfer', 1),
+('55555555555', N'Ali', N'Şahin', 1, '1985-11-18', '05550000005', 'ali@mail.com', N'Antalya', N'Muratpaşa', 1),
+('66666666666', N'Zeynep', N'Aydın', 2, '1998-02-14', '05550000006', 'zeynep@mail.com', N'Adana', N'Seyhan', 1),
+('77777777777', N'Murat', N'Koç', 1, '1991-09-09', '05550000007', 'murat@mail.com', N'Konya', N'Selçuklu', 1),
+('88888888888', N'Elif', N'Arslan', 2, '1993-12-30', '05550000008', 'elif@mail.com', N'Eskişehir', N'Odunpazarı', 1),
+('99999999999', N'Emre', N'Öztürk', 1, '1987-06-05', '05550000009', 'emre@mail.com', N'Samsun', N'İlkadım', 1),
+('10101010101', N'Seda', N'Polat', 2, '1996-04-21', '05550000010', 'seda@mail.com', N'Mersin', N'Yenişehir', 1);
+
+INSERT INTO Kitaplar
+(KitapAdi, ISBN, YazarId, YayineviId, KategoriId, BasimYili, SayfaSayisi, DilId, Stok, Aktif)
+VALUES
+(N'Kara Kitap', '9789750802941', 1, 1, 1, 1990, 430, 1, 5, 1),
+(N'İnce Memed', '9789750803184', 2, 2, 1, 1955, 450, 1, 4, 1),
+(N'Kürk Mantolu Madonna', '9789753638028', 3, 3, 1, 1943, 160, 1, 10, 1),
+(N'Huzur', '9789754700113', 4, 4, 1, 1949, 420, 1, 3, 1),
+(N'Çalıkuşu', '9789751001237', 5, 5, 1, 1922, 390, 1, 6, 1),
+(N'Ateşten Gömlek', '9789751002340', 6, 6, 1, 1923, 280, 1, 2, 1),
+(N'Dokuzuncu Hariciye Koğuşu', '9789750804051', 7, 7, 1, 1930, 180, 1, 4, 1),
+(N'Kuvâyi Milliye', '9789750805119', 8, 8, 1, 1965, 210, 1, 3, 1),
+(N'Aşk', '9786053606456', 9, 9, 1, 2009, 420, 1, 7, 1),
+(N'Tutunamayanlar', '9789754700007', 10, 10, 1, 1972, 724, 1, 2, 1);
+
+INSERT INTO Oduncler
+(UyeId, KitapId, AlisTarihi, TeslimTarihi, TeslimEdildi, TeslimEdenPersonelId, TeslimAlanPersonelId)
+VALUES
+(1, 1, GETDATE()-20, GETDATE()-10, 1, 1, 1),
+(2, 2, GETDATE()-15, NULL, 0, 1, NULL),
+(3, 3, GETDATE()-12, GETDATE()-2, 1, 1, 1),
+(4, 4, GETDATE()-8, NULL, 0, 1, NULL),
+(5, 5, GETDATE()-25, GETDATE()-5, 1, 1, 1),
+(6, 6, GETDATE()-7, NULL, 0, 1, NULL),
+(7, 7, GETDATE()-30, GETDATE()-20, 1, 1, 1),
+(8, 8, GETDATE()-4, NULL, 0, 1, NULL),
+(9, 9, GETDATE()-18, GETDATE()-3, 1, 1, 1),
+(10, 10, GETDATE()-6, NULL, 0, 1, NULL);

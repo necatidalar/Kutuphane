@@ -1,5 +1,4 @@
 ﻿using Core.Entity;
-using System.Collections.Generic;
 
 namespace Kutuphane.Model.Entity
 {

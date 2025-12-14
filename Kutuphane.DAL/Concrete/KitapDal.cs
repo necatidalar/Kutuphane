@@ -25,15 +25,15 @@ namespace Kutuphane.DAL.Concrete
                     .Where(predicate ?? (x => true))
                     .Select(k => new KitapDto
                     {
-                        KitapID = k.KitapId,
+                        KitapId = k.KitapId,
                         KitapAdi = k.KitapAdi,
                         ISBN = k.ISBN ?? string.Empty,
-                        YazarID = k.YazarId,
+                        YazarId = k.YazarId,
                         YazarAd = k.Yazar.Ad,
                         YazarSoyad = k.Yazar.Soyad,
-                        YayineviID = k.YayineviId,
+                        YayineviId = k.YayineviId,
                         YayineviAd = k.Yayinevi.Ad,
-                        KategoriID = k.KategoriId,
+                        KategoriId = k.KategoriId,
                         KategoriAdi = k.Kategori.KategoriAdi,
                         BasimYili = k.BasimYili,
                         SayfaSayisi = k.SayfaSayisi,

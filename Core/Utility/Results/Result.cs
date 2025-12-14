@@ -10,7 +10,7 @@
         public Result(bool isSuccess)
         {
             IsSuccess = isSuccess;
-        } 
+        }
 
         public string Message { get; }
 

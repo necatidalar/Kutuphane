@@ -2,7 +2,7 @@
 
 namespace Kutuphane.Model.DTO
 {
-    public class YazarDto :IDto
+    public class YazarDto : IDto
     {
         public int YazarId { get; set; }
         public string Ad { get; set; }

@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 
 namespace Kutuphane.BLL.Concrete
 {
-    public class YayineviManager: IYayineviService
+    public class YayineviManager : IYayineviService
     {
         readonly IYayineviDal _yayineviDal;
 
