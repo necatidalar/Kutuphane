@@ -1,9 +1,7 @@
 ﻿using Kutuphane.BLL.Abstract;
 using Kutuphane.BLL.Concrete;
 using Kutuphane.DAL.Concrete;
-using Kutuphane.DAL.Contexes;
 using Kutuphane.Model.Entity;
-using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
 
 namespace Kutuphane.UI
@@ -14,7 +12,6 @@ namespace Kutuphane.UI
         {
             InitializeComponent();
             dataGrid_Kategori.DataSource = bilKategori;
-
         }
 
         BindingList<Kategori> bilKategori = new BindingList<Kategori>();
@@ -28,8 +25,6 @@ namespace Kutuphane.UI
             KutulariTemizle();
             dataGrid_Kategori.ClearSelection();
         }
-
-       
         private void Listele()
         {
             var kategoriResult = kategoriService.GetListByFilterService(x =>
@@ -52,9 +47,10 @@ namespace Kutuphane.UI
             KutulariTemizle();
             PasifUyeKontrol();
         }
-
         private void btnKaydet_Click(object sender, EventArgs e)
         {
+            if (!BoslukKontrol()) return;
+
             Kategori yeniKategori = new Kategori
             {
                 KategoriAdi = textBox_KategoriAdi.Text,
@@ -63,17 +59,19 @@ namespace Kutuphane.UI
 
             var kategoriResult = kategoriService.AddService(yeniKategori);
 
-            if (kategoriResult.IsSuccess)
+            if (!kategoriResult.IsSuccess)
             {
-                MessageBox.Show("Kategori başarıyla kaydedildi.", "Başarılı");
-                Listele();
-            }
-            else
                 MessageBox.Show(kategoriResult.Message, "Hata");
-        }
+                return;
+            }
 
+            MessageBox.Show("Kategori başarıyla kaydedildi.", "Başarılı");
+            Listele();
+        }
         private void btnDuzenle_Click(object sender, EventArgs e)
         {
+            if (!BoslukKontrol()) return;
+
             int.TryParse(textBox_KategoriId.Text, out int idResult);
 
             Kategori yeniKategori = new Kategori
@@ -85,15 +83,15 @@ namespace Kutuphane.UI
 
             var kategoriResult = kategoriService.UpdateService(yeniKategori);
 
-            if (kategoriResult.IsSuccess)
+            if (!kategoriResult.IsSuccess)
             {
-                MessageBox.Show("Üye başarıyla güncellendi.", "Başarılı");
-                Listele();
-            }
-            else
                 MessageBox.Show(kategoriResult.Message, "Hata");
-        }
+                return;
+            }
 
+            MessageBox.Show("Kategori başarıyla güncellendi.", "Başarılı");
+            Listele();
+        }
         private void btnSil_Click(object sender, EventArgs e)
         {
             if (!int.TryParse(textBox_KategoriId.Text, out int idResult))
@@ -124,19 +122,16 @@ namespace Kutuphane.UI
             else
                 MessageBox.Show(uyeResult.Message, "Hata");
         }
-
         private void KutulariTemizle()
         {
             textBox_KategoriId.Clear();
             textBox_KategoriAdi.Clear();
         }
-
         private void btnTemizle_Click(object sender, EventArgs e)
         {
             dataGrid_Kategori.ClearSelection();
             KutulariTemizle();
         }
-
         private void PasifUyeKontrol()
         {
             dataGrid_Kategori.ClearSelection();
@@ -145,7 +140,6 @@ namespace Kutuphane.UI
 
             btnSilinenleriGoster.Visible = pasifResult.IsSuccess && pasifResult.Data.Any();
         }
-
         private void btnSilinenleriGoster_Click(object sender, EventArgs e)
         {
             if (!silinenModu)
@@ -176,7 +170,6 @@ namespace Kutuphane.UI
             dataGrid_Kategori.ClearSelection();
             KutulariTemizle();
         }
-
         private void btnGeriYukle_Click(object sender, EventArgs e)
         {
             if (!int.TryParse(textBox_KategoriId.Text, out int id))
@@ -216,13 +209,11 @@ namespace Kutuphane.UI
             KutulariTemizle();
             dataGrid_Kategori.ClearSelection();
         }
-
         private void btnAra_Click(object sender, EventArgs e)
         {
             Listele();
             dataGrid_Kategori.ClearSelection();
         }
-
         private void dataGrid_Kategori_SelectionChanged(object sender, EventArgs e)
         {
             if (dataGrid_Kategori.CurrentRow != null && !dataGrid_Kategori.CurrentRow.IsNewRow)
@@ -235,6 +226,15 @@ namespace Kutuphane.UI
             }
             dataGrid_Kategori.ClearSelection();
             KutulariTemizle();
+        }
+        private bool BoslukKontrol()
+        {
+            if (string.IsNullOrWhiteSpace(textBox_KategoriAdi.Text))
+            {
+                MessageBox.Show("Lütfen kategori adını boş bırakmayınız.", "Uyarı");
+                return false;
+            }
+            return true;
         }
     }
 }

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Kutuphane.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class gg : Migration
+    public partial class ssd : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -32,7 +32,8 @@ namespace Kutuphane.DAL.Migrations
                     DilId = table.Column<short>(type: "smallint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DilAdi = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
-                    DilKodu = table.Column<string>(type: "varchar(5)", maxLength: 5, nullable: false)
+                    DilKodu = table.Column<string>(type: "varchar(5)", maxLength: 5, nullable: false),
+                    AktifMi = table.Column<bool>(type: "bit", nullable: false, defaultValue: true)
                 },
                 constraints: table =>
                 {
@@ -60,7 +61,8 @@ namespace Kutuphane.DAL.Migrations
                     YayineviId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Ad = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
-                    KurulusYili = table.Column<int>(type: "int", nullable: true)
+                    KurulusYili = table.Column<int>(type: "int", nullable: true),
+                    AktifMi = table.Column<bool>(type: "bit", nullable: false, defaultValue: true)
                 },
                 constraints: table =>
                 {
@@ -76,6 +78,7 @@ namespace Kutuphane.DAL.Migrations
                     Ad = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     Soyad = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     DogumTarihi = table.Column<DateTime>(type: "datetime", nullable: true),
+                    OlumTarihi = table.Column<DateTime>(type: "datetime", nullable: true),
                     AktifMi = table.Column<bool>(type: "bit", nullable: false, defaultValue: true)
                 },
                 constraints: table =>
@@ -307,37 +310,37 @@ namespace Kutuphane.DAL.Migrations
 
             migrationBuilder.InsertData(
                 table: "Diller",
-                columns: new[] { "DilId", "DilAdi", "DilKodu" },
+                columns: new[] { "DilId", "AktifMi", "DilAdi", "DilKodu" },
                 values: new object[,]
                 {
-                    { (short)1, "Türkçe", "tr" },
-                    { (short)2, "İngilizce", "en" },
-                    { (short)3, "Almanca", "de" },
-                    { (short)4, "Fransızca", "fr" },
-                    { (short)5, "İspanyolca", "es" },
-                    { (short)6, "İtalyanca", "it" },
-                    { (short)7, "Rusça", "ru" },
-                    { (short)8, "Çince", "zh" },
-                    { (short)9, "Japonca", "ja" },
-                    { (short)10, "Arapça", "ar" },
-                    { (short)11, "Portekizce", "pt" },
-                    { (short)12, "Hollandaca", "nl" },
-                    { (short)13, "İsveççe", "sv" },
-                    { (short)14, "Fince", "fi" },
-                    { (short)15, "Danca", "da" },
-                    { (short)16, "Norveççe", "no" },
-                    { (short)17, "Macarca", "hu" },
-                    { (short)18, "Lehçe", "pl" },
-                    { (short)19, "Çekçe", "cs" },
-                    { (short)20, "Rumence", "ro" },
-                    { (short)21, "Yunanca", "el" },
-                    { (short)22, "Korece", "ko" },
-                    { (short)23, "Hintçe", "hi" },
-                    { (short)24, "Tayca", "th" },
-                    { (short)25, "Vietnamca", "vi" },
-                    { (short)26, "Endonezce", "id" },
-                    { (short)27, "Malayca", "ms" },
-                    { (short)28, "Filipince", "tl" }
+                    { (short)1, true, "Türkçe", "tr" },
+                    { (short)2, true, "İngilizce", "en" },
+                    { (short)3, true, "Almanca", "de" },
+                    { (short)4, true, "Fransızca", "fr" },
+                    { (short)5, true, "İspanyolca", "es" },
+                    { (short)6, true, "İtalyanca", "it" },
+                    { (short)7, true, "Rusça", "ru" },
+                    { (short)8, true, "Çince", "zh" },
+                    { (short)9, true, "Japonca", "ja" },
+                    { (short)10, true, "Arapça", "ar" },
+                    { (short)11, true, "Portekizce", "pt" },
+                    { (short)12, true, "Hollandaca", "nl" },
+                    { (short)13, true, "İsveççe", "sv" },
+                    { (short)14, true, "Fince", "fi" },
+                    { (short)15, true, "Danca", "da" },
+                    { (short)16, true, "Norveççe", "no" },
+                    { (short)17, true, "Macarca", "hu" },
+                    { (short)18, true, "Lehçe", "pl" },
+                    { (short)19, true, "Çekçe", "cs" },
+                    { (short)20, true, "Rumence", "ro" },
+                    { (short)21, true, "Yunanca", "el" },
+                    { (short)22, true, "Korece", "ko" },
+                    { (short)23, true, "Hintçe", "hi" },
+                    { (short)24, true, "Tayca", "th" },
+                    { (short)25, true, "Vietnamca", "vi" },
+                    { (short)26, true, "Endonezce", "id" },
+                    { (short)27, true, "Malayca", "ms" },
+                    { (short)28, true, "Filipince", "tl" }
                 });
 
             migrationBuilder.InsertData(

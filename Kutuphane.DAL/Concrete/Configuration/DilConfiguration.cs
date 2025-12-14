@@ -1,6 +1,4 @@
-﻿
-
-using Kutuphane.Model.Entity;
+﻿using Kutuphane.Model.Entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -20,6 +18,10 @@ namespace Kutuphane.DAL.Concrete.Configuration
                    .IsRequired()
                    .HasColumnType("varchar")
                    .HasMaxLength(5);
+            builder.Property(d => d.AktifMi)
+                   .IsRequired()
+                   .HasColumnType("bit")
+                   .HasDefaultValue(true);
             builder.HasData(
                 new Dil { DilId = 1, DilAdi = "Türkçe", DilKodu = "tr" },
                 new Dil { DilId = 2, DilAdi = "İngilizce", DilKodu = "en" },

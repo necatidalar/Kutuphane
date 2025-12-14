@@ -30,21 +30,21 @@ namespace Kutuphane.UI
         {
             try
             {
-                var uyeResult = personelService.PersonelBilgiGetirServis(x =>
+                var personelResult = personelService.PersonelBilgiGetirServis(x =>
                     x.AktifMi == true &&
                     (x.Ad.Contains(textBox_Ara.Text) ||
                      x.Soyad.Contains(textBox_Ara.Text) ||
                      x.KullaniciAdi.Contains(textBox_Ara.Text))
                 );
 
-                if (!uyeResult.IsSuccess)
+                if (!personelResult.IsSuccess)
                 {
-                    MessageBox.Show(uyeResult.Message, "Hata");
+                    MessageBox.Show(personelResult.Message, "Hata");
                     return;
                 }
 
                 bilPersonel.Clear();
-                foreach (var item in uyeResult.Data)
+                foreach (var item in personelResult.Data)
                     bilPersonel.Add(item);
 
                 dataGrid_Personel.ClearSelection();
@@ -92,15 +92,15 @@ namespace Kutuphane.UI
                     Sifre = textBox_Sifre.Text
                 };
 
-                var uyeResult = personelService.AddService(yeniPersonel);
+                var personelResult = personelService.AddService(yeniPersonel);
 
-                if (uyeResult.IsSuccess)
+                if (personelResult.IsSuccess)
                 {
                     MessageBox.Show("Personel başarıyla kaydedildi.", "Başarılı");
                     Listele();
                 }
                 else
-                    MessageBox.Show(uyeResult.Message, "Hata");
+                    MessageBox.Show(personelResult.Message, "Hata");
             }
             catch (Exception ex)
             {
@@ -119,6 +119,13 @@ namespace Kutuphane.UI
                     return;
                 }
 
+                var soru = MessageBox.Show("Bu personeli düzenlemek istediğine emin misin?", "Onay", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (soru == DialogResult.No)
+                {
+                    return;
+                }
+
                 Personel yeniPersonel = new Personel
                 {
                     PersonelId = idResult,
@@ -129,15 +136,15 @@ namespace Kutuphane.UI
                     Sifre = textBox_Sifre.Text
                 };
 
-                var uyeResult = personelService.UpdateService(yeniPersonel);
+                var personelResult = personelService.UpdateService(yeniPersonel);
 
-                if (uyeResult.IsSuccess)
+                if (personelResult.IsSuccess)
                 {
                     MessageBox.Show("Personel başarıyla güncellendi.", "Başarılı");
                     Listele();
                 }
                 else
-                    MessageBox.Show(uyeResult.Message, "Hata");
+                    MessageBox.Show(personelResult.Message, "Hata");
             }
             catch (Exception ex)
             {
@@ -150,32 +157,39 @@ namespace Kutuphane.UI
             {
                 if (!int.TryParse(textBox_PersonelId.Text, out int idResult))
                 {
-                    MessageBox.Show("Lütfen geçerli bir üye seçiniz.", "Hata");
+                    MessageBox.Show("Lütfen geçerli bir personel seçiniz.", "Hata");
                     return;
                 }
 
-                var uyeFromDbResult = personelService.GetByFilterService(x => x.PersonelId == idResult);
+                var personelFromDbResult = personelService.GetByFilterService(x => x.PersonelId == idResult);
 
-                if (!uyeFromDbResult.IsSuccess || uyeFromDbResult.Data == null)
+                if (!personelFromDbResult.IsSuccess || personelFromDbResult.Data == null)
                 {
-                    MessageBox.Show("Üye bulunamadı.", "Hata");
+                    MessageBox.Show("Personel bulunamadı.", "Hata");
                     return;
                 }
 
-                var uyeFromDb = uyeFromDbResult.Data;
+                var soru = MessageBox.Show("Bu personeli silmek istediğine emin misin?", "Onay", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (soru == DialogResult.No)
+                {
+                    return;
+                }
+
+                var uyeFromDb = personelFromDbResult.Data;
                 uyeFromDb.AktifMi = false;
 
-                var uyeResult = personelService.UpdateService(uyeFromDb);
+                var personelResult = personelService.UpdateService(uyeFromDb);
 
-                if (uyeResult.IsSuccess)
+                if (personelResult.IsSuccess)
                 {
-                    MessageBox.Show("Üye başarıyla silindi.", "Başarılı");
+                    MessageBox.Show("Personel başarıyla silindi.", "Başarılı");
                     Listele();
                     PasifUyeKontrol();
 
                 }
                 else
-                    MessageBox.Show(uyeResult.Message, "Hata");
+                    MessageBox.Show(personelResult.Message, "Hata");
             }
             catch (Exception ex)
             {
@@ -215,7 +229,7 @@ namespace Kutuphane.UI
                 btnDuzenle.Enabled = false;
                 btnSil.Enabled = false;
                 silinenModu = true;
-                btnSilinenleriGoster.Text = "Aktif Üyeleri Göster";
+                btnSilinenleriGoster.Text = "Aktif Personelleri Göster";
             }
             else
             {
@@ -225,7 +239,7 @@ namespace Kutuphane.UI
                 btnDuzenle.Enabled = true;
                 btnSil.Enabled = true;
                 silinenModu = false;
-                btnSilinenleriGoster.Text = "Silinen Üyeleri Göster";
+                btnSilinenleriGoster.Text = "Silinen Personelleri Göster";
             }
         }
         private void btnGeriYukle_Click(object sender, EventArgs e)
@@ -238,15 +252,15 @@ namespace Kutuphane.UI
                     return;
                 }
 
-                var uyeResult = personelService.GetByFilterService(x => x.PersonelId == id);
+                var personelResult = personelService.GetByFilterService(x => x.PersonelId == id);
 
-                if (!uyeResult.IsSuccess || uyeResult.Data == null)
+                if (!personelResult.IsSuccess || personelResult.Data == null)
                 {
                     MessageBox.Show("Üye bulunamadı.");
                     return;
                 }
 
-                var uye = uyeResult.Data;
+                var uye = personelResult.Data;
                 uye.AktifMi = true;
 
                 var updateResult = personelService.UpdateService(uye);
@@ -266,6 +280,8 @@ namespace Kutuphane.UI
                 btnDuzenle.Enabled = true;
                 btnSil.Enabled = true;
                 PasifUyeKontrol();
+                btnTemizle.PerformClick();
+                btnTemizle.PerformClick();
             }
             catch (Exception ex)
             {

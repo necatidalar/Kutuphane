@@ -1,6 +1,4 @@
-﻿
-
-using Kutuphane.Model.Entity;
+﻿using Kutuphane.Model.Entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -12,7 +10,7 @@ namespace Kutuphane.DAL.Concrete.Configuration
         {
             builder.Property(y => y.Ad).HasMaxLength(300).IsRequired();
             builder.Property(y => y.KurulusYili).IsRequired(false);
-           
+            builder.Property(d => d.AktifMi).IsRequired().HasColumnType("bit").HasDefaultValue(true);
         }
     }
 }

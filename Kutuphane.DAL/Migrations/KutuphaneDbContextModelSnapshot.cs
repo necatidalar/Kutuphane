@@ -62,6 +62,11 @@ namespace Kutuphane.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<short>("DilId"));
 
+                    b.Property<bool>("AktifMi")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
                     b.Property<string>("DilAdi")
                         .IsRequired()
                         .HasMaxLength(25)
@@ -80,168 +85,196 @@ namespace Kutuphane.DAL.Migrations
                         new
                         {
                             DilId = (short)1,
+                            AktifMi = true,
                             DilAdi = "Türkçe",
                             DilKodu = "tr"
                         },
                         new
                         {
                             DilId = (short)2,
+                            AktifMi = true,
                             DilAdi = "İngilizce",
                             DilKodu = "en"
                         },
                         new
                         {
                             DilId = (short)3,
+                            AktifMi = true,
                             DilAdi = "Almanca",
                             DilKodu = "de"
                         },
                         new
                         {
                             DilId = (short)4,
+                            AktifMi = true,
                             DilAdi = "Fransızca",
                             DilKodu = "fr"
                         },
                         new
                         {
                             DilId = (short)5,
+                            AktifMi = true,
                             DilAdi = "İspanyolca",
                             DilKodu = "es"
                         },
                         new
                         {
                             DilId = (short)6,
+                            AktifMi = true,
                             DilAdi = "İtalyanca",
                             DilKodu = "it"
                         },
                         new
                         {
                             DilId = (short)7,
+                            AktifMi = true,
                             DilAdi = "Rusça",
                             DilKodu = "ru"
                         },
                         new
                         {
                             DilId = (short)8,
+                            AktifMi = true,
                             DilAdi = "Çince",
                             DilKodu = "zh"
                         },
                         new
                         {
                             DilId = (short)9,
+                            AktifMi = true,
                             DilAdi = "Japonca",
                             DilKodu = "ja"
                         },
                         new
                         {
                             DilId = (short)10,
+                            AktifMi = true,
                             DilAdi = "Arapça",
                             DilKodu = "ar"
                         },
                         new
                         {
                             DilId = (short)11,
+                            AktifMi = true,
                             DilAdi = "Portekizce",
                             DilKodu = "pt"
                         },
                         new
                         {
                             DilId = (short)12,
+                            AktifMi = true,
                             DilAdi = "Hollandaca",
                             DilKodu = "nl"
                         },
                         new
                         {
                             DilId = (short)13,
+                            AktifMi = true,
                             DilAdi = "İsveççe",
                             DilKodu = "sv"
                         },
                         new
                         {
                             DilId = (short)14,
+                            AktifMi = true,
                             DilAdi = "Fince",
                             DilKodu = "fi"
                         },
                         new
                         {
                             DilId = (short)15,
+                            AktifMi = true,
                             DilAdi = "Danca",
                             DilKodu = "da"
                         },
                         new
                         {
                             DilId = (short)16,
+                            AktifMi = true,
                             DilAdi = "Norveççe",
                             DilKodu = "no"
                         },
                         new
                         {
                             DilId = (short)17,
+                            AktifMi = true,
                             DilAdi = "Macarca",
                             DilKodu = "hu"
                         },
                         new
                         {
                             DilId = (short)18,
+                            AktifMi = true,
                             DilAdi = "Lehçe",
                             DilKodu = "pl"
                         },
                         new
                         {
                             DilId = (short)19,
+                            AktifMi = true,
                             DilAdi = "Çekçe",
                             DilKodu = "cs"
                         },
                         new
                         {
                             DilId = (short)20,
+                            AktifMi = true,
                             DilAdi = "Rumence",
                             DilKodu = "ro"
                         },
                         new
                         {
                             DilId = (short)21,
+                            AktifMi = true,
                             DilAdi = "Yunanca",
                             DilKodu = "el"
                         },
                         new
                         {
                             DilId = (short)22,
+                            AktifMi = true,
                             DilAdi = "Korece",
                             DilKodu = "ko"
                         },
                         new
                         {
                             DilId = (short)23,
+                            AktifMi = true,
                             DilAdi = "Hintçe",
                             DilKodu = "hi"
                         },
                         new
                         {
                             DilId = (short)24,
+                            AktifMi = true,
                             DilAdi = "Tayca",
                             DilKodu = "th"
                         },
                         new
                         {
                             DilId = (short)25,
+                            AktifMi = true,
                             DilAdi = "Vietnamca",
                             DilKodu = "vi"
                         },
                         new
                         {
                             DilId = (short)26,
+                            AktifMi = true,
                             DilAdi = "Endonezce",
                             DilKodu = "id"
                         },
                         new
                         {
                             DilId = (short)27,
+                            AktifMi = true,
                             DilAdi = "Malayca",
                             DilKodu = "ms"
                         },
                         new
                         {
                             DilId = (short)28,
+                            AktifMi = true,
                             DilAdi = "Filipince",
                             DilKodu = "tl"
                         });
@@ -718,6 +751,11 @@ namespace Kutuphane.DAL.Migrations
                         .HasMaxLength(300)
                         .HasColumnType("nvarchar(300)");
 
+                    b.Property<bool>("AktifMi")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
                     b.Property<int?>("KurulusYili")
                         .HasColumnType("int");
 
@@ -774,6 +812,9 @@ namespace Kutuphane.DAL.Migrations
                         .HasDefaultValue(true);
 
                     b.Property<DateTime?>("DogumTarihi")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime?>("OlumTarihi")
                         .HasColumnType("datetime");
 
                     b.Property<string>("Soyad")

@@ -114,28 +114,30 @@ namespace Kutuphane.BLL.Concrete
         }
 
         // ---------------------------------------------
-        // LOGIN
+        // Giris
         // ---------------------------------------------
         public IDataResult<Personel> Login(string kullaniciAdi, string sifre)
         {
-            if (string.IsNullOrWhiteSpace(kullaniciAdi) ||
-                string.IsNullOrWhiteSpace(sifre))
-            {
-                return new ErrorDataResult<Personel>("Kullanıcı adı ve şifre boş olamaz.");
-            }
+            if (string.IsNullOrWhiteSpace(kullaniciAdi) || string.IsNullOrWhiteSpace(sifre))
+                return new ErrorDataResult<Personel>("Kullanıcı adı veya şifre boş olamaz.");
 
-            string sifreBase64 = SecurityHelper.EncodeBase64(sifre);
+            var result = _personelDal.GetByFilter(p =>
+                p.KullaniciAdi.ToLower() == kullaniciAdi.ToLower() &&
+                p.AktifMi == true
+            );
 
-            var sonuc = _personelDal.GetByFilter(p =>
-                p.KullaniciAdi == kullaniciAdi &&
-                p.Sifre == sifreBase64 &&
-                p.AktifMi == true);
-
-            if (sonuc.Data == null)
+            if (result.Data == null)
                 return new ErrorDataResult<Personel>("Kullanıcı adı veya şifre hatalı.");
 
-            return new SuccessDataResult<Personel>(sonuc.Data);
+            var encodedPassword = SecurityHelper.EncodeBase64(sifre);
+
+            if (result.Data.Sifre != encodedPassword)
+                return new ErrorDataResult<Personel>("Kullanıcı adı veya şifre hatalı.");
+
+            return new SuccessDataResult<Personel>(result.Data, "Giriş başarılı.");
         }
+
+
 
         public IDataResult<Personel> GetByFilterService(Expression<Func<Personel, bool>>? predicate = null)
         {

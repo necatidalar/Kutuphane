@@ -11,5 +11,6 @@ namespace Kutuphane.BLL.Abstract
         IDataResult<List<PersonelBilgileriDto>> PersonelBilgiGetirServis(Expression<Func<Personel, bool>>? predicate = null);
 
         IDataResult<List<PersonelOduncBilgileriDto>> PersonelOduncListeIleGetirServis(Expression<Func<Personel, bool>>? predicate = null);
+        IDataResult<Personel> Login(string kullaniciAdi, string sifre);
     }
 }

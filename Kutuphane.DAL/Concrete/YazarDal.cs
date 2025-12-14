@@ -23,7 +23,8 @@ namespace Kutuphane.DAL.Concrete
 
                         Ad = x.Ad,
                         Soyad = x.Soyad,
-                        DogumTarihi = x.DogumTarihi
+                        DogumTarihi = x.DogumTarihi,
+                        OlumTarihi = x.OlumTarihi
                     }).ToList();
                 return new SuccessDataResult<List<YazarDto>>(dto);
             }

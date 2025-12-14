@@ -26,7 +26,7 @@ namespace Kutuphane.DAL.Concrete
                         Ad = x.Ad,
                         Soyad = x.Soyad,
                         CinsiyetId = x.CinsiyetId,
-                        Cinsiyet = x.Cinsiyet.CinsiyetAdi,
+                        Cinsiyet = x.Cinsiyet != null ? x.Cinsiyet.CinsiyetAdi : "",
                         DogumTarihi = x.DogumTarihi,
                         Telefon = x.Telefon,
                         Eposta = x.Eposta,

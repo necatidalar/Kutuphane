@@ -1,5 +1,4 @@
-﻿using Kutuphane.BLL.Services;
-using Kutuphane.DAL.Contexes;
+﻿using System.Windows.Forms;
 
 namespace Kutuphane.UI
 {
@@ -8,60 +7,84 @@ namespace Kutuphane.UI
         public frmMain()
         {
             InitializeComponent();
-            //ChangeDbContext(DbContextType.Supervisor);
+        }
+        //public string GirisYapanKullanici { get; set; }
+        public int GirisYapanPersonelId { get; set; }
+        public string GirisYapanPersonelAd { get; private set; }
+        public string GirisYapanPersonelSoyad { get; private set; }
+        private void frmMain_Load(object sender, EventArgs e)
+        {
+            frmGiris girisForm = new frmGiris();
+            if (girisForm.ShowDialog() == DialogResult.OK)
+            {
+                this.GirisYapanPersonelAd = girisForm.GirisYapanPersonelAd;
+                this.GirisYapanPersonelSoyad = girisForm.GirisYapanPersonelSoyad;
+                this.GirisYapanPersonelId = girisForm.GirisYapanPersonelId;
+                lblKullaniciAdi.Text = $"Hoşgeldin, {this.GirisYapanPersonelAd} {this.GirisYapanPersonelSoyad}";
+            }
+            else
+            {
+                this.Close();
+            }
         }
 
-        //// DbContext değiştirme metodu
-        //private void ChangeDbContext(DbContextType contextType)
-        //{
-        //    DbContextSelector.CurrentContext = contextType;
-        //    MessageBox.Show($"Veritabanı bağlantısı {contextType} olarak değiştirildi.", "Bilgi");
-        //}
-
-
-        public string GirisYapanKullanici { get; set; }
-        public int GirisYapanPersonelID { get; set; }
+        private void yerleşimAyarlarıToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmYeslesimAyarlari frm = new frmYeslesimAyarlari();
+            frm.ShowDialog();
+        }
 
         private void kitapİşlemleriToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmKitapIslemleri kitapIslemleriForm = new frmKitapIslemleri();
-            kitapIslemleriForm.ShowDialog();
+            frmKitapIslemleri frm = new frmKitapIslemleri();
+            frm.ShowDialog();
         }
 
-        private void çıkışToolStripMenuItem_Click(object sender, EventArgs e)
+        private void kategoriİşlemleriToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            frmKategoriIslemleri frm = new frmKategoriIslemleri();
+            frm.ShowDialog();
         }
 
-        private void personelİşlemleriToolStripMenuItem_Click(object sender, EventArgs e)
+        private void yazarİşlemleriToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmPersonelIslemleri personelIslemleriForm = new frmPersonelIslemleri();
-            personelIslemleriForm.ShowDialog();
-        }
-
-        private void üyeİşlemleriToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            frmUyeIslemleri frmUye = new frmUyeIslemleri();
-            frmUye.ShowDialog();
+            frmYazarIslemleri frm = new frmYazarIslemleri();
+            frm.ShowDialog();
         }
 
         private void ödünçİşlemleriToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmOduncIslemleri frmOdunc = new frmOduncIslemleri();
-            frmOdunc.ShowDialog();
+            frmOduncIslemleri frm = new frmOduncIslemleri();
+            frm.ShowDialog();
         }
 
-        private void frmDashboard_FormClosed(object sender, FormClosedEventArgs e)
+        private void üyeİşlemleriToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmLogin loginForm = new frmLogin();
-            loginForm.Show();
+            frmUyeIslemleri frm = new frmUyeIslemleri();
+            frm.ShowDialog();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void personelİşlemleriToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form child = new frmKitapIslemleri();
-            child.MdiParent = this;
-            child.Show();
+            frmPersonelIslemleri frm = new frmPersonelIslemleri();
+            frm.ShowDialog();
+        }
+
+        private void çıkışYapToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmMain_Load(sender, e);
+        }
+
+        private void dilİşlemleriToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmDilIslemleri frm = new frmDilIslemleri();
+            frm.ShowDialog();
+        }
+
+        private void yayıneviİşlemleriToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmYayineviIslemleri frm = new frmYayineviIslemleri();
+            frm.ShowDialog();
         }
     }
 }

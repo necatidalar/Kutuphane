@@ -78,7 +78,7 @@
             btnGeriYukle.Location = new Point(118, 256);
             btnGeriYukle.Name = "btnGeriYukle";
             btnGeriYukle.Size = new Size(150, 25);
-            btnGeriYukle.TabIndex = 20;
+            btnGeriYukle.TabIndex = 8;
             btnGeriYukle.Text = "Geri Yükle";
             btnGeriYukle.UseVisualStyleBackColor = true;
             btnGeriYukle.Visible = false;
@@ -89,7 +89,7 @@
             btnSilinenleriGoster.Location = new Point(118, 225);
             btnSilinenleriGoster.Name = "btnSilinenleriGoster";
             btnSilinenleriGoster.Size = new Size(150, 25);
-            btnSilinenleriGoster.TabIndex = 19;
+            btnSilinenleriGoster.TabIndex = 7;
             btnSilinenleriGoster.Text = "Silinenleri Göster";
             btnSilinenleriGoster.UseVisualStyleBackColor = true;
             btnSilinenleriGoster.Visible = false;
@@ -100,7 +100,7 @@
             btnTemizle.Location = new Point(118, 194);
             btnTemizle.Name = "btnTemizle";
             btnTemizle.Size = new Size(150, 25);
-            btnTemizle.TabIndex = 17;
+            btnTemizle.TabIndex = 6;
             btnTemizle.Text = "Temizle";
             btnTemizle.UseVisualStyleBackColor = true;
             btnTemizle.Click += btnTemizle_Click;
@@ -110,7 +110,7 @@
             btnSil.Location = new Point(118, 163);
             btnSil.Name = "btnSil";
             btnSil.Size = new Size(150, 25);
-            btnSil.TabIndex = 18;
+            btnSil.TabIndex = 5;
             btnSil.Text = "Sil";
             btnSil.UseVisualStyleBackColor = true;
             btnSil.Click += btnSil_Click;
@@ -120,7 +120,7 @@
             btnDuzenle.Location = new Point(118, 132);
             btnDuzenle.Name = "btnDuzenle";
             btnDuzenle.Size = new Size(150, 25);
-            btnDuzenle.TabIndex = 16;
+            btnDuzenle.TabIndex = 4;
             btnDuzenle.Text = "Düzenle";
             btnDuzenle.UseVisualStyleBackColor = true;
             btnDuzenle.Click += btnDuzenle_Click;
@@ -130,7 +130,7 @@
             btnKaydet.Location = new Point(118, 101);
             btnKaydet.Name = "btnKaydet";
             btnKaydet.Size = new Size(150, 25);
-            btnKaydet.TabIndex = 15;
+            btnKaydet.TabIndex = 3;
             btnKaydet.Text = "Kaydet";
             btnKaydet.UseVisualStyleBackColor = true;
             btnKaydet.Click += btnKaydet_Click;
@@ -158,14 +158,15 @@
             textBox_KategoriAdi.Location = new Point(93, 61);
             textBox_KategoriAdi.Name = "textBox_KategoriAdi";
             textBox_KategoriAdi.Size = new Size(201, 23);
-            textBox_KategoriAdi.TabIndex = 13;
+            textBox_KategoriAdi.TabIndex = 2;
             // 
             // textBox_KategoriId
             // 
+            textBox_KategoriId.Enabled = false;
             textBox_KategoriId.Location = new Point(93, 32);
             textBox_KategoriId.Name = "textBox_KategoriId";
             textBox_KategoriId.Size = new Size(201, 23);
-            textBox_KategoriId.TabIndex = 13;
+            textBox_KategoriId.TabIndex = 1;
             // 
             // dataGrid_Kategori
             // 
@@ -178,7 +179,7 @@
             dataGrid_Kategori.Location = new Point(318, 42);
             dataGrid_Kategori.Name = "dataGrid_Kategori";
             dataGrid_Kategori.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGrid_Kategori.Size = new Size(354, 481);
+            dataGrid_Kategori.Size = new Size(354, 479);
             dataGrid_Kategori.TabIndex = 1;
             dataGrid_Kategori.SelectionChanged += dataGrid_Kategori_SelectionChanged;
             // 
@@ -212,7 +213,7 @@
             btnAra.Location = new Point(597, 12);
             btnAra.Name = "btnAra";
             btnAra.Size = new Size(75, 23);
-            btnAra.TabIndex = 7;
+            btnAra.TabIndex = 10;
             btnAra.Text = "Ara";
             btnAra.UseVisualStyleBackColor = true;
             btnAra.Click += btnAra_Click;
@@ -234,20 +235,23 @@
             textBox_Ara.Name = "textBox_Ara";
             textBox_Ara.PlaceholderText = "Kategori adı ile arayın";
             textBox_Ara.Size = new Size(168, 23);
-            textBox_Ara.TabIndex = 5;
+            textBox_Ara.TabIndex = 9;
             // 
-            // frmKategori
+            // frmKategoriIslemleri
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(684, 543);
+            ClientSize = new Size(684, 541);
             Controls.Add(btnAra);
             Controls.Add(label3);
             Controls.Add(textBox_Ara);
             Controls.Add(dataGrid_Kategori);
             Controls.Add(groupBox1);
             Icon = (Icon)resources.GetObject("$this.Icon");
-            Name = "frmKategori";
+            MaximizeBox = false;
+            MaximumSize = new Size(700, 580);
+            MinimumSize = new Size(700, 580);
+            Name = "frmKategoriIslemleri";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Kütüphane Otomasyonu - Kategori İşlemleri";
             Load += frmKategori_Load;

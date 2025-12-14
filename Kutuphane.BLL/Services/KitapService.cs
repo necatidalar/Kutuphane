@@ -1,10 +1,4 @@
-﻿using Core.Interfaces;
-using Kutuphane.DAL;
-using Kutuphane.DAL.Concrete;
-using Kutuphane.Model.Entity;
-using System.Text.RegularExpressions;
-
-namespace Kutuphane.BLL.Services
+﻿namespace Kutuphane.BLL.Services
 {
     public class KitapService
     {

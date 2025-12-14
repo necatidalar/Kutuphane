@@ -87,7 +87,7 @@
             groupBox1.Controls.Add(label1);
             groupBox1.Location = new Point(12, 12);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(328, 485);
+            groupBox1.Size = new Size(328, 437);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Personel İşlemleri";
@@ -98,14 +98,14 @@
             comboBox_Cinsiyet.Location = new Point(99, 135);
             comboBox_Cinsiyet.Name = "comboBox_Cinsiyet";
             comboBox_Cinsiyet.Size = new Size(198, 23);
-            comboBox_Cinsiyet.TabIndex = 19;
+            comboBox_Cinsiyet.TabIndex = 4;
             // 
             // btnGeriYukle
             // 
             btnGeriYukle.Location = new Point(121, 399);
             btnGeriYukle.Name = "btnGeriYukle";
             btnGeriYukle.Size = new Size(154, 25);
-            btnGeriYukle.TabIndex = 18;
+            btnGeriYukle.TabIndex = 12;
             btnGeriYukle.Text = "Geri Yükle";
             btnGeriYukle.UseVisualStyleBackColor = true;
             btnGeriYukle.Visible = false;
@@ -116,7 +116,7 @@
             btnSilinenleriGoster.Location = new Point(121, 368);
             btnSilinenleriGoster.Name = "btnSilinenleriGoster";
             btnSilinenleriGoster.Size = new Size(154, 25);
-            btnSilinenleriGoster.TabIndex = 17;
+            btnSilinenleriGoster.TabIndex = 11;
             btnSilinenleriGoster.Text = "Silinen Personelleri Göster";
             btnSilinenleriGoster.UseVisualStyleBackColor = true;
             btnSilinenleriGoster.Visible = false;
@@ -127,7 +127,7 @@
             btnTemizle.Location = new Point(121, 337);
             btnTemizle.Name = "btnTemizle";
             btnTemizle.Size = new Size(154, 25);
-            btnTemizle.TabIndex = 15;
+            btnTemizle.TabIndex = 10;
             btnTemizle.Text = "Temizle";
             btnTemizle.UseVisualStyleBackColor = true;
             btnTemizle.Click += btnTemizle_Click;
@@ -137,7 +137,7 @@
             btnSil.Location = new Point(121, 306);
             btnSil.Name = "btnSil";
             btnSil.Size = new Size(154, 25);
-            btnSil.TabIndex = 16;
+            btnSil.TabIndex = 9;
             btnSil.Text = "Sil";
             btnSil.UseVisualStyleBackColor = true;
             btnSil.Click += btnSil_Click;
@@ -147,7 +147,7 @@
             btnDuzenle.Location = new Point(121, 275);
             btnDuzenle.Name = "btnDuzenle";
             btnDuzenle.Size = new Size(154, 25);
-            btnDuzenle.TabIndex = 14;
+            btnDuzenle.TabIndex = 8;
             btnDuzenle.Text = "Düzenle";
             btnDuzenle.UseVisualStyleBackColor = true;
             btnDuzenle.Click += btnDuzenle_Click;
@@ -157,7 +157,7 @@
             btnKaydet.Location = new Point(121, 244);
             btnKaydet.Name = "btnKaydet";
             btnKaydet.Size = new Size(154, 25);
-            btnKaydet.TabIndex = 13;
+            btnKaydet.TabIndex = 7;
             btnKaydet.Text = "Kaydet";
             btnKaydet.UseVisualStyleBackColor = true;
             btnKaydet.Click += btnKaydet_Click;
@@ -167,7 +167,7 @@
             textBox_Sifre.Location = new Point(99, 193);
             textBox_Sifre.Name = "textBox_Sifre";
             textBox_Sifre.Size = new Size(198, 23);
-            textBox_Sifre.TabIndex = 1;
+            textBox_Sifre.TabIndex = 6;
             textBox_Sifre.UseSystemPasswordChar = true;
             // 
             // label4
@@ -184,7 +184,7 @@
             textBox_KullaniciAdi.Location = new Point(99, 164);
             textBox_KullaniciAdi.Name = "textBox_KullaniciAdi";
             textBox_KullaniciAdi.Size = new Size(198, 23);
-            textBox_KullaniciAdi.TabIndex = 1;
+            textBox_KullaniciAdi.TabIndex = 5;
             // 
             // label6
             // 
@@ -209,7 +209,7 @@
             textBox_Soyad.Location = new Point(99, 106);
             textBox_Soyad.Name = "textBox_Soyad";
             textBox_Soyad.Size = new Size(198, 23);
-            textBox_Soyad.TabIndex = 1;
+            textBox_Soyad.TabIndex = 3;
             // 
             // label7
             // 
@@ -225,7 +225,7 @@
             textBox_Ad.Location = new Point(99, 77);
             textBox_Ad.Name = "textBox_Ad";
             textBox_Ad.Size = new Size(198, 23);
-            textBox_Ad.TabIndex = 1;
+            textBox_Ad.TabIndex = 2;
             // 
             // label2
             // 
@@ -238,6 +238,7 @@
             // 
             // textBox_PersonelId
             // 
+            textBox_PersonelId.Enabled = false;
             textBox_PersonelId.Location = new Point(99, 48);
             textBox_PersonelId.Name = "textBox_PersonelId";
             textBox_PersonelId.Size = new Size(198, 23);
@@ -278,13 +279,13 @@
             // adDataGridViewTextBoxColumn
             // 
             adDataGridViewTextBoxColumn.DataPropertyName = "Ad";
-            adDataGridViewTextBoxColumn.HeaderText = "Ad";
+            adDataGridViewTextBoxColumn.HeaderText = "Adı";
             adDataGridViewTextBoxColumn.Name = "adDataGridViewTextBoxColumn";
             // 
             // soyadDataGridViewTextBoxColumn
             // 
             soyadDataGridViewTextBoxColumn.DataPropertyName = "Soyad";
-            soyadDataGridViewTextBoxColumn.HeaderText = "Soyad";
+            soyadDataGridViewTextBoxColumn.HeaderText = "Soyadı";
             soyadDataGridViewTextBoxColumn.Name = "soyadDataGridViewTextBoxColumn";
             // 
             // cinsiyetIdDataGridViewTextBoxColumn
@@ -297,13 +298,13 @@
             // kullaniciAdiDataGridViewTextBoxColumn
             // 
             kullaniciAdiDataGridViewTextBoxColumn.DataPropertyName = "KullaniciAdi";
-            kullaniciAdiDataGridViewTextBoxColumn.HeaderText = "KullaniciAdi";
+            kullaniciAdiDataGridViewTextBoxColumn.HeaderText = "Kullanıcı adı";
             kullaniciAdiDataGridViewTextBoxColumn.Name = "kullaniciAdiDataGridViewTextBoxColumn";
             // 
             // sifreDataGridViewTextBoxColumn
             // 
             sifreDataGridViewTextBoxColumn.DataPropertyName = "Sifre";
-            sifreDataGridViewTextBoxColumn.HeaderText = "Sifre";
+            sifreDataGridViewTextBoxColumn.HeaderText = "Şifre";
             sifreDataGridViewTextBoxColumn.Name = "sifreDataGridViewTextBoxColumn";
             // 
             // personelBilgileriDtoBindingSource
@@ -351,6 +352,7 @@
             Controls.Add(dataGrid_Personel);
             Controls.Add(groupBox1);
             Icon = (Icon)resources.GetObject("$this.Icon");
+            MinimumSize = new Size(775, 500);
             Name = "frmPersonelIslemleri";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Kütüphane Otomasyonu - Personel İşlemleri";
@@ -384,12 +386,6 @@
         private Button btnAra;
         private Label label5;
         private TextBox textBox_Ara;
-        private DataGridViewTextBoxColumn personelIdDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn adDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn soyadDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn cinsiyetIdDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn kullaniciAdiDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn sifreDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn teslimEdilenlerDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn terslimAlinanlarDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn cinsiyetDataGridViewTextBoxColumn;
@@ -398,5 +394,11 @@
         private TextBox textBox_Soyad;
         private Label label7;
         private BindingSource personelBilgileriDtoBindingSource;
+        private DataGridViewTextBoxColumn personelIdDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn adDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn soyadDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn cinsiyetIdDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn kullaniciAdiDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn sifreDataGridViewTextBoxColumn;
     }
 }

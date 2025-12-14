@@ -10,4 +10,5 @@ namespace Kutuphane.DAL.Abstract
     {
         IDataResult<List<UyeDto>> UyeListeDetayliGetir(Expression<Func<Uye, bool>>? predicate = null);
     }
+
 }

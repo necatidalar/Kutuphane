@@ -1,7 +1,4 @@
-﻿
-
-using Core.Entity;
-using Kutuphane.Model.Entity;
+﻿using Core.Entity;
 
 namespace Kutuphane.Model.DTO
 {
@@ -11,13 +8,24 @@ namespace Kutuphane.Model.DTO
         public string Ad { get; set; }
         public string Soyad { get; set; }
         public DateTime? DogumTarihi { get; set; }
+        public DateTime? OlumTarihi { get; set; }
         public string AdSoyad { get { return $"{Ad} {Soyad}"; } }
-        public int Yas 
-        { get
+
+        public int? Yas
+        {
+            get
             {
-                TimeSpan fark = DateTime.Now - (DogumTarihi ?? DateTime.Now); 
-                return (int)(fark.TotalDays / 365.25);
-            } 
+                if (!DogumTarihi.HasValue)
+                    return null;
+
+                var bitisTarihi = OlumTarihi ?? DateTime.Today;
+                var yas = bitisTarihi.Year - DogumTarihi.Value.Year;
+
+                if (DogumTarihi.Value.Date > bitisTarihi.AddYears(-yas))
+                    yas--;
+
+                return yas;
+            }
         }
     }
 }

@@ -28,15 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmYeslesimAyarlari));
             SuspendLayout();
             // 
             // frmYeslesimAyarlari
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(429, 246);
+            ClientSize = new Size(752, 542);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "frmYeslesimAyarlari";
-            Text = "frmYeslesimAyarlari";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Kütüphane Otomasyonu - Yerleşim Ayarları";
             ResumeLayout(false);
         }
 
