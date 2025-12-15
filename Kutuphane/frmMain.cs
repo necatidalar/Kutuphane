@@ -88,57 +88,12 @@ namespace Kutuphane.UI
             label_OduncSayisi.Text = oduncVerilenKitapSayisi.ToString();
         }
 
-        private void yerleşimAyarlarıToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            frmYeslesimAyarlari frm = new frmYeslesimAyarlari();
-            frm.ShowDialog();
-        }
-
-        private void kitapToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            frmKitapIslemleri frm = new frmKitapIslemleri();
-            frm.ShowDialog();
-        }
-
-        private void kategoriİşlemleriToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            frmKategoriIslemleri frm = new frmKategoriIslemleri();
-            frm.ShowDialog();
-        }
-
-        private void yazarİşlemleriToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            frmYazarIslemleri frm = new frmYazarIslemleri();
-            frm.ShowDialog();
-        }
-
-        private void ödünçİşlemleriToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            frmOduncIslemleri frm = new frmOduncIslemleri
-            {
-                GirisYapanPersonelId = this.GirisYapanPersonelId
-            };
-            frm.ShowDialog();
-        }
-
-        private void üyeİşlemleriToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            frmUyeIslemleri frm = new frmUyeIslemleri();
-            frm.ShowDialog();
-        }
-
-        private void personelİşlemleriToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            frmPersonelIslemleri frm = new frmPersonelIslemleri();
-            frm.ShowDialog();
-        }
-
         private void çıkışYapToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmMain_Load(sender, e);
         }
 
-        private void dilİşlemleriToolStripMenuItem_Click(object sender, EventArgs e)
+        private void menuStrip_Click(object sender, EventArgs e)
         {
             ToolStripMenuItem menuItem = sender as ToolStripMenuItem;
             if (menuItem == null)
@@ -147,12 +102,6 @@ namespace Kutuphane.UI
                 return;
 
             FormAcByFormAdi(menuItem.Tag.ToString());
-        }
-
-        private void yayıneviİşlemleriToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            frmYayineviIslemleri frm = new frmYayineviIslemleri();
-            frm.ShowDialog();
         }
 
         private void göstergePaneliToolStripMenuItem_Click(object sender, EventArgs e)

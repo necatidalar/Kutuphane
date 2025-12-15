@@ -123,7 +123,6 @@
             // 
             // btnAra
             // 
-            btnAra.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnAra.BackColor = Color.FromArgb(52, 152, 219);
             btnAra.FlatAppearance.BorderSize = 0;
             btnAra.FlatStyle = FlatStyle.Flat;
@@ -150,13 +149,12 @@
             // 
             // textBox_Ara
             // 
-            textBox_Ara.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             textBox_Ara.Font = new Font("Segoe UI", 10F);
-            textBox_Ara.Location = new Point(439, 20);
+            textBox_Ara.Location = new Point(446, 20);
             textBox_Ara.Margin = new Padding(3, 4, 3, 4);
             textBox_Ara.Name = "textBox_Ara";
             textBox_Ara.PlaceholderText = "Dil adı veya koduyla arayın";
-            textBox_Ara.Size = new Size(383, 30);
+            textBox_Ara.Size = new Size(376, 30);
             textBox_Ara.TabIndex = 10;
             // 
             // groupBox1
@@ -304,12 +302,11 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point, 162);
-            label4.Location = new Point(26, 124);
+            label4.Location = new Point(21, 123);
             label4.Name = "label4";
             label4.Size = new Size(79, 23);
             label4.TabIndex = 17;
             label4.Text = "Dil Kodu:";
-            label4.Visible = false;
             // 
             // label1
             // 

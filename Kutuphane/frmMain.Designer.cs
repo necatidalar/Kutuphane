@@ -120,7 +120,7 @@
             yerleşimAyarlarıToolStripMenuItem.Name = "yerleşimAyarlarıToolStripMenuItem";
             yerleşimAyarlarıToolStripMenuItem.Size = new Size(196, 29);
             yerleşimAyarlarıToolStripMenuItem.Text = "⚙ Yerleşim Ayarları";
-            yerleşimAyarlarıToolStripMenuItem.Click += yerleşimAyarlarıToolStripMenuItem_Click;
+            yerleşimAyarlarıToolStripMenuItem.Click += menuStrip_Click;
             // 
             // kitapİşlemleriToolStripMenuItem
             // 
@@ -136,14 +136,14 @@
             kategoriİşlemleriToolStripMenuItem.Name = "kategoriİşlemleriToolStripMenuItem";
             kategoriİşlemleriToolStripMenuItem.Size = new Size(249, 30);
             kategoriİşlemleriToolStripMenuItem.Text = "Kategori İşlemleri";
-            kategoriİşlemleriToolStripMenuItem.Click += kategoriİşlemleriToolStripMenuItem_Click;
+            kategoriİşlemleriToolStripMenuItem.Click += menuStrip_Click;
             // 
             // yazarİşlemleriToolStripMenuItem
             // 
             yazarİşlemleriToolStripMenuItem.Name = "yazarİşlemleriToolStripMenuItem";
             yazarİşlemleriToolStripMenuItem.Size = new Size(249, 30);
             yazarİşlemleriToolStripMenuItem.Text = "Yazar İşlemleri";
-            yazarİşlemleriToolStripMenuItem.Click += yazarİşlemleriToolStripMenuItem_Click;
+            yazarİşlemleriToolStripMenuItem.Click += menuStrip_Click;
             // 
             // dilİşlemleriToolStripMenuItem
             // 
@@ -151,21 +151,21 @@
             dilİşlemleriToolStripMenuItem.Size = new Size(249, 30);
             dilİşlemleriToolStripMenuItem.Tag = "frmDilIslemleri";
             dilİşlemleriToolStripMenuItem.Text = "Dil İşlemleri";
-            dilİşlemleriToolStripMenuItem.Click += dilİşlemleriToolStripMenuItem_Click;
+            dilİşlemleriToolStripMenuItem.Click += menuStrip_Click;
             // 
             // yayıneviİşlemleriToolStripMenuItem
             // 
             yayıneviİşlemleriToolStripMenuItem.Name = "yayıneviİşlemleriToolStripMenuItem";
             yayıneviİşlemleriToolStripMenuItem.Size = new Size(249, 30);
             yayıneviİşlemleriToolStripMenuItem.Text = "Yayınevi İşlemleri";
-            yayıneviİşlemleriToolStripMenuItem.Click += yayıneviİşlemleriToolStripMenuItem_Click;
+            yayıneviİşlemleriToolStripMenuItem.Click += menuStrip_Click;
             // 
             // kitapToolStripMenuItem
             // 
             kitapToolStripMenuItem.Name = "kitapToolStripMenuItem";
             kitapToolStripMenuItem.Size = new Size(249, 30);
             kitapToolStripMenuItem.Text = "Kitap";
-            kitapToolStripMenuItem.Click += kitapToolStripMenuItem_Click;
+            kitapToolStripMenuItem.Click += menuStrip_Click;
             // 
             // ödünçİşlemleriToolStripMenuItem
             // 
@@ -174,7 +174,7 @@
             ödünçİşlemleriToolStripMenuItem.Name = "ödünçİşlemleriToolStripMenuItem";
             ödünçİşlemleriToolStripMenuItem.Size = new Size(187, 29);
             ödünçİşlemleriToolStripMenuItem.Text = "🔄 Ödünç İşlemleri";
-            ödünçİşlemleriToolStripMenuItem.Click += ödünçİşlemleriToolStripMenuItem_Click;
+            ödünçİşlemleriToolStripMenuItem.Click += menuStrip_Click;
             // 
             // üyeİşlemleriToolStripMenuItem
             // 
@@ -183,7 +183,7 @@
             üyeİşlemleriToolStripMenuItem.Name = "üyeİşlemleriToolStripMenuItem";
             üyeİşlemleriToolStripMenuItem.Size = new Size(164, 29);
             üyeİşlemleriToolStripMenuItem.Text = "👥 Üye İşlemleri";
-            üyeİşlemleriToolStripMenuItem.Click += üyeİşlemleriToolStripMenuItem_Click;
+            üyeİşlemleriToolStripMenuItem.Click += menuStrip_Click;
             // 
             // personelİşlemleriToolStripMenuItem
             // 
@@ -192,7 +192,7 @@
             personelİşlemleriToolStripMenuItem.Name = "personelİşlemleriToolStripMenuItem";
             personelİşlemleriToolStripMenuItem.Size = new Size(203, 29);
             personelİşlemleriToolStripMenuItem.Text = "👔 Personel İşlemleri";
-            personelİşlemleriToolStripMenuItem.Click += personelİşlemleriToolStripMenuItem_Click;
+            personelİşlemleriToolStripMenuItem.Click += menuStrip_Click;
             // 
             // raporlamaToolStripMenuItem
             // 
