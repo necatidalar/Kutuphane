@@ -1,7 +1,5 @@
-﻿using Core.Utility.Results;
-using Kutuphane.Model.Entity;
-using Microsoft.EntityFrameworkCore.Migrations;
-using System.Drawing;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
+
 
 #nullable disable
 

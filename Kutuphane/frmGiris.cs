@@ -58,8 +58,8 @@ namespace Kutuphane.UI
                 Properties.Settings.Default.RememberMe = false;
             }
 
-
             Properties.Settings.Default.Save();
+
             var personelResult =_personelService.PersonelBilgiGetirServis(p=>p.KullaniciAdi == loginUserDto.KullaniciAdi);
             if (!personelResult.IsSuccess || personelResult.Data.Count == 0 )
             {
@@ -81,8 +81,8 @@ namespace Kutuphane.UI
             base.OnMouseDown(e);
             if (e.Button == MouseButtons.Left)
             {
-                Parent.Capture = false;
-                Message msg = Message.Create(Parent.Handle, 0XA1, new IntPtr(2), IntPtr.Zero);
+                this.Capture = false;
+                Message msg = Message.Create(this.Handle, 0XA1, new IntPtr(2), IntPtr.Zero);
                 this.WndProc(ref msg);
             }
         }

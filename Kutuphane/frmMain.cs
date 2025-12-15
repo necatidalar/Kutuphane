@@ -9,7 +9,6 @@ namespace Kutuphane.UI
         KitapManager _kitapManager;
         UyeManager _uyeManager;
 
-        //public string GirisYapanKullanici { get; set; }
         public int GirisYapanPersonelId { get; set; }
         public string GirisYapanPersonelAd { get; private set; }
         public string GirisYapanPersonelSoyad { get; private set; }
@@ -22,28 +21,6 @@ namespace Kutuphane.UI
             _uyeManager = new UyeManager(new UyeDal());
             loginPersoneli = new PersonelBilgileriDto();
         }
-
-
-        private void ShowHideTopPanels(bool showDashboard, bool showMenu)
-        {
-            panel_Ust.Visible = showDashboard;
-            flowLayoutPanel_Kartlar.Visible = showDashboard;
-            menuStrip1.Visible = showMenu;
-            if (showDashboard)
-                timer_Dashboard.Start();
-            else
-                timer_Dashboard.Stop();
-        }
-
-        private void SetForLoginView(bool login)
-        {
-            ShowHideTopPanels(!login, !login);
-            FormBorderStyle = login ? FormBorderStyle.None : FormBorderStyle.Sizable;
-            WindowState = login ? FormWindowState.Normal : FormWindowState.Maximized;
-            AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            AutoSize = login;
-        }
-
         private void frmMain_Load(object sender, EventArgs e)
         {
             SetForLoginView(true);
@@ -67,12 +44,29 @@ namespace Kutuphane.UI
                 }
                 else
                 {
-                    this.Close();
+                    Application.Exit();
                 }
-            };  
-            
-        }
+            };
 
+        }
+        private void ShowHideTopPanels(bool showDashboard, bool showMenu)
+        {
+            panel_Ust.Visible = showDashboard;
+            flowLayoutPanel_Kartlar.Visible = showDashboard;
+            menuStrip1.Visible = showMenu;
+            if (showDashboard)
+                timer_Dashboard.Start();
+            else
+                timer_Dashboard.Stop();
+        }
+        private void SetForLoginView(bool login)
+        {
+            ShowHideTopPanels(!login, !login);
+            FormBorderStyle = login ? FormBorderStyle.None : FormBorderStyle.Sizable;
+            WindowState = login ? FormWindowState.Normal : FormWindowState.Maximized;
+            AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            AutoSize = login;
+        }
         private void Listele()
         {
             var kitapResult = _kitapManager.GetListByFilterService(x => x.Aktif == true);
@@ -87,12 +81,10 @@ namespace Kutuphane.UI
             int oduncVerilenKitapSayisi = oduncVerilenKitapResult.IsSuccess ? oduncVerilenKitapResult.Data.Count : 0;
             label_OduncSayisi.Text = oduncVerilenKitapSayisi.ToString();
         }
-
         private void çıkışYapToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmMain_Load(sender, e);
         }
-
         private void menuStrip_Click(object sender, EventArgs e)
         {
             ToolStripMenuItem menuItem = sender as ToolStripMenuItem;
@@ -103,17 +95,10 @@ namespace Kutuphane.UI
 
             FormAcByFormAdi(menuItem.Tag.ToString());
         }
-
-        private void göstergePaneliToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Listele();
-        }
-
         private void timer_Dashboard_Tick(object sender, EventArgs e)
         {
             Listele();
         }
-
         private Type FormAdindanFormBul(string searchTag)
         {
             try
@@ -129,7 +114,7 @@ namespace Kutuphane.UI
                     using (var tempForm = (Form)Activator.CreateInstance(formType))
                     {
                         // Tag özelliğini kontrol et
-                        if (tempForm.Name != null && 
+                        if (tempForm.Name != null &&
                             tempForm.Name.Equals(searchTag, StringComparison.OrdinalIgnoreCase))
                         {
                             return formType;
@@ -141,25 +126,24 @@ namespace Kutuphane.UI
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Form arama hatası: {ex.Message}", "Hata", 
+                MessageBox.Show($"Form arama hatası: {ex.Message}", "Hata",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
         }
-
         private void FormAcByFormAdi(string FormName)
         {
             var formType = FormAdindanFormBul(FormName);
-            
+
             if (formType == null)
             {
-                MessageBox.Show($"'{FormName}' tag'ine sahip form bulunamadı.", "Uyarı", 
+                MessageBox.Show($"'{FormName}' tag'ine sahip form bulunamadı.", "Uyarı",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             // Form'u aç
-            ShowHideTopPanels(false,true);
+            ShowHideTopPanels(false, true);
             Form childForm = (Form)Activator.CreateInstance(formType);
             childForm.MdiParent = this;
             childForm.FormBorderStyle = FormBorderStyle.None;
@@ -168,6 +152,17 @@ namespace Kutuphane.UI
             childForm.Show();
 
         }
-
+        private void gostergePaneliToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Listele();
+        }
+        private void cikisYapToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowHideTopPanels(false, true);
+            frmGiris girisForm = new frmGiris();
+            girisForm.MdiParent = this;
+            ActivateMdiChild(girisForm);
+            girisForm.Show();
+        }
     }
 }
