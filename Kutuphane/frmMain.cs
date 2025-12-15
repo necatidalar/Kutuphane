@@ -1,5 +1,6 @@
 ﻿using Kutuphane.BLL.Concrete;
 using Kutuphane.DAL.Concrete;
+using Kutuphane.Model.DTO;
 
 namespace Kutuphane.UI
 {
@@ -12,34 +13,64 @@ namespace Kutuphane.UI
         public int GirisYapanPersonelId { get; set; }
         public string GirisYapanPersonelAd { get; private set; }
         public string GirisYapanPersonelSoyad { get; private set; }
-
+        public PersonelBilgileriDto loginPersoneli { get; set; }
         public frmMain()
         {
             InitializeComponent();
 
             _kitapManager = new KitapManager(new KitapDal());
             _uyeManager = new UyeManager(new UyeDal());
+            loginPersoneli = new PersonelBilgileriDto();
+        }
+
+
+        private void ShowHideTopPanels(bool showDashboard, bool showMenu)
+        {
+            panel_Ust.Visible = showDashboard;
+            flowLayoutPanel_Kartlar.Visible = showDashboard;
+            menuStrip1.Visible = showMenu;
+            if (showDashboard)
+                timer_Dashboard.Start();
+            else
+                timer_Dashboard.Stop();
+        }
+
+        private void SetForLoginView(bool login)
+        {
+            ShowHideTopPanels(!login, !login);
+            FormBorderStyle = login ? FormBorderStyle.None : FormBorderStyle.Sizable;
+            WindowState = login ? FormWindowState.Normal : FormWindowState.Maximized;
+            AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            AutoSize = login;
         }
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            flowLayoutPanel_Kartlar.Visible = false;
-            lblKullaniciAdi.Visible = false;
+            SetForLoginView(true);
+
             frmGiris girisForm = new frmGiris();
-            if (girisForm.ShowDialog() == DialogResult.OK)
+            girisForm.MdiParent = this;
+            ActivateMdiChild(girisForm);
+            girisForm.Show();
+            girisForm.FormClosed += (s, args) =>
             {
-                this.GirisYapanPersonelAd = girisForm.GirisYapanPersonelAd;
-                this.GirisYapanPersonelSoyad = girisForm.GirisYapanPersonelSoyad;
-                this.GirisYapanPersonelId = girisForm.GirisYapanPersonelId;
-                lblKullaniciAdi.Text = $"Hoşgeldin, {this.GirisYapanPersonelAd} {this.GirisYapanPersonelSoyad}";
-                flowLayoutPanel_Kartlar.Visible = true;
-                lblKullaniciAdi.Visible = true;
-                Listele();
-            }
-            else
-            {
-                this.Close();
-            }
+                if (girisForm.GirisYapanPersonel != null && girisForm.GirisYapanPersonel.PersonelId > 0)
+                {
+                    loginPersoneli = girisForm.GirisYapanPersonel;
+                    this.GirisYapanPersonelId = loginPersoneli.PersonelId;
+                    this.GirisYapanPersonelAd = loginPersoneli.Ad;
+                    this.GirisYapanPersonelSoyad = loginPersoneli.Soyad;
+                    lblKullaniciAdi.Text = $"Hoşgeldin, {this.GirisYapanPersonelAd} {this.GirisYapanPersonelSoyad}";
+                    SetForLoginView(false);
+                    ShowHideTopPanels(true, true);
+                    Listele();
+                }
+                else
+                {
+                    this.Close();
+                }
+            };  
+            
         }
 
         private void Listele()
@@ -63,7 +94,7 @@ namespace Kutuphane.UI
             frm.ShowDialog();
         }
 
-        private void kitapİşlemleriToolStripMenuItem_Click(object sender, EventArgs e)
+        private void kitapToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmKitapIslemleri frm = new frmKitapIslemleri();
             frm.ShowDialog();
@@ -109,8 +140,13 @@ namespace Kutuphane.UI
 
         private void dilİşlemleriToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmDilIslemleri frm = new frmDilIslemleri();
-            frm.ShowDialog();
+            ToolStripMenuItem menuItem = sender as ToolStripMenuItem;
+            if (menuItem == null)
+                return;
+            if (menuItem.Tag == null)
+                return;
+
+            FormAcByFormAdi(menuItem.Tag.ToString());
         }
 
         private void yayıneviİşlemleriToolStripMenuItem_Click(object sender, EventArgs e)
@@ -123,5 +159,66 @@ namespace Kutuphane.UI
         {
             Listele();
         }
+
+        private void timer_Dashboard_Tick(object sender, EventArgs e)
+        {
+            Listele();
+        }
+
+        private Type FormAdindanFormBul(string searchTag)
+        {
+            try
+            {
+                // Assembly'deki tüm Form türlerini al
+                var formTypes = System.Reflection.Assembly.GetExecutingAssembly()
+                    .GetTypes()
+                    .Where(t => t.IsSubclassOf(typeof(Form)) && !t.IsAbstract);
+
+                foreach (var formType in formTypes)
+                {
+                    // Form instance'ı oluştur (geçici olarak)
+                    using (var tempForm = (Form)Activator.CreateInstance(formType))
+                    {
+                        // Tag özelliğini kontrol et
+                        if (tempForm.Name != null && 
+                            tempForm.Name.Equals(searchTag, StringComparison.OrdinalIgnoreCase))
+                        {
+                            return formType;
+                        }
+                    }
+                }
+
+                return null;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Form arama hatası: {ex.Message}", "Hata", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
+        }
+
+        private void FormAcByFormAdi(string FormName)
+        {
+            var formType = FormAdindanFormBul(FormName);
+            
+            if (formType == null)
+            {
+                MessageBox.Show($"'{FormName}' tag'ine sahip form bulunamadı.", "Uyarı", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Form'u aç
+            ShowHideTopPanels(false,true);
+            Form childForm = (Form)Activator.CreateInstance(formType);
+            childForm.MdiParent = this;
+            childForm.FormBorderStyle = FormBorderStyle.None;
+            ActivateMdiChild(childForm);
+            childForm.Dock = DockStyle.Fill;
+            childForm.Show();
+
+        }
+
     }
 }

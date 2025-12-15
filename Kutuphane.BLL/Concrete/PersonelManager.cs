@@ -2,15 +2,19 @@
 using Core.Utility.Results;
 using Kutuphane.BLL.Abstract;
 using Kutuphane.DAL.Abstract;
+using Kutuphane.DAL.Concrete;
 using Kutuphane.Model.DTO;
 using Kutuphane.Model.Entity;
+using Microsoft.IdentityModel.Tokens;
 using System.Linq.Expressions;
+using System.Reflection.Metadata;
 
 namespace Kutuphane.BLL.Concrete
 {
     public class PersonelManager : IPersonelService
     {
         readonly IPersonelDal _personelDal;
+        
 
         public PersonelManager(IPersonelDal personelDal)
         {
@@ -116,25 +120,21 @@ namespace Kutuphane.BLL.Concrete
         // ---------------------------------------------
         // Giris
         // ---------------------------------------------
-        public IDataResult<Personel> Login(string kullaniciAdi, string sifre)
+        public IResult Login(LoginUserDto kullanici)
         {
-            if (string.IsNullOrWhiteSpace(kullaniciAdi) || string.IsNullOrWhiteSpace(sifre))
-                return new ErrorDataResult<Personel>("Kullanıcı adı veya şifre boş olamaz.");
+            if (string.IsNullOrWhiteSpace(kullanici.KullaniciAdi) || string.IsNullOrWhiteSpace(kullanici.Sifre))
+                return new ErrorResult("Kullanıcı adı veya şifre boş olamaz.");
 
-            var result = _personelDal.GetByFilter(p =>
-                p.KullaniciAdi.ToLower() == kullaniciAdi.ToLower() &&
-                p.AktifMi == true
-            );
+           IFunctionService  _functionService = new FunctionManager( new FunctionDal());
+            var funcResult = _functionService.ExecuteScalarFunctionService<bool>("fn_LoginKontrol", new object[] { kullanici.KullaniciAdi, kullanici.Sifre });
 
-            if (result.Data == null)
-                return new ErrorDataResult<Personel>("Kullanıcı adı veya şifre hatalı.");
+            if (!funcResult.IsSuccess)
+                return new ErrorResult("Kullanıcı kontrolü sırasında bir hata oluştu.");
 
-            var encodedPassword = SecurityHelper.EncodeBase64(sifre);
+            if (funcResult.Data == false)
+                return new ErrorResult("Kullanıcı adı veya şifre hatalı.");
 
-            if (result.Data.Sifre != encodedPassword)
-                return new ErrorDataResult<Personel>("Kullanıcı adı veya şifre hatalı.");
-
-            return new SuccessDataResult<Personel>(result.Data, "Giriş başarılı.");
+            return new SuccessResult("Giriş başarılı.");
         }
 
 

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Kutuphane.DAL.Migrations
 {
     [DbContext(typeof(KutuphaneDbContext))]
-    [Migration("20251213175854_ssd")]
-    partial class ssd
+    [Migration("20251215071557_table")]
+    partial class table
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -24,8 +24,8 @@ namespace Kutuphane.DAL.Concrete
                         PersonelId = x.PersonelId,
                         Ad = x.Ad,
                         Soyad = x.Soyad,
-                        KullaniciAdi = x.KullaniciAdi,
-                        Sifre = x.Sifre,
+                        //KullaniciAdi = x.KullaniciAdi,
+                        //Sifre = x.Sifre,
                         CinsiyetId = x.CinsiyetId,
                         CinsiyetAdi = x.Cinsiyet.CinsiyetAdi,
                         AktifMi = x.AktifMi

@@ -63,7 +63,7 @@ namespace Kutuphane.DAL.Concrete.Configuration
                     Soyad = "Dalmaz",
                     CinsiyetId = 1,
                     KullaniciAdi = "neci",
-                    Sifre = "MTIz", //base64 12345"
+                    Sifre = "MTIz", //base64 123"
                     AktifMi = true
                 }
             );

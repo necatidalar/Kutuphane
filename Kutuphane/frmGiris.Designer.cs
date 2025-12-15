@@ -60,9 +60,9 @@
             label_Logo.AutoSize = true;
             label_Logo.Font = new Font("Segoe UI", 60F);
             label_Logo.ForeColor = Color.White;
-            label_Logo.Location = new Point(55, 60);
+            label_Logo.Location = new Point(35, 38);
             label_Logo.Name = "label_Logo";
-            label_Logo.Size = new Size(132, 106);
+            label_Logo.Size = new Size(194, 133);
             label_Logo.TabIndex = 2;
             label_Logo.Text = "🔐";
             // 
@@ -71,9 +71,9 @@
             label_Baslik2.AutoSize = true;
             label_Baslik2.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point, 162);
             label_Baslik2.ForeColor = Color.White;
-            label_Baslik2.Location = new Point(48, 208);
+            label_Baslik2.Location = new Point(45, 217);
             label_Baslik2.Name = "label_Baslik2";
-            label_Baslik2.Size = new Size(147, 30);
+            label_Baslik2.Size = new Size(169, 37);
             label_Baslik2.TabIndex = 1;
             label_Baslik2.Text = "Otomasyonu";
             // 
@@ -84,7 +84,7 @@
             label_Baslik1.ForeColor = Color.White;
             label_Baslik1.Location = new Point(45, 171);
             label_Baslik1.Name = "label_Baslik1";
-            label_Baslik1.Size = new Size(157, 37);
+            label_Baslik1.Size = new Size(195, 46);
             label_Baslik1.TabIndex = 0;
             label_Baslik1.Text = "Kütüphane";
             // 
@@ -95,7 +95,7 @@
             textBox_KullaniciAdi.Margin = new Padding(4);
             textBox_KullaniciAdi.Name = "textBox_KullaniciAdi";
             textBox_KullaniciAdi.PlaceholderText = "Kullanıcı adınızı giriniz";
-            textBox_KullaniciAdi.Size = new Size(298, 29);
+            textBox_KullaniciAdi.Size = new Size(298, 34);
             textBox_KullaniciAdi.TabIndex = 1;
             // 
             // textBox_Sifre
@@ -106,7 +106,7 @@
             textBox_Sifre.Name = "textBox_Sifre";
             textBox_Sifre.PasswordChar = '●';
             textBox_Sifre.PlaceholderText = "Şifrenizi giriniz";
-            textBox_Sifre.Size = new Size(298, 29);
+            textBox_Sifre.Size = new Size(298, 34);
             textBox_Sifre.TabIndex = 2;
             textBox_Sifre.UseSystemPasswordChar = true;
             // 
@@ -117,7 +117,7 @@
             label1.ForeColor = Color.DimGray;
             label1.Location = new Point(286, 72);
             label1.Name = "label1";
-            label1.Size = new Size(111, 19);
+            label1.Size = new Size(136, 23);
             label1.TabIndex = 3;
             label1.Text = "👤 Kullanıcı Adı:";
             // 
@@ -128,7 +128,7 @@
             label2.ForeColor = Color.DimGray;
             label2.Location = new Point(286, 148);
             label2.Name = "label2";
-            label2.Size = new Size(62, 19);
+            label2.Size = new Size(77, 23);
             label2.TabIndex = 3;
             label2.Text = "🔑 Şifre:";
             // 
@@ -155,7 +155,7 @@
             checkBox_BeniHatirla.ForeColor = Color.FromArgb(64, 64, 64);
             checkBox_BeniHatirla.Location = new Point(286, 215);
             checkBox_BeniHatirla.Name = "checkBox_BeniHatirla";
-            checkBox_BeniHatirla.Size = new Size(99, 23);
+            checkBox_BeniHatirla.Size = new Size(120, 27);
             checkBox_BeniHatirla.TabIndex = 3;
             checkBox_BeniHatirla.Text = "Beni Hatırla";
             checkBox_BeniHatirla.UseVisualStyleBackColor = true;
@@ -177,7 +177,7 @@
             // frmGiris
             // 
             AcceptButton = btnGiris;
-            AutoScaleDimensions = new SizeF(9F, 21F);
+            AutoScaleDimensions = new SizeF(11F, 28F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(635, 350);
@@ -195,7 +195,8 @@
             Margin = new Padding(4);
             MaximizeBox = false;
             Name = "frmGiris";
-            StartPosition = FormStartPosition.CenterScreen;
+            ShowInTaskbar = false;
+            StartPosition = FormStartPosition.CenterParent;
             Text = "Kütüphane Giriş";
             Load += frmGiris_Load;
             panel_Sol.ResumeLayout(false);

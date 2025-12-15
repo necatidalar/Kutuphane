@@ -302,7 +302,6 @@ namespace Kutuphane.UI
                 textBox_Ad.Text = row.Ad;
                 textBox_Soyad.Text = row.Soyad;
                 comboBox_Cinsiyet.SelectedValue = row.CinsiyetId;
-                textBox_KullaniciAdi.Text = row.KullaniciAdi;
                 return;
             }
             btnTemizle.PerformClick();
