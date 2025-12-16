@@ -37,7 +37,7 @@ namespace Kutuphane.DAL.Concrete
                         KategoriAdi = k.Kategori.KategoriAdi,
                         BasimYili = k.BasimYili,
                         SayfaSayisi = k.SayfaSayisi,
-                        DilId = k.DilId,
+                        DilId = k.Diller.DilId,
                         Dil = k.Diller.DilAdi,
                         Stok = k.Stok,
                         Aktif = k.Aktif

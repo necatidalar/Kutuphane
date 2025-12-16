@@ -36,7 +36,7 @@ namespace Kutuphane.UI
 
             if (!uyeResult.IsSuccess)
             {
-                MessageBox.Show(uyeResult.Message, "Hata");
+                MessageBox.Show(uyeResult.Message, "Hata", MessageBoxButtons.OK,MessageBoxIcon.Error);
                 return;
             }
 

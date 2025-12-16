@@ -81,6 +81,12 @@ namespace Kutuphane.BLL.Concrete
             if (entity.KitapId <= 0)
                 return new ErrorResult("Geçersiz kitap seçimi.");
 
+            if (!string.IsNullOrWhiteSpace(entity.ISBN))
+            {
+                var kontrol = _kitapDal.GetByFilter(x => x.ISBN == entity.ISBN && x.KitapId != entity.KitapId);
+                if (kontrol.IsSuccess && kontrol.Data != null)
+                    return new ErrorResult("Bu ISBN ile kayıtlı başka bir kitap zaten var.");
+            }
             var validation = Validate(entity, isUpdate: true);
             if (!validation.IsSuccess)
                 return validation;

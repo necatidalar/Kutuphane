@@ -8,13 +8,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Core\Core.csproj" />
-    <ProjectReference Include="..\Kutuphane.DAL\Kutuphane.DAL.csproj" />
-    <ProjectReference Include="..\Kutuphane.Model\Kutuphane.Model.csproj" />
+    <Compile Remove="Services\**" />
+    <EmbeddedResource Remove="Services\**" />
+    <None Remove="Services\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\" />
+    <ProjectReference Include="..\Core\Core.csproj" />
+    <ProjectReference Include="..\Kutuphane.DAL\Kutuphane.DAL.csproj" />
+    <ProjectReference Include="..\Kutuphane.Model\Kutuphane.Model.csproj" />
   </ItemGroup>
 
 </Project>

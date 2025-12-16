@@ -52,18 +52,16 @@
             textBox_PersonelId = new TextBox();
             label1 = new Label();
             dataGrid_Personel = new DataGridView();
-            personelBilgileriDtoBindingSource = new BindingSource(components);
-            btnAra = new Button();
-            label5 = new Label();
-            textBox_Ara = new TextBox();
             personelIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             adDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             soyadDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             cinsiyetAdiDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            kullaniciAdiDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            sifreDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             cinsiyetIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             aktifMiDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
+            personelBilgileriDtoBindingSource = new BindingSource(components);
+            btnAra = new Button();
+            label5 = new Label();
+            textBox_Ara = new TextBox();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGrid_Personel).BeginInit();
             ((System.ComponentModel.ISupportInitialize)personelBilgileriDtoBindingSource).BeginInit();
@@ -318,7 +316,7 @@
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dataGrid_Personel.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGrid_Personel.ColumnHeadersHeight = 30;
-            dataGrid_Personel.Columns.AddRange(new DataGridViewColumn[] { personelIdDataGridViewTextBoxColumn, adDataGridViewTextBoxColumn, soyadDataGridViewTextBoxColumn, cinsiyetAdiDataGridViewTextBoxColumn, kullaniciAdiDataGridViewTextBoxColumn, sifreDataGridViewTextBoxColumn, cinsiyetIdDataGridViewTextBoxColumn, aktifMiDataGridViewCheckBoxColumn });
+            dataGrid_Personel.Columns.AddRange(new DataGridViewColumn[] { personelIdDataGridViewTextBoxColumn, adDataGridViewTextBoxColumn, soyadDataGridViewTextBoxColumn, cinsiyetAdiDataGridViewTextBoxColumn, cinsiyetIdDataGridViewTextBoxColumn, aktifMiDataGridViewCheckBoxColumn });
             dataGrid_Personel.DataSource = personelBilgileriDtoBindingSource;
             dataGrid_Personel.EnableHeadersVisualStyles = false;
             dataGrid_Personel.GridColor = Color.LightGray;
@@ -337,47 +335,6 @@
             dataGrid_Personel.TabIndex = 1;
             dataGrid_Personel.CellFormatting += dataGrid_Personel_CellFormatting;
             dataGrid_Personel.SelectionChanged += dataGrid_Personel_SelectionChanged;
-            // 
-            // personelBilgileriDtoBindingSource
-            // 
-            personelBilgileriDtoBindingSource.DataSource = typeof(Model.DTO.PersonelBilgileriDto);
-            // 
-            // btnAra
-            // 
-            btnAra.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnAra.BackColor = Color.FromArgb(41, 128, 185);
-            btnAra.FlatAppearance.BorderSize = 0;
-            btnAra.FlatStyle = FlatStyle.Flat;
-            btnAra.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            btnAra.ForeColor = Color.White;
-            btnAra.Location = new Point(982, 11);
-            btnAra.Name = "btnAra";
-            btnAra.Size = new Size(75, 25);
-            btnAra.TabIndex = 14;
-            btnAra.Text = "🔍 ARA";
-            btnAra.UseVisualStyleBackColor = false;
-            btnAra.Click += btnAra_Click;
-            // 
-            // label5
-            // 
-            label5.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
-            label5.Location = new Point(660, 14);
-            label5.Name = "label5";
-            label5.Size = new Size(33, 19);
-            label5.TabIndex = 0;
-            label5.Text = "Ara:";
-            // 
-            // textBox_Ara
-            // 
-            textBox_Ara.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            textBox_Ara.Font = new Font("Segoe UI", 10F);
-            textBox_Ara.Location = new Point(700, 12);
-            textBox_Ara.Name = "textBox_Ara";
-            textBox_Ara.PlaceholderText = "Ad, Soyad veya Kullanıcı Adı ile arayın";
-            textBox_Ara.Size = new Size(276, 25);
-            textBox_Ara.TabIndex = 13;
             // 
             // personelIdDataGridViewTextBoxColumn
             // 
@@ -408,20 +365,6 @@
             cinsiyetAdiDataGridViewTextBoxColumn.Name = "cinsiyetAdiDataGridViewTextBoxColumn";
             cinsiyetAdiDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // kullaniciAdiDataGridViewTextBoxColumn
-            // 
-            kullaniciAdiDataGridViewTextBoxColumn.DataPropertyName = "KullaniciAdi";
-            kullaniciAdiDataGridViewTextBoxColumn.HeaderText = "Kullanıcı Adı";
-            kullaniciAdiDataGridViewTextBoxColumn.Name = "kullaniciAdiDataGridViewTextBoxColumn";
-            kullaniciAdiDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // sifreDataGridViewTextBoxColumn
-            // 
-            sifreDataGridViewTextBoxColumn.DataPropertyName = "Sifre";
-            sifreDataGridViewTextBoxColumn.HeaderText = "Şifre";
-            sifreDataGridViewTextBoxColumn.Name = "sifreDataGridViewTextBoxColumn";
-            sifreDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
             // cinsiyetIdDataGridViewTextBoxColumn
             // 
             cinsiyetIdDataGridViewTextBoxColumn.DataPropertyName = "CinsiyetId";
@@ -437,6 +380,47 @@
             aktifMiDataGridViewCheckBoxColumn.Name = "aktifMiDataGridViewCheckBoxColumn";
             aktifMiDataGridViewCheckBoxColumn.ReadOnly = true;
             aktifMiDataGridViewCheckBoxColumn.Visible = false;
+            // 
+            // personelBilgileriDtoBindingSource
+            // 
+            personelBilgileriDtoBindingSource.DataSource = typeof(Model.DTO.PersonelBilgileriDto);
+            // 
+            // btnAra
+            // 
+            btnAra.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnAra.BackColor = Color.FromArgb(41, 128, 185);
+            btnAra.FlatAppearance.BorderSize = 0;
+            btnAra.FlatStyle = FlatStyle.Flat;
+            btnAra.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            btnAra.ForeColor = Color.White;
+            btnAra.Location = new Point(982, 11);
+            btnAra.Name = "btnAra";
+            btnAra.Size = new Size(75, 25);
+            btnAra.TabIndex = 14;
+            btnAra.Text = "🔍 ARA";
+            btnAra.UseVisualStyleBackColor = false;
+            btnAra.Click += btnAra_Click;
+            // 
+            // label5
+            // 
+            label5.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
+            label5.Location = new Point(661, 15);
+            label5.Name = "label5";
+            label5.Size = new Size(33, 19);
+            label5.TabIndex = 0;
+            label5.Text = "Ara:";
+            // 
+            // textBox_Ara
+            // 
+            textBox_Ara.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            textBox_Ara.Font = new Font("Segoe UI", 10F);
+            textBox_Ara.Location = new Point(700, 12);
+            textBox_Ara.Name = "textBox_Ara";
+            textBox_Ara.PlaceholderText = "Ad, Soyad veya Kullanıcı Adı ile arayın";
+            textBox_Ara.Size = new Size(276, 25);
+            textBox_Ara.TabIndex = 13;
             // 
             // frmPersonelIslemleri
             // 

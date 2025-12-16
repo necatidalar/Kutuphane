@@ -23,30 +23,31 @@ namespace Kutuphane.UI
         }
         private void frmMain_Load(object sender, EventArgs e)
         {
-            SetForLoginView(true);
+            Logout();
+            //SetForLoginView(true);
 
-            frmGiris girisForm = new frmGiris();
-            girisForm.MdiParent = this;
-            ActivateMdiChild(girisForm);
-            girisForm.Show();
-            girisForm.FormClosed += (s, args) =>
-            {
-                if (girisForm.GirisYapanPersonel != null && girisForm.GirisYapanPersonel.PersonelId > 0)
-                {
-                    loginPersoneli = girisForm.GirisYapanPersonel;
-                    this.GirisYapanPersonelId = loginPersoneli.PersonelId;
-                    this.GirisYapanPersonelAd = loginPersoneli.Ad;
-                    this.GirisYapanPersonelSoyad = loginPersoneli.Soyad;
-                    lblKullaniciAdi.Text = $"Hoşgeldin, {this.GirisYapanPersonelAd} {this.GirisYapanPersonelSoyad}";
-                    SetForLoginView(false);
-                    ShowHideTopPanels(true, true);
-                    Listele();
-                }
-                else
-                {
-                    Application.Exit();
-                }
-            };
+            //frmGiris girisForm = new frmGiris();
+            //girisForm.MdiParent = this;
+            //ActivateMdiChild(girisForm);
+            //girisForm.Show();
+            //girisForm.FormClosed += (s, args) =>
+            //{
+            //    if (girisForm.GirisYapanPersonel != null && girisForm.GirisYapanPersonel.PersonelId > 0)
+            //    {
+            //        loginPersoneli = girisForm.GirisYapanPersonel;
+            //        this.GirisYapanPersonelId = loginPersoneli.PersonelId;
+            //        this.GirisYapanPersonelAd = loginPersoneli.Ad;
+            //        this.GirisYapanPersonelSoyad = loginPersoneli.Soyad;
+            //        lblKullaniciAdi.Text = $"Hoşgeldin, {this.GirisYapanPersonelAd} {this.GirisYapanPersonelSoyad}";
+            //        SetForLoginView(false);
+            //        ShowHideTopPanels(true, true);
+            //        Listele();
+            //    }
+            //    else
+            //    {
+            //        Application.Exit();
+            //    }
+            //};
 
         }
         private void ShowHideTopPanels(bool showDashboard, bool showMenu)
@@ -159,15 +160,60 @@ namespace Kutuphane.UI
         private void gostergePaneliToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Listele();
+            ShowHideTopPanels(true, true);
         }
         private void cikisYapToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShowHideTopPanels(false, true);
+            Logout();
+        }
+
+        private void Logout()
+        {
+            // State temizliği
+            GirisYapanPersonelId = 0;
+            GirisYapanPersonelAd = null;
+            GirisYapanPersonelSoyad = null;
+            loginPersoneli = null;
+
+            lblKullaniciAdi.Text = string.Empty;
+
+            // Açık MDI formları kapat
+            foreach (Form child in MdiChildren)
+                child.Close();
+
+            timer_Dashboard.Stop();
+
+            SetForLoginView(true);
+
+            // Login ekranını aç
             frmGiris girisForm = new frmGiris();
             girisForm.MdiParent = this;
-            ActivateMdiChild(girisForm);
-
+            girisForm.FormClosed += LoginFormClosed;
             girisForm.Show();
+        }
+        private void LoginFormClosed(object sender, FormClosedEventArgs e)
+        {
+            frmGiris girisForm = sender as frmGiris;
+
+            if (girisForm?.GirisYapanPersonel == null)
+            {
+                Application.Exit();
+                return;
+            }
+
+            loginPersoneli = girisForm.GirisYapanPersonel;
+
+            GirisYapanPersonelId = loginPersoneli.PersonelId;
+            GirisYapanPersonelAd = loginPersoneli.Ad;
+            GirisYapanPersonelSoyad = loginPersoneli.Soyad;
+
+            lblKullaniciAdi.Text =
+                $"Hoşgeldin, {GirisYapanPersonelAd} {GirisYapanPersonelSoyad}";
+
+            SetForLoginView(false);
+            ShowHideTopPanels(true, true);
+            timer_Dashboard.Start();
+            Listele();
         }
     }
 }
