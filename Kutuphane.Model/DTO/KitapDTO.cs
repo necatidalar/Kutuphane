@@ -16,6 +16,7 @@ namespace Kutuphane.Model.DTO
         public string KategoriAdi { get; set; }
         public int? BasimYili { get; set; }
         public int? SayfaSayisi { get; set; }
+        public int DilId { get; set; }
         public string Dil { get; set; }
         public int Stok { get; set; }
         public bool Aktif { get; set; }

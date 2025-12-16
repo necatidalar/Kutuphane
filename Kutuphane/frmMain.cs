@@ -62,10 +62,10 @@ namespace Kutuphane.UI
         private void SetForLoginView(bool login)
         {
             ShowHideTopPanels(!login, !login);
-            FormBorderStyle = login ? FormBorderStyle.None : FormBorderStyle.Sizable;
+            //FormBorderStyle = login ? FormBorderStyle.None : FormBorderStyle.Sizable;
             WindowState = login ? FormWindowState.Normal : FormWindowState.Maximized;
-            AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            AutoSize = login;
+            //AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            AutoSize = false /*login*/;
         }
         private void Listele()
         {
@@ -144,7 +144,11 @@ namespace Kutuphane.UI
 
             // Form'u aç
             ShowHideTopPanels(false, true);
-            Form childForm = (Form)Activator.CreateInstance(formType);
+            Form? childForm = (Form)Activator.CreateInstance(formType);
+            if (childForm == ActiveMdiChild || childForm == null)
+                return;
+
+            ActiveMdiChild?.Close();
             childForm.MdiParent = this;
             childForm.FormBorderStyle = FormBorderStyle.None;
             ActivateMdiChild(childForm);
@@ -162,6 +166,7 @@ namespace Kutuphane.UI
             frmGiris girisForm = new frmGiris();
             girisForm.MdiParent = this;
             ActivateMdiChild(girisForm);
+
             girisForm.Show();
         }
     }

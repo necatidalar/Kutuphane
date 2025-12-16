@@ -1,42 +1,66 @@
-﻿using Kutuphane.BLL.Concrete;
+﻿using Kutuphane.BLL.Abstract;
+using Kutuphane.BLL.Concrete;
 using Kutuphane.DAL.Concrete;
+using Kutuphane.Model.DTO;
 using Kutuphane.Model.Entity;
+using Kutuphane.UI.UIMetodlar;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace Kutuphane.UI
 {
     public partial class frmKitapIslemleri : Form
     {
-        KitapManager _kitapManager;
-        YazarManager _yazarManager;
-        KategoriManager _kategoriManager;
-        YayineviManager _yayineviManager;
-        DilManager _dilManager;
+
+        List<KitapDto> kitapListe = new();
 
         public frmKitapIslemleri()
         {
             InitializeComponent();
-
-            _kitapManager = new KitapManager(new KitapDal());
-            _yazarManager = new YazarManager(new YazarDal());
-            _kategoriManager = new KategoriManager(new KategoriDal());
-            _yayineviManager = new YayineviManager(new YayineviDal());
-            _dilManager = new DilManager(new DilDal());
         }
 
         private void frmKitapIslemleri_Load(object sender, EventArgs e)
         {
+
             ComboDoldur();
             Listele();
             dataGrid_Kitap.ClearSelection();
         }
 
-        //EKSİK,HATA
-        private void Listele()
+
+        private void ComboDoldur()
         {
-            var kitapResult = _kitapManager.KitapListeDetayliGetirServis(x =>
-                x.Aktif == true &&
-                (x.KitapAdi.Contains(textBox_Ara.Text) || x.ISBN.Contains(textBox_Ara.Text))
-            );
+            IYazarService _yazarManager = new YazarManager(new YazarDal());
+            var yazarResult = _yazarManager.YazarListeGetirServis(x => x.AktifMi);
+            if (yazarResult.IsSuccess)
+                Metodlar.ComboDoldur(comboBox_Yazar, yazarResult.Data, "AdSoyad", "YazarId");
+
+            IKategoriService _kategoriManager = new KategoriManager(new KategoriDal());
+            var kategoriResult = _kategoriManager.GetListByFilterService(x => x.AktifMi);
+            if (kategoriResult.IsSuccess)
+                Metodlar.ComboDoldur(comboBox_Kategori, kategoriResult.Data, "KategoriAdi", "KategoriId");
+
+            IYayineviService _yayineviManager = new YayineviManager(new YayineviDal());
+            var yayineviResult = _yayineviManager.GetListByFilterService(x => x.AktifMi);
+            if (yayineviResult.IsSuccess)
+                Metodlar.ComboDoldur(comboBox_Yayinevi, yayineviResult.Data, "Ad", "YayineviId");
+
+            IDilService _dilManager = new DilManager(new DilDal());
+            var dilResult = _dilManager.GetListByFilterService();
+            if (dilResult.IsSuccess)
+                Metodlar.ComboDoldur(comboBox_Dil, dilResult.Data, "DilAdi", "DilId");
+
+        }
+
+        private void Listele(string? aramMetin = null)
+        {
+            IKitapService _kitapManager = new KitapManager(new KitapDal());
+            if (aramMetin != null)
+            {
+                // necoş sonra düzelt
+            }
+
+            var kitapResult = _kitapManager.KitapListeDetayliGetirServis(x => x.Aktif);
 
             if (!kitapResult.IsSuccess)
             {
@@ -44,73 +68,13 @@ namespace Kutuphane.UI
                 return;
             }
 
-            dataGrid_Kitap.DataSource = kitapResult.Data;
+            Metodlar.gridDoldur(kitapDtoBindingSource, kitapResult.Data);
         }
 
-        private void ComboDoldur()
-        {
-            YazarComboDoldur();
-            KategoriComboDoldur();
-            YayineviComboDoldur();
-            DilComboDoldur();
-        }
-        private void YazarComboDoldur()
-        {
-            var result = _yazarManager.GetListByFilterService(x => x.AktifMi);
 
-            if (!result.IsSuccess)
-                throw new Exception(result.Message);
-
-            comboBox_Yazar.DataSource = result.Data
-                .Select(x => new
-                {
-                    x.YazarId,
-                    AdSoyad = x.Ad + " " + x.Soyad
-                })
-                .ToList();
-
-            comboBox_Yazar.DisplayMember = "AdSoyad";
-            comboBox_Yazar.ValueMember = "YazarId";
-            comboBox_Yazar.SelectedIndex = -1;
-        }
-        private void KategoriComboDoldur()
-        {
-            var result = _kategoriManager.GetListByFilterService(x => x.AktifMi);
-
-            if (!result.IsSuccess)
-                throw new Exception(result.Message);
-
-            comboBox_Kategori.DataSource = result.Data;
-            comboBox_Kategori.DisplayMember = "KategoriAdi";
-            comboBox_Kategori.ValueMember = "KategoriId";
-            comboBox_Kategori.SelectedIndex = -1;
-        }
-        private void YayineviComboDoldur()
-        {
-            var result = _yayineviManager.GetListByFilterService(x => x.AktifMi);
-
-            if (!result.IsSuccess)
-                throw new Exception(result.Message);
-
-            comboBox_Yayinevi.DataSource = result.Data;
-            comboBox_Yayinevi.DisplayMember = "Ad";
-            comboBox_Yayinevi.ValueMember = "YayineviId";
-            comboBox_Yayinevi.SelectedIndex = -1;
-        }
-        private void DilComboDoldur()
-        {
-            var result = _dilManager.GetListByFilterService();
-
-            if (!result.IsSuccess)
-                throw new Exception(result.Message);
-
-            comboBox_Dil.DataSource = result.Data;
-            comboBox_Dil.DisplayMember = "DilAdi";
-            comboBox_Dil.ValueMember = "DilId";
-            comboBox_Dil.SelectedIndex = -1;
-        }
         private void btnKaydet_Click(object sender, EventArgs e)
         {
+            IKitapService _kitapManager = new KitapManager(new KitapDal());
             Kitap kitap = new Kitap
             {
                 ISBN = textBox_ISBN.Text.Trim(),
@@ -185,29 +149,38 @@ namespace Kutuphane.UI
             Listele();
             dataGrid_Kitap.ClearSelection();
         }
-        private void kategoriİşlemToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            frmKategoriIslemleri frm = new frmKategoriIslemleri();
-            frm.ShowDialog();
-        }
-        private void yazarİşlemleriToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            frmYazarIslemleri frm = new frmYazarIslemleri();
-            frm.ShowDialog();
-        }
-        private void dilİşlemleriToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            frmDilIslemleri frm = new frmDilIslemleri();
-            frm.ShowDialog();
-        }
-        private void yayıneviİşlemleriToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            frmYayineviIslemleri frm = new frmYayineviIslemleri();
-            frm.ShowDialog();
-        }
+
         private void dataGrid_Kitap_SelectionChanged(object sender, EventArgs e)
         {
+            if (dataGrid_Kitap.SelectedRows.Count > 0)
+            {
+                DataGridViewRow? selectedRow = dataGrid_Kitap.SelectedRows[0];
+                if (selectedRow != null)
+                {
+                    KitapDto selectedKitap = (KitapDto)selectedRow.DataBoundItem;
+                    textBox_KitapId.Text = selectedKitap.KitapId.ToString();
+                    textBox_ISBN.Text = selectedKitap.ISBN;
+                    textBox_KitapAdi.Text = selectedKitap.KitapAdi;
+                    comboBox_Yazar.SelectedValue = selectedKitap.YazarId;
+                    comboBox_Kategori.SelectedValue = selectedKitap.KategoriId;
+                    comboBox_Yayinevi.SelectedValue = selectedKitap.YayineviId;
+                    comboBox_Dil.SelectedValue = selectedKitap.DilId;
+                    textBox_BasimYili.Text = selectedKitap.BasimYili?.ToString() ?? string.Empty;
+                    textBox_SayfaSayisi.Text = selectedKitap.SayfaSayisi?.ToString() ?? string.Empty;
+                    textBox_StokMiktari.Text = selectedKitap.Stok.ToString();
 
+                }
+            }
+            
+
+
+            // Form alanlarını doldur
+
+        }
+
+        private void dataGrid_Kitap_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            
         }
     }
 }
