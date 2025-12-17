@@ -32,9 +32,9 @@
             textBox_UyeAra = new TextBox();
             label1 = new Label();
             groupBox1 = new GroupBox();
+            label_ToplamAlinanKitapSayisi = new Label();
             label_AdSoyad = new Label();
             button_UyeAra = new Button();
-            btn_UyeListele = new Button();
             groupBox2 = new GroupBox();
             button_OduncVer = new Button();
             button_KitapAra = new Button();
@@ -47,6 +47,7 @@
             groupBox3 = new GroupBox();
             button_IadeAl = new Button();
             listView_UyeninAldigiKitapListesi = new ListView();
+            label_SuanOduncteKitapSayisi = new Label();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
@@ -73,9 +74,10 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(label_SuanOduncteKitapSayisi);
+            groupBox1.Controls.Add(label_ToplamAlinanKitapSayisi);
             groupBox1.Controls.Add(label_AdSoyad);
             groupBox1.Controls.Add(button_UyeAra);
-            groupBox1.Controls.Add(btn_UyeListele);
             groupBox1.Controls.Add(label1);
             groupBox1.Controls.Add(textBox_UyeAra);
             groupBox1.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point, 162);
@@ -85,6 +87,17 @@
             groupBox1.TabIndex = 2;
             groupBox1.TabStop = false;
             groupBox1.Text = "👤 Üye İşlemleri";
+            // 
+            // label_ToplamAlinanKitapSayisi
+            // 
+            label_ToplamAlinanKitapSayisi.AutoSize = true;
+            label_ToplamAlinanKitapSayisi.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 162);
+            label_ToplamAlinanKitapSayisi.ForeColor = Color.FromArgb(41, 128, 185);
+            label_ToplamAlinanKitapSayisi.Location = new Point(78, 86);
+            label_ToplamAlinanKitapSayisi.Name = "label_ToplamAlinanKitapSayisi";
+            label_ToplamAlinanKitapSayisi.Size = new Size(121, 19);
+            label_ToplamAlinanKitapSayisi.TabIndex = 11;
+            label_ToplamAlinanKitapSayisi.Text = "Toplam Alınan: 0";
             // 
             // label_AdSoyad
             // 
@@ -111,21 +124,6 @@
             button_UyeAra.Text = "ARA";
             button_UyeAra.UseVisualStyleBackColor = false;
             button_UyeAra.Click += button_UyeAra_Click;
-            // 
-            // btn_UyeListele
-            // 
-            btn_UyeListele.BackColor = Color.FromArgb(52, 73, 94);
-            btn_UyeListele.FlatAppearance.BorderSize = 0;
-            btn_UyeListele.FlatStyle = FlatStyle.Flat;
-            btn_UyeListele.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 162);
-            btn_UyeListele.ForeColor = Color.White;
-            btn_UyeListele.Location = new Point(78, 100);
-            btn_UyeListele.Name = "btn_UyeListele";
-            btn_UyeListele.Size = new Size(369, 35);
-            btn_UyeListele.TabIndex = 9;
-            btn_UyeListele.Text = "Üyenin Ödünç Aldıği Kitapları Listele";
-            btn_UyeListele.UseVisualStyleBackColor = false;
-            btn_UyeListele.Click += btn_UyeListele_Click;
             // 
             // groupBox2
             // 
@@ -244,20 +242,20 @@
             groupBox3.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point, 162);
             groupBox3.Location = new Point(522, 11);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(455, 719);
+            groupBox3.Size = new Size(541, 719);
             groupBox3.TabIndex = 4;
             groupBox3.TabStop = false;
             groupBox3.Text = "↩️ İade Alma";
             // 
             // button_IadeAl
             // 
-            button_IadeAl.Anchor = AnchorStyles.Bottom;
+            button_IadeAl.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             button_IadeAl.BackColor = Color.FromArgb(192, 57, 43);
             button_IadeAl.FlatAppearance.BorderSize = 0;
             button_IadeAl.FlatStyle = FlatStyle.Flat;
             button_IadeAl.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 162);
             button_IadeAl.ForeColor = Color.White;
-            button_IadeAl.Location = new Point(62, 669);
+            button_IadeAl.Location = new Point(105, 669);
             button_IadeAl.Name = "button_IadeAl";
             button_IadeAl.Size = new Size(331, 35);
             button_IadeAl.TabIndex = 9;
@@ -267,22 +265,33 @@
             // 
             // listView_UyeninAldigiKitapListesi
             // 
-            listView_UyeninAldigiKitapListesi.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            listView_UyeninAldigiKitapListesi.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             listView_UyeninAldigiKitapListesi.BorderStyle = BorderStyle.FixedSingle;
             listView_UyeninAldigiKitapListesi.FullRowSelect = true;
             listView_UyeninAldigiKitapListesi.Location = new Point(6, 26);
             listView_UyeninAldigiKitapListesi.Name = "listView_UyeninAldigiKitapListesi";
-            listView_UyeninAldigiKitapListesi.Size = new Size(443, 632);
+            listView_UyeninAldigiKitapListesi.Size = new Size(529, 632);
             listView_UyeninAldigiKitapListesi.TabIndex = 6;
             listView_UyeninAldigiKitapListesi.UseCompatibleStateImageBehavior = false;
             listView_UyeninAldigiKitapListesi.View = View.Details;
+            // 
+            // label_SuanOduncteKitapSayisi
+            // 
+            label_SuanOduncteKitapSayisi.AutoSize = true;
+            label_SuanOduncteKitapSayisi.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 162);
+            label_SuanOduncteKitapSayisi.ForeColor = Color.FromArgb(41, 128, 185);
+            label_SuanOduncteKitapSayisi.Location = new Point(78, 105);
+            label_SuanOduncteKitapSayisi.Name = "label_SuanOduncteKitapSayisi";
+            label_SuanOduncteKitapSayisi.Size = new Size(121, 19);
+            label_SuanOduncteKitapSayisi.TabIndex = 11;
+            label_SuanOduncteKitapSayisi.Text = "Şu an Ödünçte: 0";
             // 
             // frmOduncIslemleri
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(989, 742);
+            ClientSize = new Size(1075, 742);
             Controls.Add(groupBox3);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
@@ -316,9 +325,10 @@
         private Button button_OduncVer;
         private Label label_AdSoyad;
         private Button button_UyeAra;
-        private Button btn_UyeListele;
         private Button button_IadeAl;
         private ListView listView_UyeninAldigiKitapListesi;
         private Button button_KitapAra;
+        private Label label_ToplamAlinanKitapSayisi;
+        private Label label_SuanOduncteKitapSayisi;
     }
 }

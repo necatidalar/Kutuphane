@@ -64,7 +64,7 @@
             // 
             dataGrid_Yayinevi.AllowUserToAddRows = false;
             dataGrid_Yayinevi.AllowUserToDeleteRows = false;
-            dataGrid_Yayinevi.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dataGrid_Yayinevi.AllowUserToResizeRows = false;
             dataGrid_Yayinevi.AutoGenerateColumns = false;
             dataGrid_Yayinevi.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGrid_Yayinevi.BackgroundColor = Color.White;
@@ -92,7 +92,7 @@
             dataGridViewCellStyle2.SelectionForeColor = Color.Black;
             dataGrid_Yayinevi.RowsDefaultCellStyle = dataGridViewCellStyle2;
             dataGrid_Yayinevi.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGrid_Yayinevi.Size = new Size(354, 487);
+            dataGrid_Yayinevi.Size = new Size(431, 487);
             dataGrid_Yayinevi.TabIndex = 2;
             dataGrid_Yayinevi.SelectionChanged += dataGrid_Yayinevi_SelectionChanged;
             // 
@@ -140,13 +140,12 @@
             // 
             // btnAra
             // 
-            btnAra.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnAra.BackColor = Color.FromArgb(41, 128, 185);
             btnAra.FlatAppearance.BorderSize = 0;
             btnAra.FlatStyle = FlatStyle.Flat;
             btnAra.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             btnAra.ForeColor = Color.White;
-            btnAra.Location = new Point(597, 12);
+            btnAra.Location = new Point(674, 12);
             btnAra.Name = "btnAra";
             btnAra.Size = new Size(75, 25);
             btnAra.TabIndex = 13;
@@ -156,10 +155,9 @@
             // 
             // label3
             // 
-            label3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
-            label3.Location = new Point(387, 15);
+            label3.Location = new Point(395, 15);
             label3.Name = "label3";
             label3.Size = new Size(33, 19);
             label3.TabIndex = 11;
@@ -167,12 +165,11 @@
             // 
             // textBox_Ara
             // 
-            textBox_Ara.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             textBox_Ara.Font = new Font("Segoe UI", 10F);
-            textBox_Ara.Location = new Point(423, 13);
+            textBox_Ara.Location = new Point(434, 13);
             textBox_Ara.Name = "textBox_Ara";
             textBox_Ara.PlaceholderText = "Yayınevi adı ile arayın";
-            textBox_Ara.Size = new Size(168, 25);
+            textBox_Ara.Size = new Size(234, 25);
             textBox_Ara.TabIndex = 12;
             // 
             // groupBox1
@@ -348,7 +345,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(684, 541);
+            ClientSize = new Size(761, 541);
             Controls.Add(groupBox1);
             Controls.Add(btnAra);
             Controls.Add(label3);
@@ -356,7 +353,6 @@
             Controls.Add(dataGrid_Yayinevi);
             Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
-            MaximumSize = new Size(700, 580);
             MinimumSize = new Size(700, 580);
             Name = "frmYayineviIslemleri";
             StartPosition = FormStartPosition.CenterScreen;

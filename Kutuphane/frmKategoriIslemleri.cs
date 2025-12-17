@@ -11,7 +11,7 @@ namespace Kutuphane.UI
         public frmKategoriIslemleri()
         {
             InitializeComponent();
-            //dataGrid_Kategori.DataSource = bilKategori;
+            dataGrid_Kategori.DataSource = bilKategori;
         }
 
         BindingList<Kategori> bilKategori = new BindingList<Kategori>();

@@ -11,7 +11,7 @@ namespace Kutuphane.UI
         public frmDilIslemleri()
         {
             InitializeComponent();
-            //dataGrid_Dil.DataSource = bilDil;
+            dataGrid_Dil.DataSource = bilDil;
 
         }
 

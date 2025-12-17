@@ -43,13 +43,13 @@
             textBox_KategoriAdi = new TextBox();
             textBox_KategoriId = new TextBox();
             dataGrid_Kategori = new DataGridView();
+            kategoriIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            kategoriAdiDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            kitapKategorilerDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             kategoriBindingSource = new BindingSource(components);
             btnAra = new Button();
             label3 = new Label();
             textBox_Ara = new TextBox();
-            kategoriIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            kategoriAdiDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            kitapKategorilerDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGrid_Kategori).BeginInit();
             ((System.ComponentModel.ISupportInitialize)kategoriBindingSource).BeginInit();
@@ -206,9 +206,10 @@
             // 
             // dataGrid_Kategori
             // 
-            dataGrid_Kategori.AllowUserToAddRows = false;
             dataGrid_Kategori.AllowUserToDeleteRows = false;
-            dataGrid_Kategori.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dataGrid_Kategori.AllowUserToOrderColumns = true;
+            dataGrid_Kategori.AllowUserToResizeRows = false;
+            dataGrid_Kategori.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             dataGrid_Kategori.AutoGenerateColumns = false;
             dataGrid_Kategori.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGrid_Kategori.BackgroundColor = Color.White;
@@ -229,7 +230,6 @@
             dataGrid_Kategori.Location = new Point(318, 51);
             dataGrid_Kategori.MultiSelect = false;
             dataGrid_Kategori.Name = "dataGrid_Kategori";
-            dataGrid_Kategori.ReadOnly = true;
             dataGrid_Kategori.RowHeadersVisible = false;
             dataGrid_Kategori.RowTemplate.DefaultCellStyle.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 162);
             dataGrid_Kategori.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -237,13 +237,32 @@
             dataGrid_Kategori.TabIndex = 1;
             dataGrid_Kategori.SelectionChanged += dataGrid_Kategori_SelectionChanged;
             // 
+            // kategoriIdDataGridViewTextBoxColumn
+            // 
+            kategoriIdDataGridViewTextBoxColumn.DataPropertyName = "KategoriId";
+            kategoriIdDataGridViewTextBoxColumn.HeaderText = "ID";
+            kategoriIdDataGridViewTextBoxColumn.Name = "kategoriIdDataGridViewTextBoxColumn";
+            kategoriIdDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // kategoriAdiDataGridViewTextBoxColumn
+            // 
+            kategoriAdiDataGridViewTextBoxColumn.DataPropertyName = "KategoriAdi";
+            kategoriAdiDataGridViewTextBoxColumn.HeaderText = "Kategori Adı";
+            kategoriAdiDataGridViewTextBoxColumn.Name = "kategoriAdiDataGridViewTextBoxColumn";
+            // 
+            // kitapKategorilerDataGridViewTextBoxColumn
+            // 
+            kitapKategorilerDataGridViewTextBoxColumn.DataPropertyName = "KitapKategoriler";
+            kitapKategorilerDataGridViewTextBoxColumn.HeaderText = "KitapKategoriler";
+            kitapKategorilerDataGridViewTextBoxColumn.Name = "kitapKategorilerDataGridViewTextBoxColumn";
+            kitapKategorilerDataGridViewTextBoxColumn.Visible = false;
+            // 
             // kategoriBindingSource
             // 
             kategoriBindingSource.DataSource = typeof(Model.Entity.Kategori);
             // 
             // btnAra
             // 
-            btnAra.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnAra.BackColor = Color.FromArgb(52, 152, 219);
             btnAra.FlatAppearance.BorderSize = 0;
             btnAra.FlatStyle = FlatStyle.Flat;
@@ -269,36 +288,12 @@
             // 
             // textBox_Ara
             // 
-            textBox_Ara.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             textBox_Ara.Font = new Font("Segoe UI", 10F);
             textBox_Ara.Location = new Point(373, 15);
             textBox_Ara.Name = "textBox_Ara";
             textBox_Ara.PlaceholderText = "Kategori adı ile arayın";
             textBox_Ara.Size = new Size(329, 25);
             textBox_Ara.TabIndex = 9;
-            // 
-            // kategoriIdDataGridViewTextBoxColumn
-            // 
-            kategoriIdDataGridViewTextBoxColumn.DataPropertyName = "KategoriId";
-            kategoriIdDataGridViewTextBoxColumn.HeaderText = "ID";
-            kategoriIdDataGridViewTextBoxColumn.Name = "kategoriIdDataGridViewTextBoxColumn";
-            kategoriIdDataGridViewTextBoxColumn.ReadOnly = true;
-            kategoriIdDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // kategoriAdiDataGridViewTextBoxColumn
-            // 
-            kategoriAdiDataGridViewTextBoxColumn.DataPropertyName = "KategoriAdi";
-            kategoriAdiDataGridViewTextBoxColumn.HeaderText = "Kategori Adı";
-            kategoriAdiDataGridViewTextBoxColumn.Name = "kategoriAdiDataGridViewTextBoxColumn";
-            kategoriAdiDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // kitapKategorilerDataGridViewTextBoxColumn
-            // 
-            kitapKategorilerDataGridViewTextBoxColumn.DataPropertyName = "KitapKategoriler";
-            kitapKategorilerDataGridViewTextBoxColumn.HeaderText = "KitapKategoriler";
-            kitapKategorilerDataGridViewTextBoxColumn.Name = "kitapKategorilerDataGridViewTextBoxColumn";
-            kitapKategorilerDataGridViewTextBoxColumn.ReadOnly = true;
-            kitapKategorilerDataGridViewTextBoxColumn.Visible = false;
             // 
             // frmKategoriIslemleri
             // 
@@ -312,7 +307,6 @@
             Controls.Add(dataGrid_Kategori);
             Controls.Add(groupBox1);
             Icon = (Icon)resources.GetObject("$this.Icon");
-            MaximumSize = new Size(800, 590);
             MinimumSize = new Size(800, 590);
             Name = "frmKategoriIslemleri";
             StartPosition = FormStartPosition.CenterScreen;

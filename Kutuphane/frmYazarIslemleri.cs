@@ -12,7 +12,7 @@ namespace Kutuphane.UI
         public frmYazarIslemleri()
         {
             InitializeComponent();
-            //dataGrid_Yazar.DataSource = bilYazar;
+            dataGrid_Yazar.DataSource = bilYazar;
         }
 
         BindingList<YazarDto> bilYazar = new BindingList<YazarDto>();

@@ -52,16 +52,16 @@
             textBox_PersonelId = new TextBox();
             label1 = new Label();
             dataGrid_Personel = new DataGridView();
-            personelIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            adDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            soyadDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            cinsiyetAdiDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            cinsiyetIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            aktifMiDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
             personelBilgileriDtoBindingSource = new BindingSource(components);
             btnAra = new Button();
             label5 = new Label();
             textBox_Ara = new TextBox();
+            personelIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            adDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            soyadDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            cinsiyetIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            cinsiyetAdiDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            aktifMiDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGrid_Personel).BeginInit();
             ((System.ComponentModel.ISupportInitialize)personelBilgileriDtoBindingSource).BeginInit();
@@ -300,9 +300,10 @@
             // 
             // dataGrid_Personel
             // 
-            dataGrid_Personel.AllowUserToAddRows = false;
             dataGrid_Personel.AllowUserToDeleteRows = false;
-            dataGrid_Personel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dataGrid_Personel.AllowUserToOrderColumns = true;
+            dataGrid_Personel.AllowUserToResizeRows = false;
+            dataGrid_Personel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             dataGrid_Personel.AutoGenerateColumns = false;
             dataGrid_Personel.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGrid_Personel.BackgroundColor = Color.White;
@@ -316,14 +317,13 @@
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dataGrid_Personel.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGrid_Personel.ColumnHeadersHeight = 30;
-            dataGrid_Personel.Columns.AddRange(new DataGridViewColumn[] { personelIdDataGridViewTextBoxColumn, adDataGridViewTextBoxColumn, soyadDataGridViewTextBoxColumn, cinsiyetAdiDataGridViewTextBoxColumn, cinsiyetIdDataGridViewTextBoxColumn, aktifMiDataGridViewCheckBoxColumn });
+            dataGrid_Personel.Columns.AddRange(new DataGridViewColumn[] { personelIdDataGridViewTextBoxColumn, adDataGridViewTextBoxColumn, soyadDataGridViewTextBoxColumn, cinsiyetIdDataGridViewTextBoxColumn, cinsiyetAdiDataGridViewTextBoxColumn, aktifMiDataGridViewCheckBoxColumn });
             dataGrid_Personel.DataSource = personelBilgileriDtoBindingSource;
             dataGrid_Personel.EnableHeadersVisualStyles = false;
             dataGrid_Personel.GridColor = Color.LightGray;
             dataGrid_Personel.Location = new Point(346, 42);
             dataGrid_Personel.MultiSelect = false;
             dataGrid_Personel.Name = "dataGrid_Personel";
-            dataGrid_Personel.ReadOnly = true;
             dataGrid_Personel.RowHeadersVisible = false;
             dataGridViewCellStyle2.BackColor = Color.White;
             dataGridViewCellStyle2.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 162);
@@ -336,58 +336,12 @@
             dataGrid_Personel.CellFormatting += dataGrid_Personel_CellFormatting;
             dataGrid_Personel.SelectionChanged += dataGrid_Personel_SelectionChanged;
             // 
-            // personelIdDataGridViewTextBoxColumn
-            // 
-            personelIdDataGridViewTextBoxColumn.DataPropertyName = "PersonelId";
-            personelIdDataGridViewTextBoxColumn.HeaderText = "ID";
-            personelIdDataGridViewTextBoxColumn.Name = "personelIdDataGridViewTextBoxColumn";
-            personelIdDataGridViewTextBoxColumn.ReadOnly = true;
-            personelIdDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // adDataGridViewTextBoxColumn
-            // 
-            adDataGridViewTextBoxColumn.DataPropertyName = "Ad";
-            adDataGridViewTextBoxColumn.HeaderText = "Adı";
-            adDataGridViewTextBoxColumn.Name = "adDataGridViewTextBoxColumn";
-            adDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // soyadDataGridViewTextBoxColumn
-            // 
-            soyadDataGridViewTextBoxColumn.DataPropertyName = "Soyad";
-            soyadDataGridViewTextBoxColumn.HeaderText = "Soyadı";
-            soyadDataGridViewTextBoxColumn.Name = "soyadDataGridViewTextBoxColumn";
-            soyadDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // cinsiyetAdiDataGridViewTextBoxColumn
-            // 
-            cinsiyetAdiDataGridViewTextBoxColumn.DataPropertyName = "CinsiyetAdi";
-            cinsiyetAdiDataGridViewTextBoxColumn.HeaderText = "Cinsiyet";
-            cinsiyetAdiDataGridViewTextBoxColumn.Name = "cinsiyetAdiDataGridViewTextBoxColumn";
-            cinsiyetAdiDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // cinsiyetIdDataGridViewTextBoxColumn
-            // 
-            cinsiyetIdDataGridViewTextBoxColumn.DataPropertyName = "CinsiyetId";
-            cinsiyetIdDataGridViewTextBoxColumn.HeaderText = "CinsiyetId";
-            cinsiyetIdDataGridViewTextBoxColumn.Name = "cinsiyetIdDataGridViewTextBoxColumn";
-            cinsiyetIdDataGridViewTextBoxColumn.ReadOnly = true;
-            cinsiyetIdDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // aktifMiDataGridViewCheckBoxColumn
-            // 
-            aktifMiDataGridViewCheckBoxColumn.DataPropertyName = "AktifMi";
-            aktifMiDataGridViewCheckBoxColumn.HeaderText = "AktifMi";
-            aktifMiDataGridViewCheckBoxColumn.Name = "aktifMiDataGridViewCheckBoxColumn";
-            aktifMiDataGridViewCheckBoxColumn.ReadOnly = true;
-            aktifMiDataGridViewCheckBoxColumn.Visible = false;
-            // 
             // personelBilgileriDtoBindingSource
             // 
             personelBilgileriDtoBindingSource.DataSource = typeof(Model.DTO.PersonelBilgileriDto);
             // 
             // btnAra
             // 
-            btnAra.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnAra.BackColor = Color.FromArgb(41, 128, 185);
             btnAra.FlatAppearance.BorderSize = 0;
             btnAra.FlatStyle = FlatStyle.Flat;
@@ -403,7 +357,6 @@
             // 
             // label5
             // 
-            label5.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
             label5.Location = new Point(661, 15);
@@ -414,13 +367,51 @@
             // 
             // textBox_Ara
             // 
-            textBox_Ara.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             textBox_Ara.Font = new Font("Segoe UI", 10F);
             textBox_Ara.Location = new Point(700, 12);
             textBox_Ara.Name = "textBox_Ara";
             textBox_Ara.PlaceholderText = "Ad, Soyad veya Kullanıcı Adı ile arayın";
             textBox_Ara.Size = new Size(276, 25);
             textBox_Ara.TabIndex = 13;
+            // 
+            // personelIdDataGridViewTextBoxColumn
+            // 
+            personelIdDataGridViewTextBoxColumn.DataPropertyName = "PersonelId";
+            personelIdDataGridViewTextBoxColumn.HeaderText = "PersonelId";
+            personelIdDataGridViewTextBoxColumn.Name = "personelIdDataGridViewTextBoxColumn";
+            personelIdDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // adDataGridViewTextBoxColumn
+            // 
+            adDataGridViewTextBoxColumn.DataPropertyName = "Ad";
+            adDataGridViewTextBoxColumn.HeaderText = "Adı";
+            adDataGridViewTextBoxColumn.Name = "adDataGridViewTextBoxColumn";
+            // 
+            // soyadDataGridViewTextBoxColumn
+            // 
+            soyadDataGridViewTextBoxColumn.DataPropertyName = "Soyad";
+            soyadDataGridViewTextBoxColumn.HeaderText = "Soyadı";
+            soyadDataGridViewTextBoxColumn.Name = "soyadDataGridViewTextBoxColumn";
+            // 
+            // cinsiyetIdDataGridViewTextBoxColumn
+            // 
+            cinsiyetIdDataGridViewTextBoxColumn.DataPropertyName = "CinsiyetId";
+            cinsiyetIdDataGridViewTextBoxColumn.HeaderText = "CinsiyetId";
+            cinsiyetIdDataGridViewTextBoxColumn.Name = "cinsiyetIdDataGridViewTextBoxColumn";
+            cinsiyetIdDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // cinsiyetAdiDataGridViewTextBoxColumn
+            // 
+            cinsiyetAdiDataGridViewTextBoxColumn.DataPropertyName = "CinsiyetAdi";
+            cinsiyetAdiDataGridViewTextBoxColumn.HeaderText = "Cinsiyet";
+            cinsiyetAdiDataGridViewTextBoxColumn.Name = "cinsiyetAdiDataGridViewTextBoxColumn";
+            // 
+            // aktifMiDataGridViewCheckBoxColumn
+            // 
+            aktifMiDataGridViewCheckBoxColumn.DataPropertyName = "AktifMi";
+            aktifMiDataGridViewCheckBoxColumn.HeaderText = "AktifMi";
+            aktifMiDataGridViewCheckBoxColumn.Name = "aktifMiDataGridViewCheckBoxColumn";
+            aktifMiDataGridViewCheckBoxColumn.Visible = false;
             // 
             // frmPersonelIslemleri
             // 
@@ -476,14 +467,14 @@
         private Label label7;
         private ComboBox comboBox_Cinsiyet;
         private Label label6;
+        private DataGridViewTextBoxColumn kullaniciAdiDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn sifreDataGridViewTextBoxColumn;
         private BindingSource personelBilgileriDtoBindingSource;
         private DataGridViewTextBoxColumn personelIdDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn adDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn soyadDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn cinsiyetAdiDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn kullaniciAdiDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn sifreDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn cinsiyetIdDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn cinsiyetAdiDataGridViewTextBoxColumn;
         private DataGridViewCheckBoxColumn aktifMiDataGridViewCheckBoxColumn;
     }
 }

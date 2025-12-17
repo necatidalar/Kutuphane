@@ -68,7 +68,6 @@
             // 
             // btnAra
             // 
-            btnAra.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnAra.BackColor = Color.FromArgb(41, 128, 185);
             btnAra.FlatAppearance.BorderSize = 0;
             btnAra.FlatStyle = FlatStyle.Flat;
@@ -84,7 +83,6 @@
             // 
             // label3
             // 
-            label3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
             label3.Location = new Point(556, 15);
@@ -95,7 +93,6 @@
             // 
             // textBox_Ara
             // 
-            textBox_Ara.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             textBox_Ara.Font = new Font("Segoe UI", 10F);
             textBox_Ara.Location = new Point(592, 13);
             textBox_Ara.Name = "textBox_Ara";
@@ -318,7 +315,8 @@
             // 
             dataGrid_Yazar.AllowUserToAddRows = false;
             dataGrid_Yazar.AllowUserToDeleteRows = false;
-            dataGrid_Yazar.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dataGrid_Yazar.AllowUserToResizeRows = false;
+            dataGrid_Yazar.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             dataGrid_Yazar.AutoGenerateColumns = false;
             dataGrid_Yazar.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGrid_Yazar.BackgroundColor = Color.White;

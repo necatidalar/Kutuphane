@@ -60,6 +60,7 @@
             label_GecikmisUyeSayisi = new Label();
             label4 = new Label();
             timer_Dashboard = new System.Windows.Forms.Timer(components);
+            toolStripContainer1 = new ToolStripContainer();
             panel_Ust.SuspendLayout();
             menuStrip1.SuspendLayout();
             flowLayoutPanel_Kartlar.SuspendLayout();
@@ -67,6 +68,9 @@
             panel_Uye.SuspendLayout();
             panel_Odunc.SuspendLayout();
             panel_Geciklis.SuspendLayout();
+            toolStripContainer1.ContentPanel.SuspendLayout();
+            toolStripContainer1.TopToolStripPanel.SuspendLayout();
+            toolStripContainer1.SuspendLayout();
             SuspendLayout();
             // 
             // panel_Ust
@@ -74,10 +78,9 @@
             panel_Ust.BackColor = Color.FromArgb(44, 62, 80);
             panel_Ust.Controls.Add(lblKullaniciAdi);
             panel_Ust.Dock = DockStyle.Top;
-            panel_Ust.Location = new Point(0, 39);
-            panel_Ust.Margin = new Padding(3, 4, 3, 4);
+            panel_Ust.Location = new Point(0, 0);
             panel_Ust.Name = "panel_Ust";
-            panel_Ust.Size = new Size(1413, 80);
+            panel_Ust.Size = new Size(1211, 60);
             panel_Ust.TabIndex = 4;
             // 
             // lblKullaniciAdi
@@ -85,23 +88,24 @@
             lblKullaniciAdi.AutoSize = true;
             lblKullaniciAdi.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point, 162);
             lblKullaniciAdi.ForeColor = Color.White;
-            lblKullaniciAdi.Location = new Point(14, 23);
+            lblKullaniciAdi.Location = new Point(12, 17);
             lblKullaniciAdi.Name = "lblKullaniciAdi";
-            lblKullaniciAdi.Size = new Size(178, 32);
+            lblKullaniciAdi.Size = new Size(131, 25);
             lblKullaniciAdi.TabIndex = 1;
             lblKullaniciAdi.Text = "👤 Hoşgeldin,";
             // 
             // menuStrip1
             // 
             menuStrip1.BackColor = Color.WhiteSmoke;
+            menuStrip1.Dock = DockStyle.None;
             menuStrip1.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 162);
             menuStrip1.GripStyle = ToolStripGripStyle.Visible;
             menuStrip1.ImageScalingSize = new Size(20, 20);
             menuStrip1.Items.AddRange(new ToolStripItem[] { gostergePaneliToolStripMenuItem, yerlesimAyarlariToolStripMenuItem, kitapIslemleriToolStripMenuItem, oduncIslemleriToolStripMenuItem, uyeIslemleriToolStripMenuItem, personelIslemleriToolStripMenuItem, raporlamaToolStripMenuItem, cikisYapToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Padding = new Padding(7, 5, 0, 5);
-            menuStrip1.Size = new Size(1413, 39);
+            menuStrip1.Padding = new Padding(6, 4, 0, 4);
+            menuStrip1.Size = new Size(1236, 32);
             menuStrip1.TabIndex = 3;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -110,7 +114,7 @@
             gostergePaneliToolStripMenuItem.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
             gostergePaneliToolStripMenuItem.ForeColor = Color.FromArgb(44, 62, 80);
             gostergePaneliToolStripMenuItem.Name = "gostergePaneliToolStripMenuItem";
-            gostergePaneliToolStripMenuItem.Size = new Size(186, 29);
+            gostergePaneliToolStripMenuItem.Size = new Size(153, 24);
             gostergePaneliToolStripMenuItem.Text = "📊 Gösterge Paneli";
             gostergePaneliToolStripMenuItem.Click += gostergePaneliToolStripMenuItem_Click;
             // 
@@ -119,7 +123,7 @@
             yerlesimAyarlariToolStripMenuItem.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
             yerlesimAyarlariToolStripMenuItem.ForeColor = Color.FromArgb(44, 62, 80);
             yerlesimAyarlariToolStripMenuItem.Name = "yerlesimAyarlariToolStripMenuItem";
-            yerlesimAyarlariToolStripMenuItem.Size = new Size(196, 29);
+            yerlesimAyarlariToolStripMenuItem.Size = new Size(162, 24);
             yerlesimAyarlariToolStripMenuItem.Tag = "frmYeslesimAyarlari";
             yerlesimAyarlariToolStripMenuItem.Text = "⚙ Yerleşim Ayarları";
             yerlesimAyarlariToolStripMenuItem.Click += menuStrip_Click;
@@ -130,13 +134,13 @@
             kitapIslemleriToolStripMenuItem.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
             kitapIslemleriToolStripMenuItem.ForeColor = Color.FromArgb(44, 62, 80);
             kitapIslemleriToolStripMenuItem.Name = "kitapIslemleriToolStripMenuItem";
-            kitapIslemleriToolStripMenuItem.Size = new Size(176, 29);
+            kitapIslemleriToolStripMenuItem.Size = new Size(141, 24);
             kitapIslemleriToolStripMenuItem.Text = "📚 Kitap İşlemleri";
             // 
             // kitapToolStripMenuItem
             // 
             kitapToolStripMenuItem.Name = "kitapToolStripMenuItem";
-            kitapToolStripMenuItem.Size = new Size(249, 30);
+            kitapToolStripMenuItem.Size = new Size(197, 24);
             kitapToolStripMenuItem.Tag = "frmKitapIslemleri";
             kitapToolStripMenuItem.Text = "Kitap İşlemleri";
             kitapToolStripMenuItem.Click += menuStrip_Click;
@@ -144,7 +148,7 @@
             // kategoriIslemleriiToolStripMenuItem
             // 
             kategoriIslemleriiToolStripMenuItem.Name = "kategoriIslemleriiToolStripMenuItem";
-            kategoriIslemleriiToolStripMenuItem.Size = new Size(249, 30);
+            kategoriIslemleriiToolStripMenuItem.Size = new Size(197, 24);
             kategoriIslemleriiToolStripMenuItem.Tag = "frmKategoriIslemleri";
             kategoriIslemleriiToolStripMenuItem.Text = "Kategori İşlemleri";
             kategoriIslemleriiToolStripMenuItem.Click += menuStrip_Click;
@@ -152,7 +156,7 @@
             // yazarIslemleriToolStripMenuItem
             // 
             yazarIslemleriToolStripMenuItem.Name = "yazarIslemleriToolStripMenuItem";
-            yazarIslemleriToolStripMenuItem.Size = new Size(249, 30);
+            yazarIslemleriToolStripMenuItem.Size = new Size(197, 24);
             yazarIslemleriToolStripMenuItem.Tag = "frmYazarIslemleri";
             yazarIslemleriToolStripMenuItem.Text = "Yazar İşlemleri";
             yazarIslemleriToolStripMenuItem.Click += menuStrip_Click;
@@ -160,7 +164,7 @@
             // dilIslemleriToolStripMenuItem
             // 
             dilIslemleriToolStripMenuItem.Name = "dilIslemleriToolStripMenuItem";
-            dilIslemleriToolStripMenuItem.Size = new Size(249, 30);
+            dilIslemleriToolStripMenuItem.Size = new Size(197, 24);
             dilIslemleriToolStripMenuItem.Tag = "frmDilIslemleri";
             dilIslemleriToolStripMenuItem.Text = "Dil İşlemleri";
             dilIslemleriToolStripMenuItem.Click += menuStrip_Click;
@@ -168,7 +172,7 @@
             // yayineviIslemleriToolStripMenuItem
             // 
             yayineviIslemleriToolStripMenuItem.Name = "yayineviIslemleriToolStripMenuItem";
-            yayineviIslemleriToolStripMenuItem.Size = new Size(249, 30);
+            yayineviIslemleriToolStripMenuItem.Size = new Size(197, 24);
             yayineviIslemleriToolStripMenuItem.Tag = "frmYayineviIslemleri";
             yayineviIslemleriToolStripMenuItem.Text = "Yayınevi İşlemleri";
             yayineviIslemleriToolStripMenuItem.Click += menuStrip_Click;
@@ -178,7 +182,7 @@
             oduncIslemleriToolStripMenuItem.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
             oduncIslemleriToolStripMenuItem.ForeColor = Color.FromArgb(44, 62, 80);
             oduncIslemleriToolStripMenuItem.Name = "oduncIslemleriToolStripMenuItem";
-            oduncIslemleriToolStripMenuItem.Size = new Size(187, 29);
+            oduncIslemleriToolStripMenuItem.Size = new Size(153, 24);
             oduncIslemleriToolStripMenuItem.Tag = "frmOduncIslemleri";
             oduncIslemleriToolStripMenuItem.Text = "🔄 Ödünç İşlemleri";
             oduncIslemleriToolStripMenuItem.Click += menuStrip_Click;
@@ -188,7 +192,7 @@
             uyeIslemleriToolStripMenuItem.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
             uyeIslemleriToolStripMenuItem.ForeColor = Color.FromArgb(44, 62, 80);
             uyeIslemleriToolStripMenuItem.Name = "uyeIslemleriToolStripMenuItem";
-            uyeIslemleriToolStripMenuItem.Size = new Size(164, 29);
+            uyeIslemleriToolStripMenuItem.Size = new Size(135, 24);
             uyeIslemleriToolStripMenuItem.Tag = "frmUyeIslemleri";
             uyeIslemleriToolStripMenuItem.Text = "👥 Üye İşlemleri";
             uyeIslemleriToolStripMenuItem.Click += menuStrip_Click;
@@ -198,7 +202,7 @@
             personelIslemleriToolStripMenuItem.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
             personelIslemleriToolStripMenuItem.ForeColor = Color.FromArgb(44, 62, 80);
             personelIslemleriToolStripMenuItem.Name = "personelIslemleriToolStripMenuItem";
-            personelIslemleriToolStripMenuItem.Size = new Size(203, 29);
+            personelIslemleriToolStripMenuItem.Size = new Size(165, 24);
             personelIslemleriToolStripMenuItem.Tag = "frmPersonelIslemleri";
             personelIslemleriToolStripMenuItem.Text = "👔 Personel İşlemleri";
             personelIslemleriToolStripMenuItem.Click += menuStrip_Click;
@@ -208,7 +212,7 @@
             raporlamaToolStripMenuItem.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
             raporlamaToolStripMenuItem.ForeColor = Color.FromArgb(44, 62, 80);
             raporlamaToolStripMenuItem.Name = "raporlamaToolStripMenuItem";
-            raporlamaToolStripMenuItem.Size = new Size(146, 29);
+            raporlamaToolStripMenuItem.Size = new Size(121, 24);
             raporlamaToolStripMenuItem.Text = "📝 Raporlama";
             // 
             // cikisYapToolStripMenuItem
@@ -216,7 +220,7 @@
             cikisYapToolStripMenuItem.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
             cikisYapToolStripMenuItem.ForeColor = Color.FromArgb(192, 57, 43);
             cikisYapToolStripMenuItem.Name = "cikisYapToolStripMenuItem";
-            cikisYapToolStripMenuItem.Size = new Size(128, 29);
+            cikisYapToolStripMenuItem.Size = new Size(103, 24);
             cikisYapToolStripMenuItem.Text = "🔒 Çıkış Yap";
             cikisYapToolStripMenuItem.Click += cikisYapToolStripMenuItem_Click;
             // 
@@ -229,11 +233,11 @@
             flowLayoutPanel_Kartlar.Controls.Add(panel_Odunc);
             flowLayoutPanel_Kartlar.Controls.Add(panel_Geciklis);
             flowLayoutPanel_Kartlar.Dock = DockStyle.Fill;
-            flowLayoutPanel_Kartlar.Location = new Point(0, 119);
-            flowLayoutPanel_Kartlar.Margin = new Padding(7, 8, 7, 8);
+            flowLayoutPanel_Kartlar.Location = new Point(0, 60);
+            flowLayoutPanel_Kartlar.Margin = new Padding(6, 6, 6, 6);
             flowLayoutPanel_Kartlar.Name = "flowLayoutPanel_Kartlar";
-            flowLayoutPanel_Kartlar.Padding = new Padding(11, 13, 11, 13);
-            flowLayoutPanel_Kartlar.Size = new Size(1413, 829);
+            flowLayoutPanel_Kartlar.Padding = new Padding(10, 10, 10, 10);
+            flowLayoutPanel_Kartlar.Size = new Size(1211, 594);
             flowLayoutPanel_Kartlar.TabIndex = 7;
             // 
             // panel_Kitap
@@ -241,10 +245,10 @@
             panel_Kitap.BackColor = Color.FromArgb(39, 174, 96);
             panel_Kitap.Controls.Add(label_KitapSayisi);
             panel_Kitap.Controls.Add(label1);
-            panel_Kitap.Location = new Point(22, 26);
-            panel_Kitap.Margin = new Padding(11, 13, 11, 13);
+            panel_Kitap.Location = new Point(20, 20);
+            panel_Kitap.Margin = new Padding(10, 10, 10, 10);
             panel_Kitap.Name = "panel_Kitap";
-            panel_Kitap.Size = new Size(320, 200);
+            panel_Kitap.Size = new Size(280, 150);
             panel_Kitap.TabIndex = 0;
             // 
             // label_KitapSayisi
@@ -252,9 +256,9 @@
             label_KitapSayisi.AutoSize = true;
             label_KitapSayisi.Font = new Font("Segoe UI", 48F, FontStyle.Bold);
             label_KitapSayisi.ForeColor = Color.White;
-            label_KitapSayisi.Location = new Point(15, 60);
+            label_KitapSayisi.Location = new Point(13, 45);
             label_KitapSayisi.Name = "label_KitapSayisi";
-            label_KitapSayisi.Size = new Size(91, 106);
+            label_KitapSayisi.Size = new Size(74, 86);
             label_KitapSayisi.TabIndex = 0;
             label_KitapSayisi.Text = "0";
             // 
@@ -263,9 +267,9 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 14F);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(16, 20);
+            label1.Location = new Point(14, 15);
             label1.Name = "label1";
-            label1.Size = new Size(193, 32);
+            label1.Size = new Size(145, 25);
             label1.TabIndex = 1;
             label1.Text = "📚 Toplam Kitap";
             // 
@@ -274,10 +278,10 @@
             panel_Uye.BackColor = Color.FromArgb(41, 128, 185);
             panel_Uye.Controls.Add(label_UyeSayisi);
             panel_Uye.Controls.Add(label2);
-            panel_Uye.Location = new Point(364, 26);
-            panel_Uye.Margin = new Padding(11, 13, 11, 13);
+            panel_Uye.Location = new Point(320, 20);
+            panel_Uye.Margin = new Padding(10, 10, 10, 10);
             panel_Uye.Name = "panel_Uye";
-            panel_Uye.Size = new Size(320, 200);
+            panel_Uye.Size = new Size(280, 150);
             panel_Uye.TabIndex = 1;
             // 
             // label_UyeSayisi
@@ -285,9 +289,9 @@
             label_UyeSayisi.AutoSize = true;
             label_UyeSayisi.Font = new Font("Segoe UI", 48F, FontStyle.Bold);
             label_UyeSayisi.ForeColor = Color.White;
-            label_UyeSayisi.Location = new Point(17, 60);
+            label_UyeSayisi.Location = new Point(15, 45);
             label_UyeSayisi.Name = "label_UyeSayisi";
-            label_UyeSayisi.Size = new Size(91, 106);
+            label_UyeSayisi.Size = new Size(74, 86);
             label_UyeSayisi.TabIndex = 0;
             label_UyeSayisi.Text = "0";
             // 
@@ -296,9 +300,9 @@
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 14F);
             label2.ForeColor = Color.White;
-            label2.Location = new Point(17, 20);
+            label2.Location = new Point(15, 15);
             label2.Name = "label2";
-            label2.Size = new Size(180, 32);
+            label2.Size = new Size(136, 25);
             label2.TabIndex = 1;
             label2.Text = "👥 Toplam Üye";
             // 
@@ -307,10 +311,10 @@
             panel_Odunc.BackColor = Color.FromArgb(230, 126, 34);
             panel_Odunc.Controls.Add(label_OduncSayisi);
             panel_Odunc.Controls.Add(label3);
-            panel_Odunc.Location = new Point(706, 26);
-            panel_Odunc.Margin = new Padding(11, 13, 11, 13);
+            panel_Odunc.Location = new Point(620, 20);
+            panel_Odunc.Margin = new Padding(10, 10, 10, 10);
             panel_Odunc.Name = "panel_Odunc";
-            panel_Odunc.Size = new Size(320, 200);
+            panel_Odunc.Size = new Size(280, 150);
             panel_Odunc.TabIndex = 2;
             // 
             // label_OduncSayisi
@@ -318,9 +322,9 @@
             label_OduncSayisi.AutoSize = true;
             label_OduncSayisi.Font = new Font("Segoe UI", 48F, FontStyle.Bold);
             label_OduncSayisi.ForeColor = Color.White;
-            label_OduncSayisi.Location = new Point(17, 60);
+            label_OduncSayisi.Location = new Point(15, 45);
             label_OduncSayisi.Name = "label_OduncSayisi";
-            label_OduncSayisi.Size = new Size(91, 106);
+            label_OduncSayisi.Size = new Size(74, 86);
             label_OduncSayisi.TabIndex = 2;
             label_OduncSayisi.Text = "0";
             // 
@@ -329,9 +333,9 @@
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 14F);
             label3.ForeColor = Color.White;
-            label3.Location = new Point(17, 20);
+            label3.Location = new Point(15, 15);
             label3.Name = "label3";
-            label3.Size = new Size(221, 32);
+            label3.Size = new Size(171, 25);
             label3.TabIndex = 3;
             label3.Text = "🔄 Emanet Kitaplar";
             // 
@@ -340,10 +344,10 @@
             panel_Geciklis.BackColor = Color.FromArgb(192, 57, 43);
             panel_Geciklis.Controls.Add(label_GecikmisUyeSayisi);
             panel_Geciklis.Controls.Add(label4);
-            panel_Geciklis.Location = new Point(1048, 26);
-            panel_Geciklis.Margin = new Padding(11, 13, 11, 13);
+            panel_Geciklis.Location = new Point(20, 190);
+            panel_Geciklis.Margin = new Padding(10, 10, 10, 10);
             panel_Geciklis.Name = "panel_Geciklis";
-            panel_Geciklis.Size = new Size(320, 200);
+            panel_Geciklis.Size = new Size(280, 150);
             panel_Geciklis.TabIndex = 3;
             // 
             // label_GecikmisUyeSayisi
@@ -351,9 +355,9 @@
             label_GecikmisUyeSayisi.AutoSize = true;
             label_GecikmisUyeSayisi.Font = new Font("Segoe UI", 48F, FontStyle.Bold);
             label_GecikmisUyeSayisi.ForeColor = Color.White;
-            label_GecikmisUyeSayisi.Location = new Point(17, 60);
+            label_GecikmisUyeSayisi.Location = new Point(15, 45);
             label_GecikmisUyeSayisi.Name = "label_GecikmisUyeSayisi";
-            label_GecikmisUyeSayisi.Size = new Size(91, 106);
+            label_GecikmisUyeSayisi.Size = new Size(74, 86);
             label_GecikmisUyeSayisi.TabIndex = 4;
             label_GecikmisUyeSayisi.Text = "0";
             // 
@@ -362,9 +366,9 @@
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 14F);
             label4.ForeColor = Color.White;
-            label4.Location = new Point(17, 20);
+            label4.Location = new Point(15, 15);
             label4.Name = "label4";
-            label4.Size = new Size(236, 32);
+            label4.Size = new Size(183, 25);
             label4.TabIndex = 5;
             label4.Text = "⚠️ Gecikmiş Kitaplar";
             // 
@@ -373,19 +377,35 @@
             timer_Dashboard.Interval = 10000;
             timer_Dashboard.Tick += timer_Dashboard_Tick;
             // 
+            // toolStripContainer1
+            // 
+            // 
+            // toolStripContainer1.ContentPanel
+            // 
+            toolStripContainer1.ContentPanel.Controls.Add(flowLayoutPanel_Kartlar);
+            toolStripContainer1.ContentPanel.Controls.Add(panel_Ust);
+            toolStripContainer1.ContentPanel.Size = new Size(1211, 654);
+            toolStripContainer1.Dock = DockStyle.Fill;
+            toolStripContainer1.Location = new Point(0, 0);
+            toolStripContainer1.Name = "toolStripContainer1";
+            toolStripContainer1.Size = new Size(1236, 711);
+            toolStripContainer1.TabIndex = 9;
+            toolStripContainer1.Text = "toolStripContainer1";
+            // 
+            // toolStripContainer1.TopToolStripPanel
+            // 
+            toolStripContainer1.TopToolStripPanel.Controls.Add(menuStrip1);
+            // 
             // frmMain
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(1413, 948);
-            Controls.Add(flowLayoutPanel_Kartlar);
-            Controls.Add(panel_Ust);
-            Controls.Add(menuStrip1);
+            ClientSize = new Size(1236, 711);
+            Controls.Add(toolStripContainer1);
             Icon = (Icon)resources.GetObject("$this.Icon");
             IsMdiContainer = true;
             MainMenuStrip = menuStrip1;
-            Margin = new Padding(3, 4, 3, 4);
             Name = "frmMain";
             StartPosition = FormStartPosition.CenterParent;
             Text = "Kütüphane Otomasyonu";
@@ -404,8 +424,12 @@
             panel_Odunc.PerformLayout();
             panel_Geciklis.ResumeLayout(false);
             panel_Geciklis.PerformLayout();
+            toolStripContainer1.ContentPanel.ResumeLayout(false);
+            toolStripContainer1.TopToolStripPanel.ResumeLayout(false);
+            toolStripContainer1.TopToolStripPanel.PerformLayout();
+            toolStripContainer1.ResumeLayout(false);
+            toolStripContainer1.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -440,5 +464,6 @@
         private FlowLayoutPanel flowLayoutPanel_Kartlar;
         private System.Windows.Forms.Timer timer_Dashboard;
         private ToolStripMenuItem kitapToolStripMenuItem;
+        private ToolStripContainer toolStripContainer1;
     }
 }

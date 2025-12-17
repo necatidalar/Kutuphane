@@ -24,37 +24,24 @@ namespace Kutuphane.UI
         private void frmMain_Load(object sender, EventArgs e)
         {
             Logout();
-            //SetForLoginView(true);
-
-            //frmGiris girisForm = new frmGiris();
-            //girisForm.MdiParent = this;
-            //ActivateMdiChild(girisForm);
-            //girisForm.Show();
-            //girisForm.FormClosed += (s, args) =>
-            //{
-            //    if (girisForm.GirisYapanPersonel != null && girisForm.GirisYapanPersonel.PersonelId > 0)
-            //    {
-            //        loginPersoneli = girisForm.GirisYapanPersonel;
-            //        this.GirisYapanPersonelId = loginPersoneli.PersonelId;
-            //        this.GirisYapanPersonelAd = loginPersoneli.Ad;
-            //        this.GirisYapanPersonelSoyad = loginPersoneli.Soyad;
-            //        lblKullaniciAdi.Text = $"Hoşgeldin, {this.GirisYapanPersonelAd} {this.GirisYapanPersonelSoyad}";
-            //        SetForLoginView(false);
-            //        ShowHideTopPanels(true, true);
-            //        Listele();
-            //    }
-            //    else
-            //    {
-            //        Application.Exit();
-            //    }
-            //};
-
         }
         private void ShowHideTopPanels(bool showDashboard, bool showMenu)
         {
-            panel_Ust.Visible = showDashboard;
-            flowLayoutPanel_Kartlar.Visible = showDashboard;
+            if (toolStripContainer1 != null)
+            {
+                toolStripContainer1.TopToolStripPanel.Visible = showMenu;
+
+                var content = toolStripContainer1.ContentPanel;
+                if (content != null)
+                {
+                    panel_Ust.Visible = showDashboard;
+                    flowLayoutPanel_Kartlar.Visible = showDashboard;
+                    toolStripContainer1.Visible = showMenu;
+                }
+            }
+
             menuStrip1.Visible = showMenu;
+
             if (showDashboard)
                 timer_Dashboard.Start();
             else
@@ -149,6 +136,12 @@ namespace Kutuphane.UI
             if (childForm == ActiveMdiChild || childForm == null)
                 return;
 
+
+            if (childForm is frmOduncIslemleri oduncForm)
+            {
+                oduncForm.GirisYapanPersonelId = this.GirisYapanPersonelId;
+            }
+
             ActiveMdiChild?.Close();
             childForm.MdiParent = this;
             childForm.FormBorderStyle = FormBorderStyle.None;
@@ -174,7 +167,7 @@ namespace Kutuphane.UI
             GirisYapanPersonelAd = null;
             GirisYapanPersonelSoyad = null;
             loginPersoneli = null;
-
+            toolStripContainer1.Visible = false;
             lblKullaniciAdi.Text = string.Empty;
 
             // Açık MDI formları kapat
@@ -185,7 +178,6 @@ namespace Kutuphane.UI
 
             SetForLoginView(true);
 
-            // Login ekranını aç
             frmGiris girisForm = new frmGiris();
             girisForm.MdiParent = this;
             girisForm.FormClosed += LoginFormClosed;

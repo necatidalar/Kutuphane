@@ -15,6 +15,7 @@ namespace Kutuphane.UI
         private int _girisYapanPersonelId = 0;
         private List<KitapDto> _sepetiKitaplar = new();
 
+
         public int GirisYapanPersonelId
         {
             get => _girisYapanPersonelId;
@@ -86,6 +87,7 @@ namespace Kutuphane.UI
                     MessageBox.Show("Üye bulunamadı.", "Sonuç", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     _secilenUyeId = 0;
                     label_AdSoyad.Text = "Seçili Üye: YOK";
+                    label_ToplamAlinanKitapSayisi.Text = "Toplam Alınan: 0 | Şu an Ödünçte: 0";
                     listView_UyeninAldigiKitapListesi.Items.Clear();
                     return;
                 }
@@ -114,17 +116,6 @@ namespace Kutuphane.UI
             UyeninAldigiKitaplarıListele();
         }
 
-        private void btn_UyeListele_Click(object sender, EventArgs e)
-        {
-            if (_secilenUyeId == 0)
-            {
-                MessageBox.Show("Lütfen önce bir üye arayın ve seçin.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            UyeninAldigiKitaplarıListele();
-        }
-
         private void UyeninAldigiKitaplarıListele()
         {
             try
@@ -138,6 +129,11 @@ namespace Kutuphane.UI
                     MessageBox.Show(result.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
+                int toplamKitap = result.Data.Count;
+                int oduncteOlanlar = result.Data.Count(x => x.TeslimEdildi == false);
+
+                label_ToplamAlinanKitapSayisi.Text = $"Toplam Alınan: {toplamKitap}";
+                label_SuanOduncteKitapSayisi.Text = $"Şu an Ödünçte: {oduncteOlanlar}";
 
                 foreach (var odunc in result.Data)
                 {
