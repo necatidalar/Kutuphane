@@ -28,6 +28,13 @@ namespace Kutuphane.UI
         }
         private void ComboDoldur()
         {
+            comboBox_Sirala.Items.Clear();
+            comboBox_Sirala.Items.Add("Kitap Adı (A-Z)");
+            comboBox_Sirala.Items.Add("Kitap Adı (Z-A)");
+            comboBox_Sirala.Items.Add("Basım Yılı");
+            comboBox_Sirala.Items.Add("Stok");
+            comboBox_Sirala.SelectedIndex = 0;
+
             IYazarService yazarService = new YazarManager(new YazarDal());
             var yazarResult = yazarService.YazarListeGetirServis(x => x.AktifMi);
             if (yazarResult.IsSuccess)
@@ -48,28 +55,66 @@ namespace Kutuphane.UI
             if (dilResult.IsSuccess)
                 Metodlar.ComboDoldur(comboBox_Dil, dilResult.Data, "DilAdi", "DilId");
         }
-        private void Listele(string? aramMetin = null)
+        private void Listele(string? aramaMetni = null)
         {
             dataGrid_Kitap.Rows.Clear();
 
-            if (aramMetin != null)
-            {
-                // necoş sonra düzelt
-            }
+            aramaMetni ??= textBox_Ara.Text.Trim();
 
             var kitapResult = kitapService.KitapListeDetayliGetirServis(x => x.Aktif);
 
             if (!kitapResult.IsSuccess)
             {
-                MessageBox.Show(kitapResult.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(kitapResult.Message, "Hata",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            Metodlar.gridDoldur(kitapDtoBindingSource, kitapResult.Data);
+            var liste = kitapResult.Data;
+            //Arama
+            if (!string.IsNullOrWhiteSpace(aramaMetni))
+            {
+                aramaMetni = aramaMetni.ToLower();
+
+                liste = liste.Where(x =>
+                     x.KitapAdi.ToLower().Contains(aramaMetni) ||
+                     x.ISBN.ToLower().Contains(aramaMetni) ||
+                     x.YazarAd.ToLower().Contains(aramaMetni) ||
+                     x.YazarSoyad.ToLower().Contains(aramaMetni) ||
+                     x.KategoriAdi.ToLower().Contains(aramaMetni) ||
+                     x.YayineviAd.ToLower().Contains(aramaMetni) ||
+                     (x.BasimYili.HasValue &&
+                      x.BasimYili.Value.ToString().Contains(aramaMetni)) ||
+                     x.Dil.ToLower().Contains(aramaMetni)
+                ).ToList();
+
+            }
+
+            //SIRALAMA
+            switch (comboBox_Sirala.SelectedItem?.ToString())
+            {
+                case "Kitap Adı (A-Z)":
+                    liste = liste.OrderBy(x => x.KitapAdi).ToList();
+                    break;
+
+                case "Kitap Adı (Z-A)":
+                    liste = liste.OrderByDescending(x => x.KitapAdi).ToList();
+                    break;
+
+                case "Basım Yılı":
+                    liste = liste.OrderByDescending(x => x.BasimYili).ToList();
+                    break;
+
+                case "Stok":
+                    liste = liste.OrderByDescending(x => x.Stok).ToList();
+                    break;
+            }
+            Metodlar.gridDoldur(kitapDtoBindingSource, liste);
+
             dataGrid_Kitap.ClearSelection();
             dataGrid_Kitap.CurrentCell = null;
-            Temizle();
         }
+
         private Kitap KitapNesnesiniOlustur(int? kitapId = null)
         {
             return new Kitap
@@ -275,6 +320,65 @@ namespace Kutuphane.UI
                 }
             }
             //Doldurdum
+        }
+        private void dataGrid_Kitap_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            if (e.RowIndex < 0 || e.ColumnIndex < 0)
+                return;
+
+            if (string.IsNullOrWhiteSpace(textBox_Ara.Text))
+                return;
+
+            if (e.Value == null)
+                return;
+
+            string hucreMetni = e.Value.ToString();
+            string aranan = textBox_Ara.Text;
+
+            int index = hucreMetni.IndexOf(aranan, StringComparison.OrdinalIgnoreCase);
+            if (index < 0)
+                return;
+
+            e.Handled = true;
+
+            e.PaintBackground(e.ClipBounds, true);
+
+            Font font = e.CellStyle.Font;
+            Color normalRenk = e.CellStyle.ForeColor;
+            Color bulunanRenk = Color.DarkRed;
+
+            string once = hucreMetni.Substring(0, index);
+            string bulunan = hucreMetni.Substring(index, aranan.Length);
+            string sonra = hucreMetni.Substring(index + aranan.Length);
+
+            float x = e.CellBounds.X + 2;
+            float y = e.CellBounds.Y + 4;
+
+            using (Brush normalBrush = new SolidBrush(normalRenk))
+            using (Brush bulunanBrush = new SolidBrush(bulunanRenk))
+            {
+                // önceki metin
+                e.Graphics.DrawString(once, font, normalBrush, x, y);
+                x += e.Graphics.MeasureString(once, font).Width;
+
+                // bulunan metin
+                e.Graphics.DrawString(bulunan, font, bulunanBrush, x, y);
+                x += e.Graphics.MeasureString(bulunan, font).Width;
+
+                // sonrası
+                e.Graphics.DrawString(sonra, font, normalBrush, x, y);
+            }
+
+            e.Paint(e.ClipBounds, DataGridViewPaintParts.Border);
+        }
+        private void textBox_Ara_TextChanged(object sender, EventArgs e)
+        {
+            Listele();
+        }
+
+        private void comboBox_Sirala_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Listele();
         }
     }
 }

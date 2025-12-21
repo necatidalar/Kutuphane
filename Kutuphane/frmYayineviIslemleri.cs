@@ -16,28 +16,49 @@ namespace Kutuphane.UI
         private void frmYayineviIslemleri_Load(object sender, EventArgs e)
         {
             dataGrid_Yayinevi.DataSource = bilYayinevi;
+
+            comboBox_Sirala.Items.Clear();
+            comboBox_Sirala.Items.Add("Yayınevi Adı (A-Z)");
+            comboBox_Sirala.Items.Add("Yayınevi Adı (Z-A)");
+            comboBox_Sirala.SelectedIndex = 0;
+
             Listele();
             PasifUyeKontrol();
         }
+
         BindingList<Yayinevi> bilYayinevi = new BindingList<Yayinevi>();
         IYayineviService yayineviService = new YayineviManager(new YayineviDal());
         bool silinenModu = false;
         private void Listele()
         {
-            var YayineviResult = yayineviService.GetListByFilterService(x =>
+            var yayineviResult = yayineviService.GetListByFilterService(x =>
                 x.AktifMi == true &&
-                (x.Ad.Contains(textBox_Ara.Text))
+                x.Ad.Contains(textBox_Ara.Text)
             );
 
-            if (!YayineviResult.IsSuccess)
+            if (!yayineviResult.IsSuccess)
             {
-                MessageBox.Show(YayineviResult.Message, "Hata");
+                MessageBox.Show(yayineviResult.Message, "Hata");
                 return;
+            }
+
+            IEnumerable<Yayinevi> liste = yayineviResult.Data;
+
+
+            switch (comboBox_Sirala.SelectedItem?.ToString())
+            {
+                case "Yayınevi Adı (A-Z)":
+                    liste = liste.OrderBy(x => x.Ad);
+                    break;
+
+                case "Yayınevi Adı (Z-A)":
+                    liste = liste.OrderByDescending(x => x.Ad);
+                    break;
             }
 
             bilYayinevi.Clear();
 
-            foreach (var item in YayineviResult.Data)
+            foreach (var item in liste)
                 bilYayinevi.Add(item);
 
             dataGrid_Yayinevi.ClearSelection();
@@ -223,6 +244,14 @@ namespace Kutuphane.UI
             }
             dataGrid_Yayinevi.ClearSelection();
             KutulariTemizle();
+        }
+        private void textBox_Ara_TextChanged(object sender, EventArgs e)
+        {
+            Listele();
+        }
+        private void comboBox_Sirala_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Listele();
         }
     }
 }

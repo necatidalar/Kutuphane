@@ -75,7 +75,8 @@
             textBox_Ad = new TextBox();
             textBox_TcPass = new TextBox();
             textBox_UyeId = new TextBox();
-            btnAra = new Button();
+            comboBox_Sirala = new ComboBox();
+            comboBox_Filtre = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)dataGrid_Uye).BeginInit();
             ((System.ComponentModel.ISupportInitialize)uyeDtoBindingSource).BeginInit();
             groupBox1.SuspendLayout();
@@ -115,6 +116,8 @@
             dataGrid_Uye.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGrid_Uye.Size = new Size(814, 621);
             dataGrid_Uye.TabIndex = 19;
+            dataGrid_Uye.CellFormatting += dataGrid_Uye_CellFormatting;
+            dataGrid_Uye.CellPainting += dataGrid_Uye_CellPainting;
             dataGrid_Uye.SelectionChanged += dataGrid_Uye_SelectionChanged;
             // 
             // uyeIdDataGridViewTextBoxColumn
@@ -200,18 +203,19 @@
             // 
             textBox_Ara.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             textBox_Ara.Font = new Font("Segoe UI", 10F);
-            textBox_Ara.Location = new Point(771, 13);
+            textBox_Ara.Location = new Point(572, 12);
             textBox_Ara.Name = "textBox_Ara";
-            textBox_Ara.PlaceholderText = "TC Kimlik No / Pasaport No / Ad Soyad ile arayın";
+            textBox_Ara.PlaceholderText = "Arama metni giriniz";
             textBox_Ara.Size = new Size(280, 25);
             textBox_Ara.TabIndex = 17;
+            textBox_Ara.TextChanged += textBox_Ara_TextChanged;
             // 
             // label1
             // 
             label1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
-            label1.Location = new Point(735, 16);
+            label1.Location = new Point(533, 15);
             label1.Name = "label1";
             label1.Size = new Size(33, 19);
             label1.TabIndex = 2;
@@ -528,21 +532,27 @@
             textBox_UyeId.Size = new Size(201, 25);
             textBox_UyeId.TabIndex = 1;
             // 
-            // btnAra
+            // comboBox_Sirala
             // 
-            btnAra.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnAra.BackColor = Color.FromArgb(41, 128, 185);
-            btnAra.FlatAppearance.BorderSize = 0;
-            btnAra.FlatStyle = FlatStyle.Flat;
-            btnAra.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            btnAra.ForeColor = Color.White;
-            btnAra.Location = new Point(1057, 12);
-            btnAra.Name = "btnAra";
-            btnAra.Size = new Size(75, 25);
-            btnAra.TabIndex = 18;
-            btnAra.Text = "🔍 ARA";
-            btnAra.UseVisualStyleBackColor = false;
-            btnAra.Click += btnAra_Click;
+            comboBox_Sirala.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            comboBox_Sirala.Font = new Font("Segoe UI", 10F);
+            comboBox_Sirala.FormattingEnabled = true;
+            comboBox_Sirala.Location = new Point(998, 12);
+            comboBox_Sirala.Name = "comboBox_Sirala";
+            comboBox_Sirala.Size = new Size(134, 25);
+            comboBox_Sirala.TabIndex = 21;
+            comboBox_Sirala.SelectedIndexChanged += comboBox_Sirala_SelectedIndexChanged;
+            // 
+            // comboBox_Filtre
+            // 
+            comboBox_Filtre.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            comboBox_Filtre.Font = new Font("Segoe UI", 10F);
+            comboBox_Filtre.FormattingEnabled = true;
+            comboBox_Filtre.Location = new Point(858, 12);
+            comboBox_Filtre.Name = "comboBox_Filtre";
+            comboBox_Filtre.Size = new Size(134, 25);
+            comboBox_Filtre.TabIndex = 22;
+            comboBox_Filtre.SelectedIndexChanged += comboBox_Filtre_SelectedIndexChanged;
             // 
             // frmUyeIslemleri
             // 
@@ -550,7 +560,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(1144, 676);
-            Controls.Add(btnAra);
+            Controls.Add(comboBox_Filtre);
+            Controls.Add(comboBox_Sirala);
             Controls.Add(groupBox1);
             Controls.Add(label1);
             Controls.Add(textBox_Ara);
@@ -580,7 +591,6 @@
         private GroupBox groupBox1;
         private Label label2;
         private TextBox textBox_UyeId;
-        private Button btnAra;
         private Label label8;
         private Label label7;
         private Label label6;
@@ -618,5 +628,7 @@
         private DataGridViewTextBoxColumn adresDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn adresDetayDataGridViewTextBoxColumn;
         private DataGridViewCheckBoxColumn aktifMiDataGridViewCheckBoxColumn;
+        private ComboBox comboBox_Sirala;
+        private ComboBox comboBox_Filtre;
     }
 }

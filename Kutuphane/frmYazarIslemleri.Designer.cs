@@ -32,7 +32,6 @@
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmYazarIslemleri));
-            btnAra = new Button();
             label3 = new Label();
             textBox_Ara = new TextBox();
             groupBox1 = new GroupBox();
@@ -61,31 +60,17 @@
             adSoyadDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             yasDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             yazarDtoBindingSource = new BindingSource(components);
+            comboBox_Sirala = new ComboBox();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGrid_Yazar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)yazarDtoBindingSource).BeginInit();
             SuspendLayout();
             // 
-            // btnAra
-            // 
-            btnAra.BackColor = Color.FromArgb(41, 128, 185);
-            btnAra.FlatAppearance.BorderSize = 0;
-            btnAra.FlatStyle = FlatStyle.Flat;
-            btnAra.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            btnAra.ForeColor = Color.White;
-            btnAra.Location = new Point(822, 12);
-            btnAra.Name = "btnAra";
-            btnAra.Size = new Size(75, 25);
-            btnAra.TabIndex = 13;
-            btnAra.Text = "🔍 ARA";
-            btnAra.UseVisualStyleBackColor = false;
-            btnAra.Click += btnAra_Click;
-            // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
-            label3.Location = new Point(556, 15);
+            label3.Location = new Point(413, 13);
             label3.Name = "label3";
             label3.Size = new Size(33, 19);
             label3.TabIndex = 11;
@@ -94,11 +79,12 @@
             // textBox_Ara
             // 
             textBox_Ara.Font = new Font("Segoe UI", 10F);
-            textBox_Ara.Location = new Point(592, 13);
+            textBox_Ara.Location = new Point(452, 10);
             textBox_Ara.Name = "textBox_Ara";
             textBox_Ara.PlaceholderText = "Yazarın adı ya da soyadıyla arayın";
-            textBox_Ara.Size = new Size(224, 25);
+            textBox_Ara.Size = new Size(305, 25);
             textBox_Ara.TabIndex = 12;
+            textBox_Ara.TextChanged += textBox_Ara_TextChanged;
             // 
             // groupBox1
             // 
@@ -403,14 +389,24 @@
             // 
             yazarDtoBindingSource.DataSource = typeof(Model.DTO.YazarDto);
             // 
+            // comboBox_Sirala
+            // 
+            comboBox_Sirala.Font = new Font("Segoe UI", 10F);
+            comboBox_Sirala.FormattingEnabled = true;
+            comboBox_Sirala.Location = new Point(763, 10);
+            comboBox_Sirala.Name = "comboBox_Sirala";
+            comboBox_Sirala.Size = new Size(134, 25);
+            comboBox_Sirala.TabIndex = 21;
+            comboBox_Sirala.SelectedIndexChanged += comboBox_Sirala_SelectedIndexChanged;
+            // 
             // frmYazarIslemleri
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(909, 541);
+            Controls.Add(comboBox_Sirala);
             Controls.Add(dataGrid_Yazar);
-            Controls.Add(btnAra);
             Controls.Add(label3);
             Controls.Add(textBox_Ara);
             Controls.Add(groupBox1);
@@ -430,8 +426,6 @@
         }
 
         #endregion
-
-        private Button btnAra;
         private Label label3;
         private TextBox textBox_Ara;
         private GroupBox groupBox1;
@@ -460,5 +454,6 @@
         private DataGridViewTextBoxColumn olumTarihiDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn adSoyadDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn yasDataGridViewTextBoxColumn;
+        private ComboBox comboBox_Sirala;
     }
 }

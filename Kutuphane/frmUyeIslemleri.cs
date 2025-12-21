@@ -28,28 +28,110 @@ namespace Kutuphane.UI
         private void Listele()
         {
             var uyeResult = uyeService.UyeListeDetayliGetirServis(x =>
-                x.AktifMi == true &&
-                (x.TcPass.Contains(textBox_Ara.Text) ||
-                 x.Ad.Contains(textBox_Ara.Text) ||
-                 x.Soyad.Contains(textBox_Ara.Text))
+                x.TcPass.Contains(textBox_Ara.Text) ||
+                x.Ad.Contains(textBox_Ara.Text) ||
+                x.Soyad.Contains(textBox_Ara.Text) ||
+                x.Adres.Contains(textBox_Ara.Text) ||
+                x.AdresDetay.Contains(textBox_Ara.Text) ||
+                x.Eposta.Contains(textBox_Ara.Text) ||
+                x.Telefon.Contains(textBox_Ara.Text)
             );
 
             if (!uyeResult.IsSuccess)
             {
-                MessageBox.Show(uyeResult.Message, "Hata", MessageBoxButtons.OK,MessageBoxIcon.Error);
+                MessageBox.Show(uyeResult.Message);
                 return;
+            }
+
+            IEnumerable<UyeDto> liste = uyeResult.Data;
+
+            // 🔹 FİLTRE
+            switch (comboBox_Filtre.SelectedItem?.ToString())
+            {
+                case "Erkek":
+                    liste = liste.Where(x => x.Cinsiyet == "Erkek");
+                    break;
+
+                case "Kadın":
+                    liste = liste.Where(x => x.Cinsiyet == "Kadın");
+                    break;
+
+                case "Belirtilmemiş":
+                    liste = liste.Where(x => x.Cinsiyet == "Belirtilmemiş");
+                    break;
+            }
+
+            // 🔹 SIRALAMA
+            switch (comboBox_Sirala.SelectedItem?.ToString())
+            {
+                case "Ad (A-Z)":
+                    liste = liste.OrderBy(x => x.Ad);
+                    break;
+
+                case "Ad (Z-A)":
+                    liste = liste.OrderByDescending(x => x.Ad);
+                    break;
+
+                case "Soyad (A-Z)":
+                    liste = liste.OrderBy(x => x.Soyad);
+                    break;
+
+                case "Soyad (Z-A)":
+                    liste = liste.OrderByDescending(x => x.Soyad);
+                    break;
+
+                case "Tc / Pass (A-Z)":
+                    liste = liste.OrderBy(x => x.TcPass);
+                    break;
+
+                case "Tc / Pass (Z-A)":
+                    liste = liste.OrderByDescending(x => x.TcPass);
+                    break;
+
+                case "Cinsiyet (A-Z)":
+                    liste = liste.OrderBy(x => x.Cinsiyet);
+                    break;
+
+                case "Cinsiyet (Z-A)":
+                    liste = liste.OrderByDescending(x => x.Cinsiyet);
+                    break;
             }
 
             bilUyeDto.Clear();
 
-            foreach (var item in uyeResult.Data)
+            foreach (var item in liste)
+            {
                 bilUyeDto.Add(item);
+            }
 
             dataGrid_Uye.ClearSelection();
-            KutulariTemizle();
         }
+
+
+
+
         private void ComboDoldur()
         {
+            // SIRALAMA
+            comboBox_Sirala.Items.Clear();
+            comboBox_Sirala.Items.Add("Ad (A-Z)");
+            comboBox_Sirala.Items.Add("Ad (Z-A)");
+            comboBox_Sirala.Items.Add("Soyad (A-Z)");
+            comboBox_Sirala.Items.Add("Soyad (Z-A)");
+            comboBox_Sirala.Items.Add("Tc / Pass (A-Z)");
+            comboBox_Sirala.Items.Add("Tc / Pass (Z-A)");
+            comboBox_Sirala.Items.Add("Cinsiyet (A-Z)");
+            comboBox_Sirala.Items.Add("Cinsiyet (Z-A)");
+            comboBox_Sirala.SelectedIndex = 0;
+
+            // FİLTRE
+            comboBox_Filtre.Items.Clear();
+            comboBox_Filtre.Items.Add("Tümü");
+            comboBox_Filtre.Items.Add("Erkek");
+            comboBox_Filtre.Items.Add("Kadın");
+            comboBox_Filtre.Items.Add("Belirtilmemiş");
+            comboBox_Filtre.SelectedIndex = 0;
+
             ICinsiyetService cinsiyetService = new CinsiyetManager(new CinsiyetDal());
             var cinsiyetResult = cinsiyetService.GetListByFilterService();
 
@@ -327,6 +409,95 @@ namespace Kutuphane.UI
                 return false;
             }
             return true;
+        }
+
+        private void textBox_Ara_TextChanged(object sender, EventArgs e)
+        {
+            Listele();
+        }
+
+        private void comboBox_Sirala_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Listele();
+        }
+
+        private void dataGrid_Uye_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+        //    if (string.IsNullOrWhiteSpace(textBox_Ara.Text))
+        //        return;
+
+        //    if (e.Value != null)
+        //    {
+        //        string aranan = textBox_Ara.Text.ToLower();
+        //        string hucreMetni = e.Value.ToString().ToLower();
+
+        //        if (hucreMetni.Contains(aranan))
+        //        {
+        //            e.CellStyle.BackColor = Color.Yellow;
+        //            e.CellStyle.ForeColor = Color.Black;
+        //        }
+        //        else
+        //        {
+        //            e.CellStyle.BackColor = Color.White;
+        //            e.CellStyle.ForeColor = Color.Black;
+        //        }
+        //    }
+        }
+
+        private void comboBox_Filtre_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Listele();
+        }
+
+        private void dataGrid_Uye_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            if (e.RowIndex < 0 || e.ColumnIndex < 0)
+                return;
+
+            if (string.IsNullOrWhiteSpace(textBox_Ara.Text))
+                return;
+
+            if (e.Value == null)
+                return;
+
+            string hucreMetni = e.Value.ToString();
+            string aranan = textBox_Ara.Text;
+
+            int index = hucreMetni.IndexOf(aranan, StringComparison.OrdinalIgnoreCase);
+            if (index < 0)
+                return;
+
+            e.Handled = true;
+
+            e.PaintBackground(e.ClipBounds, true);
+
+            Font font = e.CellStyle.Font;
+            Color normalRenk = e.CellStyle.ForeColor;
+            Color bulunanRenk = Color.DarkRed;
+
+            string once = hucreMetni.Substring(0, index);
+            string bulunan = hucreMetni.Substring(index, aranan.Length);
+            string sonra = hucreMetni.Substring(index + aranan.Length);
+
+            float x = e.CellBounds.X + 2;
+            float y = e.CellBounds.Y + 4;
+
+            using (Brush normalBrush = new SolidBrush(normalRenk))
+            using (Brush bulunanBrush = new SolidBrush(bulunanRenk))
+            {
+                // önceki metin
+                e.Graphics.DrawString(once, font, normalBrush, x, y);
+                x += e.Graphics.MeasureString(once, font).Width;
+
+                // bulunan metin
+                e.Graphics.DrawString(bulunan, font, bulunanBrush, x, y);
+                x += e.Graphics.MeasureString(bulunan, font).Width;
+
+                // sonrası
+                e.Graphics.DrawString(sonra, font, normalBrush, x, y);
+            }
+
+            e.Paint(e.ClipBounds, DataGridViewPaintParts.Border);
         }
     }
 }

@@ -4,6 +4,7 @@ using Kutuphane.DAL.Concrete;
 using Kutuphane.Model.DTO;
 using Kutuphane.Model.Entity;
 using System.ComponentModel;
+
 namespace Kutuphane.UI
 {
     public partial class frmPersonelIslemleri : Form
@@ -16,6 +17,17 @@ namespace Kutuphane.UI
 
         private void frmPersonelIslemleri_Load(object sender, EventArgs e)
         {
+            comboBox_Sirala.Items.Clear();
+
+            comboBox_Sirala.Items.Add("Ad (A-Z)");
+            comboBox_Sirala.Items.Add("Ad (Z-A)");
+            comboBox_Sirala.Items.Add("Soyad (A-Z)");
+            comboBox_Sirala.Items.Add("Soyad (Z-A)");
+            comboBox_Sirala.Items.Add("Cinsiyet (A-Z)");
+            comboBox_Sirala.Items.Add("Cinsiyet (Z-A)");
+
+            comboBox_Sirala.SelectedIndex = 0;
+
             Listele();
             ComboDoldur();
             PasifUyeKontrol();
@@ -33,8 +45,7 @@ namespace Kutuphane.UI
                 var personelResult = personelService.PersonelBilgiGetirServis(x =>
                     x.AktifMi == true &&
                     (x.Ad.Contains(textBox_Ara.Text) ||
-                     x.Soyad.Contains(textBox_Ara.Text) ||
-                     x.KullaniciAdi.Contains(textBox_Ara.Text))
+                     x.Soyad.Contains(textBox_Ara.Text))
                 );
 
                 if (!personelResult.IsSuccess)
@@ -43,8 +54,37 @@ namespace Kutuphane.UI
                     return;
                 }
 
+                IEnumerable<PersonelBilgileriDto> siraliListe = personelResult.Data;
+
+                switch (comboBox_Sirala.SelectedItem?.ToString())
+                {
+                    case "Ad (A-Z)":
+                        siraliListe = siraliListe.OrderBy(x => x.Ad);
+                        break;
+
+                    case "Ad (Z-A)":
+                        siraliListe = siraliListe.OrderByDescending(x => x.Ad);
+                        break;
+
+                    case "Soyad (A-Z)":
+                        siraliListe = siraliListe.OrderBy(x => x.Soyad);
+                        break;
+
+                    case "Soyad (Z-A)":
+                        siraliListe = siraliListe.OrderByDescending(x => x.Soyad);
+                        break;
+
+                    case "Cinsiyet (A-Z)":
+                        siraliListe = siraliListe.OrderBy(x => x.CinsiyetAdi);
+                        break;
+
+                    case "Cinsiyet (Z-A)":
+                        siraliListe = siraliListe.OrderByDescending(x => x.CinsiyetAdi);
+                        break;
+                }
+
                 bilPersonel.Clear();
-                foreach (var item in personelResult.Data)
+                foreach (var item in siraliListe)
                     bilPersonel.Add(item);
 
                 dataGrid_Personel.ClearSelection();
@@ -54,6 +94,7 @@ namespace Kutuphane.UI
                 MessageBox.Show("Listeleme sırasında hata oluştu:\n" + ex.Message);
             }
         }
+
         private void ComboDoldur()
         {
             try
@@ -308,15 +349,25 @@ namespace Kutuphane.UI
         }
         private void dataGrid_Personel_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (dataGrid_Personel.Columns[e.ColumnIndex].Name == "sifreDataGridViewTextBoxColumn")
-            {
-                if (e.Value != null)
-                {
-                    string sifre = e.Value.ToString();
-                    e.Value = new string('●', sifre.Length);
-                    e.FormattingApplied = true;
-                }
-            }
+            //if (string.IsNullOrWhiteSpace(textBox_Ara.Text))
+            //    return;
+
+            //if (e.Value != null)
+            //{
+            //    string aranan = textBox_Ara.Text.ToLower();
+            //    string hucreMetni = e.Value.ToString().ToLower();
+
+            //    if (hucreMetni.Contains(aranan))
+            //    {
+            //        e.CellStyle.BackColor = Color.Yellow;
+            //        e.CellStyle.ForeColor = Color.Black;
+            //    }
+            //    else
+            //    {
+            //        e.CellStyle.BackColor = Color.White;
+            //        e.CellStyle.ForeColor = Color.Black;
+            //    }
+            //}
         }
         private bool BoslukKontrol()
         {
@@ -351,6 +402,16 @@ namespace Kutuphane.UI
             }
 
             return true;
+        }
+
+        private void textBox_Ara_TextChanged(object sender, EventArgs e)
+        {
+            Listele();
+        }
+
+        private void comboBox_Sirala_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Listele();
         }
     }
 }

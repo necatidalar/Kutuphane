@@ -21,6 +21,13 @@ namespace Kutuphane.UI
 
         private void frmDilIslemleri_Load(object sender, EventArgs e)
         {
+            comboBox_Sirala.Items.Add("Dil Adı (A-Z)");
+            comboBox_Sirala.Items.Add("Dil Adı (Z-A)");
+            comboBox_Sirala.Items.Add("Dil Kodu (A-Z)");
+            comboBox_Sirala.Items.Add("Dil Kodu (Z-A)");
+
+            comboBox_Sirala.SelectedIndex = 0;
+
             Listele();
             PasifUyeKontrol();
             KutulariTemizle();
@@ -28,10 +35,8 @@ namespace Kutuphane.UI
         }
         private void Listele()
         {
-            var dilResult = dilService.GetListByFilterService(x =>
-                x.AktifMi == true &&
-                (x.DilAdi.Contains(textBox_Ara.Text) || x.DilKodu.Contains(textBox_Ara.Text))
-            );
+            var dilResult = dilService.GetListByFilterService(x => x.AktifMi == true &&
+            (x.DilAdi.Contains(textBox_Ara.Text) || x.DilKodu.Contains(textBox_Ara.Text)));
 
             if (!dilResult.IsSuccess)
             {
@@ -39,9 +44,29 @@ namespace Kutuphane.UI
                 return;
             }
 
-            bilDil.Clear();
+            IEnumerable<Dil> siraliListe = dilResult.Data;
 
-            foreach (var item in dilResult.Data)
+            switch (comboBox_Sirala.SelectedItem.ToString())
+            {
+                case "Dil Adı (A-Z)":
+                    siraliListe = siraliListe.OrderBy(x => x.DilAdi);
+                    break;
+
+                case "Dil Adı (Z-A)":
+                    siraliListe = siraliListe.OrderByDescending(x => x.DilAdi);
+                    break;
+
+                case "Dil Kodu (A-Z)":
+                    siraliListe = siraliListe.OrderBy(x => x.DilKodu);
+                    break;
+
+                case "Dil Kodu (Z-A)":
+                    siraliListe = siraliListe.OrderByDescending(x => x.DilKodu);
+                    break;
+            }
+
+            bilDil.Clear();
+            foreach (var item in siraliListe)
                 bilDil.Add(item);
 
             dataGrid_Dil.ClearSelection();
@@ -213,6 +238,8 @@ namespace Kutuphane.UI
         {
             Listele();
             dataGrid_Dil.ClearSelection();
+            dataGrid_Dil.Refresh();
+            dataGrid_Dil.ClearSelection();
         }
         private void dataGrid_Dil_SelectionChanged(object sender, EventArgs e)
         {
@@ -227,6 +254,37 @@ namespace Kutuphane.UI
             }
             dataGrid_Dil.ClearSelection();
             KutulariTemizle();
+        }
+        private void dataGrid_Dil_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            //if (string.IsNullOrWhiteSpace(textBox_Ara.Text))
+            //    return;
+
+            //if (e.Value != null)
+            //{
+            //    string aranan = textBox_Ara.Text.ToLower();
+            //    string hucreMetni = e.Value.ToString().ToLower();
+
+            //    if (hucreMetni.Contains(aranan))
+            //    {
+            //        e.CellStyle.BackColor = Color.Yellow;
+            //        e.CellStyle.ForeColor = Color.Black;
+            //    }
+            //    else
+            //    {
+            //        e.CellStyle.BackColor = Color.White;
+            //        e.CellStyle.ForeColor = Color.Black;
+            //    }
+            //}
+        }
+        private void textBox_Ara_TextChanged(object sender, EventArgs e)
+        {
+            Listele();
+            dataGrid_Dil.Refresh();
+        }
+        private void comboBox_Sirala_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Listele();
         }
     }
 }

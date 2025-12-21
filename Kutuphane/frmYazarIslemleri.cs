@@ -26,6 +26,12 @@ namespace Kutuphane.UI
             dateTimePicker_OlumTarihi.ShowCheckBox = true;
             dateTimePicker_OlumTarihi.Checked = false;
 
+            comboBox_Sirala.Items.Clear();
+            comboBox_Sirala.Items.Add("Ad (A-Z)");
+            comboBox_Sirala.Items.Add("Ad (Z-A)");
+            comboBox_Sirala.Items.Add("Soyad (A-Z)");
+            comboBox_Sirala.Items.Add("Soyad (Z-A)");
+            comboBox_Sirala.SelectedIndex = 0;
             Listele();
             PasifUyeKontrol();
             KutulariTemizle();
@@ -35,7 +41,10 @@ namespace Kutuphane.UI
         {
             var yazarResult = yazarService.YazarListeGetirServis(x =>
                 x.AktifMi == true &&
-                (x.Ad.Contains(textBox_Ara.Text) || x.Soyad.Contains(textBox_Ara.Text))
+                (
+                    x.Ad.Contains(textBox_Ara.Text) ||
+                    x.Soyad.Contains(textBox_Ara.Text)
+                )
             );
 
             if (!yazarResult.IsSuccess)
@@ -44,9 +53,31 @@ namespace Kutuphane.UI
                 return;
             }
 
+            IEnumerable<YazarDto> liste = yazarResult.Data;
+
+
+            switch (comboBox_Sirala.SelectedItem?.ToString())
+            {
+                case "Ad (A-Z)":
+                    liste = liste.OrderBy(x => x.Ad);
+                    break;
+
+                case "Ad (Z-A)":
+                    liste = liste.OrderByDescending(x => x.Ad);
+                    break;
+
+                case "Soyad (A-Z)":
+                    liste = liste.OrderBy(x => x.Soyad);
+                    break;
+
+                case "Soyad (Z-A)":
+                    liste = liste.OrderByDescending(x => x.Soyad);
+                    break;
+            }
+
             bilYazar.Clear();
 
-            foreach (var item in yazarResult.Data)
+            foreach (var item in liste)
                 bilYazar.Add(item);
 
             dataGrid_Yazar.ClearSelection();
@@ -274,6 +305,16 @@ namespace Kutuphane.UI
             }
             dataGrid_Yazar.ClearSelection();
             KutulariTemizle();
+        }
+
+        private void textBox_Ara_TextChanged(object sender, EventArgs e)
+        {
+            Listele();
+        }
+
+        private void comboBox_Sirala_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Listele();
         }
     }
 }

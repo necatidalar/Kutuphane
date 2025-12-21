@@ -1,5 +1,6 @@
 ﻿using Kutuphane.BLL.Concrete;
 using Kutuphane.DAL.Concrete;
+using Kutuphane.DAL.Contexes;
 using Kutuphane.Model.DTO;
 
 namespace Kutuphane.UI
@@ -23,23 +24,43 @@ namespace Kutuphane.UI
         }
         private void frmMain_Load(object sender, EventArgs e)
         {
-            Logout();
+            CheckDatabaseConnection();
+            //SetForLoginView(true);
+            //Logout();
+            timer_baglanti.Start();
+        }
+        private void CheckDatabaseConnection()
+        {
+            try
+            {
+                using (var context = new KutuphaneDbContext())
+                {
+                    if (context.Database.CanConnect())
+                    {
+                        Logout();
+                        label_Mesaj.Visible = false;
+                    }
+                    else
+                    {
+                        label_Mesaj.Visible = true;
+                        label_Mesaj.Text = "Veritabanı: Bağlantı Yok";
+                        label_Mesaj.ForeColor = Color.Red;
+                        menuStrip1.Enabled = false;
+                        flowLayoutPanel_Kartlar.Visible = false;
+                        lblKullaniciAdi.Visible = false;
+                    }
+                }
+            }
+            catch
+            {
+                label_Mesaj.Text = "Veritabanı: Hata";
+                label_Mesaj.ForeColor = Color.DarkRed;
+            }
         }
         private void ShowHideTopPanels(bool showDashboard, bool showMenu)
         {
-            if (toolStripContainer1 != null)
-            {
-                toolStripContainer1.TopToolStripPanel.Visible = showMenu;
-
-                var content = toolStripContainer1.ContentPanel;
-                if (content != null)
-                {
-                    panel_Ust.Visible = showDashboard;
-                    flowLayoutPanel_Kartlar.Visible = showDashboard;
-                    toolStripContainer1.Visible = showMenu;
-                }
-            }
-
+            //panel_Ust.Visible = showDashboard;
+            flowLayoutPanel_Kartlar.Visible = showDashboard;
             menuStrip1.Visible = showMenu;
 
             if (showDashboard)
@@ -49,11 +70,27 @@ namespace Kutuphane.UI
         }
         private void SetForLoginView(bool login)
         {
+            panel_Ust.Visible = !login;
             ShowHideTopPanels(!login, !login);
-            //FormBorderStyle = login ? FormBorderStyle.None : FormBorderStyle.Sizable;
-            WindowState = login ? FormWindowState.Normal : FormWindowState.Maximized;
-            //AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            AutoSize = false /*login*/;
+
+            if (login)
+            {
+                ClientSize = new Size(635, 350);
+                WindowState = FormWindowState.Normal;
+                StartPosition = FormStartPosition.CenterScreen;
+                //FormBorderStyle = FormBorderStyle.None;
+                MaximizeBox = false;
+                FormBorderStyle = FormBorderStyle.FixedSingle;
+            }
+            else
+            {
+                MaximizeBox = true;
+                //FormBorderStyle = FormBorderStyle.Sizable;
+                WindowState = FormWindowState.Maximized;
+                FormBorderStyle = FormBorderStyle.Sizable;
+            }
+
+            AutoSize = false;
         }
         private void Listele()
         {
@@ -69,19 +106,14 @@ namespace Kutuphane.UI
             int oduncVerilenKitapSayisi = oduncVerilenKitapResult.IsSuccess ? oduncVerilenKitapResult.Data.Count : 0;
             label_OduncSayisi.Text = oduncVerilenKitapSayisi.ToString();
         }
-        private void çıkışYapToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            frmMain_Load(sender, e);
-        }
         private void menuStrip_Click(object sender, EventArgs e)
         {
             ToolStripMenuItem menuItem = sender as ToolStripMenuItem;
-            if (menuItem == null)
-                return;
-            if (menuItem.Tag == null)
-                return;
+            if (menuItem == null || menuItem.Tag == null) return;
 
             FormAcByFormAdi(menuItem.Tag.ToString());
+
+            label_Mesaj.Text = $" {menuItem.Text}";
         }
         private void timer_Dashboard_Tick(object sender, EventArgs e)
         {
@@ -91,17 +123,14 @@ namespace Kutuphane.UI
         {
             try
             {
-                // Assembly'deki tüm Form türlerini al
                 var formTypes = System.Reflection.Assembly.GetExecutingAssembly()
                     .GetTypes()
                     .Where(t => t.IsSubclassOf(typeof(Form)) && !t.IsAbstract);
 
                 foreach (var formType in formTypes)
                 {
-                    // Form instance'ı oluştur (geçici olarak)
                     using (var tempForm = (Form)Activator.CreateInstance(formType))
                     {
-                        // Tag özelliğini kontrol et
                         if (tempForm.Name != null &&
                             tempForm.Name.Equals(searchTag, StringComparison.OrdinalIgnoreCase))
                         {
@@ -130,12 +159,10 @@ namespace Kutuphane.UI
                 return;
             }
 
-            // Form'u aç
             ShowHideTopPanels(false, true);
-            Form? childForm = (Form)Activator.CreateInstance(formType);
-            if (childForm == ActiveMdiChild || childForm == null)
-                return;
 
+            Form? childForm = (Form)Activator.CreateInstance(formType);
+            if (childForm == null) return;
 
             if (childForm is frmOduncIslemleri oduncForm)
             {
@@ -145,32 +172,39 @@ namespace Kutuphane.UI
             ActiveMdiChild?.Close();
             childForm.MdiParent = this;
             childForm.FormBorderStyle = FormBorderStyle.None;
-            ActivateMdiChild(childForm);
             childForm.Dock = DockStyle.Fill;
-            childForm.Show();
 
+            lblKullaniciAdi.Visible = false;
+            label_Mesaj.Visible = true;
+
+            string baslik = string.IsNullOrEmpty(childForm.Text) ? FormName : childForm.Text;
+            label_Mesaj.Text = $" {baslik}";
+            label_Mesaj.ForeColor = Color.White;
+
+            childForm.Show();
         }
         private void gostergePaneliToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Listele();
             ShowHideTopPanels(true, true);
+
+            label_Mesaj.Visible = false;
+            lblKullaniciAdi.Visible = true;
+            lblKullaniciAdi.Text = $"Hoşgeldin, {GirisYapanPersonelAd} {GirisYapanPersonelSoyad}";
         }
         private void cikisYapToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Logout();
         }
-
         private void Logout()
         {
-            // State temizliği
             GirisYapanPersonelId = 0;
             GirisYapanPersonelAd = null;
             GirisYapanPersonelSoyad = null;
             loginPersoneli = null;
-            toolStripContainer1.Visible = false;
             lblKullaniciAdi.Text = string.Empty;
 
-            // Açık MDI formları kapat
+
             foreach (Form child in MdiChildren)
                 child.Close();
 
@@ -206,6 +240,11 @@ namespace Kutuphane.UI
             ShowHideTopPanels(true, true);
             timer_Dashboard.Start();
             Listele();
+        }
+
+        private void timer_baglanti_Tick(object sender, EventArgs e)
+        {
+            CheckDatabaseConnection();
         }
     }
 }

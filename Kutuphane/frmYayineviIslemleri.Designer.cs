@@ -39,7 +39,6 @@
             aktifMiDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
             yayineviKitaplariDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             yayineviBindingSource = new BindingSource(components);
-            btnAra = new Button();
             label3 = new Label();
             textBox_Ara = new TextBox();
             groupBox1 = new GroupBox();
@@ -55,6 +54,7 @@
             textBox_KurulusYili = new TextBox();
             textBox_YayineviAdi = new TextBox();
             textBox_YayineviId = new TextBox();
+            comboBox_Sirala = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)dataGrid_Yayinevi).BeginInit();
             ((System.ComponentModel.ISupportInitialize)yayineviBindingSource).BeginInit();
             groupBox1.SuspendLayout();
@@ -138,26 +138,11 @@
             // 
             yayineviBindingSource.DataSource = typeof(Model.Entity.Yayinevi);
             // 
-            // btnAra
-            // 
-            btnAra.BackColor = Color.FromArgb(41, 128, 185);
-            btnAra.FlatAppearance.BorderSize = 0;
-            btnAra.FlatStyle = FlatStyle.Flat;
-            btnAra.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            btnAra.ForeColor = Color.White;
-            btnAra.Location = new Point(674, 12);
-            btnAra.Name = "btnAra";
-            btnAra.Size = new Size(75, 25);
-            btnAra.TabIndex = 13;
-            btnAra.Text = "🔍 ARA";
-            btnAra.UseVisualStyleBackColor = false;
-            btnAra.Click += btnAra_Click;
-            // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
-            label3.Location = new Point(395, 15);
+            label3.Location = new Point(318, 14);
             label3.Name = "label3";
             label3.Size = new Size(33, 19);
             label3.TabIndex = 11;
@@ -166,11 +151,12 @@
             // textBox_Ara
             // 
             textBox_Ara.Font = new Font("Segoe UI", 10F);
-            textBox_Ara.Location = new Point(434, 13);
+            textBox_Ara.Location = new Point(357, 11);
             textBox_Ara.Name = "textBox_Ara";
             textBox_Ara.PlaceholderText = "Yayınevi adı ile arayın";
-            textBox_Ara.Size = new Size(234, 25);
+            textBox_Ara.Size = new Size(252, 25);
             textBox_Ara.TabIndex = 12;
+            textBox_Ara.TextChanged += textBox_Ara_TextChanged;
             // 
             // groupBox1
             // 
@@ -340,14 +326,24 @@
             textBox_YayineviId.Size = new Size(201, 25);
             textBox_YayineviId.TabIndex = 1;
             // 
+            // comboBox_Sirala
+            // 
+            comboBox_Sirala.Font = new Font("Segoe UI", 10F);
+            comboBox_Sirala.FormattingEnabled = true;
+            comboBox_Sirala.Location = new Point(615, 11);
+            comboBox_Sirala.Name = "comboBox_Sirala";
+            comboBox_Sirala.Size = new Size(134, 25);
+            comboBox_Sirala.TabIndex = 20;
+            comboBox_Sirala.SelectedIndexChanged += comboBox_Sirala_SelectedIndexChanged;
+            // 
             // frmYayineviIslemleri
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(761, 541);
+            Controls.Add(comboBox_Sirala);
             Controls.Add(groupBox1);
-            Controls.Add(btnAra);
             Controls.Add(label3);
             Controls.Add(textBox_Ara);
             Controls.Add(dataGrid_Yayinevi);
@@ -392,5 +388,6 @@
         private DataGridViewCheckBoxColumn aktifMiDataGridViewCheckBoxColumn;
         private DataGridViewTextBoxColumn yayineviKitaplariDataGridViewTextBoxColumn;
         private BindingSource yayineviBindingSource;
+        private ComboBox comboBox_Sirala;
     }
 }

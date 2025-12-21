@@ -1,17 +1,19 @@
-﻿namespace Kutuphane.UI
+﻿using Kutuphane.UI;
+
+namespace Kutuphane.UI
 {
     partial class frmMain
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
             {
@@ -20,17 +22,18 @@
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated code
+        #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             panel_Ust = new Panel();
+            label_Mesaj = new Label();
             lblKullaniciAdi = new Label();
             menuStrip1 = new MenuStrip();
             gostergePaneliToolStripMenuItem = new ToolStripMenuItem();
@@ -60,7 +63,7 @@
             label_GecikmisUyeSayisi = new Label();
             label4 = new Label();
             timer_Dashboard = new System.Windows.Forms.Timer(components);
-            toolStripContainer1 = new ToolStripContainer();
+            timer_baglanti = new System.Windows.Forms.Timer(components);
             panel_Ust.SuspendLayout();
             menuStrip1.SuspendLayout();
             flowLayoutPanel_Kartlar.SuspendLayout();
@@ -68,20 +71,30 @@
             panel_Uye.SuspendLayout();
             panel_Odunc.SuspendLayout();
             panel_Geciklis.SuspendLayout();
-            toolStripContainer1.ContentPanel.SuspendLayout();
-            toolStripContainer1.TopToolStripPanel.SuspendLayout();
-            toolStripContainer1.SuspendLayout();
             SuspendLayout();
             // 
             // panel_Ust
             // 
             panel_Ust.BackColor = Color.FromArgb(44, 62, 80);
+            panel_Ust.Controls.Add(label_Mesaj);
             panel_Ust.Controls.Add(lblKullaniciAdi);
             panel_Ust.Dock = DockStyle.Top;
-            panel_Ust.Location = new Point(0, 0);
+            panel_Ust.Location = new Point(0, 32);
             panel_Ust.Name = "panel_Ust";
-            panel_Ust.Size = new Size(1211, 60);
+            panel_Ust.Size = new Size(1234, 60);
             panel_Ust.TabIndex = 4;
+            // 
+            // label_Mesaj
+            // 
+            label_Mesaj.Anchor = AnchorStyles.Left;
+            label_Mesaj.AutoSize = true;
+            label_Mesaj.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 162);
+            label_Mesaj.ForeColor = Color.White;
+            label_Mesaj.Location = new Point(12, 13);
+            label_Mesaj.Name = "label_Mesaj";
+            label_Mesaj.Size = new Size(22, 30);
+            label_Mesaj.TabIndex = 2;
+            label_Mesaj.Text = "•";
             // 
             // lblKullaniciAdi
             // 
@@ -97,15 +110,13 @@
             // menuStrip1
             // 
             menuStrip1.BackColor = Color.WhiteSmoke;
-            menuStrip1.Dock = DockStyle.None;
             menuStrip1.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 162);
-            menuStrip1.GripStyle = ToolStripGripStyle.Visible;
             menuStrip1.ImageScalingSize = new Size(20, 20);
             menuStrip1.Items.AddRange(new ToolStripItem[] { gostergePaneliToolStripMenuItem, yerlesimAyarlariToolStripMenuItem, kitapIslemleriToolStripMenuItem, oduncIslemleriToolStripMenuItem, uyeIslemleriToolStripMenuItem, personelIslemleriToolStripMenuItem, raporlamaToolStripMenuItem, cikisYapToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Padding = new Padding(6, 4, 0, 4);
-            menuStrip1.Size = new Size(1236, 32);
+            menuStrip1.Size = new Size(1234, 32);
             menuStrip1.TabIndex = 3;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -226,18 +237,17 @@
             // 
             // flowLayoutPanel_Kartlar
             // 
-            flowLayoutPanel_Kartlar.AutoScroll = true;
             flowLayoutPanel_Kartlar.BackColor = Color.FromArgb(236, 240, 241);
             flowLayoutPanel_Kartlar.Controls.Add(panel_Kitap);
             flowLayoutPanel_Kartlar.Controls.Add(panel_Uye);
             flowLayoutPanel_Kartlar.Controls.Add(panel_Odunc);
             flowLayoutPanel_Kartlar.Controls.Add(panel_Geciklis);
             flowLayoutPanel_Kartlar.Dock = DockStyle.Fill;
-            flowLayoutPanel_Kartlar.Location = new Point(0, 60);
-            flowLayoutPanel_Kartlar.Margin = new Padding(6, 6, 6, 6);
+            flowLayoutPanel_Kartlar.Location = new Point(0, 92);
+            flowLayoutPanel_Kartlar.Margin = new Padding(6);
             flowLayoutPanel_Kartlar.Name = "flowLayoutPanel_Kartlar";
-            flowLayoutPanel_Kartlar.Padding = new Padding(10, 10, 10, 10);
-            flowLayoutPanel_Kartlar.Size = new Size(1211, 594);
+            flowLayoutPanel_Kartlar.Padding = new Padding(10);
+            flowLayoutPanel_Kartlar.Size = new Size(1234, 619);
             flowLayoutPanel_Kartlar.TabIndex = 7;
             // 
             // panel_Kitap
@@ -246,7 +256,7 @@
             panel_Kitap.Controls.Add(label_KitapSayisi);
             panel_Kitap.Controls.Add(label1);
             panel_Kitap.Location = new Point(20, 20);
-            panel_Kitap.Margin = new Padding(10, 10, 10, 10);
+            panel_Kitap.Margin = new Padding(10);
             panel_Kitap.Name = "panel_Kitap";
             panel_Kitap.Size = new Size(280, 150);
             panel_Kitap.TabIndex = 0;
@@ -279,7 +289,7 @@
             panel_Uye.Controls.Add(label_UyeSayisi);
             panel_Uye.Controls.Add(label2);
             panel_Uye.Location = new Point(320, 20);
-            panel_Uye.Margin = new Padding(10, 10, 10, 10);
+            panel_Uye.Margin = new Padding(10);
             panel_Uye.Name = "panel_Uye";
             panel_Uye.Size = new Size(280, 150);
             panel_Uye.TabIndex = 1;
@@ -312,7 +322,7 @@
             panel_Odunc.Controls.Add(label_OduncSayisi);
             panel_Odunc.Controls.Add(label3);
             panel_Odunc.Location = new Point(620, 20);
-            panel_Odunc.Margin = new Padding(10, 10, 10, 10);
+            panel_Odunc.Margin = new Padding(10);
             panel_Odunc.Name = "panel_Odunc";
             panel_Odunc.Size = new Size(280, 150);
             panel_Odunc.TabIndex = 2;
@@ -344,8 +354,8 @@
             panel_Geciklis.BackColor = Color.FromArgb(192, 57, 43);
             panel_Geciklis.Controls.Add(label_GecikmisUyeSayisi);
             panel_Geciklis.Controls.Add(label4);
-            panel_Geciklis.Location = new Point(20, 190);
-            panel_Geciklis.Margin = new Padding(10, 10, 10, 10);
+            panel_Geciklis.Location = new Point(920, 20);
+            panel_Geciklis.Margin = new Padding(10);
             panel_Geciklis.Name = "panel_Geciklis";
             panel_Geciklis.Size = new Size(280, 150);
             panel_Geciklis.TabIndex = 3;
@@ -377,32 +387,20 @@
             timer_Dashboard.Interval = 10000;
             timer_Dashboard.Tick += timer_Dashboard_Tick;
             // 
-            // toolStripContainer1
+            // timer_baglanti
             // 
-            // 
-            // toolStripContainer1.ContentPanel
-            // 
-            toolStripContainer1.ContentPanel.Controls.Add(flowLayoutPanel_Kartlar);
-            toolStripContainer1.ContentPanel.Controls.Add(panel_Ust);
-            toolStripContainer1.ContentPanel.Size = new Size(1211, 654);
-            toolStripContainer1.Dock = DockStyle.Fill;
-            toolStripContainer1.Location = new Point(0, 0);
-            toolStripContainer1.Name = "toolStripContainer1";
-            toolStripContainer1.Size = new Size(1236, 711);
-            toolStripContainer1.TabIndex = 9;
-            toolStripContainer1.Text = "toolStripContainer1";
-            // 
-            // toolStripContainer1.TopToolStripPanel
-            // 
-            toolStripContainer1.TopToolStripPanel.Controls.Add(menuStrip1);
+            timer_baglanti.Interval = 10000;
+            timer_baglanti.Tick += timer_baglanti_Tick;
             // 
             // frmMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(1236, 711);
-            Controls.Add(toolStripContainer1);
+            ClientSize = new Size(1234, 711);
+            Controls.Add(flowLayoutPanel_Kartlar);
+            Controls.Add(panel_Ust);
+            Controls.Add(menuStrip1);
             Icon = (Icon)resources.GetObject("$this.Icon");
             IsMdiContainer = true;
             MainMenuStrip = menuStrip1;
@@ -424,17 +422,13 @@
             panel_Odunc.PerformLayout();
             panel_Geciklis.ResumeLayout(false);
             panel_Geciklis.PerformLayout();
-            toolStripContainer1.ContentPanel.ResumeLayout(false);
-            toolStripContainer1.TopToolStripPanel.ResumeLayout(false);
-            toolStripContainer1.TopToolStripPanel.PerformLayout();
-            toolStripContainer1.ResumeLayout(false);
-            toolStripContainer1.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
-        #endregion
+        #endregion
 
-        private Panel panel_Ust;
+        private Panel panel_Ust;
         private Label lblKullaniciAdi;
         private MenuStrip menuStrip1;
         private ToolStripMenuItem gostergePaneliToolStripMenuItem;
@@ -464,6 +458,7 @@
         private FlowLayoutPanel flowLayoutPanel_Kartlar;
         private System.Windows.Forms.Timer timer_Dashboard;
         private ToolStripMenuItem kitapToolStripMenuItem;
-        private ToolStripContainer toolStripContainer1;
+        private Label label_Mesaj;
+        private System.Windows.Forms.Timer timer_baglanti;
     }
 }

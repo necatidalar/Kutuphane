@@ -197,6 +197,7 @@
             Name = "frmGiris";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Kütüphane Giriş";
+            WindowState = FormWindowState.Maximized;
             Load += frmGiris_Load;
             panel_Sol.ResumeLayout(false);
             panel_Sol.PerformLayout();

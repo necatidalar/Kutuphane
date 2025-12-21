@@ -1,4 +1,5 @@
-﻿using Kutuphane.BLL.Abstract;
+﻿using Core.Utility.Results;
+using Kutuphane.BLL.Abstract;
 using Kutuphane.BLL.Concrete;
 using Kutuphane.DAL.Concrete;
 using Kutuphane.Model.Entity;
@@ -20,6 +21,9 @@ namespace Kutuphane.UI
 
         private void frmKategori_Load(object sender, EventArgs e)
         {
+            comboBox_Sirala.Items.Add("Kategori Adı (A-Z)");
+            comboBox_Sirala.Items.Add("Kategori Adı (Z-A)");
+            comboBox_Sirala.SelectedIndex = 0;
             Listele();
             PasifUyeKontrol();
             KutulariTemizle();
@@ -38,9 +42,20 @@ namespace Kutuphane.UI
                 return;
             }
 
+            IEnumerable<Kategori> siraliListe = kategoriResult.Data;
+            switch (comboBox_Sirala.SelectedItem.ToString())
+            {
+                case "Kategori Adı (A-Z)":
+                    siraliListe = siraliListe.OrderBy(x => x.KategoriAdi);
+                    break;
+                case "Kategori Adı (Z-A)":
+                    siraliListe = siraliListe.OrderByDescending(x => x.KategoriAdi);
+                    break;
+            }
+
             bilKategori.Clear();
 
-            foreach (var item in kategoriResult.Data)
+            foreach (var item in siraliListe)
                 bilKategori.Add(item);
 
             dataGrid_Kategori.ClearSelection();
@@ -235,6 +250,38 @@ namespace Kutuphane.UI
                 return false;
             }
             return true;
+        }
+
+        private void dataGrid_Kategori_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            //if (string.IsNullOrWhiteSpace(textBox_Ara.Text))
+            //    return;
+
+            //if (e.Value != null)
+            //{
+            //    string aranan = textBox_Ara.Text.ToLower();
+            //    string hucreMetni = e.Value.ToString().ToLower();
+
+            //    if (hucreMetni.Contains(aranan))
+            //    {
+            //        e.CellStyle.BackColor = Color.Yellow;
+            //        e.CellStyle.ForeColor = Color.Black;
+            //    }
+            //    else
+            //    {
+            //        e.CellStyle.BackColor = Color.White;
+            //        e.CellStyle.ForeColor = Color.Black;
+            //    }
+            //}
+        }
+        private void textBox_Ara_TextChanged(object sender, EventArgs e)
+        {
+            Listele();
+        }
+
+        private void comboBox_Sirala_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Listele();
         }
     }
 }
