@@ -1,5 +1,4 @@
-﻿using Core.Utility.Results;
-using Kutuphane.BLL.Abstract;
+﻿using Kutuphane.BLL.Abstract;
 using Kutuphane.BLL.Concrete;
 using Kutuphane.DAL.Concrete;
 using Kutuphane.Model.Entity;
@@ -251,7 +250,6 @@ namespace Kutuphane.UI
             }
             return true;
         }
-
         private void dataGrid_Kategori_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             //if (string.IsNullOrWhiteSpace(textBox_Ara.Text))
@@ -278,10 +276,36 @@ namespace Kutuphane.UI
         {
             Listele();
         }
-
         private void comboBox_Sirala_SelectedIndexChanged(object sender, EventArgs e)
         {
             Listele();
+        }
+        bool kategoriAdiAsc = true;
+
+        private void dataGrid_Kategori_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            string kolonAdi = dataGrid_Kategori.Columns[e.ColumnIndex].DataPropertyName;
+
+            if (kolonAdi != nameof(Kategori.KategoriAdi))
+                return;
+
+            IEnumerable<Kategori> liste = bilKategori.ToList();
+
+            if (kategoriAdiAsc)
+                liste = liste.OrderBy(x => x.KategoriAdi);
+            else
+                liste = liste.OrderByDescending(x => x.KategoriAdi);
+
+            kategoriAdiAsc = !kategoriAdiAsc;
+
+            bilKategori.Clear();
+            foreach (var item in liste)
+                bilKategori.Add(item);
+
+            dataGrid_Kategori.Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection =
+                kategoriAdiAsc
+                    ? SortOrder.Descending
+                    : SortOrder.Ascending;
         }
     }
 }

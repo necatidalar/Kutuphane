@@ -20,6 +20,7 @@ namespace Kutuphane.UI
 
             _kitapManager = new KitapManager(new KitapDal());
             _uyeManager = new UyeManager(new UyeDal());
+            _oduncManager = new OduncManager(new OduncDal());
             loginPersoneli = new PersonelBilgileriDto();
         }
         private void frmMain_Load(object sender, EventArgs e)
@@ -94,17 +95,29 @@ namespace Kutuphane.UI
         private void Listele()
         {
             var kitapResult = _kitapManager.GetListByFilterService(x => x.Aktif == true);
-            int toplamKitap = kitapResult.IsSuccess ? kitapResult.Data.Count : 0;
-            label_KitapSayisi.Text = toplamKitap.ToString();
+            label_KitapSayisi.Text = kitapResult.IsSuccess
+                ? kitapResult.Data.Count.ToString()
+                : "0";
 
             var uyeResult = _uyeManager.GetListByFilterService(x => x.AktifMi == true);
-            int toplamUye = uyeResult.IsSuccess ? uyeResult.Data.Count : 0;
-            label_UyeSayisi.Text = toplamUye.ToString();
+            label_UyeSayisi.Text = uyeResult.IsSuccess
+                ? uyeResult.Data.Count.ToString()
+                : "0";
 
-            var oduncVerilenKitapResult = _kitapManager.GetListByFilterService();
-            int oduncVerilenKitapSayisi = oduncVerilenKitapResult.IsSuccess ? oduncVerilenKitapResult.Data.Count : 0;
-            label_OduncSayisi.Text = oduncVerilenKitapSayisi.ToString();
+            var oduncResult = _oduncManager.GetListByFilterService(x =>
+                x.TeslimEdildi == false);
+
+            int oduncSayisi = oduncResult.IsSuccess ? oduncResult.Data.Count : 0;
+            label_OduncSayisi.Text = oduncSayisi.ToString();
+
+            var gecikmisResult = _oduncManager.GetListByFilterService(x =>
+                x.TeslimEdildi == false &&
+                x.TeslimTarihi < DateTime.Now);
+
+            int gecikmisSayisi = gecikmisResult.IsSuccess ? gecikmisResult.Data.Count : 0;
+            label_GecikmisUyeSayisi.Text = gecikmisSayisi.ToString();
         }
+
         private void menuStrip_Click(object sender, EventArgs e)
         {
             ToolStripMenuItem menuItem = sender as ToolStripMenuItem;

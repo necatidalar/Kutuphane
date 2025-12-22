@@ -53,10 +53,10 @@ namespace Kutuphane.UI
         private void UyeninAldigiKitapListViewDuzenle()
         {
             listView_UyeninAldigiKitapListesi.Columns.Clear();
-            listView_UyeninAldigiKitapListesi.Columns.Add("Kitap Adı", 180);
-            listView_UyeninAldigiKitapListesi.Columns.Add("Alış Tarihi", 120);
-            listView_UyeninAldigiKitapListesi.Columns.Add("Teslim Tarihi", 120);
-            listView_UyeninAldigiKitapListesi.Columns.Add("Durum", 120);
+            listView_UyeninAldigiKitapListesi.Columns.Add("Kitap Adı", 200);
+            listView_UyeninAldigiKitapListesi.Columns.Add("Alış Tarihi", 150);
+            listView_UyeninAldigiKitapListesi.Columns.Add("Teslim Tarihi", 150);
+            listView_UyeninAldigiKitapListesi.Columns.Add("Durum", 150);
         }
         private void button_UyeAra_Click(object sender, EventArgs e)
         {
@@ -332,7 +332,9 @@ namespace Kutuphane.UI
                     x.Aktif &&
                     x.Stok > 0 &&
                     (x.KitapAdi.Contains(aramaMetni) ||
-                     x.ISBN.Contains(aramaMetni))
+                     x.ISBN.Contains(aramaMetni) ||
+                     x.Yazar.Ad.Contains(aramaMetni) ||
+                     x.Yazar.Soyad.Contains(aramaMetni))
                 );
 
                 if (!result.IsSuccess || result.Data.Count == 0)

@@ -44,13 +44,13 @@
             textBox_KategoriAdi = new TextBox();
             textBox_KategoriId = new TextBox();
             dataGrid_Kategori = new DataGridView();
-            kategoriIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            kategoriAdiDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            kitapKategorilerDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             kategoriBindingSource = new BindingSource(components);
             label3 = new Label();
             textBox_Ara = new TextBox();
             comboBox_Sirala = new ComboBox();
+            kategoriIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            kategoriAdiDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            kitapKategorilerDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGrid_Kategori).BeginInit();
             ((System.ComponentModel.ISupportInitialize)kategoriBindingSource).BeginInit();
@@ -73,7 +73,7 @@
             groupBox1.ForeColor = Color.FromArgb(41, 128, 185);
             groupBox1.Location = new Point(12, 12);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(300, 527);
+            groupBox1.Size = new Size(300, 372);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "📚 Kategori İşlemleri";
@@ -90,7 +90,7 @@
             btnTemizle.Name = "btnTemizle";
             btnTemizle.Size = new Size(265, 38);
             btnTemizle.TabIndex = 6;
-            btnTemizle.Text = "🧹 TEMİZLE";
+            btnTemizle.Text = "\U0001f9f9 TEMİZLE";
             btnTemizle.UseVisualStyleBackColor = false;
             btnTemizle.Click += btnTemizle_Click;
             // 
@@ -259,30 +259,8 @@
             dataGrid_Kategori.Size = new Size(447, 484);
             dataGrid_Kategori.TabIndex = 11;
             dataGrid_Kategori.CellFormatting += dataGrid_Kategori_CellFormatting;
+            dataGrid_Kategori.ColumnHeaderMouseClick += dataGrid_Kategori_ColumnHeaderMouseClick;
             dataGrid_Kategori.SelectionChanged += dataGrid_Kategori_SelectionChanged;
-            // 
-            // kategoriIdDataGridViewTextBoxColumn
-            // 
-            kategoriIdDataGridViewTextBoxColumn.DataPropertyName = "KategoriId";
-            kategoriIdDataGridViewTextBoxColumn.HeaderText = "ID";
-            kategoriIdDataGridViewTextBoxColumn.Name = "kategoriIdDataGridViewTextBoxColumn";
-            kategoriIdDataGridViewTextBoxColumn.ReadOnly = true;
-            kategoriIdDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // kategoriAdiDataGridViewTextBoxColumn
-            // 
-            kategoriAdiDataGridViewTextBoxColumn.DataPropertyName = "KategoriAdi";
-            kategoriAdiDataGridViewTextBoxColumn.HeaderText = "Kategori Adı";
-            kategoriAdiDataGridViewTextBoxColumn.Name = "kategoriAdiDataGridViewTextBoxColumn";
-            kategoriAdiDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // kitapKategorilerDataGridViewTextBoxColumn
-            // 
-            kitapKategorilerDataGridViewTextBoxColumn.DataPropertyName = "KitapKategoriler";
-            kitapKategorilerDataGridViewTextBoxColumn.HeaderText = "KitapKategoriler";
-            kitapKategorilerDataGridViewTextBoxColumn.Name = "kitapKategorilerDataGridViewTextBoxColumn";
-            kitapKategorilerDataGridViewTextBoxColumn.ReadOnly = true;
-            kitapKategorilerDataGridViewTextBoxColumn.Visible = false;
             // 
             // kategoriBindingSource
             // 
@@ -320,6 +298,29 @@
             comboBox_Sirala.Size = new Size(134, 25);
             comboBox_Sirala.TabIndex = 10;
             comboBox_Sirala.SelectedIndexChanged += comboBox_Sirala_SelectedIndexChanged;
+            // 
+            // kategoriIdDataGridViewTextBoxColumn
+            // 
+            kategoriIdDataGridViewTextBoxColumn.DataPropertyName = "KategoriId";
+            kategoriIdDataGridViewTextBoxColumn.HeaderText = "ID";
+            kategoriIdDataGridViewTextBoxColumn.Name = "kategoriIdDataGridViewTextBoxColumn";
+            kategoriIdDataGridViewTextBoxColumn.ReadOnly = true;
+            kategoriIdDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // kategoriAdiDataGridViewTextBoxColumn
+            // 
+            kategoriAdiDataGridViewTextBoxColumn.DataPropertyName = "KategoriAdi";
+            kategoriAdiDataGridViewTextBoxColumn.HeaderText = "Kategori Adı";
+            kategoriAdiDataGridViewTextBoxColumn.Name = "kategoriAdiDataGridViewTextBoxColumn";
+            kategoriAdiDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // kitapKategorilerDataGridViewTextBoxColumn
+            // 
+            kitapKategorilerDataGridViewTextBoxColumn.DataPropertyName = "KitapKategoriler";
+            kitapKategorilerDataGridViewTextBoxColumn.HeaderText = "KitapKategoriler";
+            kitapKategorilerDataGridViewTextBoxColumn.Name = "kitapKategorilerDataGridViewTextBoxColumn";
+            kitapKategorilerDataGridViewTextBoxColumn.ReadOnly = true;
+            kitapKategorilerDataGridViewTextBoxColumn.Visible = false;
             // 
             // frmKategoriIslemleri
             // 
@@ -359,13 +360,13 @@
         private BindingSource kategoriBindingSource;
         private Label label3;
         private TextBox textBox_Ara;
-        private DataGridViewTextBoxColumn kategoriIdDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn kategoriAdiDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn kitapKategorilerDataGridViewTextBoxColumn;
         private ComboBox comboBox_Sirala;
         private Button btnTemizle;
         private Button btnSil;
         private Button btnDuzenle;
         private Button btnKaydet;
+        private DataGridViewTextBoxColumn kategoriIdDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn kategoriAdiDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn kitapKategorilerDataGridViewTextBoxColumn;
     }
 }
