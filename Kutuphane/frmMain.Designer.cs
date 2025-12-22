@@ -63,7 +63,6 @@ namespace Kutuphane.UI
             label_GecikmisUyeSayisi = new Label();
             label4 = new Label();
             timer_Dashboard = new System.Windows.Forms.Timer(components);
-            timer_baglanti = new System.Windows.Forms.Timer(components);
             panel_Ust.SuspendLayout();
             menuStrip1.SuspendLayout();
             flowLayoutPanel_Kartlar.SuspendLayout();
@@ -387,11 +386,6 @@ namespace Kutuphane.UI
             timer_Dashboard.Interval = 10000;
             timer_Dashboard.Tick += timer_Dashboard_Tick;
             // 
-            // timer_baglanti
-            // 
-            timer_baglanti.Interval = 10000;
-            timer_baglanti.Tick += timer_baglanti_Tick;
-            // 
             // frmMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -459,6 +453,5 @@ namespace Kutuphane.UI
         private System.Windows.Forms.Timer timer_Dashboard;
         private ToolStripMenuItem kitapToolStripMenuItem;
         private Label label_Mesaj;
-        private System.Windows.Forms.Timer timer_baglanti;
     }
 }

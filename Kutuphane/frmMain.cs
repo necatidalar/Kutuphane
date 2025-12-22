@@ -27,7 +27,6 @@ namespace Kutuphane.UI
             CheckDatabaseConnection();
             //SetForLoginView(true);
             //Logout();
-            timer_baglanti.Start();
         }
         private void CheckDatabaseConnection()
         {
@@ -240,11 +239,6 @@ namespace Kutuphane.UI
             ShowHideTopPanels(true, true);
             timer_Dashboard.Start();
             Listele();
-        }
-
-        private void timer_baglanti_Tick(object sender, EventArgs e)
-        {
-            CheckDatabaseConnection();
         }
     }
 }
