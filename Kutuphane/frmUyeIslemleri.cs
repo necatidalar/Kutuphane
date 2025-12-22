@@ -28,13 +28,13 @@ namespace Kutuphane.UI
         private void Listele()
         {
             var uyeResult = uyeService.UyeListeDetayliGetirServis(x =>
-                x.TcPass.Contains(textBox_Ara.Text) ||
+                (x.TcPass.Contains(textBox_Ara.Text) ||
                 x.Ad.Contains(textBox_Ara.Text) ||
                 x.Soyad.Contains(textBox_Ara.Text) ||
                 x.Adres.Contains(textBox_Ara.Text) ||
                 x.AdresDetay.Contains(textBox_Ara.Text) ||
                 x.Eposta.Contains(textBox_Ara.Text) ||
-                x.Telefon.Contains(textBox_Ara.Text)
+                x.Telefon.Contains(textBox_Ara.Text)) && x.AktifMi
             );
 
             if (!uyeResult.IsSuccess)
@@ -45,7 +45,7 @@ namespace Kutuphane.UI
 
             IEnumerable<UyeDto> liste = uyeResult.Data;
 
-            // 🔹 FİLTRE
+             // FİLTRE
             switch (comboBox_Filtre.SelectedItem?.ToString())
             {
                 case "Erkek":
@@ -61,7 +61,7 @@ namespace Kutuphane.UI
                     break;
             }
 
-            // 🔹 SIRALAMA
+            // SIRALAMA
             switch (comboBox_Sirala.SelectedItem?.ToString())
             {
                 case "Ad (A-Z)":
@@ -423,25 +423,25 @@ namespace Kutuphane.UI
 
         private void dataGrid_Uye_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-        //    if (string.IsNullOrWhiteSpace(textBox_Ara.Text))
-        //        return;
+            if (string.IsNullOrWhiteSpace(textBox_Ara.Text))
+                return;
 
-        //    if (e.Value != null)
-        //    {
-        //        string aranan = textBox_Ara.Text.ToLower();
-        //        string hucreMetni = e.Value.ToString().ToLower();
+            if (e.Value != null)
+            {
+                string aranan = textBox_Ara.Text.ToLower();
+                string hucreMetni = e.Value.ToString().ToLower();
 
-        //        if (hucreMetni.Contains(aranan))
-        //        {
-        //            e.CellStyle.BackColor = Color.Yellow;
-        //            e.CellStyle.ForeColor = Color.Black;
-        //        }
-        //        else
-        //        {
-        //            e.CellStyle.BackColor = Color.White;
-        //            e.CellStyle.ForeColor = Color.Black;
-        //        }
-        //    }
+                if (hucreMetni.Contains(aranan))
+                {
+                    e.CellStyle.BackColor = Color.Yellow;
+                    e.CellStyle.ForeColor = Color.Black;
+                }
+                else
+                {
+                    e.CellStyle.BackColor = Color.White;
+                    e.CellStyle.ForeColor = Color.Black;
+                }
+            }
         }
 
         private void comboBox_Filtre_SelectedIndexChanged(object sender, EventArgs e)
@@ -499,5 +499,7 @@ namespace Kutuphane.UI
 
             e.Paint(e.ClipBounds, DataGridViewPaintParts.Border);
         }
+
+       
     }
 }

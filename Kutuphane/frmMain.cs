@@ -9,7 +9,7 @@ namespace Kutuphane.UI
     {
         KitapManager _kitapManager;
         UyeManager _uyeManager;
-
+        OduncManager _oduncManager;
         public int GirisYapanPersonelId { get; set; }
         public string GirisYapanPersonelAd { get; private set; }
         public string GirisYapanPersonelSoyad { get; private set; }
