@@ -17,17 +17,6 @@ namespace Kutuphane.UI
 
         private void frmPersonelIslemleri_Load(object sender, EventArgs e)
         {
-            comboBox_Sirala.Items.Clear();
-
-            comboBox_Sirala.Items.Add("Ad (A-Z)");
-            comboBox_Sirala.Items.Add("Ad (Z-A)");
-            comboBox_Sirala.Items.Add("Soyad (A-Z)");
-            comboBox_Sirala.Items.Add("Soyad (Z-A)");
-            comboBox_Sirala.Items.Add("Cinsiyet (A-Z)");
-            comboBox_Sirala.Items.Add("Cinsiyet (Z-A)");
-
-            comboBox_Sirala.SelectedIndex = 0;
-
             Listele();
             ComboDoldur();
             PasifUyeKontrol();
@@ -54,37 +43,8 @@ namespace Kutuphane.UI
                     return;
                 }
 
-                IEnumerable<PersonelBilgileriDto> siraliListe = personelResult.Data;
-
-                switch (comboBox_Sirala.SelectedItem?.ToString())
-                {
-                    case "Ad (A-Z)":
-                        siraliListe = siraliListe.OrderBy(x => x.Ad);
-                        break;
-
-                    case "Ad (Z-A)":
-                        siraliListe = siraliListe.OrderByDescending(x => x.Ad);
-                        break;
-
-                    case "Soyad (A-Z)":
-                        siraliListe = siraliListe.OrderBy(x => x.Soyad);
-                        break;
-
-                    case "Soyad (Z-A)":
-                        siraliListe = siraliListe.OrderByDescending(x => x.Soyad);
-                        break;
-
-                    case "Cinsiyet (A-Z)":
-                        siraliListe = siraliListe.OrderBy(x => x.CinsiyetAdi);
-                        break;
-
-                    case "Cinsiyet (Z-A)":
-                        siraliListe = siraliListe.OrderByDescending(x => x.CinsiyetAdi);
-                        break;
-                }
-
                 bilPersonel.Clear();
-                foreach (var item in siraliListe)
+                foreach (var item in personelResult.Data)
                     bilPersonel.Add(item);
 
                 dataGrid_Personel.ClearSelection();
@@ -238,6 +198,10 @@ namespace Kutuphane.UI
             }
         }
         private void btnTemizle_Click(object sender, EventArgs e)
+        {
+            KutulariTemizle();   
+        }
+        private void KutulariTemizle()
         {
             textBox_Ad.Clear();
             textBox_Soyad.Clear();
@@ -403,15 +367,17 @@ namespace Kutuphane.UI
 
             return true;
         }
-
         private void textBox_Ara_TextChanged(object sender, EventArgs e)
         {
             Listele();
         }
 
-        private void comboBox_Sirala_SelectedIndexChanged(object sender, EventArgs e)
+        Dictionary<string, bool> sortDirections = new();
+        private void dataGrid_Personel_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            Listele();
+            DataGridSortHelper.SortByColumn<PersonelBilgileriDto>(dataGrid_Personel, bilPersonel, e.ColumnIndex, sortDirections);
+            dataGrid_Personel.ClearSelection();
+            KutulariTemizle();
         }
     }
 }

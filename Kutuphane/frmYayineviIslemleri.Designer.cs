@@ -39,7 +39,6 @@
             aktifMiDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
             yayineviKitaplariDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             yayineviBindingSource = new BindingSource(components);
-            label3 = new Label();
             textBox_Ara = new TextBox();
             groupBox1 = new GroupBox();
             btnGeriYukle = new Button();
@@ -54,7 +53,7 @@
             textBox_KurulusYili = new TextBox();
             textBox_YayineviAdi = new TextBox();
             textBox_YayineviId = new TextBox();
-            comboBox_Sirala = new ComboBox();
+            label3 = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGrid_Yayinevi).BeginInit();
             ((System.ComponentModel.ISupportInitialize)yayineviBindingSource).BeginInit();
             groupBox1.SuspendLayout();
@@ -65,6 +64,7 @@
             dataGrid_Yayinevi.AllowUserToAddRows = false;
             dataGrid_Yayinevi.AllowUserToDeleteRows = false;
             dataGrid_Yayinevi.AllowUserToResizeRows = false;
+            dataGrid_Yayinevi.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             dataGrid_Yayinevi.AutoGenerateColumns = false;
             dataGrid_Yayinevi.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGrid_Yayinevi.BackgroundColor = Color.White;
@@ -92,8 +92,9 @@
             dataGridViewCellStyle2.SelectionForeColor = Color.Black;
             dataGrid_Yayinevi.RowsDefaultCellStyle = dataGridViewCellStyle2;
             dataGrid_Yayinevi.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGrid_Yayinevi.Size = new Size(431, 487);
+            dataGrid_Yayinevi.Size = new Size(605, 487);
             dataGrid_Yayinevi.TabIndex = 2;
+            dataGrid_Yayinevi.ColumnHeaderMouseClick += dataGrid_Yayinevi_ColumnHeaderMouseClick;
             dataGrid_Yayinevi.SelectionChanged += dataGrid_Yayinevi_SelectionChanged;
             // 
             // yayineviIdDataGridViewTextBoxColumn
@@ -138,20 +139,10 @@
             // 
             yayineviBindingSource.DataSource = typeof(Model.Entity.Yayinevi);
             // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
-            label3.Location = new Point(318, 14);
-            label3.Name = "label3";
-            label3.Size = new Size(33, 19);
-            label3.TabIndex = 11;
-            label3.Text = "Ara:";
-            // 
             // textBox_Ara
             // 
             textBox_Ara.Font = new Font("Segoe UI", 10F);
-            textBox_Ara.Location = new Point(357, 11);
+            textBox_Ara.Location = new Point(375, 11);
             textBox_Ara.Name = "textBox_Ara";
             textBox_Ara.PlaceholderText = "Yayınevi adı ile arayın";
             textBox_Ara.Size = new Size(252, 25);
@@ -326,25 +317,25 @@
             textBox_YayineviId.Size = new Size(201, 25);
             textBox_YayineviId.TabIndex = 1;
             // 
-            // comboBox_Sirala
+            // label3
             // 
-            comboBox_Sirala.Font = new Font("Segoe UI", 10F);
-            comboBox_Sirala.FormattingEnabled = true;
-            comboBox_Sirala.Location = new Point(615, 11);
-            comboBox_Sirala.Name = "comboBox_Sirala";
-            comboBox_Sirala.Size = new Size(134, 25);
-            comboBox_Sirala.TabIndex = 20;
-            comboBox_Sirala.SelectedIndexChanged += comboBox_Sirala_SelectedIndexChanged;
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            label3.ForeColor = Color.FromArgb(64, 64, 64);
+            label3.Location = new Point(318, 14);
+            label3.Name = "label3";
+            label3.Size = new Size(51, 17);
+            label3.TabIndex = 21;
+            label3.Text = "Arama:";
             // 
             // frmYayineviIslemleri
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(761, 541);
-            Controls.Add(comboBox_Sirala);
-            Controls.Add(groupBox1);
+            ClientSize = new Size(935, 541);
             Controls.Add(label3);
+            Controls.Add(groupBox1);
             Controls.Add(textBox_Ara);
             Controls.Add(dataGrid_Yayinevi);
             Icon = (Icon)resources.GetObject("$this.Icon");
@@ -367,7 +358,6 @@
 
         private DataGridView dataGrid_Yayinevi;
         private Button btnAra;
-        private Label label3;
         private TextBox textBox_Ara;
         private GroupBox groupBox1;
         private Button btnGeriYukle;
@@ -388,6 +378,6 @@
         private DataGridViewCheckBoxColumn aktifMiDataGridViewCheckBoxColumn;
         private DataGridViewTextBoxColumn yayineviKitaplariDataGridViewTextBoxColumn;
         private BindingSource yayineviBindingSource;
-        private ComboBox comboBox_Sirala;
+        private Label label3;
     }
 }

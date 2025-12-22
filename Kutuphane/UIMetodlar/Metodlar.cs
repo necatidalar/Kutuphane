@@ -1,6 +1,7 @@
 ﻿
 
 using Microsoft.VisualBasic;
+using System.ComponentModel;
 
 namespace Kutuphane.UI.UIMetodlar
 {
@@ -29,8 +30,9 @@ namespace Kutuphane.UI.UIMetodlar
 
         public static void gridDoldur<T>(BindingSource bindingSource, ICollection<T> dataList)
         {
-            foreach (var item in dataList)
-                bindingSource.Add(item);
+            bindingSource.DataSource = new BindingList<T>(dataList.ToList());
+            //foreach (var item in dataList)
+            //    bindingSource.Add(item);
         }
     }
 }

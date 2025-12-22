@@ -4,6 +4,7 @@ using Kutuphane.DAL.Concrete;
 using Kutuphane.Model.DTO;
 using Kutuphane.Model.Entity;
 using Kutuphane.UI.UIMetodlar;
+using System.ComponentModel;
 
 namespace Kutuphane.UI
 {
@@ -28,13 +29,6 @@ namespace Kutuphane.UI
         }
         private void ComboDoldur()
         {
-            comboBox_Sirala.Items.Clear();
-            comboBox_Sirala.Items.Add("Kitap Adı (A-Z)");
-            comboBox_Sirala.Items.Add("Kitap Adı (Z-A)");
-            comboBox_Sirala.Items.Add("Basım Yılı");
-            comboBox_Sirala.Items.Add("Stok");
-            comboBox_Sirala.SelectedIndex = 0;
-
             IYazarService yazarService = new YazarManager(new YazarDal());
             var yazarResult = yazarService.YazarListeGetirServis(x => x.AktifMi);
             if (yazarResult.IsSuccess)
@@ -90,31 +84,11 @@ namespace Kutuphane.UI
 
             }
 
-            //SIRALAMA
-            switch (comboBox_Sirala.SelectedItem?.ToString())
-            {
-                case "Kitap Adı (A-Z)":
-                    liste = liste.OrderBy(x => x.KitapAdi).ToList();
-                    break;
-
-                case "Kitap Adı (Z-A)":
-                    liste = liste.OrderByDescending(x => x.KitapAdi).ToList();
-                    break;
-
-                case "Basım Yılı":
-                    liste = liste.OrderByDescending(x => x.BasimYili).ToList();
-                    break;
-
-                case "Stok":
-                    liste = liste.OrderByDescending(x => x.Stok).ToList();
-                    break;
-            }
             Metodlar.gridDoldur(kitapDtoBindingSource, liste);
 
             dataGrid_Kitap.ClearSelection();
             dataGrid_Kitap.CurrentCell = null;
         }
-
         private Kitap KitapNesnesiniOlustur(int? kitapId = null)
         {
             return new Kitap
@@ -376,9 +350,15 @@ namespace Kutuphane.UI
             Listele();
         }
 
-        private void comboBox_Sirala_SelectedIndexChanged(object sender, EventArgs e)
+        Dictionary<string, bool> sortDirections = new();
+        private void dataGrid_Kitap_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            Listele();
+            if (kitapDtoBindingSource.DataSource is BindingList<KitapDto> bindingList)
+            {
+                DataGridSortHelper.SortByColumn<KitapDto>(dataGrid_Kitap, bindingList, e.ColumnIndex, sortDirections);
+            }
+            dataGrid_Kitap.ClearSelection();
+            Temizle();
         }
     }
 }

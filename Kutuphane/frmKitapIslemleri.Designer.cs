@@ -36,6 +36,8 @@ namespace Kutuphane.UI
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmKitapIslemleri));
             groupBox1 = new GroupBox();
+            btnGeriYukle = new Button();
+            btnSilinenleriGoster = new Button();
             btnTemizle = new Button();
             btnSil = new Button();
             btnDuzenle = new Button();
@@ -61,7 +63,6 @@ namespace Kutuphane.UI
             textBox_ISBN = new TextBox();
             textBox_KitapId = new TextBox();
             kitapDtoBindingSource = new BindingSource(components);
-            label1 = new Label();
             textBox_Ara = new TextBox();
             aktifDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
             stokDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -80,9 +81,7 @@ namespace Kutuphane.UI
             kitapAdiDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             kitapIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             dataGrid_Kitap = new DataGridView();
-            comboBox_Sirala = new ComboBox();
-            btnGeriYukle = new Button();
-            btnSilinenleriGoster = new Button();
+            label1 = new Label();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)kitapDtoBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGrid_Kitap).BeginInit();
@@ -123,6 +122,37 @@ namespace Kutuphane.UI
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Kitap İşlemleri";
+            // 
+            // btnGeriYukle
+            // 
+            btnGeriYukle.BackColor = Color.FromArgb(52, 73, 94);
+            btnGeriYukle.FlatAppearance.BorderSize = 0;
+            btnGeriYukle.FlatStyle = FlatStyle.Flat;
+            btnGeriYukle.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 162);
+            btnGeriYukle.ForeColor = Color.White;
+            btnGeriYukle.Location = new Point(125, 541);
+            btnGeriYukle.Name = "btnGeriYukle";
+            btnGeriYukle.Size = new Size(201, 35);
+            btnGeriYukle.TabIndex = 16;
+            btnGeriYukle.Text = "↩️ Seçili Kategoriyi Geri Yükle";
+            btnGeriYukle.UseVisualStyleBackColor = false;
+            btnGeriYukle.Visible = false;
+            btnGeriYukle.Click += btnGeriYukle_Click;
+            // 
+            // btnSilinenleriGoster
+            // 
+            btnSilinenleriGoster.BackColor = Color.FromArgb(236, 240, 241);
+            btnSilinenleriGoster.FlatAppearance.BorderColor = Color.FromArgb(52, 73, 94);
+            btnSilinenleriGoster.FlatStyle = FlatStyle.Flat;
+            btnSilinenleriGoster.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 162);
+            btnSilinenleriGoster.ForeColor = Color.FromArgb(52, 73, 94);
+            btnSilinenleriGoster.Location = new Point(125, 500);
+            btnSilinenleriGoster.Name = "btnSilinenleriGoster";
+            btnSilinenleriGoster.Size = new Size(201, 35);
+            btnSilinenleriGoster.TabIndex = 14;
+            btnSilinenleriGoster.Text = "🗑️ Silinen Kategorileri Göster";
+            btnSilinenleriGoster.UseVisualStyleBackColor = false;
+            btnSilinenleriGoster.Click += btnSilinenleriGoster_Click;
             // 
             // btnTemizle
             // 
@@ -373,22 +403,10 @@ namespace Kutuphane.UI
             // 
             kitapDtoBindingSource.DataSource = typeof(Model.DTO.KitapDto);
             // 
-            // label1
-            // 
-            label1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
-            label1.Location = new Point(757, 16);
-            label1.Name = "label1";
-            label1.Size = new Size(33, 19);
-            label1.TabIndex = 20;
-            label1.Text = "Ara:";
-            // 
             // textBox_Ara
             // 
-            textBox_Ara.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             textBox_Ara.Font = new Font("Segoe UI", 10F);
-            textBox_Ara.Location = new Point(796, 13);
+            textBox_Ara.Location = new Point(438, 13);
             textBox_Ara.Name = "textBox_Ara";
             textBox_Ara.PlaceholderText = "Arama için metin girin";
             textBox_Ara.Size = new Size(276, 25);
@@ -534,56 +552,25 @@ namespace Kutuphane.UI
             dataGrid_Kitap.Size = new Size(831, 600);
             dataGrid_Kitap.TabIndex = 19;
             dataGrid_Kitap.CellPainting += dataGrid_Kitap_CellPainting;
+            dataGrid_Kitap.ColumnHeaderMouseClick += dataGrid_Kitap_ColumnHeaderMouseClick;
             dataGrid_Kitap.SelectionChanged += dataGrid_Kitap_SelectionChanged;
             // 
-            // comboBox_Sirala
+            // label1
             // 
-            comboBox_Sirala.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            comboBox_Sirala.Font = new Font("Segoe UI", 10F);
-            comboBox_Sirala.FormattingEnabled = true;
-            comboBox_Sirala.Location = new Point(1078, 13);
-            comboBox_Sirala.Name = "comboBox_Sirala";
-            comboBox_Sirala.Size = new Size(134, 25);
-            comboBox_Sirala.TabIndex = 18;
-            comboBox_Sirala.SelectedIndexChanged += comboBox_Sirala_SelectedIndexChanged;
-            // 
-            // btnGeriYukle
-            // 
-            btnGeriYukle.BackColor = Color.FromArgb(52, 73, 94);
-            btnGeriYukle.FlatAppearance.BorderSize = 0;
-            btnGeriYukle.FlatStyle = FlatStyle.Flat;
-            btnGeriYukle.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 162);
-            btnGeriYukle.ForeColor = Color.White;
-            btnGeriYukle.Location = new Point(125, 541);
-            btnGeriYukle.Name = "btnGeriYukle";
-            btnGeriYukle.Size = new Size(201, 35);
-            btnGeriYukle.TabIndex = 16;
-            btnGeriYukle.Text = "↩️ Seçili Kategoriyi Geri Yükle";
-            btnGeriYukle.UseVisualStyleBackColor = false;
-            btnGeriYukle.Visible = false;
-            btnGeriYukle.Click += btnGeriYukle_Click;
-            // 
-            // btnSilinenleriGoster
-            // 
-            btnSilinenleriGoster.BackColor = Color.FromArgb(236, 240, 241);
-            btnSilinenleriGoster.FlatAppearance.BorderColor = Color.FromArgb(52, 73, 94);
-            btnSilinenleriGoster.FlatStyle = FlatStyle.Flat;
-            btnSilinenleriGoster.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 162);
-            btnSilinenleriGoster.ForeColor = Color.FromArgb(52, 73, 94);
-            btnSilinenleriGoster.Location = new Point(125, 500);
-            btnSilinenleriGoster.Name = "btnSilinenleriGoster";
-            btnSilinenleriGoster.Size = new Size(201, 35);
-            btnSilinenleriGoster.TabIndex = 14;
-            btnSilinenleriGoster.Text = "🗑️ Silinen Kategorileri Göster";
-            btnSilinenleriGoster.UseVisualStyleBackColor = false;
-            btnSilinenleriGoster.Click += btnSilinenleriGoster_Click;
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            label1.ForeColor = Color.FromArgb(64, 64, 64);
+            label1.Location = new Point(381, 16);
+            label1.Name = "label1";
+            label1.Size = new Size(51, 17);
+            label1.TabIndex = 20;
+            label1.Text = "Arama:";
             // 
             // frmKitapIslemleri
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1224, 661);
-            Controls.Add(comboBox_Sirala);
             Controls.Add(label1);
             Controls.Add(textBox_Ara);
             Controls.Add(dataGrid_Kitap);
@@ -624,7 +611,6 @@ namespace Kutuphane.UI
         private Label label11;
         private TextBox textBox_SayfaSayisi;
         private BindingSource kitapDtoBindingSource;
-        private Label label1;
         private TextBox textBox_Ara;
         private Button btnTemizle;
         private Button btnSil;
@@ -649,8 +635,8 @@ namespace Kutuphane.UI
         private DataGridViewTextBoxColumn kitapAdiDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn kitapIdDataGridViewTextBoxColumn;
         private DataGridView dataGrid_Kitap;
-        private ComboBox comboBox_Sirala;
         private Button btnGeriYukle;
         private Button btnSilinenleriGoster;
+        private Label label1;
     }
 }

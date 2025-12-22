@@ -14,8 +14,6 @@ namespace Kutuphane.UI
         private int _secilenUyeId = 0;
         private int _girisYapanPersonelId = 0;
         private List<KitapDto> _sepetiKitaplar = new();
-
-
         public int GirisYapanPersonelId
         {
             get => _girisYapanPersonelId;
@@ -34,6 +32,22 @@ namespace Kutuphane.UI
             SepetListViewDuzenle();
             KitapListeListViewDuzenle();
             UyeninAldigiKitapListViewDuzenle();
+            UyeListViewDuzenle();
+        }
+        private void UyeListViewDuzenle()
+        {
+            listView_Uyeler.View = View.Details;
+            listView_Uyeler.GridLines = true;
+            listView_Uyeler.FullRowSelect = true;
+
+            // Sütunları ekleyelim
+            listView_Uyeler.Columns.Clear();
+            listView_Uyeler.Columns.Add("TC/Pass", 100);
+            listView_Uyeler.Columns.Add("Ad", 120);
+            listView_Uyeler.Columns.Add("Soyad", 120);
+
+            // Olay (Event) Bağlama: Listeden seçim yapınca çalışacak kod
+            listView_Uyeler.SelectedIndexChanged += listView_Uyeler_SelectedIndexChanged;
         }
         private void SepetListViewDuzenle()
         {
@@ -60,54 +74,22 @@ namespace Kutuphane.UI
         }
         private void button_UyeAra_Click(object sender, EventArgs e)
         {
-            string aramaMetni = textBox_UyeAra.Text.Trim();
 
-            if (string.IsNullOrWhiteSpace(aramaMetni))
-            {
-                MessageBox.Show("Lütfen arama metni girin.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            try
-            {
-                var result = _uyeManager.GetListByFilterService(x =>
-                    x.AktifMi &&
-                    (x.TcPass.Contains(aramaMetni) ||
-                     x.Ad.Contains(aramaMetni) ||
-                     x.Soyad.Contains(aramaMetni))
-                );
-
-                if (!result.IsSuccess || result.Data.Count == 0)
-                {
-                    MessageBox.Show("Üye bulunamadı.", "Sonuç", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    _secilenUyeId = 0;
-                    label_AdSoyad.Text = "Seçili Üye: YOK";
-                    label_ToplamAlinanKitapSayisi.Text = "Toplam Alınan: 0 | Şu an Ödünçte: 0";
-                    listView_UyeninAldigiKitapListesi.Items.Clear();
-                    return;
-                }
-
-                if (result.Data.Count == 1)
-                {
-                    UyeSecimi(result.Data[0]);
-                }
-                else
-                {
-                    UyeSecimi(result.Data[0]);
-                    MessageBox.Show($"{result.Data.Count} üye bulundu. İlki seçildi.", "Bilgi",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Hata: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
         }
         private void UyeSecimi(Uye uye)
         {
             _secilenUyeId = uye.UyeId;
             label_AdSoyad.Text = $"Seçili Üye: {uye.Ad} {uye.Soyad}";
             UyeninAldigiKitaplarıListele();
+        }
+        private void listView_Uyeler_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listView_Uyeler.SelectedItems.Count > 0)
+            {
+                ListViewItem secilenSatir = listView_Uyeler.SelectedItems[0];
+                Uye secilenUye = (Uye)secilenSatir.Tag;
+                UyeSecimi(secilenUye);
+            }
         }
         private void UyeninAldigiKitaplarıListele()
         {
@@ -154,13 +136,6 @@ namespace Kutuphane.UI
 
             if (kitap == null)
                 return;
-
-            if (_sepetiKitaplar.Any(k => k.KitapId == kitap.KitapId))
-            {
-                MessageBox.Show("Bu kitap zaten sepette bulunuyor.", "Uyarı",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
 
             _sepetiKitaplar.Add(kitap);
             SepetGuncelle();
@@ -320,12 +295,6 @@ namespace Kutuphane.UI
         {
             string aramaMetni = textBox_KitapAra.Text.Trim();
 
-            if (string.IsNullOrWhiteSpace(aramaMetni))
-            {
-                MessageBox.Show("Lütfen arama metni girin.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
             try
             {
                 var result = _kitapManager.KitapListeDetayliGetirServis(x =>
@@ -336,14 +305,6 @@ namespace Kutuphane.UI
                      x.Yazar.Ad.Contains(aramaMetni) ||
                      x.Yazar.Soyad.Contains(aramaMetni))
                 );
-
-                if (!result.IsSuccess || result.Data.Count == 0)
-                {
-                    MessageBox.Show("Kitap bulunamadı veya stok tükendi.", "Sonuç",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    listView_KitapListesi.Items.Clear();
-                    return;
-                }
 
                 listView_KitapListesi.Items.Clear();
                 foreach (var kitap in result.Data)
@@ -360,6 +321,50 @@ namespace Kutuphane.UI
             {
                 MessageBox.Show($"Hata: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+        private void textBox_UyeAra_TextChanged(object sender, EventArgs e)
+        {
+            string aramaMetni = textBox_UyeAra.Text.Trim();
+            listView_Uyeler.Items.Clear();
+
+            if (string.IsNullOrEmpty(aramaMetni)) return;
+
+            var result = _uyeManager.GetListByFilterService(x =>
+                x.AktifMi &&
+                (x.TcPass.Contains(aramaMetni) ||
+                 x.Ad.Contains(aramaMetni) ||
+                 x.Soyad.Contains(aramaMetni))
+            );
+
+            if (result.IsSuccess && result.Data.Count > 0)
+            {
+                listView_Uyeler.BeginUpdate();
+                foreach (var uye in result.Data)
+                {
+                    ListViewItem item = new ListViewItem(uye.TcPass);
+                    item.SubItems.Add(uye.Ad);
+                    item.SubItems.Add(uye.Soyad);
+                    item.Tag = uye;
+
+                    listView_Uyeler.Items.Add(item);
+                }
+                listView_Uyeler.EndUpdate();
+            }
+        }
+        private void listView_Sepet_DoubleClick(object sender, EventArgs e)
+        {
+            if (listView_Sepet.SelectedItems.Count == 0)
+                return;
+
+            var secilenItem = listView_Sepet.SelectedItems[0];
+            int kitapId = (int)secilenItem.Tag;
+
+            var kitap = _sepetiKitaplar.FirstOrDefault(x => x.KitapId == kitapId);
+            if (kitap == null)
+                return;
+
+            _sepetiKitaplar.Remove(kitap);
+            SepetGuncelle();
         }
     }
 }

@@ -16,12 +16,6 @@ namespace Kutuphane.UI
         private void frmYayineviIslemleri_Load(object sender, EventArgs e)
         {
             dataGrid_Yayinevi.DataSource = bilYayinevi;
-
-            comboBox_Sirala.Items.Clear();
-            comboBox_Sirala.Items.Add("Yayınevi Adı (A-Z)");
-            comboBox_Sirala.Items.Add("Yayınevi Adı (Z-A)");
-            comboBox_Sirala.SelectedIndex = 0;
-
             Listele();
             PasifUyeKontrol();
         }
@@ -42,23 +36,9 @@ namespace Kutuphane.UI
                 return;
             }
 
-            IEnumerable<Yayinevi> liste = yayineviResult.Data;
-
-
-            switch (comboBox_Sirala.SelectedItem?.ToString())
-            {
-                case "Yayınevi Adı (A-Z)":
-                    liste = liste.OrderBy(x => x.Ad);
-                    break;
-
-                case "Yayınevi Adı (Z-A)":
-                    liste = liste.OrderByDescending(x => x.Ad);
-                    break;
-            }
-
             bilYayinevi.Clear();
 
-            foreach (var item in liste)
+            foreach (var item in yayineviResult.Data)
                 bilYayinevi.Add(item);
 
             dataGrid_Yayinevi.ClearSelection();
@@ -249,9 +229,13 @@ namespace Kutuphane.UI
         {
             Listele();
         }
-        private void comboBox_Sirala_SelectedIndexChanged(object sender, EventArgs e)
+
+        Dictionary<string, bool> sortDirections = new();
+        private void dataGrid_Yayinevi_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            Listele();
+            DataGridSortHelper.SortByColumn<Yayinevi>(dataGrid_Yayinevi, bilYayinevi, e.ColumnIndex, sortDirections);
+            dataGrid_Yayinevi.ClearSelection();
+            KutulariTemizle();
         }
     }
 }

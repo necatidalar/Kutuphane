@@ -32,7 +32,6 @@
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmYazarIslemleri));
-            label3 = new Label();
             textBox_Ara = new TextBox();
             groupBox1 = new GroupBox();
             textBox_Soyad = new TextBox();
@@ -60,26 +59,16 @@
             adSoyadDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             yasDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             yazarDtoBindingSource = new BindingSource(components);
-            comboBox_Sirala = new ComboBox();
+            label3 = new Label();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGrid_Yazar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)yazarDtoBindingSource).BeginInit();
             SuspendLayout();
             // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
-            label3.Location = new Point(413, 13);
-            label3.Name = "label3";
-            label3.Size = new Size(33, 19);
-            label3.TabIndex = 11;
-            label3.Text = "Ara:";
-            // 
             // textBox_Ara
             // 
             textBox_Ara.Font = new Font("Segoe UI", 10F);
-            textBox_Ara.Location = new Point(452, 10);
+            textBox_Ara.Location = new Point(375, 10);
             textBox_Ara.Name = "textBox_Ara";
             textBox_Ara.PlaceholderText = "Yazarın adı ya da soyadıyla arayın";
             textBox_Ara.Size = new Size(305, 25);
@@ -302,7 +291,7 @@
             dataGrid_Yazar.AllowUserToAddRows = false;
             dataGrid_Yazar.AllowUserToDeleteRows = false;
             dataGrid_Yazar.AllowUserToResizeRows = false;
-            dataGrid_Yazar.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            dataGrid_Yazar.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dataGrid_Yazar.AutoGenerateColumns = false;
             dataGrid_Yazar.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGrid_Yazar.BackgroundColor = Color.White;
@@ -332,6 +321,7 @@
             dataGrid_Yazar.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGrid_Yazar.Size = new Size(579, 488);
             dataGrid_Yazar.TabIndex = 14;
+            dataGrid_Yazar.ColumnHeaderMouseClick += dataGrid_Yazar_ColumnHeaderMouseClick;
             dataGrid_Yazar.SelectionChanged += dataGrid_Yazar_SelectionChanged;
             // 
             // yazarIdDataGridViewTextBoxColumn
@@ -389,15 +379,16 @@
             // 
             yazarDtoBindingSource.DataSource = typeof(Model.DTO.YazarDto);
             // 
-            // comboBox_Sirala
+            // label3
             // 
-            comboBox_Sirala.Font = new Font("Segoe UI", 10F);
-            comboBox_Sirala.FormattingEnabled = true;
-            comboBox_Sirala.Location = new Point(763, 10);
-            comboBox_Sirala.Name = "comboBox_Sirala";
-            comboBox_Sirala.Size = new Size(134, 25);
-            comboBox_Sirala.TabIndex = 21;
-            comboBox_Sirala.SelectedIndexChanged += comboBox_Sirala_SelectedIndexChanged;
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            label3.ForeColor = Color.FromArgb(64, 64, 64);
+            label3.Location = new Point(318, 13);
+            label3.Name = "label3";
+            label3.Size = new Size(51, 17);
+            label3.TabIndex = 22;
+            label3.Text = "Arama:";
             // 
             // frmYazarIslemleri
             // 
@@ -405,9 +396,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(909, 541);
-            Controls.Add(comboBox_Sirala);
-            Controls.Add(dataGrid_Yazar);
             Controls.Add(label3);
+            Controls.Add(dataGrid_Yazar);
             Controls.Add(textBox_Ara);
             Controls.Add(groupBox1);
             Icon = (Icon)resources.GetObject("$this.Icon");
@@ -426,7 +416,6 @@
         }
 
         #endregion
-        private Label label3;
         private TextBox textBox_Ara;
         private GroupBox groupBox1;
         private Button btnGeriYukle;
@@ -454,6 +443,6 @@
         private DataGridViewTextBoxColumn olumTarihiDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn adSoyadDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn yasDataGridViewTextBoxColumn;
-        private ComboBox comboBox_Sirala;
+        private Label label3;
     }
 }

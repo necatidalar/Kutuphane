@@ -45,7 +45,7 @@ namespace Kutuphane.UI
 
             IEnumerable<UyeDto> liste = uyeResult.Data;
 
-             // FİLTRE
+            // FİLTRE
             switch (comboBox_Filtre.SelectedItem?.ToString())
             {
                 case "Erkek":
@@ -61,42 +61,6 @@ namespace Kutuphane.UI
                     break;
             }
 
-            // SIRALAMA
-            switch (comboBox_Sirala.SelectedItem?.ToString())
-            {
-                case "Ad (A-Z)":
-                    liste = liste.OrderBy(x => x.Ad);
-                    break;
-
-                case "Ad (Z-A)":
-                    liste = liste.OrderByDescending(x => x.Ad);
-                    break;
-
-                case "Soyad (A-Z)":
-                    liste = liste.OrderBy(x => x.Soyad);
-                    break;
-
-                case "Soyad (Z-A)":
-                    liste = liste.OrderByDescending(x => x.Soyad);
-                    break;
-
-                case "Tc / Pass (A-Z)":
-                    liste = liste.OrderBy(x => x.TcPass);
-                    break;
-
-                case "Tc / Pass (Z-A)":
-                    liste = liste.OrderByDescending(x => x.TcPass);
-                    break;
-
-                case "Cinsiyet (A-Z)":
-                    liste = liste.OrderBy(x => x.Cinsiyet);
-                    break;
-
-                case "Cinsiyet (Z-A)":
-                    liste = liste.OrderByDescending(x => x.Cinsiyet);
-                    break;
-            }
-
             bilUyeDto.Clear();
 
             foreach (var item in liste)
@@ -106,24 +70,8 @@ namespace Kutuphane.UI
 
             dataGrid_Uye.ClearSelection();
         }
-
-
-
-
         private void ComboDoldur()
         {
-            // SIRALAMA
-            comboBox_Sirala.Items.Clear();
-            comboBox_Sirala.Items.Add("Ad (A-Z)");
-            comboBox_Sirala.Items.Add("Ad (Z-A)");
-            comboBox_Sirala.Items.Add("Soyad (A-Z)");
-            comboBox_Sirala.Items.Add("Soyad (Z-A)");
-            comboBox_Sirala.Items.Add("Tc / Pass (A-Z)");
-            comboBox_Sirala.Items.Add("Tc / Pass (Z-A)");
-            comboBox_Sirala.Items.Add("Cinsiyet (A-Z)");
-            comboBox_Sirala.Items.Add("Cinsiyet (Z-A)");
-            comboBox_Sirala.SelectedIndex = 0;
-
             // FİLTRE
             comboBox_Filtre.Items.Clear();
             comboBox_Filtre.Items.Add("Tümü");
@@ -410,17 +358,10 @@ namespace Kutuphane.UI
             }
             return true;
         }
-
         private void textBox_Ara_TextChanged(object sender, EventArgs e)
         {
             Listele();
         }
-
-        private void comboBox_Sirala_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            Listele();
-        }
-
         private void dataGrid_Uye_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(textBox_Ara.Text))
@@ -443,12 +384,10 @@ namespace Kutuphane.UI
                 }
             }
         }
-
         private void comboBox_Filtre_SelectedIndexChanged(object sender, EventArgs e)
         {
             Listele();
         }
-
         private void dataGrid_Uye_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
             if (e.RowIndex < 0 || e.ColumnIndex < 0)
@@ -499,7 +438,12 @@ namespace Kutuphane.UI
 
             e.Paint(e.ClipBounds, DataGridViewPaintParts.Border);
         }
-
-       
+        Dictionary<string, bool> sortDirections = new();
+        private void dataGrid_Uye_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            DataGridSortHelper.SortByColumn<UyeDto>(dataGrid_Uye, bilUyeDto, e.ColumnIndex, sortDirections);
+            dataGrid_Uye.ClearSelection();
+            KutulariTemizle();
+        }
     }
 }

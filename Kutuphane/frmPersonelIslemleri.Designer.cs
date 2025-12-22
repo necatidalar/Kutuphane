@@ -59,9 +59,8 @@
             cinsiyetAdiDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             aktifMiDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
             personelBilgileriDtoBindingSource = new BindingSource(components);
-            label5 = new Label();
             textBox_Ara = new TextBox();
-            comboBox_Sirala = new ComboBox();
+            label5 = new Label();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGrid_Personel).BeginInit();
             ((System.ComponentModel.ISupportInitialize)personelBilgileriDtoBindingSource).BeginInit();
@@ -334,6 +333,7 @@
             dataGrid_Personel.Size = new Size(711, 558);
             dataGrid_Personel.TabIndex = 1;
             dataGrid_Personel.CellFormatting += dataGrid_Personel_CellFormatting;
+            dataGrid_Personel.ColumnHeaderMouseClick += dataGrid_Personel_ColumnHeaderMouseClick;
             dataGrid_Personel.SelectionChanged += dataGrid_Personel_SelectionChanged;
             // 
             // personelIdDataGridViewTextBoxColumn
@@ -379,35 +379,26 @@
             // 
             personelBilgileriDtoBindingSource.DataSource = typeof(Model.DTO.PersonelBilgileriDto);
             // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
-            label5.Location = new Point(602, 12);
-            label5.Name = "label5";
-            label5.Size = new Size(33, 19);
-            label5.TabIndex = 0;
-            label5.Text = "Ara:";
-            // 
             // textBox_Ara
             // 
             textBox_Ara.Font = new Font("Segoe UI", 10F);
-            textBox_Ara.Location = new Point(641, 9);
+            textBox_Ara.Location = new Point(403, 11);
             textBox_Ara.Name = "textBox_Ara";
-            textBox_Ara.PlaceholderText = "Ad, Soyad veya Kullanıcı Adı ile arayın";
+            textBox_Ara.PlaceholderText = "Ad veya Soyad ile arayın";
             textBox_Ara.Size = new Size(276, 25);
             textBox_Ara.TabIndex = 13;
             textBox_Ara.TextChanged += textBox_Ara_TextChanged;
             // 
-            // comboBox_Sirala
+            // label5
             // 
-            comboBox_Sirala.Font = new Font("Segoe UI", 10F);
-            comboBox_Sirala.FormattingEnabled = true;
-            comboBox_Sirala.Location = new Point(923, 9);
-            comboBox_Sirala.Name = "comboBox_Sirala";
-            comboBox_Sirala.Size = new Size(134, 25);
-            comboBox_Sirala.TabIndex = 20;
-            comboBox_Sirala.SelectedIndexChanged += comboBox_Sirala_SelectedIndexChanged;
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            label5.ForeColor = Color.FromArgb(64, 64, 64);
+            label5.Location = new Point(346, 14);
+            label5.Name = "label5";
+            label5.Size = new Size(51, 17);
+            label5.TabIndex = 21;
+            label5.Text = "Arama:";
             // 
             // frmPersonelIslemleri
             // 
@@ -415,7 +406,6 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(1069, 612);
-            Controls.Add(comboBox_Sirala);
             Controls.Add(label5);
             Controls.Add(textBox_Ara);
             Controls.Add(dataGrid_Personel);
@@ -453,7 +443,6 @@
         private Button btnSil;
         private Button btnDuzenle;
         private Button btnKaydet;
-        private Label label5;
         private TextBox textBox_Ara;
         private DataGridViewTextBoxColumn teslimEdilenlerDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn terslimAlinanlarDataGridViewTextBoxColumn;
@@ -471,6 +460,6 @@
         private DataGridViewTextBoxColumn cinsiyetIdDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn cinsiyetAdiDataGridViewTextBoxColumn;
         private DataGridViewCheckBoxColumn aktifMiDataGridViewCheckBoxColumn;
-        private ComboBox comboBox_Sirala;
+        private Label label5;
     }
 }

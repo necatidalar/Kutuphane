@@ -21,13 +21,6 @@ namespace Kutuphane.UI
 
         private void frmDilIslemleri_Load(object sender, EventArgs e)
         {
-            comboBox_Sirala.Items.Add("Dil Adı (A-Z)");
-            comboBox_Sirala.Items.Add("Dil Adı (Z-A)");
-            comboBox_Sirala.Items.Add("Dil Kodu (A-Z)");
-            comboBox_Sirala.Items.Add("Dil Kodu (Z-A)");
-
-            comboBox_Sirala.SelectedIndex = 0;
-
             Listele();
             PasifUyeKontrol();
             KutulariTemizle();
@@ -44,29 +37,8 @@ namespace Kutuphane.UI
                 return;
             }
 
-            IEnumerable<Dil> siraliListe = dilResult.Data;
-
-            switch (comboBox_Sirala.SelectedItem.ToString())
-            {
-                case "Dil Adı (A-Z)":
-                    siraliListe = siraliListe.OrderBy(x => x.DilAdi);
-                    break;
-
-                case "Dil Adı (Z-A)":
-                    siraliListe = siraliListe.OrderByDescending(x => x.DilAdi);
-                    break;
-
-                case "Dil Kodu (A-Z)":
-                    siraliListe = siraliListe.OrderBy(x => x.DilKodu);
-                    break;
-
-                case "Dil Kodu (Z-A)":
-                    siraliListe = siraliListe.OrderByDescending(x => x.DilKodu);
-                    break;
-            }
-
             bilDil.Clear();
-            foreach (var item in siraliListe)
+            foreach (var item in dilResult.Data)
                 bilDil.Add(item);
 
             dataGrid_Dil.ClearSelection();
@@ -282,9 +254,13 @@ namespace Kutuphane.UI
             Listele();
             dataGrid_Dil.Refresh();
         }
-        private void comboBox_Sirala_SelectedIndexChanged(object sender, EventArgs e)
+
+        Dictionary<string, bool> sortDirections = new();
+        private void dataGrid_Dil_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            Listele();
+            DataGridSortHelper.SortByColumn<Dil>(dataGrid_Dil, bilDil, e.ColumnIndex, sortDirections);
+            dataGrid_Dil.ClearSelection();
+            KutulariTemizle();
         }
     }
 }

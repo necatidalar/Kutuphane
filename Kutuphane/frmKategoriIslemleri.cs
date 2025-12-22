@@ -20,9 +20,6 @@ namespace Kutuphane.UI
 
         private void frmKategori_Load(object sender, EventArgs e)
         {
-            comboBox_Sirala.Items.Add("Kategori Adı (A-Z)");
-            comboBox_Sirala.Items.Add("Kategori Adı (Z-A)");
-            comboBox_Sirala.SelectedIndex = 0;
             Listele();
             PasifUyeKontrol();
             KutulariTemizle();
@@ -30,31 +27,19 @@ namespace Kutuphane.UI
         }
         private void Listele()
         {
-            var kategoriResult = kategoriService.GetListByFilterService(x =>
-                x.AktifMi == true &&
-                (x.KategoriAdi.Contains(textBox_Ara.Text))
+            var result = kategoriService.GetListByFilterService(x =>
+                x.AktifMi &&
+                x.KategoriAdi.Contains(textBox_Ara.Text)
             );
 
-            if (!kategoriResult.IsSuccess)
+            if (!result.IsSuccess)
             {
-                MessageBox.Show(kategoriResult.Message, "Hata");
+                MessageBox.Show(result.Message, "Hata");
                 return;
             }
 
-            IEnumerable<Kategori> siraliListe = kategoriResult.Data;
-            switch (comboBox_Sirala.SelectedItem.ToString())
-            {
-                case "Kategori Adı (A-Z)":
-                    siraliListe = siraliListe.OrderBy(x => x.KategoriAdi);
-                    break;
-                case "Kategori Adı (Z-A)":
-                    siraliListe = siraliListe.OrderByDescending(x => x.KategoriAdi);
-                    break;
-            }
-
             bilKategori.Clear();
-
-            foreach (var item in siraliListe)
+            foreach (var item in result.Data)
                 bilKategori.Add(item);
 
             dataGrid_Kategori.ClearSelection();
@@ -276,36 +261,34 @@ namespace Kutuphane.UI
         {
             Listele();
         }
-        private void comboBox_Sirala_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            Listele();
-        }
-        bool kategoriAdiAsc = true;
-
+        Dictionary<string, bool> sortDirections = new();
         private void dataGrid_Kategori_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            string kolonAdi = dataGrid_Kategori.Columns[e.ColumnIndex].DataPropertyName;
+            DataGridSortHelper.SortByColumn<Kategori>(dataGrid_Kategori,bilKategori,e.ColumnIndex, sortDirections);
+            dataGrid_Kategori.ClearSelection();
+            KutulariTemizle();
+            //string kolonAdi = dataGrid_Kategori.Columns[e.ColumnIndex].DataPropertyName;
 
-            if (kolonAdi != nameof(Kategori.KategoriAdi))
-                return;
+            //if (kolonAdi != nameof(Kategori.KategoriAdi))
+            //    return;
 
-            IEnumerable<Kategori> liste = bilKategori.ToList();
+            //IEnumerable<Kategori> liste = bilKategori.ToList();
 
-            if (kategoriAdiAsc)
-                liste = liste.OrderBy(x => x.KategoriAdi);
-            else
-                liste = liste.OrderByDescending(x => x.KategoriAdi);
+            //if (kategoriAdiAsc)
+            //    liste = liste.OrderBy(x => x.KategoriAdi);
+            //else
+            //    liste = liste.OrderByDescending(x => x.KategoriAdi);
 
-            kategoriAdiAsc = !kategoriAdiAsc;
+            //kategoriAdiAsc = !kategoriAdiAsc;
 
-            bilKategori.Clear();
-            foreach (var item in liste)
-                bilKategori.Add(item);
+            //bilKategori.Clear();
+            //foreach (var item in liste)
+            //    bilKategori.Add(item);
 
-            dataGrid_Kategori.Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection =
-                kategoriAdiAsc
-                    ? SortOrder.Descending
-                    : SortOrder.Ascending;
+            //dataGrid_Kategori.Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection =
+            //    kategoriAdiAsc
+            //        ? SortOrder.Descending
+            //        : SortOrder.Ascending;
         }
     }
 }

@@ -44,13 +44,12 @@
             textBox_KategoriAdi = new TextBox();
             textBox_KategoriId = new TextBox();
             dataGrid_Kategori = new DataGridView();
-            kategoriBindingSource = new BindingSource(components);
-            label3 = new Label();
-            textBox_Ara = new TextBox();
-            comboBox_Sirala = new ComboBox();
             kategoriIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             kategoriAdiDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             kitapKategorilerDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            kategoriBindingSource = new BindingSource(components);
+            label3 = new Label();
+            textBox_Ara = new TextBox();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGrid_Kategori).BeginInit();
             ((System.ComponentModel.ISupportInitialize)kategoriBindingSource).BeginInit();
@@ -221,7 +220,7 @@
             dataGrid_Kategori.AllowUserToAddRows = false;
             dataGrid_Kategori.AllowUserToDeleteRows = false;
             dataGrid_Kategori.AllowUserToResizeRows = false;
-            dataGrid_Kategori.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dataGrid_Kategori.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             dataGrid_Kategori.AutoGenerateColumns = false;
             dataGrid_Kategori.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGrid_Kategori.BackgroundColor = Color.FromArgb(245, 246, 250);
@@ -256,48 +255,11 @@
             dataGrid_Kategori.RowHeadersVisible = false;
             dataGrid_Kategori.RowTemplate.Height = 32;
             dataGrid_Kategori.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGrid_Kategori.Size = new Size(447, 484);
+            dataGrid_Kategori.Size = new Size(560, 484);
             dataGrid_Kategori.TabIndex = 11;
             dataGrid_Kategori.CellFormatting += dataGrid_Kategori_CellFormatting;
             dataGrid_Kategori.ColumnHeaderMouseClick += dataGrid_Kategori_ColumnHeaderMouseClick;
             dataGrid_Kategori.SelectionChanged += dataGrid_Kategori_SelectionChanged;
-            // 
-            // kategoriBindingSource
-            // 
-            kategoriBindingSource.DataSource = typeof(Model.Entity.Kategori);
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
-            label3.ForeColor = Color.FromArgb(64, 64, 64);
-            label3.Location = new Point(325, 21);
-            label3.Name = "label3";
-            label3.Size = new Size(51, 17);
-            label3.TabIndex = 6;
-            label3.Text = "Arama:";
-            // 
-            // textBox_Ara
-            // 
-            textBox_Ara.Font = new Font("Segoe UI", 10F);
-            textBox_Ara.Location = new Point(382, 17);
-            textBox_Ara.Name = "textBox_Ara";
-            textBox_Ara.PlaceholderText = "Kategori adı ile arayın...";
-            textBox_Ara.Size = new Size(250, 25);
-            textBox_Ara.TabIndex = 9;
-            textBox_Ara.TextChanged += textBox_Ara_TextChanged;
-            // 
-            // comboBox_Sirala
-            // 
-            comboBox_Sirala.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            comboBox_Sirala.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBox_Sirala.Font = new Font("Segoe UI", 10F);
-            comboBox_Sirala.FormattingEnabled = true;
-            comboBox_Sirala.Location = new Point(638, 17);
-            comboBox_Sirala.Name = "comboBox_Sirala";
-            comboBox_Sirala.Size = new Size(134, 25);
-            comboBox_Sirala.TabIndex = 10;
-            comboBox_Sirala.SelectedIndexChanged += comboBox_Sirala_SelectedIndexChanged;
             // 
             // kategoriIdDataGridViewTextBoxColumn
             // 
@@ -322,13 +284,37 @@
             kitapKategorilerDataGridViewTextBoxColumn.ReadOnly = true;
             kitapKategorilerDataGridViewTextBoxColumn.Visible = false;
             // 
+            // kategoriBindingSource
+            // 
+            kategoriBindingSource.DataSource = typeof(Model.Entity.Kategori);
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            label3.ForeColor = Color.FromArgb(64, 64, 64);
+            label3.Location = new Point(325, 27);
+            label3.Name = "label3";
+            label3.Size = new Size(51, 17);
+            label3.TabIndex = 6;
+            label3.Text = "Arama:";
+            // 
+            // textBox_Ara
+            // 
+            textBox_Ara.Font = new Font("Segoe UI", 10F);
+            textBox_Ara.Location = new Point(382, 24);
+            textBox_Ara.Name = "textBox_Ara";
+            textBox_Ara.PlaceholderText = "Kategori adı ile arayın...";
+            textBox_Ara.Size = new Size(250, 25);
+            textBox_Ara.TabIndex = 9;
+            textBox_Ara.TextChanged += textBox_Ara_TextChanged;
+            // 
             // frmKategoriIslemleri
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(784, 551);
-            Controls.Add(comboBox_Sirala);
+            ClientSize = new Size(897, 551);
             Controls.Add(label3);
             Controls.Add(textBox_Ara);
             Controls.Add(dataGrid_Kategori);
@@ -360,7 +346,6 @@
         private BindingSource kategoriBindingSource;
         private Label label3;
         private TextBox textBox_Ara;
-        private ComboBox comboBox_Sirala;
         private Button btnTemizle;
         private Button btnSil;
         private Button btnDuzenle;

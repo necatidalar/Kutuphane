@@ -18,8 +18,8 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmDilIslemleri));
             dataGrid_Dil = new DataGridView();
             dilIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -42,7 +42,6 @@
             label1 = new Label();
             label2 = new Label();
             textBox_DilKodu = new TextBox();
-            comboBox_Sirala = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)dataGrid_Dil).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dilBindingSource).BeginInit();
             groupBox1.SuspendLayout();
@@ -53,7 +52,7 @@
             dataGrid_Dil.AllowUserToAddRows = false;
             dataGrid_Dil.AllowUserToDeleteRows = false;
             dataGrid_Dil.AllowUserToResizeRows = false;
-            dataGrid_Dil.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dataGrid_Dil.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             dataGrid_Dil.AutoGenerateColumns = false;
             dataGrid_Dil.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGrid_Dil.BackgroundColor = Color.FromArgb(245, 246, 250);
@@ -88,9 +87,10 @@
             dataGrid_Dil.RowHeadersVisible = false;
             dataGrid_Dil.RowTemplate.Height = 32;
             dataGrid_Dil.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGrid_Dil.Size = new Size(465, 484);
+            dataGrid_Dil.Size = new Size(606, 484);
             dataGrid_Dil.TabIndex = 12;
             dataGrid_Dil.CellFormatting += dataGrid_Dil_CellFormatting;
+            dataGrid_Dil.ColumnHeaderMouseClick += dataGrid_Dil_ColumnHeaderMouseClick;
             dataGrid_Dil.SelectionChanged += dataGrid_Dil_SelectionChanged;
             // 
             // dilIdDataGridViewTextBoxColumn
@@ -132,7 +132,7 @@
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
             label3.ForeColor = Color.FromArgb(64, 64, 64);
-            label3.Location = new Point(325, 21);
+            label3.Location = new Point(325, 27);
             label3.Name = "label3";
             label3.Size = new Size(51, 17);
             label3.TabIndex = 14;
@@ -141,7 +141,7 @@
             // textBox_Ara
             // 
             textBox_Ara.Font = new Font("Segoe UI", 10F);
-            textBox_Ara.Location = new Point(382, 17);
+            textBox_Ara.Location = new Point(382, 24);
             textBox_Ara.Name = "textBox_Ara";
             textBox_Ara.PlaceholderText = "Dil adı veya koduyla arayın...";
             textBox_Ara.Size = new Size(265, 25);
@@ -236,7 +236,7 @@
             btnTemizle.Name = "btnTemizle";
             btnTemizle.Size = new Size(265, 38);
             btnTemizle.TabIndex = 7;
-            btnTemizle.Text = "🧹 TEMİZLE";
+            btnTemizle.Text = "\U0001f9f9 TEMİZLE";
             btnTemizle.UseVisualStyleBackColor = false;
             btnTemizle.Click += btnTemizle_Click;
             // 
@@ -329,25 +329,12 @@
             textBox_DilKodu.Size = new Size(190, 25);
             textBox_DilKodu.TabIndex = 3;
             // 
-            // comboBox_Sirala
-            // 
-            comboBox_Sirala.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            comboBox_Sirala.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBox_Sirala.Font = new Font("Segoe UI", 10F);
-            comboBox_Sirala.FormattingEnabled = true;
-            comboBox_Sirala.Location = new Point(656, 17);
-            comboBox_Sirala.Name = "comboBox_Sirala";
-            comboBox_Sirala.Size = new Size(134, 25);
-            comboBox_Sirala.TabIndex = 11;
-            comboBox_Sirala.SelectedIndexChanged += comboBox_Sirala_SelectedIndexChanged;
-            // 
             // frmDilIslemleri
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(802, 551);
-            Controls.Add(comboBox_Sirala);
+            ClientSize = new Size(943, 551);
             Controls.Add(groupBox1);
             Controls.Add(label3);
             Controls.Add(textBox_Ara);
@@ -388,6 +375,5 @@
         private DataGridViewTextBoxColumn dilKoduDataGridViewTextBoxColumn;
         private DataGridViewCheckBoxColumn aktifMiDataGridViewCheckBoxColumn;
         private BindingSource dilBindingSource;
-        private ComboBox comboBox_Sirala;
     }
 }

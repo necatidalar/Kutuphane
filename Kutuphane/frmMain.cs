@@ -92,6 +92,51 @@ namespace Kutuphane.UI
 
             AutoSize = false;
         }
+        private void Logout()
+        {
+            GirisYapanPersonelId = 0;
+            GirisYapanPersonelAd = null;
+            GirisYapanPersonelSoyad = null;
+            loginPersoneli = null;
+            lblKullaniciAdi.Text = string.Empty;
+
+
+            foreach (Form child in MdiChildren)
+                child.Close();
+
+            timer_Dashboard.Stop();
+
+            SetForLoginView(true);
+
+            frmGiris girisForm = new frmGiris();
+            girisForm.MdiParent = this;
+            girisForm.FormClosed += LoginFormClosed;
+            girisForm.Show();
+        }
+        private void LoginFormClosed(object sender, FormClosedEventArgs e)
+        {
+            frmGiris girisForm = sender as frmGiris;
+
+            if (girisForm?.GirisYapanPersonel == null)
+            {
+                Application.Exit();
+                return;
+            }
+
+            loginPersoneli = girisForm.GirisYapanPersonel;
+
+            GirisYapanPersonelId = loginPersoneli.PersonelId;
+            GirisYapanPersonelAd = loginPersoneli.Ad;
+            GirisYapanPersonelSoyad = loginPersoneli.Soyad;
+
+            lblKullaniciAdi.Text =
+                $"Hoşgeldin, {GirisYapanPersonelAd} {GirisYapanPersonelSoyad}";
+
+            SetForLoginView(false);
+            ShowHideTopPanels(true, true);
+            timer_Dashboard.Start();
+            Listele();
+        }
         private void Listele()
         {
             var kitapResult = _kitapManager.GetListByFilterService(x => x.Aktif == true);
@@ -117,7 +162,6 @@ namespace Kutuphane.UI
             int gecikmisSayisi = gecikmisResult.IsSuccess ? gecikmisResult.Data.Count : 0;
             label_GecikmisUyeSayisi.Text = gecikmisSayisi.ToString();
         }
-
         private void menuStrip_Click(object sender, EventArgs e)
         {
             ToolStripMenuItem menuItem = sender as ToolStripMenuItem;
@@ -207,51 +251,6 @@ namespace Kutuphane.UI
         private void cikisYapToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Logout();
-        }
-        private void Logout()
-        {
-            GirisYapanPersonelId = 0;
-            GirisYapanPersonelAd = null;
-            GirisYapanPersonelSoyad = null;
-            loginPersoneli = null;
-            lblKullaniciAdi.Text = string.Empty;
-
-
-            foreach (Form child in MdiChildren)
-                child.Close();
-
-            timer_Dashboard.Stop();
-
-            SetForLoginView(true);
-
-            frmGiris girisForm = new frmGiris();
-            girisForm.MdiParent = this;
-            girisForm.FormClosed += LoginFormClosed;
-            girisForm.Show();
-        }
-        private void LoginFormClosed(object sender, FormClosedEventArgs e)
-        {
-            frmGiris girisForm = sender as frmGiris;
-
-            if (girisForm?.GirisYapanPersonel == null)
-            {
-                Application.Exit();
-                return;
-            }
-
-            loginPersoneli = girisForm.GirisYapanPersonel;
-
-            GirisYapanPersonelId = loginPersoneli.PersonelId;
-            GirisYapanPersonelAd = loginPersoneli.Ad;
-            GirisYapanPersonelSoyad = loginPersoneli.Soyad;
-
-            lblKullaniciAdi.Text =
-                $"Hoşgeldin, {GirisYapanPersonelAd} {GirisYapanPersonelSoyad}";
-
-            SetForLoginView(false);
-            ShowHideTopPanels(true, true);
-            timer_Dashboard.Start();
-            Listele();
         }
     }
 }
