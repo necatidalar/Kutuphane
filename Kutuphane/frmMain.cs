@@ -10,6 +10,8 @@ namespace Kutuphane.UI
         KitapManager _kitapManager;
         UyeManager _uyeManager;
         OduncManager _oduncManager;
+        YayineviManager _yayineviManager;
+        YazarManager _yazarManager;
         public int GirisYapanPersonelId { get; set; }
         public string GirisYapanPersonelAd { get; private set; }
         public string GirisYapanPersonelSoyad { get; private set; }
@@ -21,6 +23,8 @@ namespace Kutuphane.UI
             _kitapManager = new KitapManager(new KitapDal());
             _uyeManager = new UyeManager(new UyeDal());
             _oduncManager = new OduncManager(new OduncDal());
+            _yazarManager = new YazarManager(new YazarDal());
+            _yayineviManager = new YayineviManager(new YayineviDal());
             loginPersoneli = new PersonelBilgileriDto();
         }
         private void frmMain_Load(object sender, EventArgs e)
@@ -172,6 +176,17 @@ namespace Kutuphane.UI
 
             int gecikmisSayisi = gecikmisResult.IsSuccess ? gecikmisResult.Data.Count : 0;
             label_GecikmisUyeSayisi.Text = gecikmisSayisi.ToString();
+
+            var yazarResult = _yazarManager.GetListByFilterService(x => x.AktifMi == true);
+            label_YazarSayisi.Text = yazarResult.IsSuccess
+                ? yazarResult.Data.Count.ToString()
+                : "0";
+
+            var yayineviResult = _yayineviManager.GetListByFilterService(x => x.AktifMi == true);
+            label_YayineviSayisi.Text = yayineviResult.IsSuccess
+                ? yayineviResult.Data.Count.ToString()
+                : "0";
+
         }
         private void menuStrip_Click(object sender, EventArgs e)
         {

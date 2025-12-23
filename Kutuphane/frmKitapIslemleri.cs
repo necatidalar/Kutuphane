@@ -20,10 +20,8 @@ namespace Kutuphane.UI
 
         private void frmKitapIslemleri_Load(object sender, EventArgs e)
         {
-            Listele();
             ComboDoldur();
-            dataGrid_Kitap.ClearSelection();
-            dataGrid_Kitap.CurrentCell = null;
+            Listele();
             Temizle();
             PasifKontrol();
         }
@@ -359,6 +357,28 @@ namespace Kutuphane.UI
             }
             dataGrid_Kitap.ClearSelection();
             Temizle();
+        }
+        private void dataGrid_Kitap_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(textBox_Ara.Text))
+                return;
+
+            if (e.Value != null)
+            {
+                string aranan = textBox_Ara.Text.ToLower();
+                string hucreMetni = e.Value.ToString().ToLower();
+
+                if (hucreMetni.Contains(aranan))
+                {
+                    e.CellStyle.BackColor = Color.Yellow;
+                    e.CellStyle.ForeColor = Color.Black;
+                }
+                else
+                {
+                    e.CellStyle.BackColor = Color.White;
+                    e.CellStyle.ForeColor = Color.Black;
+                }
+            }
         }
     }
 }

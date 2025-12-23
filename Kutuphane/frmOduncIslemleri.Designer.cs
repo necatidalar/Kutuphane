@@ -38,6 +38,9 @@
             label1 = new Label();
             textBox_UyeAra = new TextBox();
             panelRight = new Panel();
+            groupBox5 = new GroupBox();
+            button_TumIadeAl = new Button();
+            listView_AlinanTumKitaplarinListesi = new ListView();
             groupBox3 = new GroupBox();
             button_IadeAl = new Button();
             listView_UyeninAldigiKitapListesi = new ListView();
@@ -46,6 +49,7 @@
             groupBox2.SuspendLayout();
             groupBox1.SuspendLayout();
             panelRight.SuspendLayout();
+            groupBox5.SuspendLayout();
             groupBox3.SuspendLayout();
             SuspendLayout();
             // 
@@ -308,6 +312,7 @@
             // 
             // panelRight
             // 
+            panelRight.Controls.Add(groupBox5);
             panelRight.Controls.Add(groupBox3);
             panelRight.Dock = DockStyle.Fill;
             panelRight.Location = new Point(653, 13);
@@ -316,17 +321,68 @@
             panelRight.Size = new Size(518, 879);
             panelRight.TabIndex = 1;
             // 
+            // groupBox5
+            // 
+            groupBox5.Controls.Add(button_TumIadeAl);
+            groupBox5.Controls.Add(listView_AlinanTumKitaplarinListesi);
+            groupBox5.Dock = DockStyle.Fill;
+            groupBox5.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            groupBox5.ForeColor = Color.DimGray;
+            groupBox5.Location = new Point(5, 364);
+            groupBox5.Name = "groupBox5";
+            groupBox5.Padding = new Padding(10);
+            groupBox5.Size = new Size(513, 515);
+            groupBox5.TabIndex = 5;
+            groupBox5.TabStop = false;
+            groupBox5.Text = "Tüm Ödünç Kitaplar";
+            // 
+            // button_TumIadeAl
+            // 
+            button_TumIadeAl.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            button_TumIadeAl.BackColor = Color.FromArgb(192, 57, 43);
+            button_TumIadeAl.Cursor = Cursors.Hand;
+            button_TumIadeAl.FlatAppearance.BorderSize = 0;
+            button_TumIadeAl.FlatStyle = FlatStyle.Flat;
+            button_TumIadeAl.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            button_TumIadeAl.ForeColor = Color.White;
+            button_TumIadeAl.Location = new Point(13, 456);
+            button_TumIadeAl.Name = "button_TumIadeAl";
+            button_TumIadeAl.Size = new Size(487, 45);
+            button_TumIadeAl.TabIndex = 10;
+            button_TumIadeAl.Text = "❌ SEÇİLİ KİTABI İADE AL";
+            button_TumIadeAl.UseVisualStyleBackColor = false;
+            button_TumIadeAl.Click += button_TumIadeAl_Click;
+            // 
+            // listView_AlinanTumKitaplarinListesi
+            // 
+            listView_AlinanTumKitaplarinListesi.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            listView_AlinanTumKitaplarinListesi.BorderStyle = BorderStyle.FixedSingle;
+            listView_AlinanTumKitaplarinListesi.CheckBoxes = true;
+            listView_AlinanTumKitaplarinListesi.Font = new Font("Segoe UI", 10F);
+            listView_AlinanTumKitaplarinListesi.ForeColor = SystemColors.WindowText;
+            listView_AlinanTumKitaplarinListesi.FullRowSelect = true;
+            listView_AlinanTumKitaplarinListesi.GridLines = true;
+            listView_AlinanTumKitaplarinListesi.HeaderStyle = ColumnHeaderStyle.Nonclickable;
+            listView_AlinanTumKitaplarinListesi.Location = new Point(13, 35);
+            listView_AlinanTumKitaplarinListesi.MultiSelect = false;
+            listView_AlinanTumKitaplarinListesi.Name = "listView_AlinanTumKitaplarinListesi";
+            listView_AlinanTumKitaplarinListesi.RightToLeft = RightToLeft.Yes;
+            listView_AlinanTumKitaplarinListesi.Size = new Size(487, 415);
+            listView_AlinanTumKitaplarinListesi.TabIndex = 6;
+            listView_AlinanTumKitaplarinListesi.UseCompatibleStateImageBehavior = false;
+            listView_AlinanTumKitaplarinListesi.View = View.Details;
+            // 
             // groupBox3
             // 
             groupBox3.Controls.Add(button_IadeAl);
             groupBox3.Controls.Add(listView_UyeninAldigiKitapListesi);
-            groupBox3.Dock = DockStyle.Fill;
+            groupBox3.Dock = DockStyle.Top;
             groupBox3.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
             groupBox3.ForeColor = Color.DimGray;
             groupBox3.Location = new Point(5, 0);
             groupBox3.Name = "groupBox3";
             groupBox3.Padding = new Padding(10);
-            groupBox3.Size = new Size(513, 879);
+            groupBox3.Size = new Size(513, 364);
             groupBox3.TabIndex = 4;
             groupBox3.TabStop = false;
             groupBox3.Text = "↩️ İade Alma İşlemi (Üye Üzerindekiler)";
@@ -340,7 +396,7 @@
             button_IadeAl.FlatStyle = FlatStyle.Flat;
             button_IadeAl.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
             button_IadeAl.ForeColor = Color.White;
-            button_IadeAl.Location = new Point(13, 820);
+            button_IadeAl.Location = new Point(13, 305);
             button_IadeAl.Name = "button_IadeAl";
             button_IadeAl.Size = new Size(487, 45);
             button_IadeAl.TabIndex = 9;
@@ -362,7 +418,7 @@
             listView_UyeninAldigiKitapListesi.MultiSelect = false;
             listView_UyeninAldigiKitapListesi.Name = "listView_UyeninAldigiKitapListesi";
             listView_UyeninAldigiKitapListesi.RightToLeft = RightToLeft.Yes;
-            listView_UyeninAldigiKitapListesi.Size = new Size(487, 780);
+            listView_UyeninAldigiKitapListesi.Size = new Size(487, 262);
             listView_UyeninAldigiKitapListesi.TabIndex = 6;
             listView_UyeninAldigiKitapListesi.UseCompatibleStateImageBehavior = false;
             listView_UyeninAldigiKitapListesi.View = View.Details;
@@ -387,6 +443,7 @@
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             panelRight.ResumeLayout(false);
+            groupBox5.ResumeLayout(false);
             groupBox3.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -428,5 +485,8 @@
         private Button button1;
         private DateTimePicker dateTimePicker_TeslimTarihi;
         private Label label5;
+        private GroupBox groupBox5;
+        private ListView listView_AlinanTumKitaplarinListesi;
+        private Button button_TumIadeAl;
     }
 }

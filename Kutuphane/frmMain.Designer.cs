@@ -48,6 +48,7 @@ namespace Kutuphane.UI
             uyeIslemleriToolStripMenuItem = new ToolStripMenuItem();
             personelIslemleriToolStripMenuItem = new ToolStripMenuItem();
             raporlamaToolStripMenuItem = new ToolStripMenuItem();
+            ayarlarToolStripMenuItem = new ToolStripMenuItem();
             cikisYapToolStripMenuItem = new ToolStripMenuItem();
             flowLayoutPanel_Kartlar = new FlowLayoutPanel();
             panel_Kitap = new Panel();
@@ -64,6 +65,12 @@ namespace Kutuphane.UI
             panel_Geciklis = new Panel();
             label_GecikmisUyeSayisi = new Label();
             label4 = new Label();
+            panel1 = new Panel();
+            label_YazarSayisi = new Label();
+            label8 = new Label();
+            panel2 = new Panel();
+            label_YayineviSayisi = new Label();
+            label6 = new Label();
             timer_Dashboard = new System.Windows.Forms.Timer(components);
             panel_Ust.SuspendLayout();
             menuStrip1.SuspendLayout();
@@ -72,6 +79,8 @@ namespace Kutuphane.UI
             panel_Uye.SuspendLayout();
             panel_Odunc.SuspendLayout();
             panel_Geciklis.SuspendLayout();
+            panel1.SuspendLayout();
+            panel2.SuspendLayout();
             SuspendLayout();
             // 
             // panel_Ust
@@ -113,7 +122,7 @@ namespace Kutuphane.UI
             menuStrip1.BackColor = Color.WhiteSmoke;
             menuStrip1.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 162);
             menuStrip1.ImageScalingSize = new Size(20, 20);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { gostergePaneliToolStripMenuItem, yerlesimAyarlariToolStripMenuItem, kitapIslemleriToolStripMenuItem, oduncIslemleriToolStripMenuItem, uyeIslemleriToolStripMenuItem, personelIslemleriToolStripMenuItem, raporlamaToolStripMenuItem, cikisYapToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { gostergePaneliToolStripMenuItem, yerlesimAyarlariToolStripMenuItem, kitapIslemleriToolStripMenuItem, oduncIslemleriToolStripMenuItem, uyeIslemleriToolStripMenuItem, personelIslemleriToolStripMenuItem, raporlamaToolStripMenuItem, ayarlarToolStripMenuItem, cikisYapToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Padding = new Padding(6, 4, 0, 4);
@@ -227,6 +236,14 @@ namespace Kutuphane.UI
             raporlamaToolStripMenuItem.Size = new Size(121, 24);
             raporlamaToolStripMenuItem.Text = "📝 Raporlama";
             // 
+            // ayarlarToolStripMenuItem
+            // 
+            ayarlarToolStripMenuItem.Name = "ayarlarToolStripMenuItem";
+            ayarlarToolStripMenuItem.Size = new Size(93, 24);
+            ayarlarToolStripMenuItem.Tag = "frmAyarlar";
+            ayarlarToolStripMenuItem.Text = "⚙ Ayarlar";
+            ayarlarToolStripMenuItem.Click += menuStrip_Click;
+            // 
             // cikisYapToolStripMenuItem
             // 
             cikisYapToolStripMenuItem.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
@@ -240,6 +257,8 @@ namespace Kutuphane.UI
             // 
             flowLayoutPanel_Kartlar.BackColor = Color.FromArgb(236, 240, 241);
             flowLayoutPanel_Kartlar.Controls.Add(panel_Kitap);
+            flowLayoutPanel_Kartlar.Controls.Add(panel1);
+            flowLayoutPanel_Kartlar.Controls.Add(panel2);
             flowLayoutPanel_Kartlar.Controls.Add(panel_Uye);
             flowLayoutPanel_Kartlar.Controls.Add(panel_Odunc);
             flowLayoutPanel_Kartlar.Controls.Add(panel_Geciklis);
@@ -291,7 +310,7 @@ namespace Kutuphane.UI
             panel_Uye.Controls.Add(label_UyeErkekSayisi);
             panel_Uye.Controls.Add(label_UyeSayisi);
             panel_Uye.Controls.Add(label2);
-            panel_Uye.Location = new Point(320, 20);
+            panel_Uye.Location = new Point(920, 20);
             panel_Uye.Margin = new Padding(10);
             panel_Uye.Name = "panel_Uye";
             panel_Uye.Size = new Size(280, 160);
@@ -344,7 +363,7 @@ namespace Kutuphane.UI
             panel_Odunc.BackColor = Color.FromArgb(230, 126, 34);
             panel_Odunc.Controls.Add(label_OduncSayisi);
             panel_Odunc.Controls.Add(label3);
-            panel_Odunc.Location = new Point(620, 20);
+            panel_Odunc.Location = new Point(20, 200);
             panel_Odunc.Margin = new Padding(10);
             panel_Odunc.Name = "panel_Odunc";
             panel_Odunc.Size = new Size(280, 160);
@@ -377,7 +396,7 @@ namespace Kutuphane.UI
             panel_Geciklis.BackColor = Color.FromArgb(192, 57, 43);
             panel_Geciklis.Controls.Add(label_GecikmisUyeSayisi);
             panel_Geciklis.Controls.Add(label4);
-            panel_Geciklis.Location = new Point(920, 20);
+            panel_Geciklis.Location = new Point(320, 200);
             panel_Geciklis.Margin = new Padding(10);
             panel_Geciklis.Name = "panel_Geciklis";
             panel_Geciklis.Size = new Size(280, 160);
@@ -404,6 +423,73 @@ namespace Kutuphane.UI
             label4.Size = new Size(183, 25);
             label4.TabIndex = 5;
             label4.Text = "⚠️ Gecikmiş Kitaplar";
+            // 
+            // panel1
+            // 
+            panel1.BackColor = Color.FromArgb(155, 89, 182);
+            panel1.Controls.Add(label_YazarSayisi);
+            panel1.Controls.Add(label8);
+            panel1.Location = new Point(320, 20);
+            panel1.Margin = new Padding(10);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(280, 160);
+            panel1.TabIndex = 4;
+            // 
+            // label_YazarSayisi
+            // 
+            label_YazarSayisi.AutoSize = true;
+            label_YazarSayisi.Font = new Font("Segoe UI", 48F, FontStyle.Bold);
+            label_YazarSayisi.ForeColor = Color.White;
+            label_YazarSayisi.Location = new Point(15, 45);
+            label_YazarSayisi.Name = "label_YazarSayisi";
+            label_YazarSayisi.Size = new Size(74, 86);
+            label_YazarSayisi.TabIndex = 4;
+            label_YazarSayisi.Text = "0";
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.BackColor = Color.FromArgb(155, 89, 182);
+            label8.Font = new Font("Segoe UI", 14F);
+            label8.ForeColor = Color.White;
+            label8.Location = new Point(15, 15);
+            label8.Name = "label8";
+            label8.Size = new Size(149, 25);
+            label8.TabIndex = 5;
+            label8.Text = "✍️ Toplam Yazar";
+            // 
+            // panel2
+            // 
+            panel2.BackColor = Color.FromArgb(22, 160, 133);
+            panel2.Controls.Add(label_YayineviSayisi);
+            panel2.Controls.Add(label6);
+            panel2.Location = new Point(620, 20);
+            panel2.Margin = new Padding(10);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(280, 160);
+            panel2.TabIndex = 5;
+            // 
+            // label_YayineviSayisi
+            // 
+            label_YayineviSayisi.AutoSize = true;
+            label_YayineviSayisi.Font = new Font("Segoe UI", 48F, FontStyle.Bold);
+            label_YayineviSayisi.ForeColor = Color.White;
+            label_YayineviSayisi.Location = new Point(15, 45);
+            label_YayineviSayisi.Name = "label_YayineviSayisi";
+            label_YayineviSayisi.Size = new Size(74, 86);
+            label_YayineviSayisi.TabIndex = 4;
+            label_YayineviSayisi.Text = "0";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("Segoe UI", 14F);
+            label6.ForeColor = Color.White;
+            label6.Location = new Point(15, 15);
+            label6.Name = "label6";
+            label6.Size = new Size(172, 25);
+            label6.TabIndex = 5;
+            label6.Text = "🏢 Toplam Yayınevi";
             // 
             // timer_Dashboard
             // 
@@ -440,6 +526,10 @@ namespace Kutuphane.UI
             panel_Odunc.PerformLayout();
             panel_Geciklis.ResumeLayout(false);
             panel_Geciklis.PerformLayout();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -465,10 +555,15 @@ namespace Kutuphane.UI
         private Panel panel_Uye;
         private Panel panel_Odunc;
         private Panel panel_Geciklis;
+        private Panel panel_Yazar;
+        private Panel panel_Yayinevi;
         private Label label_KitapSayisi;
         private Label label_UyeSayisi;
         private Label label_OduncSayisi;
         private Label label_GecikmisUyeSayisi;
+        private Label label_YayineviSayisi;
+        private Label label5;
+        private Label label6;
         private Label label1;
         private Label label2;
         private Label label3;
@@ -479,5 +574,10 @@ namespace Kutuphane.UI
         private Label label_Mesaj;
         private Label label_UyeKadinSayisi;
         private Label label_UyeErkekSayisi;
+        private ToolStripMenuItem ayarlarToolStripMenuItem;
+        private Panel panel1;
+        private Label label_YazarSayisi;
+        private Label label8;
+        private Panel panel2;
     }
 }

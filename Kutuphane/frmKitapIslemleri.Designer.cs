@@ -418,6 +418,7 @@ namespace Kutuphane.UI
             aktifDataGridViewCheckBoxColumn.DataPropertyName = "Aktif";
             aktifDataGridViewCheckBoxColumn.HeaderText = "Aktif";
             aktifDataGridViewCheckBoxColumn.Name = "aktifDataGridViewCheckBoxColumn";
+            aktifDataGridViewCheckBoxColumn.ReadOnly = true;
             aktifDataGridViewCheckBoxColumn.Visible = false;
             // 
             // stokDataGridViewTextBoxColumn
@@ -425,18 +426,21 @@ namespace Kutuphane.UI
             stokDataGridViewTextBoxColumn.DataPropertyName = "Stok";
             stokDataGridViewTextBoxColumn.HeaderText = "Stok Miktarı";
             stokDataGridViewTextBoxColumn.Name = "stokDataGridViewTextBoxColumn";
+            stokDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // dilDataGridViewTextBoxColumn
             // 
             dilDataGridViewTextBoxColumn.DataPropertyName = "Dil";
             dilDataGridViewTextBoxColumn.HeaderText = "Dil";
             dilDataGridViewTextBoxColumn.Name = "dilDataGridViewTextBoxColumn";
+            dilDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // dilIdDataGridViewTextBoxColumn
             // 
             dilIdDataGridViewTextBoxColumn.DataPropertyName = "DilId";
             dilIdDataGridViewTextBoxColumn.HeaderText = "DilId";
             dilIdDataGridViewTextBoxColumn.Name = "dilIdDataGridViewTextBoxColumn";
+            dilIdDataGridViewTextBoxColumn.ReadOnly = true;
             dilIdDataGridViewTextBoxColumn.Visible = false;
             // 
             // sayfaSayisiDataGridViewTextBoxColumn
@@ -444,24 +448,28 @@ namespace Kutuphane.UI
             sayfaSayisiDataGridViewTextBoxColumn.DataPropertyName = "SayfaSayisi";
             sayfaSayisiDataGridViewTextBoxColumn.HeaderText = "Sayfa Sayısı";
             sayfaSayisiDataGridViewTextBoxColumn.Name = "sayfaSayisiDataGridViewTextBoxColumn";
+            sayfaSayisiDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // basimYiliDataGridViewTextBoxColumn
             // 
             basimYiliDataGridViewTextBoxColumn.DataPropertyName = "BasimYili";
             basimYiliDataGridViewTextBoxColumn.HeaderText = "Basım Yılı";
             basimYiliDataGridViewTextBoxColumn.Name = "basimYiliDataGridViewTextBoxColumn";
+            basimYiliDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // kategoriAdiDataGridViewTextBoxColumn
             // 
             kategoriAdiDataGridViewTextBoxColumn.DataPropertyName = "KategoriAdi";
             kategoriAdiDataGridViewTextBoxColumn.HeaderText = "Kategori Adı";
             kategoriAdiDataGridViewTextBoxColumn.Name = "kategoriAdiDataGridViewTextBoxColumn";
+            kategoriAdiDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // kategoriIdDataGridViewTextBoxColumn
             // 
             kategoriIdDataGridViewTextBoxColumn.DataPropertyName = "KategoriId";
             kategoriIdDataGridViewTextBoxColumn.HeaderText = "KategoriId";
             kategoriIdDataGridViewTextBoxColumn.Name = "kategoriIdDataGridViewTextBoxColumn";
+            kategoriIdDataGridViewTextBoxColumn.ReadOnly = true;
             kategoriIdDataGridViewTextBoxColumn.Visible = false;
             // 
             // yayineviAdDataGridViewTextBoxColumn
@@ -469,12 +477,14 @@ namespace Kutuphane.UI
             yayineviAdDataGridViewTextBoxColumn.DataPropertyName = "YayineviAd";
             yayineviAdDataGridViewTextBoxColumn.HeaderText = "Yayınevi Adı";
             yayineviAdDataGridViewTextBoxColumn.Name = "yayineviAdDataGridViewTextBoxColumn";
+            yayineviAdDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // yayineviIdDataGridViewTextBoxColumn
             // 
             yayineviIdDataGridViewTextBoxColumn.DataPropertyName = "YayineviId";
             yayineviIdDataGridViewTextBoxColumn.HeaderText = "YayineviId";
             yayineviIdDataGridViewTextBoxColumn.Name = "yayineviIdDataGridViewTextBoxColumn";
+            yayineviIdDataGridViewTextBoxColumn.ReadOnly = true;
             yayineviIdDataGridViewTextBoxColumn.Visible = false;
             // 
             // yazarSoyadDataGridViewTextBoxColumn
@@ -482,18 +492,21 @@ namespace Kutuphane.UI
             yazarSoyadDataGridViewTextBoxColumn.DataPropertyName = "YazarSoyad";
             yazarSoyadDataGridViewTextBoxColumn.HeaderText = "Yazar Soyadı";
             yazarSoyadDataGridViewTextBoxColumn.Name = "yazarSoyadDataGridViewTextBoxColumn";
+            yazarSoyadDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // yazarAdDataGridViewTextBoxColumn
             // 
             yazarAdDataGridViewTextBoxColumn.DataPropertyName = "YazarAd";
             yazarAdDataGridViewTextBoxColumn.HeaderText = "Yazar Adı";
             yazarAdDataGridViewTextBoxColumn.Name = "yazarAdDataGridViewTextBoxColumn";
+            yazarAdDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // yazarIdDataGridViewTextBoxColumn
             // 
             yazarIdDataGridViewTextBoxColumn.DataPropertyName = "YazarId";
             yazarIdDataGridViewTextBoxColumn.HeaderText = "YazarId";
             yazarIdDataGridViewTextBoxColumn.Name = "yazarIdDataGridViewTextBoxColumn";
+            yazarIdDataGridViewTextBoxColumn.ReadOnly = true;
             yazarIdDataGridViewTextBoxColumn.Visible = false;
             // 
             // ıSBNDataGridViewTextBoxColumn
@@ -501,22 +514,26 @@ namespace Kutuphane.UI
             ıSBNDataGridViewTextBoxColumn.DataPropertyName = "ISBN";
             ıSBNDataGridViewTextBoxColumn.HeaderText = "ISBN";
             ıSBNDataGridViewTextBoxColumn.Name = "ıSBNDataGridViewTextBoxColumn";
+            ıSBNDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // kitapAdiDataGridViewTextBoxColumn
             // 
             kitapAdiDataGridViewTextBoxColumn.DataPropertyName = "KitapAdi";
             kitapAdiDataGridViewTextBoxColumn.HeaderText = "Kitap Adı";
             kitapAdiDataGridViewTextBoxColumn.Name = "kitapAdiDataGridViewTextBoxColumn";
+            kitapAdiDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // kitapIdDataGridViewTextBoxColumn
             // 
             kitapIdDataGridViewTextBoxColumn.DataPropertyName = "KitapId";
             kitapIdDataGridViewTextBoxColumn.HeaderText = "KitapId";
             kitapIdDataGridViewTextBoxColumn.Name = "kitapIdDataGridViewTextBoxColumn";
+            kitapIdDataGridViewTextBoxColumn.ReadOnly = true;
             kitapIdDataGridViewTextBoxColumn.Visible = false;
             // 
             // dataGrid_Kitap
             // 
+            dataGrid_Kitap.AllowUserToAddRows = false;
             dataGrid_Kitap.AllowUserToDeleteRows = false;
             dataGrid_Kitap.AllowUserToOrderColumns = true;
             dataGrid_Kitap.AllowUserToResizeRows = false;
@@ -541,6 +558,7 @@ namespace Kutuphane.UI
             dataGrid_Kitap.Location = new Point(381, 44);
             dataGrid_Kitap.MultiSelect = false;
             dataGrid_Kitap.Name = "dataGrid_Kitap";
+            dataGrid_Kitap.ReadOnly = true;
             dataGrid_Kitap.RowHeadersVisible = false;
             dataGridViewCellStyle2.BackColor = Color.White;
             dataGridViewCellStyle2.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 162);
@@ -551,6 +569,7 @@ namespace Kutuphane.UI
             dataGrid_Kitap.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGrid_Kitap.Size = new Size(831, 600);
             dataGrid_Kitap.TabIndex = 19;
+            dataGrid_Kitap.CellFormatting += dataGrid_Kitap_CellFormatting;
             dataGrid_Kitap.CellPainting += dataGrid_Kitap_CellPainting;
             dataGrid_Kitap.ColumnHeaderMouseClick += dataGrid_Kitap_ColumnHeaderMouseClick;
             dataGrid_Kitap.SelectionChanged += dataGrid_Kitap_SelectionChanged;

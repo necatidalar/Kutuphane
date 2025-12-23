@@ -29,12 +29,98 @@ namespace Kutuphane.UI
         }
         private void frmOduncIslemleri_Load(object sender, EventArgs e)
         {
+            TumOdunclerListViewDuzenle();
+            TumOduncleriListele();
             SepetListViewDuzenle();
             KitapListeListViewDuzenle();
             UyeninAldigiKitapListViewDuzenle();
             UyeListViewDuzenle();
 
             dateTimePicker_TeslimTarihi.Value = DateTime.Now.AddDays(45);
+        }
+        private void TumOdunclerListViewDuzenle()
+        {
+            listView_AlinanTumKitaplarinListesi.View = View.Details;
+            listView_AlinanTumKitaplarinListesi.FullRowSelect = true;
+            listView_AlinanTumKitaplarinListesi.GridLines = true;
+            listView_AlinanTumKitaplarinListesi.CheckBoxes = true;
+
+            listView_AlinanTumKitaplarinListesi.Columns.Clear();
+            listView_AlinanTumKitaplarinListesi.Columns.Add("Üye", 200);
+            listView_AlinanTumKitaplarinListesi.Columns.Add("Kitap", 250);
+            listView_AlinanTumKitaplarinListesi.Columns.Add("Alış", 120);
+            listView_AlinanTumKitaplarinListesi.Columns.Add("Teslim", 120);
+            listView_AlinanTumKitaplarinListesi.Columns.Add("Durum", 120);
+        }
+        private void TumOduncleriListele()
+        {
+            listView_AlinanTumKitaplarinListesi.Items.Clear();
+
+            var result = _oduncManager.OduncBilgileriGetirServis(x => x.TeslimEdildi == false);
+
+            foreach (var o in result.Data)
+            {
+                bool geciktiMi = o.TeslimTarihi < DateTime.Today;
+
+                var item = new ListViewItem($"{o.UyeAd} {o.UyeSoyad}");
+                item.SubItems.Add(o.KitapAdi);
+                item.SubItems.Add(o.AlisTarihi.ToString("dd.MM.yyyy"));
+                item.SubItems.Add(o.TeslimTarihi?.ToString("dd.MM.yyyy"));
+                item.SubItems.Add(geciktiMi ? "❌ GECİKMİŞ" : "✅ Yeni");
+
+                item.Tag = o.OduncId;
+
+                if (geciktiMi)
+                {
+                    item.BackColor = Color.DarkRed;
+                    item.ForeColor = Color.White;
+                }
+                else
+                {
+                    item.BackColor = Color.DarkGreen;
+                    item.ForeColor = Color.White;
+                }
+
+                listView_AlinanTumKitaplarinListesi.Items.Add(item);
+            }
+        }
+        private void button_TumIadeAl_Click(object sender, EventArgs e)
+        {
+            var secili = listView_AlinanTumKitaplarinListesi.Items
+                .Cast<ListViewItem>()
+                .Where(x => x.Checked)
+                .ToList();
+
+            if (!secili.Any())
+            {
+                MessageBox.Show("Lütfen iade alınacak kitapları işaretleyin.");
+                return;
+            }
+
+            int basarili = 0;
+
+            foreach (var item in secili)
+            {
+                int oduncId = (int)item.Tag;
+
+                var odunc = _oduncManager.GetByFilterService(x => x.OduncId == oduncId).Data;
+                odunc.TeslimEdildi = true;
+                odunc.TeslimTarihi = DateTime.Now;
+                odunc.TeslimAlanPersonelId = _girisYapanPersonelId;
+
+                _oduncManager.UpdateService(odunc);
+
+                var kitap = _kitapManager.GetByFilterService(x => x.KitapId == odunc.KitapId).Data;
+                kitap.Stok++;
+                _kitapManager.UpdateService(kitap);
+
+                basarili++;
+            }
+
+            MessageBox.Show($"✅ {basarili} kitap topluca iade alındı.");
+
+            TumOduncleriListele();
+            UyeninAldigiKitaplarıListele();
         }
         private void UyeListViewDuzenle()
         {
@@ -226,6 +312,7 @@ namespace Kutuphane.UI
                 MessageBox.Show(mesaj, "Sonuç", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 UyeninAldigiKitaplarıListele();
+                TumOduncleriListele();
             }
             catch (Exception ex)
             {
@@ -288,6 +375,7 @@ namespace Kutuphane.UI
                     "Sonuç", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 UyeninAldigiKitaplarıListele();
+                TumOduncleriListele();
             }
             catch (Exception ex)
             {
