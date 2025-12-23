@@ -195,7 +195,6 @@
             Margin = new Padding(4);
             MaximizeBox = false;
             Name = "frmGiris";
-            StartPosition = FormStartPosition.CenterScreen;
             Text = "Kütüphane Giriş";
             WindowState = FormWindowState.Maximized;
             Load += frmGiris_Load;

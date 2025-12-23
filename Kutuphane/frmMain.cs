@@ -129,8 +129,7 @@ namespace Kutuphane.UI
             GirisYapanPersonelAd = loginPersoneli.Ad;
             GirisYapanPersonelSoyad = loginPersoneli.Soyad;
 
-            lblKullaniciAdi.Text =
-                $"Hoşgeldin, {GirisYapanPersonelAd} {GirisYapanPersonelSoyad}";
+            lblKullaniciAdi.Text = $"Hoşgeldin, {GirisYapanPersonelAd} {GirisYapanPersonelSoyad}";
 
             SetForLoginView(false);
             ShowHideTopPanels(true, true);
@@ -148,6 +147,18 @@ namespace Kutuphane.UI
             label_UyeSayisi.Text = uyeResult.IsSuccess
                 ? uyeResult.Data.Count.ToString()
                 : "0";
+
+            int erkekSayisi = _uyeManager
+                .GetListByFilterService(x => x.AktifMi && x.Cinsiyet.CinsiyetAdi == "Erkek")
+                .Data?.Count ?? 0;
+
+            int kadinSayisi = _uyeManager
+                .GetListByFilterService(x => x.AktifMi && x.Cinsiyet.CinsiyetAdi == "Kadın")
+                .Data?.Count ?? 0;
+
+            label_UyeErkekSayisi.Text = $"Erkek: {erkekSayisi}";
+            label_UyeKadinSayisi.Text = $"Kadın: {kadinSayisi}";
+
 
             var oduncResult = _oduncManager.GetListByFilterService(x =>
                 x.TeslimEdildi == false);

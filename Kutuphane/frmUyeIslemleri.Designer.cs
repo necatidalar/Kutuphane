@@ -36,18 +36,6 @@ namespace Kutuphane.UI
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmUyeIslemleri));
             dataGrid_Uye = new DataGridView();
-            uyeIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            tcPassDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            adDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            soyadDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
-            cinsiyetDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            dogumTarihiDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            telefonDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            epostaDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            adresDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            adresDetayDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            aktifMiDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
             uyeDtoBindingSource = new BindingSource(components);
             textBox_Ara = new TextBox();
             groupBox1 = new GroupBox();
@@ -79,6 +67,18 @@ namespace Kutuphane.UI
             textBox_UyeId = new TextBox();
             comboBox_Filtre = new ComboBox();
             label1 = new Label();
+            uyeIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            tcPassDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            adDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            soyadDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            cinsiyetDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            dogumTarihiDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            telefonDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            epostaDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            adresDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            adresDetayDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            aktifMiDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dataGrid_Uye).BeginInit();
             ((System.ComponentModel.ISupportInitialize)uyeDtoBindingSource).BeginInit();
             groupBox1.SuspendLayout();
@@ -125,108 +125,6 @@ namespace Kutuphane.UI
             dataGrid_Uye.CellPainting += dataGrid_Uye_CellPainting;
             dataGrid_Uye.ColumnHeaderMouseClick += dataGrid_Uye_ColumnHeaderMouseClick;
             dataGrid_Uye.SelectionChanged += dataGrid_Uye_SelectionChanged;
-            // 
-            // uyeIdDataGridViewTextBoxColumn
-            // 
-            uyeIdDataGridViewTextBoxColumn.DataPropertyName = "UyeId";
-            uyeIdDataGridViewTextBoxColumn.HeaderText = "UyeId";
-            uyeIdDataGridViewTextBoxColumn.MinimumWidth = 6;
-            uyeIdDataGridViewTextBoxColumn.Name = "uyeIdDataGridViewTextBoxColumn";
-            uyeIdDataGridViewTextBoxColumn.ReadOnly = true;
-            uyeIdDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // tcPassDataGridViewTextBoxColumn
-            // 
-            tcPassDataGridViewTextBoxColumn.DataPropertyName = "TcPass";
-            tcPassDataGridViewTextBoxColumn.HeaderText = "TC/Pasaport No";
-            tcPassDataGridViewTextBoxColumn.MinimumWidth = 6;
-            tcPassDataGridViewTextBoxColumn.Name = "tcPassDataGridViewTextBoxColumn";
-            tcPassDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // adDataGridViewTextBoxColumn
-            // 
-            adDataGridViewTextBoxColumn.DataPropertyName = "Ad";
-            adDataGridViewTextBoxColumn.HeaderText = "Adı";
-            adDataGridViewTextBoxColumn.MinimumWidth = 6;
-            adDataGridViewTextBoxColumn.Name = "adDataGridViewTextBoxColumn";
-            adDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // soyadDataGridViewTextBoxColumn
-            // 
-            soyadDataGridViewTextBoxColumn.DataPropertyName = "Soyad";
-            soyadDataGridViewTextBoxColumn.HeaderText = "Soyadı";
-            soyadDataGridViewTextBoxColumn.MinimumWidth = 6;
-            soyadDataGridViewTextBoxColumn.Name = "soyadDataGridViewTextBoxColumn";
-            soyadDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            dataGridViewTextBoxColumn1.DataPropertyName = "CinsiyetId";
-            dataGridViewTextBoxColumn1.HeaderText = "CinsiyetId";
-            dataGridViewTextBoxColumn1.MinimumWidth = 6;
-            dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            dataGridViewTextBoxColumn1.ReadOnly = true;
-            dataGridViewTextBoxColumn1.Visible = false;
-            // 
-            // cinsiyetDataGridViewTextBoxColumn
-            // 
-            cinsiyetDataGridViewTextBoxColumn.DataPropertyName = "Cinsiyet";
-            cinsiyetDataGridViewTextBoxColumn.HeaderText = "Cinsiyet";
-            cinsiyetDataGridViewTextBoxColumn.MinimumWidth = 6;
-            cinsiyetDataGridViewTextBoxColumn.Name = "cinsiyetDataGridViewTextBoxColumn";
-            cinsiyetDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // dogumTarihiDataGridViewTextBoxColumn
-            // 
-            dogumTarihiDataGridViewTextBoxColumn.DataPropertyName = "DogumTarihi";
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.Format = "dd.MM.yyyy";
-            dogumTarihiDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
-            dogumTarihiDataGridViewTextBoxColumn.HeaderText = "Doğum Tarihi";
-            dogumTarihiDataGridViewTextBoxColumn.MinimumWidth = 6;
-            dogumTarihiDataGridViewTextBoxColumn.Name = "dogumTarihiDataGridViewTextBoxColumn";
-            dogumTarihiDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // telefonDataGridViewTextBoxColumn
-            // 
-            telefonDataGridViewTextBoxColumn.DataPropertyName = "Telefon";
-            telefonDataGridViewTextBoxColumn.HeaderText = "Telefon";
-            telefonDataGridViewTextBoxColumn.MinimumWidth = 6;
-            telefonDataGridViewTextBoxColumn.Name = "telefonDataGridViewTextBoxColumn";
-            telefonDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // epostaDataGridViewTextBoxColumn
-            // 
-            epostaDataGridViewTextBoxColumn.DataPropertyName = "Eposta";
-            epostaDataGridViewTextBoxColumn.HeaderText = "E-Posta";
-            epostaDataGridViewTextBoxColumn.MinimumWidth = 6;
-            epostaDataGridViewTextBoxColumn.Name = "epostaDataGridViewTextBoxColumn";
-            epostaDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // adresDataGridViewTextBoxColumn
-            // 
-            adresDataGridViewTextBoxColumn.DataPropertyName = "Adres";
-            adresDataGridViewTextBoxColumn.HeaderText = "Adres";
-            adresDataGridViewTextBoxColumn.MinimumWidth = 6;
-            adresDataGridViewTextBoxColumn.Name = "adresDataGridViewTextBoxColumn";
-            adresDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // adresDetayDataGridViewTextBoxColumn
-            // 
-            adresDetayDataGridViewTextBoxColumn.DataPropertyName = "AdresDetay";
-            adresDetayDataGridViewTextBoxColumn.HeaderText = "Adres Detay";
-            adresDetayDataGridViewTextBoxColumn.MinimumWidth = 6;
-            adresDetayDataGridViewTextBoxColumn.Name = "adresDetayDataGridViewTextBoxColumn";
-            adresDetayDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // aktifMiDataGridViewCheckBoxColumn
-            // 
-            aktifMiDataGridViewCheckBoxColumn.DataPropertyName = "AktifMi";
-            aktifMiDataGridViewCheckBoxColumn.HeaderText = "AktifMi";
-            aktifMiDataGridViewCheckBoxColumn.MinimumWidth = 6;
-            aktifMiDataGridViewCheckBoxColumn.Name = "aktifMiDataGridViewCheckBoxColumn";
-            aktifMiDataGridViewCheckBoxColumn.ReadOnly = true;
-            aktifMiDataGridViewCheckBoxColumn.Visible = false;
             // 
             // uyeDtoBindingSource
             // 
@@ -574,6 +472,107 @@ namespace Kutuphane.UI
             label1.Size = new Size(51, 17);
             label1.TabIndex = 23;
             label1.Text = "Arama:";
+            // 
+            // uyeIdDataGridViewTextBoxColumn
+            // 
+            uyeIdDataGridViewTextBoxColumn.DataPropertyName = "UyeId";
+            uyeIdDataGridViewTextBoxColumn.HeaderText = "UyeId";
+            uyeIdDataGridViewTextBoxColumn.MinimumWidth = 6;
+            uyeIdDataGridViewTextBoxColumn.Name = "uyeIdDataGridViewTextBoxColumn";
+            uyeIdDataGridViewTextBoxColumn.ReadOnly = true;
+            uyeIdDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // tcPassDataGridViewTextBoxColumn
+            // 
+            tcPassDataGridViewTextBoxColumn.DataPropertyName = "TcPass";
+            tcPassDataGridViewTextBoxColumn.HeaderText = "TC/Pasaport No";
+            tcPassDataGridViewTextBoxColumn.MinimumWidth = 6;
+            tcPassDataGridViewTextBoxColumn.Name = "tcPassDataGridViewTextBoxColumn";
+            tcPassDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // adDataGridViewTextBoxColumn
+            // 
+            adDataGridViewTextBoxColumn.DataPropertyName = "Ad";
+            adDataGridViewTextBoxColumn.HeaderText = "Adı";
+            adDataGridViewTextBoxColumn.MinimumWidth = 6;
+            adDataGridViewTextBoxColumn.Name = "adDataGridViewTextBoxColumn";
+            adDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // soyadDataGridViewTextBoxColumn
+            // 
+            soyadDataGridViewTextBoxColumn.DataPropertyName = "Soyad";
+            soyadDataGridViewTextBoxColumn.HeaderText = "Soyadı";
+            soyadDataGridViewTextBoxColumn.MinimumWidth = 6;
+            soyadDataGridViewTextBoxColumn.Name = "soyadDataGridViewTextBoxColumn";
+            soyadDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            dataGridViewTextBoxColumn1.DataPropertyName = "CinsiyetId";
+            dataGridViewTextBoxColumn1.HeaderText = "CinsiyetId";
+            dataGridViewTextBoxColumn1.MinimumWidth = 6;
+            dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            dataGridViewTextBoxColumn1.ReadOnly = true;
+            dataGridViewTextBoxColumn1.Visible = false;
+            // 
+            // cinsiyetDataGridViewTextBoxColumn
+            // 
+            cinsiyetDataGridViewTextBoxColumn.DataPropertyName = "Cinsiyet";
+            cinsiyetDataGridViewTextBoxColumn.HeaderText = "Cinsiyet";
+            cinsiyetDataGridViewTextBoxColumn.MinimumWidth = 6;
+            cinsiyetDataGridViewTextBoxColumn.Name = "cinsiyetDataGridViewTextBoxColumn";
+            cinsiyetDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // dogumTarihiDataGridViewTextBoxColumn
+            // 
+            dogumTarihiDataGridViewTextBoxColumn.DataPropertyName = "DogumTarihi";
+            dataGridViewCellStyle2.Format = "dd.MM.yyyy";
+            dogumTarihiDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            dogumTarihiDataGridViewTextBoxColumn.HeaderText = "Doğum Tarihi";
+            dogumTarihiDataGridViewTextBoxColumn.MinimumWidth = 6;
+            dogumTarihiDataGridViewTextBoxColumn.Name = "dogumTarihiDataGridViewTextBoxColumn";
+            dogumTarihiDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // telefonDataGridViewTextBoxColumn
+            // 
+            telefonDataGridViewTextBoxColumn.DataPropertyName = "Telefon";
+            telefonDataGridViewTextBoxColumn.HeaderText = "Telefon";
+            telefonDataGridViewTextBoxColumn.MinimumWidth = 6;
+            telefonDataGridViewTextBoxColumn.Name = "telefonDataGridViewTextBoxColumn";
+            telefonDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // epostaDataGridViewTextBoxColumn
+            // 
+            epostaDataGridViewTextBoxColumn.DataPropertyName = "Eposta";
+            epostaDataGridViewTextBoxColumn.HeaderText = "E-Posta";
+            epostaDataGridViewTextBoxColumn.MinimumWidth = 6;
+            epostaDataGridViewTextBoxColumn.Name = "epostaDataGridViewTextBoxColumn";
+            epostaDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // adresDataGridViewTextBoxColumn
+            // 
+            adresDataGridViewTextBoxColumn.DataPropertyName = "Adres";
+            adresDataGridViewTextBoxColumn.HeaderText = "Adres";
+            adresDataGridViewTextBoxColumn.MinimumWidth = 6;
+            adresDataGridViewTextBoxColumn.Name = "adresDataGridViewTextBoxColumn";
+            adresDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // adresDetayDataGridViewTextBoxColumn
+            // 
+            adresDetayDataGridViewTextBoxColumn.DataPropertyName = "AdresDetay";
+            adresDetayDataGridViewTextBoxColumn.HeaderText = "Adres Detay";
+            adresDetayDataGridViewTextBoxColumn.MinimumWidth = 6;
+            adresDetayDataGridViewTextBoxColumn.Name = "adresDetayDataGridViewTextBoxColumn";
+            adresDetayDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // aktifMiDataGridViewCheckBoxColumn
+            // 
+            aktifMiDataGridViewCheckBoxColumn.DataPropertyName = "AktifMi";
+            aktifMiDataGridViewCheckBoxColumn.HeaderText = "AktifMi";
+            aktifMiDataGridViewCheckBoxColumn.MinimumWidth = 6;
+            aktifMiDataGridViewCheckBoxColumn.Name = "aktifMiDataGridViewCheckBoxColumn";
+            aktifMiDataGridViewCheckBoxColumn.ReadOnly = true;
+            aktifMiDataGridViewCheckBoxColumn.Visible = false;
             // 
             // frmUyeIslemleri
             // 

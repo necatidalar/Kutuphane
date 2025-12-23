@@ -54,6 +54,8 @@ namespace Kutuphane.UI
             label_KitapSayisi = new Label();
             label1 = new Label();
             panel_Uye = new Panel();
+            label_UyeKadinSayisi = new Label();
+            label_UyeErkekSayisi = new Label();
             label_UyeSayisi = new Label();
             label2 = new Label();
             panel_Odunc = new Panel();
@@ -257,7 +259,7 @@ namespace Kutuphane.UI
             panel_Kitap.Location = new Point(20, 20);
             panel_Kitap.Margin = new Padding(10);
             panel_Kitap.Name = "panel_Kitap";
-            panel_Kitap.Size = new Size(280, 150);
+            panel_Kitap.Size = new Size(280, 160);
             panel_Kitap.TabIndex = 0;
             // 
             // label_KitapSayisi
@@ -285,13 +287,35 @@ namespace Kutuphane.UI
             // panel_Uye
             // 
             panel_Uye.BackColor = Color.FromArgb(41, 128, 185);
+            panel_Uye.Controls.Add(label_UyeKadinSayisi);
+            panel_Uye.Controls.Add(label_UyeErkekSayisi);
             panel_Uye.Controls.Add(label_UyeSayisi);
             panel_Uye.Controls.Add(label2);
             panel_Uye.Location = new Point(320, 20);
             panel_Uye.Margin = new Padding(10);
             panel_Uye.Name = "panel_Uye";
-            panel_Uye.Size = new Size(280, 150);
+            panel_Uye.Size = new Size(280, 160);
             panel_Uye.TabIndex = 1;
+            // 
+            // label_UyeKadinSayisi
+            // 
+            label_UyeKadinSayisi.AutoSize = true;
+            label_UyeKadinSayisi.ForeColor = Color.FromArgb(236, 240, 241);
+            label_UyeKadinSayisi.Location = new Point(92, 135);
+            label_UyeKadinSayisi.Name = "label_UyeKadinSayisi";
+            label_UyeKadinSayisi.Size = new Size(49, 15);
+            label_UyeKadinSayisi.TabIndex = 2;
+            label_UyeKadinSayisi.Text = "Kadın: 0";
+            // 
+            // label_UyeErkekSayisi
+            // 
+            label_UyeErkekSayisi.AutoSize = true;
+            label_UyeErkekSayisi.ForeColor = Color.FromArgb(236, 240, 241);
+            label_UyeErkekSayisi.Location = new Point(29, 135);
+            label_UyeErkekSayisi.Name = "label_UyeErkekSayisi";
+            label_UyeErkekSayisi.Size = new Size(47, 15);
+            label_UyeErkekSayisi.TabIndex = 2;
+            label_UyeErkekSayisi.Text = "Erkek: 0";
             // 
             // label_UyeSayisi
             // 
@@ -323,7 +347,7 @@ namespace Kutuphane.UI
             panel_Odunc.Location = new Point(620, 20);
             panel_Odunc.Margin = new Padding(10);
             panel_Odunc.Name = "panel_Odunc";
-            panel_Odunc.Size = new Size(280, 150);
+            panel_Odunc.Size = new Size(280, 160);
             panel_Odunc.TabIndex = 2;
             // 
             // label_OduncSayisi
@@ -356,7 +380,7 @@ namespace Kutuphane.UI
             panel_Geciklis.Location = new Point(920, 20);
             panel_Geciklis.Margin = new Padding(10);
             panel_Geciklis.Name = "panel_Geciklis";
-            panel_Geciklis.Size = new Size(280, 150);
+            panel_Geciklis.Size = new Size(280, 160);
             panel_Geciklis.TabIndex = 3;
             // 
             // label_GecikmisUyeSayisi
@@ -453,5 +477,7 @@ namespace Kutuphane.UI
         private System.Windows.Forms.Timer timer_Dashboard;
         private ToolStripMenuItem kitapToolStripMenuItem;
         private Label label_Mesaj;
+        private Label label_UyeKadinSayisi;
+        private Label label_UyeErkekSayisi;
     }
 }

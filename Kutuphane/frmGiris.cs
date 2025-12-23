@@ -12,7 +12,7 @@ namespace Kutuphane.UI
         private readonly IPersonelService _personelService;
 
         internal PersonelBilgileriDto GirisYapanPersonel = new();
-        
+
         public frmGiris()
         {
             InitializeComponent();
@@ -37,7 +37,7 @@ namespace Kutuphane.UI
             loginUserDto.KullaniciAdi = textBox_KullaniciAdi.Text;
             loginUserDto.Sifre = SecurityHelper.EncodeBase64(textBox_Sifre.Text);
 
-            var result  = _personelService.Login(loginUserDto);
+            var result = _personelService.Login(loginUserDto);
 
             if (!result.IsSuccess)
             {
@@ -60,8 +60,8 @@ namespace Kutuphane.UI
 
             Properties.Settings.Default.Save();
 
-            var personelResult =_personelService.PersonelBilgiGetirServis(p=>p.KullaniciAdi == loginUserDto.KullaniciAdi);
-            if (!personelResult.IsSuccess || personelResult.Data.Count == 0 )
+            var personelResult = _personelService.PersonelBilgiGetirServis(p => p.KullaniciAdi == loginUserDto.KullaniciAdi);
+            if (!personelResult.IsSuccess || personelResult.Data.Count == 0)
             {
                 MessageBox.Show("Giriş yapan personel bilgileri alınamadı.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;

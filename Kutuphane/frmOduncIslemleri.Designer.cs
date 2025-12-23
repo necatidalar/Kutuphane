@@ -21,6 +21,8 @@
             mainLayout = new TableLayoutPanel();
             panelLeft = new Panel();
             groupBox2 = new GroupBox();
+            label5 = new Label();
+            dateTimePicker_TeslimTarihi = new DateTimePicker();
             button_OduncVer = new Button();
             label4 = new Label();
             listView_Sepet = new ListView();
@@ -77,6 +79,8 @@
             // groupBox2
             // 
             groupBox2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            groupBox2.Controls.Add(label5);
+            groupBox2.Controls.Add(dateTimePicker_TeslimTarihi);
             groupBox2.Controls.Add(button_OduncVer);
             groupBox2.Controls.Add(label4);
             groupBox2.Controls.Add(listView_Sepet);
@@ -93,6 +97,28 @@
             groupBox2.TabIndex = 3;
             groupBox2.TabStop = false;
             groupBox2.Text = "➡️ Kitap Seçimi ve Ödünç Verme";
+            // 
+            // label5
+            // 
+            label5.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            label5.AutoSize = true;
+            label5.ForeColor = Color.DimGray;
+            label5.Location = new Point(15, 476);
+            label5.Name = "label5";
+            label5.Size = new Size(146, 20);
+            label5.TabIndex = 12;
+            label5.Text = "En geç teslim tarihi:";
+            // 
+            // dateTimePicker_TeslimTarihi
+            // 
+            dateTimePicker_TeslimTarihi.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            dateTimePicker_TeslimTarihi.CalendarTitleBackColor = SystemColors.ControlText;
+            dateTimePicker_TeslimTarihi.CalendarTitleForeColor = Color.DimGray;
+            dateTimePicker_TeslimTarihi.Format = DateTimePickerFormat.Short;
+            dateTimePicker_TeslimTarihi.Location = new Point(167, 473);
+            dateTimePicker_TeslimTarihi.Name = "dateTimePicker_TeslimTarihi";
+            dateTimePicker_TeslimTarihi.Size = new Size(105, 27);
+            dateTimePicker_TeslimTarihi.TabIndex = 11;
             // 
             // button_OduncVer
             // 
@@ -135,7 +161,7 @@
             listView_Sepet.Location = new Point(13, 321);
             listView_Sepet.MultiSelect = false;
             listView_Sepet.Name = "listView_Sepet";
-            listView_Sepet.Size = new Size(602, 170);
+            listView_Sepet.Size = new Size(602, 146);
             listView_Sepet.TabIndex = 6;
             listView_Sepet.UseCompatibleStateImageBehavior = false;
             listView_Sepet.View = View.Details;
@@ -150,8 +176,8 @@
             listView_KitapListesi.GridLines = true;
             listView_KitapListesi.HeaderStyle = ColumnHeaderStyle.Nonclickable;
             listView_KitapListesi.Location = new Point(13, 107);
-            listView_KitapListesi.MultiSelect = false;
             listView_KitapListesi.Name = "listView_KitapListesi";
+            listView_KitapListesi.RightToLeft = RightToLeft.Yes;
             listView_KitapListesi.Size = new Size(602, 184);
             listView_KitapListesi.TabIndex = 5;
             listView_KitapListesi.UseCompatibleStateImageBehavior = false;
@@ -217,8 +243,8 @@
             listView_Uyeler.GridLines = true;
             listView_Uyeler.HeaderStyle = ColumnHeaderStyle.Nonclickable;
             listView_Uyeler.Location = new Point(18, 126);
-            listView_Uyeler.MultiSelect = false;
             listView_Uyeler.Name = "listView_Uyeler";
+            listView_Uyeler.RightToLeft = RightToLeft.Yes;
             listView_Uyeler.Size = new Size(597, 170);
             listView_Uyeler.TabIndex = 12;
             listView_Uyeler.UseCompatibleStateImageBehavior = false;
@@ -326,14 +352,17 @@
             // 
             listView_UyeninAldigiKitapListesi.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             listView_UyeninAldigiKitapListesi.BorderStyle = BorderStyle.FixedSingle;
+            listView_UyeninAldigiKitapListesi.CheckBoxes = true;
             listView_UyeninAldigiKitapListesi.Font = new Font("Segoe UI", 10F);
+            listView_UyeninAldigiKitapListesi.ForeColor = SystemColors.WindowText;
             listView_UyeninAldigiKitapListesi.FullRowSelect = true;
             listView_UyeninAldigiKitapListesi.GridLines = true;
             listView_UyeninAldigiKitapListesi.HeaderStyle = ColumnHeaderStyle.Nonclickable;
             listView_UyeninAldigiKitapListesi.Location = new Point(13, 34);
             listView_UyeninAldigiKitapListesi.MultiSelect = false;
             listView_UyeninAldigiKitapListesi.Name = "listView_UyeninAldigiKitapListesi";
-            listView_UyeninAldigiKitapListesi.Size = new Size(487, 775);
+            listView_UyeninAldigiKitapListesi.RightToLeft = RightToLeft.Yes;
+            listView_UyeninAldigiKitapListesi.Size = new Size(487, 780);
             listView_UyeninAldigiKitapListesi.TabIndex = 6;
             listView_UyeninAldigiKitapListesi.UseCompatibleStateImageBehavior = false;
             listView_UyeninAldigiKitapListesi.View = View.Details;
@@ -395,5 +424,9 @@
         // İade
         private System.Windows.Forms.Button button_IadeAl;
         private System.Windows.Forms.ListView listView_UyeninAldigiKitapListesi;
+        private GroupBox groupBox4;
+        private Button button1;
+        private DateTimePicker dateTimePicker_TeslimTarihi;
+        private Label label5;
     }
 }
