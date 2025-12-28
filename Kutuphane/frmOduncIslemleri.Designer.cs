@@ -366,7 +366,6 @@
             listView_AlinanTumKitaplarinListesi.Location = new Point(13, 35);
             listView_AlinanTumKitaplarinListesi.MultiSelect = false;
             listView_AlinanTumKitaplarinListesi.Name = "listView_AlinanTumKitaplarinListesi";
-            listView_AlinanTumKitaplarinListesi.RightToLeft = RightToLeft.Yes;
             listView_AlinanTumKitaplarinListesi.Size = new Size(487, 415);
             listView_AlinanTumKitaplarinListesi.TabIndex = 6;
             listView_AlinanTumKitaplarinListesi.UseCompatibleStateImageBehavior = false;
