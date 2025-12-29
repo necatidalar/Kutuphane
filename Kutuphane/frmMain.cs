@@ -2,6 +2,7 @@
 using Kutuphane.DAL.Concrete;
 using Kutuphane.DAL.Contexes;
 using Kutuphane.Model.DTO;
+using Kutuphane.UI.UIMetodlar;
 
 namespace Kutuphane.UI
 {

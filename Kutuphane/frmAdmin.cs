@@ -87,7 +87,7 @@ namespace Kutuphane.UI
         {
             if (!int.TryParse(txtRolId.Text, out int rolId))
             {
-                MessageBox.Show("Geçerli bir Rol Id giriniz.", "Uyarı");=?
+                MessageBox.Show("Geçerli bir Rol Id giriniz.", "Uyarı");
                 return;
             }
 

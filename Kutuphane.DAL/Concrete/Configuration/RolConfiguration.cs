@@ -30,6 +30,11 @@ namespace Kutuphane.DAL.Concrete.Configuration
                    .HasDefaultValue(true);
 
             builder.HasIndex(x => x.RolAdi).IsUnique();
+
+            builder.HasData(
+                new Rol { RolId = 1, RolAdi = "Admin", RolKodu = "ADMIN", AktifMi = true },
+                new Rol { RolId = 2, RolAdi = "Personel", RolKodu = "PERSONEL", AktifMi = true }
+            );
         }
     }
 }

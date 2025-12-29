@@ -19,6 +19,11 @@ namespace Kutuphane.DAL.Concrete.Configuration
             builder.HasOne(x => x.Rol)
                    .WithMany(x => x.PersonelRolleri)
                    .HasForeignKey(x => x.RolId);
+
+            builder.HasData(
+                new PersonelRol { PersonelId = 1, RolId = 1 },
+                new PersonelRol { PersonelId = 2, RolId = 2 }
+            );
         }
     }
 }

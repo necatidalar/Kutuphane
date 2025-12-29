@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Kutuphane.DAL.Migrations
 {
     [DbContext(typeof(KutuphaneDbContext))]
-    [Migration("20251229164342_ss")]
+    [Migration("20251229194557_ss")]
     partial class ss
     {
         /// <inheritdoc />
@@ -693,6 +693,18 @@ namespace Kutuphane.DAL.Migrations
                     b.HasIndex("RolId");
 
                     b.ToTable("PersonelRolleri", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            PersonelId = 1,
+                            RolId = 1
+                        },
+                        new
+                        {
+                            PersonelId = 2,
+                            RolId = 2
+                        });
                 });
 
             modelBuilder.Entity("Kutuphane.Model.Entity.Rol", b =>
@@ -724,6 +736,22 @@ namespace Kutuphane.DAL.Migrations
                         .IsUnique();
 
                     b.ToTable("Roller", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            RolId = 1,
+                            AktifMi = true,
+                            RolAdi = "Admin",
+                            RolKodu = "ADMIN"
+                        },
+                        new
+                        {
+                            RolId = 2,
+                            AktifMi = true,
+                            RolAdi = "Personel",
+                            RolKodu = "PERSONEL"
+                        });
                 });
 
             modelBuilder.Entity("Kutuphane.Model.Entity.Uye", b =>
@@ -1165,6 +1193,236 @@ namespace Kutuphane.DAL.Migrations
                         .IsUnique();
 
                     b.ToTable("RolYetkileri", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            RolYetkiId = 1,
+                            RolId = 1,
+                            YetkiId = 1
+                        },
+                        new
+                        {
+                            RolYetkiId = 2,
+                            RolId = 1,
+                            YetkiId = 2
+                        },
+                        new
+                        {
+                            RolYetkiId = 3,
+                            RolId = 1,
+                            YetkiId = 3
+                        },
+                        new
+                        {
+                            RolYetkiId = 4,
+                            RolId = 1,
+                            YetkiId = 4
+                        },
+                        new
+                        {
+                            RolYetkiId = 5,
+                            RolId = 1,
+                            YetkiId = 5
+                        },
+                        new
+                        {
+                            RolYetkiId = 6,
+                            RolId = 1,
+                            YetkiId = 6
+                        },
+                        new
+                        {
+                            RolYetkiId = 7,
+                            RolId = 1,
+                            YetkiId = 7
+                        },
+                        new
+                        {
+                            RolYetkiId = 8,
+                            RolId = 1,
+                            YetkiId = 8
+                        },
+                        new
+                        {
+                            RolYetkiId = 9,
+                            RolId = 1,
+                            YetkiId = 9
+                        },
+                        new
+                        {
+                            RolYetkiId = 10,
+                            RolId = 1,
+                            YetkiId = 10
+                        },
+                        new
+                        {
+                            RolYetkiId = 11,
+                            RolId = 1,
+                            YetkiId = 11
+                        },
+                        new
+                        {
+                            RolYetkiId = 12,
+                            RolId = 1,
+                            YetkiId = 12
+                        },
+                        new
+                        {
+                            RolYetkiId = 13,
+                            RolId = 1,
+                            YetkiId = 13
+                        },
+                        new
+                        {
+                            RolYetkiId = 14,
+                            RolId = 1,
+                            YetkiId = 14
+                        },
+                        new
+                        {
+                            RolYetkiId = 15,
+                            RolId = 1,
+                            YetkiId = 15
+                        },
+                        new
+                        {
+                            RolYetkiId = 16,
+                            RolId = 1,
+                            YetkiId = 16
+                        },
+                        new
+                        {
+                            RolYetkiId = 17,
+                            RolId = 1,
+                            YetkiId = 17
+                        },
+                        new
+                        {
+                            RolYetkiId = 18,
+                            RolId = 1,
+                            YetkiId = 18
+                        },
+                        new
+                        {
+                            RolYetkiId = 19,
+                            RolId = 1,
+                            YetkiId = 19
+                        },
+                        new
+                        {
+                            RolYetkiId = 20,
+                            RolId = 1,
+                            YetkiId = 20
+                        },
+                        new
+                        {
+                            RolYetkiId = 21,
+                            RolId = 1,
+                            YetkiId = 21
+                        },
+                        new
+                        {
+                            RolYetkiId = 22,
+                            RolId = 1,
+                            YetkiId = 22
+                        },
+                        new
+                        {
+                            RolYetkiId = 23,
+                            RolId = 1,
+                            YetkiId = 23
+                        },
+                        new
+                        {
+                            RolYetkiId = 24,
+                            RolId = 1,
+                            YetkiId = 24
+                        },
+                        new
+                        {
+                            RolYetkiId = 25,
+                            RolId = 1,
+                            YetkiId = 25
+                        },
+                        new
+                        {
+                            RolYetkiId = 26,
+                            RolId = 1,
+                            YetkiId = 26
+                        },
+                        new
+                        {
+                            RolYetkiId = 27,
+                            RolId = 1,
+                            YetkiId = 27
+                        },
+                        new
+                        {
+                            RolYetkiId = 28,
+                            RolId = 1,
+                            YetkiId = 28
+                        },
+                        new
+                        {
+                            RolYetkiId = 29,
+                            RolId = 1,
+                            YetkiId = 29
+                        },
+                        new
+                        {
+                            RolYetkiId = 30,
+                            RolId = 1,
+                            YetkiId = 30
+                        },
+                        new
+                        {
+                            RolYetkiId = 31,
+                            RolId = 1,
+                            YetkiId = 31
+                        },
+                        new
+                        {
+                            RolYetkiId = 32,
+                            RolId = 1,
+                            YetkiId = 32
+                        },
+                        new
+                        {
+                            RolYetkiId = 33,
+                            RolId = 1,
+                            YetkiId = 33
+                        },
+                        new
+                        {
+                            RolYetkiId = 34,
+                            RolId = 1,
+                            YetkiId = 34
+                        },
+                        new
+                        {
+                            RolYetkiId = 35,
+                            RolId = 1,
+                            YetkiId = 35
+                        },
+                        new
+                        {
+                            RolYetkiId = 36,
+                            RolId = 1,
+                            YetkiId = 36
+                        },
+                        new
+                        {
+                            RolYetkiId = 37,
+                            RolId = 2,
+                            YetkiId = 1
+                        },
+                        new
+                        {
+                            RolYetkiId = 38,
+                            RolId = 2,
+                            YetkiId = 2
+                        });
                 });
 
             modelBuilder.Entity("Kutuphane.Model.Entity.Kitap", b =>
