@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Kutuphane.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class dd : Migration
+    public partial class ss : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -55,6 +55,21 @@ namespace Kutuphane.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Roller",
+                columns: table => new
+                {
+                    RolId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RolAdi = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
+                    RolKodu = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false),
+                    AktifMi = table.Column<bool>(type: "bit", nullable: false, defaultValue: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Roller", x => x.RolId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Yayinevleri",
                 columns: table => new
                 {
@@ -84,6 +99,20 @@ namespace Kutuphane.DAL.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Yazarlar", x => x.YazarId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Yetkiler",
+                columns: table => new
+                {
+                    YetkiId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    YetkiKodu = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
+                    YetkiAdi = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Yetkiler", x => x.YetkiId);
                 });
 
             migrationBuilder.CreateTable(
@@ -180,6 +209,56 @@ namespace Kutuphane.DAL.Migrations
                         column: x => x.YazarId,
                         principalTable: "Yazarlar",
                         principalColumn: "YazarId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RolYetkileri",
+                columns: table => new
+                {
+                    RolYetkiId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RolId = table.Column<int>(type: "int", nullable: false),
+                    YetkiId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RolYetkileri", x => x.RolYetkiId);
+                    table.ForeignKey(
+                        name: "FK_RolYetkileri_Roller_RolId",
+                        column: x => x.RolId,
+                        principalTable: "Roller",
+                        principalColumn: "RolId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_RolYetkileri_Yetkiler_YetkiId",
+                        column: x => x.YetkiId,
+                        principalTable: "Yetkiler",
+                        principalColumn: "YetkiId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PersonelRolleri",
+                columns: table => new
+                {
+                    PersonelId = table.Column<int>(type: "int", nullable: false),
+                    RolId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PersonelRolleri", x => new { x.PersonelId, x.RolId });
+                    table.ForeignKey(
+                        name: "FK_PersonelRolleri_Personeller_PersonelId",
+                        column: x => x.PersonelId,
+                        principalTable: "Personeller",
+                        principalColumn: "PersonelId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PersonelRolleri_Roller_RolId",
+                        column: x => x.RolId,
+                        principalTable: "Roller",
+                        principalColumn: "RolId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -381,6 +460,49 @@ namespace Kutuphane.DAL.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Yetkiler",
+                columns: new[] { "YetkiId", "YetkiAdi", "YetkiKodu" },
+                values: new object[,]
+                {
+                    { 1, "Dashboard", "DASHBOARD" },
+                    { 2, "Kitap Listeleme", "KITAP_LISTELE" },
+                    { 3, "Kitap Ekleme", "KITAP_EKLE" },
+                    { 4, "Kitap Güncelleme", "KITAP_GUNCELLE" },
+                    { 5, "Kitap Silme", "KITAP_SIL" },
+                    { 6, "Kategori Listeleme", "KATEGORI_LISTELE" },
+                    { 7, "Kategori Ekleme", "KATEGORI_EKLE" },
+                    { 8, "Kategori Güncelleme", "KATEGORI_GUNCELLE" },
+                    { 9, "Kategori Silme", "KATEGORI_SIL" },
+                    { 10, "Yazar Listeleme", "YAZAR_LISTELE" },
+                    { 11, "Yazar Ekleme", "YAZAR_EKLE" },
+                    { 12, "Yazar Güncelleme", "YAZAR_GUNCELLE" },
+                    { 13, "Yazar Silme", "YAZAR_SIL" },
+                    { 14, "Yayınevi Listeleme", "YAYINEVI_LISTELE" },
+                    { 15, "Yayınevi Ekleme", "YAYINEVI_EKLE" },
+                    { 16, "Yayınevi Güncelleme", "YAYINEVI_GUNCELLE" },
+                    { 17, "Yayınevi Silme", "YAYINEVI_SIL" },
+                    { 18, "Dil Listeleme", "DIL_LISTELE" },
+                    { 19, "Dil Ekleme", "DIL_EKLE" },
+                    { 20, "Dil Güncelleme", "DIL_GUNCELLE" },
+                    { 21, "Dil Silme", "DIL_SIL" },
+                    { 22, "Ödünç Listeleme", "ODUNC_LISTELE" },
+                    { 23, "Ödünç Verme", "ODUNC_VER" },
+                    { 24, "İade Alma", "IADE_AL" },
+                    { 25, "Üye Listeleme", "UYE_LISTELE" },
+                    { 26, "Üye Ekleme", "UYE_EKLE" },
+                    { 27, "Üye Güncelleme", "UYE_GUNCELLE" },
+                    { 28, "Üye Silme", "UYE_SIL" },
+                    { 29, "Personel Listeleme", "PERSONEL_LISTELE" },
+                    { 30, "Personel Ekleme", "PERSONEL_EKLE" },
+                    { 31, "Personel Güncelleme", "PERSONEL_GUNCELLE" },
+                    { 32, "Personel Silme", "PERSONEL_SIL" },
+                    { 33, "Yönetim Listeleme", "YONETIM_LISTELE" },
+                    { 34, "Yönetim Ekleme", "YONETIM_EKLE" },
+                    { 35, "Yönetim Güncelleme", "YONETIM_GUNCELLE" },
+                    { 36, "Yönetim Silme", "YONETIM_SIL" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Personeller",
                 columns: new[] { "PersonelId", "Ad", "AktifMi", "CinsiyetId", "KullaniciAdi", "Sifre", "Soyad" },
                 values: new object[,]
@@ -445,6 +567,28 @@ namespace Kutuphane.DAL.Migrations
                 column: "CinsiyetId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_PersonelRolleri_RolId",
+                table: "PersonelRolleri",
+                column: "RolId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Roller_RolAdi",
+                table: "Roller",
+                column: "RolAdi",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RolYetkileri_RolId_YetkiId",
+                table: "RolYetkileri",
+                columns: new[] { "RolId", "YetkiId" },
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RolYetkileri_YetkiId",
+                table: "RolYetkileri",
+                column: "YetkiId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Uyeler_CinsiyetId",
                 table: "Uyeler",
                 column: "CinsiyetId");
@@ -468,6 +612,12 @@ namespace Kutuphane.DAL.Migrations
                 name: "IX_YazarKitaplari_YazarId",
                 table: "YazarKitaplari",
                 column: "YazarId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Yetkiler_YetkiKodu",
+                table: "Yetkiler",
+                column: "YetkiKodu",
+                unique: true);
         }
 
         /// <inheritdoc />
@@ -480,16 +630,28 @@ namespace Kutuphane.DAL.Migrations
                 name: "Oduncler");
 
             migrationBuilder.DropTable(
+                name: "PersonelRolleri");
+
+            migrationBuilder.DropTable(
+                name: "RolYetkileri");
+
+            migrationBuilder.DropTable(
                 name: "YayineviKitaplari");
 
             migrationBuilder.DropTable(
                 name: "YazarKitaplari");
 
             migrationBuilder.DropTable(
+                name: "Uyeler");
+
+            migrationBuilder.DropTable(
                 name: "Personeller");
 
             migrationBuilder.DropTable(
-                name: "Uyeler");
+                name: "Roller");
+
+            migrationBuilder.DropTable(
+                name: "Yetkiler");
 
             migrationBuilder.DropTable(
                 name: "Kitaplar");

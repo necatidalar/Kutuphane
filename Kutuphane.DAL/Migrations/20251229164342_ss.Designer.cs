@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Kutuphane.DAL.Migrations
 {
     [DbContext(typeof(KutuphaneDbContext))]
-    [Migration("20251217051607_dd")]
-    partial class dd
+    [Migration("20251229164342_ss")]
+    partial class ss
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -680,6 +680,52 @@ namespace Kutuphane.DAL.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Kutuphane.Model.Entity.PersonelRol", b =>
+                {
+                    b.Property<int>("PersonelId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RolId")
+                        .HasColumnType("int");
+
+                    b.HasKey("PersonelId", "RolId");
+
+                    b.HasIndex("RolId");
+
+                    b.ToTable("PersonelRolleri", (string)null);
+                });
+
+            modelBuilder.Entity("Kutuphane.Model.Entity.Rol", b =>
+                {
+                    b.Property<int>("RolId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RolId"));
+
+                    b.Property<bool>("AktifMi")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<string>("RolAdi")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar");
+
+                    b.Property<string>("RolKodu")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar");
+
+                    b.HasKey("RolId");
+
+                    b.HasIndex("RolAdi")
+                        .IsUnique();
+
+                    b.ToTable("Roller", (string)null);
+                });
+
             modelBuilder.Entity("Kutuphane.Model.Entity.Uye", b =>
                 {
                     b.Property<int>("UyeId")
@@ -853,6 +899,274 @@ namespace Kutuphane.DAL.Migrations
                     b.ToTable("YazarKitaplari");
                 });
 
+            modelBuilder.Entity("Kutuphane.Model.Entity.Yetki", b =>
+                {
+                    b.Property<int>("YetkiId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("YetkiId"));
+
+                    b.Property<string>("YetkiAdi")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar");
+
+                    b.Property<string>("YetkiKodu")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar");
+
+                    b.HasKey("YetkiId");
+
+                    b.HasIndex("YetkiKodu")
+                        .IsUnique();
+
+                    b.ToTable("Yetkiler", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            YetkiId = 1,
+                            YetkiAdi = "Dashboard",
+                            YetkiKodu = "DASHBOARD"
+                        },
+                        new
+                        {
+                            YetkiId = 2,
+                            YetkiAdi = "Kitap Listeleme",
+                            YetkiKodu = "KITAP_LISTELE"
+                        },
+                        new
+                        {
+                            YetkiId = 3,
+                            YetkiAdi = "Kitap Ekleme",
+                            YetkiKodu = "KITAP_EKLE"
+                        },
+                        new
+                        {
+                            YetkiId = 4,
+                            YetkiAdi = "Kitap Güncelleme",
+                            YetkiKodu = "KITAP_GUNCELLE"
+                        },
+                        new
+                        {
+                            YetkiId = 5,
+                            YetkiAdi = "Kitap Silme",
+                            YetkiKodu = "KITAP_SIL"
+                        },
+                        new
+                        {
+                            YetkiId = 6,
+                            YetkiAdi = "Kategori Listeleme",
+                            YetkiKodu = "KATEGORI_LISTELE"
+                        },
+                        new
+                        {
+                            YetkiId = 7,
+                            YetkiAdi = "Kategori Ekleme",
+                            YetkiKodu = "KATEGORI_EKLE"
+                        },
+                        new
+                        {
+                            YetkiId = 8,
+                            YetkiAdi = "Kategori Güncelleme",
+                            YetkiKodu = "KATEGORI_GUNCELLE"
+                        },
+                        new
+                        {
+                            YetkiId = 9,
+                            YetkiAdi = "Kategori Silme",
+                            YetkiKodu = "KATEGORI_SIL"
+                        },
+                        new
+                        {
+                            YetkiId = 10,
+                            YetkiAdi = "Yazar Listeleme",
+                            YetkiKodu = "YAZAR_LISTELE"
+                        },
+                        new
+                        {
+                            YetkiId = 11,
+                            YetkiAdi = "Yazar Ekleme",
+                            YetkiKodu = "YAZAR_EKLE"
+                        },
+                        new
+                        {
+                            YetkiId = 12,
+                            YetkiAdi = "Yazar Güncelleme",
+                            YetkiKodu = "YAZAR_GUNCELLE"
+                        },
+                        new
+                        {
+                            YetkiId = 13,
+                            YetkiAdi = "Yazar Silme",
+                            YetkiKodu = "YAZAR_SIL"
+                        },
+                        new
+                        {
+                            YetkiId = 14,
+                            YetkiAdi = "Yayınevi Listeleme",
+                            YetkiKodu = "YAYINEVI_LISTELE"
+                        },
+                        new
+                        {
+                            YetkiId = 15,
+                            YetkiAdi = "Yayınevi Ekleme",
+                            YetkiKodu = "YAYINEVI_EKLE"
+                        },
+                        new
+                        {
+                            YetkiId = 16,
+                            YetkiAdi = "Yayınevi Güncelleme",
+                            YetkiKodu = "YAYINEVI_GUNCELLE"
+                        },
+                        new
+                        {
+                            YetkiId = 17,
+                            YetkiAdi = "Yayınevi Silme",
+                            YetkiKodu = "YAYINEVI_SIL"
+                        },
+                        new
+                        {
+                            YetkiId = 18,
+                            YetkiAdi = "Dil Listeleme",
+                            YetkiKodu = "DIL_LISTELE"
+                        },
+                        new
+                        {
+                            YetkiId = 19,
+                            YetkiAdi = "Dil Ekleme",
+                            YetkiKodu = "DIL_EKLE"
+                        },
+                        new
+                        {
+                            YetkiId = 20,
+                            YetkiAdi = "Dil Güncelleme",
+                            YetkiKodu = "DIL_GUNCELLE"
+                        },
+                        new
+                        {
+                            YetkiId = 21,
+                            YetkiAdi = "Dil Silme",
+                            YetkiKodu = "DIL_SIL"
+                        },
+                        new
+                        {
+                            YetkiId = 22,
+                            YetkiAdi = "Ödünç Listeleme",
+                            YetkiKodu = "ODUNC_LISTELE"
+                        },
+                        new
+                        {
+                            YetkiId = 23,
+                            YetkiAdi = "Ödünç Verme",
+                            YetkiKodu = "ODUNC_VER"
+                        },
+                        new
+                        {
+                            YetkiId = 24,
+                            YetkiAdi = "İade Alma",
+                            YetkiKodu = "IADE_AL"
+                        },
+                        new
+                        {
+                            YetkiId = 25,
+                            YetkiAdi = "Üye Listeleme",
+                            YetkiKodu = "UYE_LISTELE"
+                        },
+                        new
+                        {
+                            YetkiId = 26,
+                            YetkiAdi = "Üye Ekleme",
+                            YetkiKodu = "UYE_EKLE"
+                        },
+                        new
+                        {
+                            YetkiId = 27,
+                            YetkiAdi = "Üye Güncelleme",
+                            YetkiKodu = "UYE_GUNCELLE"
+                        },
+                        new
+                        {
+                            YetkiId = 28,
+                            YetkiAdi = "Üye Silme",
+                            YetkiKodu = "UYE_SIL"
+                        },
+                        new
+                        {
+                            YetkiId = 29,
+                            YetkiAdi = "Personel Listeleme",
+                            YetkiKodu = "PERSONEL_LISTELE"
+                        },
+                        new
+                        {
+                            YetkiId = 30,
+                            YetkiAdi = "Personel Ekleme",
+                            YetkiKodu = "PERSONEL_EKLE"
+                        },
+                        new
+                        {
+                            YetkiId = 31,
+                            YetkiAdi = "Personel Güncelleme",
+                            YetkiKodu = "PERSONEL_GUNCELLE"
+                        },
+                        new
+                        {
+                            YetkiId = 32,
+                            YetkiAdi = "Personel Silme",
+                            YetkiKodu = "PERSONEL_SIL"
+                        },
+                        new
+                        {
+                            YetkiId = 33,
+                            YetkiAdi = "Yönetim Listeleme",
+                            YetkiKodu = "YONETIM_LISTELE"
+                        },
+                        new
+                        {
+                            YetkiId = 34,
+                            YetkiAdi = "Yönetim Ekleme",
+                            YetkiKodu = "YONETIM_EKLE"
+                        },
+                        new
+                        {
+                            YetkiId = 35,
+                            YetkiAdi = "Yönetim Güncelleme",
+                            YetkiKodu = "YONETIM_GUNCELLE"
+                        },
+                        new
+                        {
+                            YetkiId = 36,
+                            YetkiAdi = "Yönetim Silme",
+                            YetkiKodu = "YONETIM_SIL"
+                        });
+                });
+
+            modelBuilder.Entity("RolYetki", b =>
+                {
+                    b.Property<int>("RolYetkiId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RolYetkiId"));
+
+                    b.Property<int>("RolId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("YetkiId")
+                        .HasColumnType("int");
+
+                    b.HasKey("RolYetkiId");
+
+                    b.HasIndex("YetkiId");
+
+                    b.HasIndex("RolId", "YetkiId")
+                        .IsUnique();
+
+                    b.ToTable("RolYetkileri", (string)null);
+                });
+
             modelBuilder.Entity("Kutuphane.Model.Entity.Kitap", b =>
                 {
                     b.HasOne("Kutuphane.Model.Entity.Dil", "Diller")
@@ -952,6 +1266,25 @@ namespace Kutuphane.DAL.Migrations
                     b.Navigation("Cinsiyet");
                 });
 
+            modelBuilder.Entity("Kutuphane.Model.Entity.PersonelRol", b =>
+                {
+                    b.HasOne("Kutuphane.Model.Entity.Personel", "Personel")
+                        .WithMany("PersonelRolleri")
+                        .HasForeignKey("PersonelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Kutuphane.Model.Entity.Rol", "Rol")
+                        .WithMany("PersonelRolleri")
+                        .HasForeignKey("RolId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Personel");
+
+                    b.Navigation("Rol");
+                });
+
             modelBuilder.Entity("Kutuphane.Model.Entity.Uye", b =>
                 {
                     b.HasOne("Kutuphane.Model.Entity.Cinsiyet", "Cinsiyet")
@@ -1001,6 +1334,25 @@ namespace Kutuphane.DAL.Migrations
                     b.Navigation("Yazar");
                 });
 
+            modelBuilder.Entity("RolYetki", b =>
+                {
+                    b.HasOne("Kutuphane.Model.Entity.Rol", "Rol")
+                        .WithMany("RolYetkileri")
+                        .HasForeignKey("RolId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Kutuphane.Model.Entity.Yetki", "Yetki")
+                        .WithMany("RolYetkileri")
+                        .HasForeignKey("YetkiId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Rol");
+
+                    b.Navigation("Yetki");
+                });
+
             modelBuilder.Entity("Kutuphane.Model.Entity.Cinsiyet", b =>
                 {
                     b.Navigation("Personeller");
@@ -1024,9 +1376,18 @@ namespace Kutuphane.DAL.Migrations
 
             modelBuilder.Entity("Kutuphane.Model.Entity.Personel", b =>
                 {
+                    b.Navigation("PersonelRolleri");
+
                     b.Navigation("TeslimAlinanlar");
 
                     b.Navigation("TeslimEdilenler");
+                });
+
+            modelBuilder.Entity("Kutuphane.Model.Entity.Rol", b =>
+                {
+                    b.Navigation("PersonelRolleri");
+
+                    b.Navigation("RolYetkileri");
                 });
 
             modelBuilder.Entity("Kutuphane.Model.Entity.Uye", b =>
@@ -1042,6 +1403,11 @@ namespace Kutuphane.DAL.Migrations
             modelBuilder.Entity("Kutuphane.Model.Entity.Yazar", b =>
                 {
                     b.Navigation("YazarKitaplari");
+                });
+
+            modelBuilder.Entity("Kutuphane.Model.Entity.Yetki", b =>
+                {
+                    b.Navigation("RolYetkileri");
                 });
 #pragma warning restore 612, 618
         }

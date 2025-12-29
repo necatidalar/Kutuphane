@@ -1,13 +1,12 @@
 ﻿using Core.Entity;
+using Kutuphane.Model.Entity;
 
-namespace Kutuphane.Model.Entity
+public class RolYetki : IEntity
 {
-    public class RolYetki : IEntity
-    {
-        public int RolId { get; set; }
-        public int YetkiId { get; set; }
-        
-        public Rol Rol { get; set; }
-        public Yetki Yetki { get; set; }
-    }
+    public int RolYetkiId { get; set; }
+    public int RolId { get; set; }
+    public int YetkiId { get; set; }
+
+    public Rol Rol { get; set; }
+    public Yetki Yetki { get; set; }
 }

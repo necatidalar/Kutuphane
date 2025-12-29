@@ -13,6 +13,7 @@ namespace Kutuphane.Model.Entity
         public bool AktifMi { get; set; } = true;
         public ICollection<Odunc> TeslimEdilenler { get; set; }
         public ICollection<Odunc> TeslimAlinanlar { get; set; }
+        public ICollection<PersonelRol> PersonelRolleri { get; set; }
         public Cinsiyet Cinsiyet { get; set; }
     }
 }

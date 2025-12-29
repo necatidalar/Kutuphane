@@ -33,7 +33,6 @@ namespace Kutuphane.BLL.Concrete
 
             return new SuccessResult();
         }
-
         public IResult AddService(Dil entity)
         {
             var validationResult = Validate(entity);
@@ -48,7 +47,6 @@ namespace Kutuphane.BLL.Concrete
 
             return _dilDal.Add(entity);
         }
-
         public IResult UpdateService(Dil entity)
         {
             if (entity.DilId <= 0)
@@ -74,7 +72,6 @@ namespace Kutuphane.BLL.Concrete
         {
             return _dilDal.GetByFilter(predicate);
         }
-
         public IDataResult<List<Dil>> GetListByFilterService(Expression<Func<Dil, bool>>? predicate = null)
         {
             return _dilDal.GetListByFilter(predicate);

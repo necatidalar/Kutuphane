@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAdmin));
@@ -38,32 +39,38 @@
             btnRolEkle = new Button();
             txtRolKodu = new TextBox();
             label3 = new Label();
+            txtRolId = new TextBox();
+            label5 = new Label();
             txtRolAdi = new TextBox();
             label2 = new Label();
             dgvRoller = new DataGridView();
+            rolIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            rolAdiDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            rolKoduDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            aktifMiDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
+            personelRolleriDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            rolYetkileriDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            rolBindingSource = new BindingSource(components);
             txtRolAra = new TextBox();
             label1 = new Label();
-            grpMenuler = new GroupBox();
-            dgvMenuler = new DataGridView();
-            txtMenuAra = new TextBox();
-            label4 = new Label();
-            grpYetkiler = new GroupBox();
+            grpYetki = new GroupBox();
             btnYetkiKaydet = new Button();
-            panelYetkiKutulari = new Panel();
-            chkOdunc = new CheckBox();
-            chkIade = new CheckBox();
-            chkSil = new CheckBox();
-            chkGuncelle = new CheckBox();
-            chkEkle = new CheckBox();
-            chkListele = new CheckBox();
-            lblSeciliBilgi = new Label();
+            dgvYetki = new DataGridView();
+            yetkiIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            yetkiAdiDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            yetkiKoduDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            Secim = new DataGridViewCheckBoxColumn();
+            rolYetkileriDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            yetkiBindingSource = new BindingSource(components);
+            txtYetkiAra = new TextBox();
+            label4 = new Label();
             grpRoller.SuspendLayout();
             panelRolIslemleri.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvRoller).BeginInit();
-            grpMenuler.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvMenuler).BeginInit();
-            grpYetkiler.SuspendLayout();
-            panelYetkiKutulari.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)rolBindingSource).BeginInit();
+            grpYetki.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvYetki).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)yetkiBindingSource).BeginInit();
             SuspendLayout();
             // 
             // grpRoller
@@ -93,13 +100,15 @@
             panelRolIslemleri.Controls.Add(btnRolEkle);
             panelRolIslemleri.Controls.Add(txtRolKodu);
             panelRolIslemleri.Controls.Add(label3);
+            panelRolIslemleri.Controls.Add(txtRolId);
+            panelRolIslemleri.Controls.Add(label5);
             panelRolIslemleri.Controls.Add(txtRolAdi);
             panelRolIslemleri.Controls.Add(label2);
             panelRolIslemleri.Dock = DockStyle.Bottom;
-            panelRolIslemleri.Location = new Point(12, 526);
+            panelRolIslemleri.Location = new Point(12, 502);
             panelRolIslemleri.Margin = new Padding(4, 3, 4, 3);
             panelRolIslemleri.Name = "panelRolIslemleri";
-            panelRolIslemleri.Size = new Size(405, 212);
+            panelRolIslemleri.Size = new Size(405, 236);
             panelRolIslemleri.TabIndex = 3;
             // 
             // btnRolSil
@@ -107,43 +116,46 @@
             btnRolSil.BackColor = Color.FromArgb(214, 48, 49);
             btnRolSil.FlatStyle = FlatStyle.Flat;
             btnRolSil.ForeColor = Color.White;
-            btnRolSil.Location = new Point(260, 145);
+            btnRolSil.Location = new Point(264, 187);
             btnRolSil.Margin = new Padding(4, 3, 4, 3);
             btnRolSil.Name = "btnRolSil";
             btnRolSil.Size = new Size(104, 40);
             btnRolSil.TabIndex = 6;
             btnRolSil.Text = "Sil";
             btnRolSil.UseVisualStyleBackColor = false;
+            btnRolSil.Click += btnRolSil_Click;
             // 
             // btnRolGuncelle
             // 
             btnRolGuncelle.BackColor = Color.FromArgb(9, 132, 227);
             btnRolGuncelle.FlatStyle = FlatStyle.Flat;
             btnRolGuncelle.ForeColor = Color.White;
-            btnRolGuncelle.Location = new Point(140, 145);
+            btnRolGuncelle.Location = new Point(144, 187);
             btnRolGuncelle.Margin = new Padding(4, 3, 4, 3);
             btnRolGuncelle.Name = "btnRolGuncelle";
             btnRolGuncelle.Size = new Size(113, 40);
             btnRolGuncelle.TabIndex = 5;
             btnRolGuncelle.Text = "Güncelle";
             btnRolGuncelle.UseVisualStyleBackColor = false;
+            btnRolGuncelle.Click += btnRolGuncelle_Click;
             // 
             // btnRolEkle
             // 
             btnRolEkle.BackColor = Color.FromArgb(0, 184, 148);
             btnRolEkle.FlatStyle = FlatStyle.Flat;
             btnRolEkle.ForeColor = Color.White;
-            btnRolEkle.Location = new Point(19, 145);
+            btnRolEkle.Location = new Point(23, 187);
             btnRolEkle.Margin = new Padding(4, 3, 4, 3);
             btnRolEkle.Name = "btnRolEkle";
             btnRolEkle.Size = new Size(114, 40);
             btnRolEkle.TabIndex = 4;
             btnRolEkle.Text = "Ekle";
             btnRolEkle.UseVisualStyleBackColor = false;
+            btnRolEkle.Click += btnRolEkle_Click;
             // 
             // txtRolKodu
             // 
-            txtRolKodu.Location = new Point(19, 102);
+            txtRolKodu.Location = new Point(23, 141);
             txtRolKodu.Margin = new Padding(4, 3, 4, 3);
             txtRolKodu.Name = "txtRolKodu";
             txtRolKodu.Size = new Size(345, 25);
@@ -153,16 +165,36 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 9F);
-            label3.Location = new Point(15, 81);
+            label3.Location = new Point(23, 123);
             label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
             label3.Size = new Size(58, 15);
             label3.TabIndex = 2;
             label3.Text = "Rol Kodu:";
             // 
+            // txtRolId
+            // 
+            txtRolId.Enabled = false;
+            txtRolId.Location = new Point(23, 33);
+            txtRolId.Margin = new Padding(4, 3, 4, 3);
+            txtRolId.Name = "txtRolId";
+            txtRolId.Size = new Size(345, 25);
+            txtRolId.TabIndex = 1;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI", 9F);
+            label5.Location = new Point(23, 15);
+            label5.Margin = new Padding(4, 0, 4, 0);
+            label5.Name = "label5";
+            label5.Size = new Size(40, 15);
+            label5.TabIndex = 0;
+            label5.Text = "Rol Id:";
+            // 
             // txtRolAdi
             // 
-            txtRolAdi.Location = new Point(19, 40);
+            txtRolAdi.Location = new Point(23, 87);
             txtRolAdi.Margin = new Padding(4, 3, 4, 3);
             txtRolAdi.Name = "txtRolAdi";
             txtRolAdi.Size = new Size(345, 25);
@@ -172,7 +204,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 9F);
-            label2.Location = new Point(15, 20);
+            label2.Location = new Point(23, 69);
             label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
             label2.Size = new Size(48, 15);
@@ -183,10 +215,14 @@
             // 
             dgvRoller.AllowUserToAddRows = false;
             dgvRoller.AllowUserToDeleteRows = false;
+            dgvRoller.AllowUserToResizeRows = false;
             dgvRoller.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dgvRoller.AutoGenerateColumns = false;
             dgvRoller.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvRoller.BackgroundColor = Color.White;
             dgvRoller.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvRoller.Columns.AddRange(new DataGridViewColumn[] { rolIdDataGridViewTextBoxColumn, rolAdiDataGridViewTextBoxColumn, rolKoduDataGridViewTextBoxColumn, aktifMiDataGridViewCheckBoxColumn, personelRolleriDataGridViewTextBoxColumn, rolYetkileriDataGridViewTextBoxColumn });
+            dgvRoller.DataSource = rolBindingSource;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = SystemColors.Window;
             dataGridViewCellStyle1.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 162);
@@ -202,8 +238,60 @@
             dgvRoller.ReadOnly = true;
             dgvRoller.RowHeadersVisible = false;
             dgvRoller.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvRoller.Size = new Size(399, 446);
+            dgvRoller.Size = new Size(399, 423);
             dgvRoller.TabIndex = 2;
+            dgvRoller.ColumnHeaderMouseClick += dgvRoller_ColumnHeaderMouseClick;
+            dgvRoller.SelectionChanged += dgvRoller_SelectionChanged;
+            // 
+            // rolIdDataGridViewTextBoxColumn
+            // 
+            rolIdDataGridViewTextBoxColumn.DataPropertyName = "RolId";
+            rolIdDataGridViewTextBoxColumn.HeaderText = "RolId";
+            rolIdDataGridViewTextBoxColumn.Name = "rolIdDataGridViewTextBoxColumn";
+            rolIdDataGridViewTextBoxColumn.ReadOnly = true;
+            rolIdDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // rolAdiDataGridViewTextBoxColumn
+            // 
+            rolAdiDataGridViewTextBoxColumn.DataPropertyName = "RolAdi";
+            rolAdiDataGridViewTextBoxColumn.HeaderText = "Rol Adı";
+            rolAdiDataGridViewTextBoxColumn.Name = "rolAdiDataGridViewTextBoxColumn";
+            rolAdiDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // rolKoduDataGridViewTextBoxColumn
+            // 
+            rolKoduDataGridViewTextBoxColumn.DataPropertyName = "RolKodu";
+            rolKoduDataGridViewTextBoxColumn.HeaderText = "Rol Kodu";
+            rolKoduDataGridViewTextBoxColumn.Name = "rolKoduDataGridViewTextBoxColumn";
+            rolKoduDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // aktifMiDataGridViewCheckBoxColumn
+            // 
+            aktifMiDataGridViewCheckBoxColumn.DataPropertyName = "AktifMi";
+            aktifMiDataGridViewCheckBoxColumn.HeaderText = "AktifMi";
+            aktifMiDataGridViewCheckBoxColumn.Name = "aktifMiDataGridViewCheckBoxColumn";
+            aktifMiDataGridViewCheckBoxColumn.ReadOnly = true;
+            aktifMiDataGridViewCheckBoxColumn.Visible = false;
+            // 
+            // personelRolleriDataGridViewTextBoxColumn
+            // 
+            personelRolleriDataGridViewTextBoxColumn.DataPropertyName = "PersonelRolleri";
+            personelRolleriDataGridViewTextBoxColumn.HeaderText = "PersonelRolleri";
+            personelRolleriDataGridViewTextBoxColumn.Name = "personelRolleriDataGridViewTextBoxColumn";
+            personelRolleriDataGridViewTextBoxColumn.ReadOnly = true;
+            personelRolleriDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // rolYetkileriDataGridViewTextBoxColumn
+            // 
+            rolYetkileriDataGridViewTextBoxColumn.DataPropertyName = "RolYetkileri";
+            rolYetkileriDataGridViewTextBoxColumn.HeaderText = "RolYetkileri";
+            rolYetkileriDataGridViewTextBoxColumn.Name = "rolYetkileriDataGridViewTextBoxColumn";
+            rolYetkileriDataGridViewTextBoxColumn.ReadOnly = true;
+            rolYetkileriDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // rolBindingSource
+            // 
+            rolBindingSource.DataSource = typeof(Model.Entity.Rol);
             // 
             // txtRolAra
             // 
@@ -215,6 +303,7 @@
             txtRolAra.PlaceholderText = "Rol adı ara...";
             txtRolAra.Size = new Size(360, 23);
             txtRolAra.TabIndex = 1;
+            txtRolAra.TextChanged += txtRolAra_TextChanged;
             // 
             // label1
             // 
@@ -227,31 +316,53 @@
             label1.TabIndex = 0;
             label1.Text = "Ara:";
             // 
-            // grpMenuler
+            // grpYetki
             // 
-            grpMenuler.Controls.Add(dgvMenuler);
-            grpMenuler.Controls.Add(txtMenuAra);
-            grpMenuler.Controls.Add(label4);
-            grpMenuler.Dock = DockStyle.Fill;
-            grpMenuler.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 162);
-            grpMenuler.ForeColor = Color.FromArgb(64, 64, 64);
-            grpMenuler.Location = new Point(429, 0);
-            grpMenuler.Margin = new Padding(4, 3, 4, 3);
-            grpMenuler.Name = "grpMenuler";
-            grpMenuler.Padding = new Padding(12);
-            grpMenuler.Size = new Size(373, 750);
-            grpMenuler.TabIndex = 2;
-            grpMenuler.TabStop = false;
-            grpMenuler.Text = "2. Menü / Ekran Seçimi";
+            grpYetki.Controls.Add(btnYetkiKaydet);
+            grpYetki.Controls.Add(dgvYetki);
+            grpYetki.Controls.Add(txtYetkiAra);
+            grpYetki.Controls.Add(label4);
+            grpYetki.Dock = DockStyle.Fill;
+            grpYetki.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 162);
+            grpYetki.ForeColor = Color.FromArgb(64, 64, 64);
+            grpYetki.Location = new Point(429, 0);
+            grpYetki.Margin = new Padding(4, 3, 4, 3);
+            grpYetki.Name = "grpYetki";
+            grpYetki.Padding = new Padding(12);
+            grpYetki.Size = new Size(854, 750);
+            grpYetki.TabIndex = 2;
+            grpYetki.TabStop = false;
+            grpYetki.Text = "2. İşlem Seçimi";
             // 
-            // dgvMenuler
+            // btnYetkiKaydet
             // 
-            dgvMenuler.AllowUserToAddRows = false;
-            dgvMenuler.AllowUserToDeleteRows = false;
-            dgvMenuler.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            dgvMenuler.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvMenuler.BackgroundColor = Color.White;
-            dgvMenuler.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            btnYetkiKaydet.Anchor = AnchorStyles.Bottom;
+            btnYetkiKaydet.BackColor = Color.FromArgb(46, 204, 113);
+            btnYetkiKaydet.FlatAppearance.BorderSize = 0;
+            btnYetkiKaydet.FlatStyle = FlatStyle.Flat;
+            btnYetkiKaydet.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            btnYetkiKaydet.ForeColor = Color.White;
+            btnYetkiKaydet.Location = new Point(211, 687);
+            btnYetkiKaydet.Margin = new Padding(4, 3, 4, 3);
+            btnYetkiKaydet.MaximumSize = new Size(419, 48);
+            btnYetkiKaydet.Name = "btnYetkiKaydet";
+            btnYetkiKaydet.Size = new Size(419, 48);
+            btnYetkiKaydet.TabIndex = 2;
+            btnYetkiKaydet.Text = "DEĞİŞİKLİKLERİ KAYDET";
+            btnYetkiKaydet.UseVisualStyleBackColor = false;
+            btnYetkiKaydet.Click += btnYetkiKaydet_Click;
+            // 
+            // dgvYetki
+            // 
+            dgvYetki.AllowUserToAddRows = false;
+            dgvYetki.AllowUserToDeleteRows = false;
+            dgvYetki.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dgvYetki.AutoGenerateColumns = false;
+            dgvYetki.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvYetki.BackgroundColor = Color.White;
+            dgvYetki.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvYetki.Columns.AddRange(new DataGridViewColumn[] { yetkiIdDataGridViewTextBoxColumn, yetkiAdiDataGridViewTextBoxColumn, yetkiKoduDataGridViewTextBoxColumn, Secim, rolYetkileriDataGridViewTextBoxColumn1 });
+            dgvYetki.DataSource = yetkiBindingSource;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = SystemColors.Window;
             dataGridViewCellStyle2.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 162);
@@ -259,27 +370,69 @@
             dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(178, 190, 195);
             dataGridViewCellStyle2.SelectionForeColor = Color.Black;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            dgvMenuler.DefaultCellStyle = dataGridViewCellStyle2;
-            dgvMenuler.Location = new Point(15, 73);
-            dgvMenuler.Margin = new Padding(4, 3, 4, 3);
-            dgvMenuler.MultiSelect = false;
-            dgvMenuler.Name = "dgvMenuler";
-            dgvMenuler.ReadOnly = true;
-            dgvMenuler.RowHeadersVisible = false;
-            dgvMenuler.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvMenuler.Size = new Size(343, 662);
-            dgvMenuler.TabIndex = 2;
+            dgvYetki.DefaultCellStyle = dataGridViewCellStyle2;
+            dgvYetki.Location = new Point(8, 73);
+            dgvYetki.Margin = new Padding(4, 3, 4, 3);
+            dgvYetki.MultiSelect = false;
+            dgvYetki.Name = "dgvYetki";
+            dgvYetki.ReadOnly = true;
+            dgvYetki.RowHeadersVisible = false;
+            dgvYetki.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvYetki.Size = new Size(824, 596);
+            dgvYetki.TabIndex = 2;
+            dgvYetki.ColumnHeaderMouseClick += dgvYetki_ColumnHeaderMouseClick;
             // 
-            // txtMenuAra
+            // yetkiIdDataGridViewTextBoxColumn
             // 
-            txtMenuAra.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            txtMenuAra.Font = new Font("Segoe UI", 9F);
-            txtMenuAra.Location = new Point(55, 35);
-            txtMenuAra.Margin = new Padding(4, 3, 4, 3);
-            txtMenuAra.Name = "txtMenuAra";
-            txtMenuAra.PlaceholderText = "Ekran veya menü adı ara...";
-            txtMenuAra.Size = new Size(303, 23);
-            txtMenuAra.TabIndex = 1;
+            yetkiIdDataGridViewTextBoxColumn.DataPropertyName = "YetkiId";
+            yetkiIdDataGridViewTextBoxColumn.HeaderText = "YetkiId";
+            yetkiIdDataGridViewTextBoxColumn.Name = "yetkiIdDataGridViewTextBoxColumn";
+            yetkiIdDataGridViewTextBoxColumn.ReadOnly = true;
+            yetkiIdDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // yetkiAdiDataGridViewTextBoxColumn
+            // 
+            yetkiAdiDataGridViewTextBoxColumn.DataPropertyName = "YetkiAdi";
+            yetkiAdiDataGridViewTextBoxColumn.HeaderText = "Yetki Adı";
+            yetkiAdiDataGridViewTextBoxColumn.Name = "yetkiAdiDataGridViewTextBoxColumn";
+            yetkiAdiDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // yetkiKoduDataGridViewTextBoxColumn
+            // 
+            yetkiKoduDataGridViewTextBoxColumn.DataPropertyName = "YetkiKodu";
+            yetkiKoduDataGridViewTextBoxColumn.HeaderText = "Yetki Kodu";
+            yetkiKoduDataGridViewTextBoxColumn.Name = "yetkiKoduDataGridViewTextBoxColumn";
+            yetkiKoduDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // Secim
+            // 
+            Secim.HeaderText = "✔";
+            Secim.Name = "Secim";
+            Secim.ReadOnly = true;
+            // 
+            // rolYetkileriDataGridViewTextBoxColumn1
+            // 
+            rolYetkileriDataGridViewTextBoxColumn1.DataPropertyName = "RolYetkileri";
+            rolYetkileriDataGridViewTextBoxColumn1.HeaderText = "RolYetkileri";
+            rolYetkileriDataGridViewTextBoxColumn1.Name = "rolYetkileriDataGridViewTextBoxColumn1";
+            rolYetkileriDataGridViewTextBoxColumn1.ReadOnly = true;
+            rolYetkileriDataGridViewTextBoxColumn1.Visible = false;
+            // 
+            // yetkiBindingSource
+            // 
+            yetkiBindingSource.DataSource = typeof(Model.Entity.Yetki);
+            // 
+            // txtYetkiAra
+            // 
+            txtYetkiAra.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            txtYetkiAra.Font = new Font("Segoe UI", 9F);
+            txtYetkiAra.Location = new Point(55, 35);
+            txtYetkiAra.Margin = new Padding(4, 3, 4, 3);
+            txtYetkiAra.Name = "txtYetkiAra";
+            txtYetkiAra.PlaceholderText = "İşlem adı veya işlem kodu ara...";
+            txtYetkiAra.Size = new Size(784, 23);
+            txtYetkiAra.TabIndex = 1;
+            txtYetkiAra.TextChanged += txtYetkiAra_TextChanged;
             // 
             // label4
             // 
@@ -292,155 +445,13 @@
             label4.TabIndex = 0;
             label4.Text = "Ara:";
             // 
-            // grpYetkiler
-            // 
-            grpYetkiler.Controls.Add(btnYetkiKaydet);
-            grpYetkiler.Controls.Add(panelYetkiKutulari);
-            grpYetkiler.Controls.Add(lblSeciliBilgi);
-            grpYetkiler.Dock = DockStyle.Right;
-            grpYetkiler.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 162);
-            grpYetkiler.ForeColor = Color.FromArgb(64, 64, 64);
-            grpYetkiler.Location = new Point(802, 0);
-            grpYetkiler.Margin = new Padding(4, 3, 4, 3);
-            grpYetkiler.Name = "grpYetkiler";
-            grpYetkiler.Padding = new Padding(12);
-            grpYetkiler.Size = new Size(481, 750);
-            grpYetkiler.TabIndex = 3;
-            grpYetkiler.TabStop = false;
-            grpYetkiler.Text = "3. Yetki Tanımlama";
-            // 
-            // btnYetkiKaydet
-            // 
-            btnYetkiKaydet.BackColor = Color.FromArgb(46, 204, 113);
-            btnYetkiKaydet.Dock = DockStyle.Bottom;
-            btnYetkiKaydet.FlatAppearance.BorderSize = 0;
-            btnYetkiKaydet.FlatStyle = FlatStyle.Flat;
-            btnYetkiKaydet.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
-            btnYetkiKaydet.ForeColor = Color.White;
-            btnYetkiKaydet.Location = new Point(12, 680);
-            btnYetkiKaydet.Margin = new Padding(4, 3, 4, 3);
-            btnYetkiKaydet.Name = "btnYetkiKaydet";
-            btnYetkiKaydet.Size = new Size(457, 58);
-            btnYetkiKaydet.TabIndex = 2;
-            btnYetkiKaydet.Text = "DEĞİŞİKLİKLERİ KAYDET";
-            btnYetkiKaydet.UseVisualStyleBackColor = false;
-            // 
-            // panelYetkiKutulari
-            // 
-            panelYetkiKutulari.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            panelYetkiKutulari.BorderStyle = BorderStyle.FixedSingle;
-            panelYetkiKutulari.Controls.Add(chkOdunc);
-            panelYetkiKutulari.Controls.Add(chkIade);
-            panelYetkiKutulari.Controls.Add(chkSil);
-            panelYetkiKutulari.Controls.Add(chkGuncelle);
-            panelYetkiKutulari.Controls.Add(chkEkle);
-            panelYetkiKutulari.Controls.Add(chkListele);
-            panelYetkiKutulari.Location = new Point(15, 103);
-            panelYetkiKutulari.Margin = new Padding(4, 3, 4, 3);
-            panelYetkiKutulari.Name = "panelYetkiKutulari";
-            panelYetkiKutulari.Size = new Size(450, 560);
-            panelYetkiKutulari.TabIndex = 1;
-            // 
-            // chkOdunc
-            // 
-            chkOdunc.AutoSize = true;
-            chkOdunc.Font = new Font("Segoe UI", 10F);
-            chkOdunc.Location = new Point(27, 256);
-            chkOdunc.Margin = new Padding(4, 3, 4, 3);
-            chkOdunc.Name = "chkOdunc";
-            chkOdunc.Size = new Size(154, 23);
-            chkOdunc.TabIndex = 5;
-            chkOdunc.Text = "Ödünç Verme Yetkisi";
-            chkOdunc.UseVisualStyleBackColor = true;
-            // 
-            // chkIade
-            // 
-            chkIade.AutoSize = true;
-            chkIade.Font = new Font("Segoe UI", 10F);
-            chkIade.Location = new Point(27, 212);
-            chkIade.Margin = new Padding(4, 3, 4, 3);
-            chkIade.Name = "chkIade";
-            chkIade.Size = new Size(131, 23);
-            chkIade.TabIndex = 4;
-            chkIade.Text = "İade Alma Yetkisi";
-            chkIade.UseVisualStyleBackColor = true;
-            // 
-            // chkSil
-            // 
-            chkSil.AutoSize = true;
-            chkSil.Font = new Font("Segoe UI", 10F);
-            chkSil.ForeColor = Color.FromArgb(192, 57, 43);
-            chkSil.Location = new Point(27, 168);
-            chkSil.Margin = new Padding(4, 3, 4, 3);
-            chkSil.Name = "chkSil";
-            chkSil.Size = new Size(129, 23);
-            chkSil.TabIndex = 3;
-            chkSil.Text = "Veri Silme Yetkisi";
-            chkSil.UseVisualStyleBackColor = true;
-            // 
-            // chkGuncelle
-            // 
-            chkGuncelle.AutoSize = true;
-            chkGuncelle.Font = new Font("Segoe UI", 10F);
-            chkGuncelle.ForeColor = Color.FromArgb(41, 128, 185);
-            chkGuncelle.Location = new Point(27, 125);
-            chkGuncelle.Margin = new Padding(4, 3, 4, 3);
-            chkGuncelle.Name = "chkGuncelle";
-            chkGuncelle.Size = new Size(165, 23);
-            chkGuncelle.TabIndex = 2;
-            chkGuncelle.Text = "Veri Düzenleme Yetkisi";
-            chkGuncelle.UseVisualStyleBackColor = true;
-            // 
-            // chkEkle
-            // 
-            chkEkle.AutoSize = true;
-            chkEkle.Font = new Font("Segoe UI", 10F);
-            chkEkle.ForeColor = Color.FromArgb(39, 174, 96);
-            chkEkle.Location = new Point(27, 81);
-            chkEkle.Margin = new Padding(4, 3, 4, 3);
-            chkEkle.Name = "chkEkle";
-            chkEkle.Size = new Size(140, 23);
-            chkEkle.TabIndex = 1;
-            chkEkle.Text = "Veri Ekleme Yetkisi";
-            chkEkle.UseVisualStyleBackColor = true;
-            // 
-            // chkListele
-            // 
-            chkListele.AutoSize = true;
-            chkListele.Checked = true;
-            chkListele.CheckState = CheckState.Checked;
-            chkListele.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            chkListele.Location = new Point(27, 37);
-            chkListele.Margin = new Padding(4, 3, 4, 3);
-            chkListele.Name = "chkListele";
-            chkListele.Size = new Size(171, 23);
-            chkListele.TabIndex = 0;
-            chkListele.Text = "Görüntüleme (Listele)";
-            chkListele.UseVisualStyleBackColor = true;
-            // 
-            // lblSeciliBilgi
-            // 
-            lblSeciliBilgi.BackColor = Color.FromArgb(255, 248, 225);
-            lblSeciliBilgi.BorderStyle = BorderStyle.FixedSingle;
-            lblSeciliBilgi.Dock = DockStyle.Top;
-            lblSeciliBilgi.Font = new Font("Segoe UI", 9F, FontStyle.Italic);
-            lblSeciliBilgi.ForeColor = Color.FromArgb(64, 64, 64);
-            lblSeciliBilgi.Location = new Point(12, 30);
-            lblSeciliBilgi.Margin = new Padding(4, 0, 4, 0);
-            lblSeciliBilgi.Name = "lblSeciliBilgi";
-            lblSeciliBilgi.Size = new Size(457, 55);
-            lblSeciliBilgi.TabIndex = 0;
-            lblSeciliBilgi.Text = "Lütfen soldan bir rol, ortadan bir menü seçiniz.";
-            lblSeciliBilgi.TextAlign = ContentAlignment.MiddleCenter;
-            // 
             // frmAdmin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(1283, 750);
-            Controls.Add(grpMenuler);
-            Controls.Add(grpYetkiler);
+            Controls.Add(grpYetki);
             Controls.Add(grpRoller);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
@@ -455,12 +466,11 @@
             panelRolIslemleri.ResumeLayout(false);
             panelRolIslemleri.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvRoller).EndInit();
-            grpMenuler.ResumeLayout(false);
-            grpMenuler.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvMenuler).EndInit();
-            grpYetkiler.ResumeLayout(false);
-            panelYetkiKutulari.ResumeLayout(false);
-            panelYetkiKutulari.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)rolBindingSource).EndInit();
+            grpYetki.ResumeLayout(false);
+            grpYetki.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvYetki).EndInit();
+            ((System.ComponentModel.ISupportInitialize)yetkiBindingSource).EndInit();
             ResumeLayout(false);
 
         }
@@ -479,19 +489,25 @@
         private System.Windows.Forms.Button btnRolSil;
         private System.Windows.Forms.Button btnRolGuncelle;
         private System.Windows.Forms.Button btnRolEkle;
-        private System.Windows.Forms.GroupBox grpMenuler;
-        private System.Windows.Forms.TextBox txtMenuAra;
+        private System.Windows.Forms.GroupBox grpYetki;
+        private System.Windows.Forms.TextBox txtYetkiAra;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.DataGridView dgvMenuler;
-        private System.Windows.Forms.GroupBox grpYetkiler;
-        private System.Windows.Forms.Label lblSeciliBilgi;
-        private System.Windows.Forms.Panel panelYetkiKutulari;
-        private System.Windows.Forms.CheckBox chkOdunc;
-        private System.Windows.Forms.CheckBox chkIade;
-        private System.Windows.Forms.CheckBox chkSil;
-        private System.Windows.Forms.CheckBox chkGuncelle;
-        private System.Windows.Forms.CheckBox chkEkle;
-        private System.Windows.Forms.CheckBox chkListele;
-        private System.Windows.Forms.Button btnYetkiKaydet;
+        private System.Windows.Forms.DataGridView dgvYetki;
+        private Button btnYetkiKaydet;
+        private DataGridViewTextBoxColumn rolIdDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn rolAdiDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn rolKoduDataGridViewTextBoxColumn;
+        private DataGridViewCheckBoxColumn aktifMiDataGridViewCheckBoxColumn;
+        private DataGridViewTextBoxColumn personelRolleriDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn rolYetkileriDataGridViewTextBoxColumn;
+        private BindingSource rolBindingSource;
+        private TextBox txtRolId;
+        private Label label5;
+        private BindingSource yetkiBindingSource;
+        private DataGridViewTextBoxColumn yetkiIdDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn yetkiKoduDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn yetkiAdiDataGridViewTextBoxColumn;
+        private DataGridViewCheckBoxColumn Secim;
+        private DataGridViewTextBoxColumn rolYetkileriDataGridViewTextBoxColumn1;
     }
 }
