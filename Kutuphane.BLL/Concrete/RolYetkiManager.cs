@@ -28,9 +28,6 @@ namespace Kutuphane.BLL.Concrete
 
             return new SuccessResult();
         }
-
-        // ================= ADD =================
-
         public IResult AddService(RolYetki entity)
         {
             var validation = Validate(entity);
@@ -45,9 +42,6 @@ namespace Kutuphane.BLL.Concrete
 
             return _rolYetkiDal.Add(entity);
         }
-
-        // ================= DELETE =================
-
         public IResult DeleteService(RolYetki entity)
         {
             var dbKayit = _rolYetkiDal.GetByFilter(x => x.RolYetkiId == entity.RolYetkiId);
@@ -56,14 +50,10 @@ namespace Kutuphane.BLL.Concrete
 
             return _rolYetkiDal.Delete(dbKayit.Data);
         }
-
-        // ================= GET =================
-
         public IDataResult<RolYetki> GetByFilterService(Expression<Func<RolYetki, bool>>? predicate = null)
         {
             return _rolYetkiDal.GetByFilter(predicate);
         }
-
         public IDataResult<List<RolYetki>> GetListByFilterService(Expression<Func<RolYetki, bool>>? predicate = null)
         {
             return _rolYetkiDal.GetListByFilter(predicate);

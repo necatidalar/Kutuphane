@@ -75,6 +75,7 @@
             groupBox1.Size = new Size(300, 372);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
+            groupBox1.Tag = "KATEGORI_LISTELE";
             groupBox1.Text = "📚 Kategori İşlemleri";
             // 
             // btnTemizle
@@ -89,6 +90,7 @@
             btnTemizle.Name = "btnTemizle";
             btnTemizle.Size = new Size(265, 38);
             btnTemizle.TabIndex = 6;
+            btnTemizle.Tag = "KATEGORI_EKLE";
             btnTemizle.Text = "\U0001f9f9 TEMİZLE";
             btnTemizle.UseVisualStyleBackColor = false;
             btnTemizle.Click += btnTemizle_Click;
@@ -105,6 +107,7 @@
             btnSil.Name = "btnSil";
             btnSil.Size = new Size(265, 38);
             btnSil.TabIndex = 5;
+            btnSil.Tag = "KATEGORI_SIL";
             btnSil.Text = "❌ SİL";
             btnSil.UseVisualStyleBackColor = false;
             btnSil.Click += btnSil_Click;
@@ -121,6 +124,7 @@
             btnDuzenle.Name = "btnDuzenle";
             btnDuzenle.Size = new Size(265, 38);
             btnDuzenle.TabIndex = 4;
+            btnDuzenle.Tag = "KATEGORI_GUNCELLE";
             btnDuzenle.Text = "✏️ DÜZENLE";
             btnDuzenle.UseVisualStyleBackColor = false;
             btnDuzenle.Click += btnDuzenle_Click;
@@ -137,6 +141,7 @@
             btnKaydet.Name = "btnKaydet";
             btnKaydet.Size = new Size(265, 38);
             btnKaydet.TabIndex = 3;
+            btnKaydet.Tag = "KATEGORI_EKLE";
             btnKaydet.Text = "💾 KAYDET";
             btnKaydet.UseVisualStyleBackColor = false;
             btnKaydet.Click += btnKaydet_Click;
@@ -153,6 +158,7 @@
             btnGeriYukle.Name = "btnGeriYukle";
             btnGeriYukle.Size = new Size(265, 38);
             btnGeriYukle.TabIndex = 8;
+            btnGeriYukle.Tag = "KATEGORI_SIL";
             btnGeriYukle.Text = "↩️ Seçili Kategoriyi Geri Yükle";
             btnGeriYukle.UseVisualStyleBackColor = false;
             btnGeriYukle.Visible = false;
@@ -170,6 +176,7 @@
             btnSilinenleriGoster.Name = "btnSilinenleriGoster";
             btnSilinenleriGoster.Size = new Size(265, 38);
             btnSilinenleriGoster.TabIndex = 7;
+            btnSilinenleriGoster.Tag = "KATEGORI_SIL";
             btnSilinenleriGoster.Text = "🗑️ Silinen Kategorileri Göster";
             btnSilinenleriGoster.UseVisualStyleBackColor = false;
             btnSilinenleriGoster.Click += btnSilinenleriGoster_Click;
@@ -257,6 +264,7 @@
             dataGrid_Kategori.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGrid_Kategori.Size = new Size(560, 484);
             dataGrid_Kategori.TabIndex = 11;
+            dataGrid_Kategori.Tag = "KATEGORI_LISTELE";
             dataGrid_Kategori.CellFormatting += dataGrid_Kategori_CellFormatting;
             dataGrid_Kategori.ColumnHeaderMouseClick += dataGrid_Kategori_ColumnHeaderMouseClick;
             dataGrid_Kategori.SelectionChanged += dataGrid_Kategori_SelectionChanged;
@@ -297,6 +305,7 @@
             label3.Name = "label3";
             label3.Size = new Size(51, 17);
             label3.TabIndex = 6;
+            label3.Tag = "KATEGORI_LISTELE";
             label3.Text = "Arama:";
             // 
             // textBox_Ara
@@ -307,6 +316,7 @@
             textBox_Ara.PlaceholderText = "Kategori adı ile arayın...";
             textBox_Ara.Size = new Size(250, 25);
             textBox_Ara.TabIndex = 9;
+            textBox_Ara.Tag = "KATEGORI_LISTELE";
             textBox_Ara.TextChanged += textBox_Ara_TextChanged;
             // 
             // frmKategoriIslemleri
@@ -323,6 +333,7 @@
             MinimumSize = new Size(800, 590);
             Name = "frmKategoriIslemleri";
             StartPosition = FormStartPosition.CenterScreen;
+            Tag = "KATEGORI_LISTELE";
             Text = "Kütüphane Otomasyonu - Kategori İşlemleri";
             Load += frmKategori_Load;
             groupBox1.ResumeLayout(false);

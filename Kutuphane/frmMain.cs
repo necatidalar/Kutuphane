@@ -1,4 +1,6 @@
-﻿using Kutuphane.BLL.Concrete;
+﻿using Core.Helpers;
+using Kutuphane.BLL.Abstract;
+using Kutuphane.BLL.Concrete;
 using Kutuphane.DAL.Concrete;
 using Kutuphane.DAL.Contexes;
 using Kutuphane.Model.DTO;
@@ -13,11 +15,14 @@ namespace Kutuphane.UI
         OduncManager _oduncManager;
         YayineviManager _yayineviManager;
         YazarManager _yazarManager;
+
         public int GirisYapanPersonelId { get; set; }
         public string GirisYapanPersonelAd { get; private set; }
         public string GirisYapanPersonelSoyad { get; private set; }
         public PersonelBilgileriDto loginPersoneli { get; set; }
         private readonly YetkiKontrol _yetkiKontrol;
+        private readonly IPersonelService _personelService;
+
         public frmMain()
         {
             InitializeComponent();
@@ -29,10 +34,87 @@ namespace Kutuphane.UI
             _yayineviManager = new YayineviManager(new YayineviDal());
             loginPersoneli = new PersonelBilgileriDto();
             _yetkiKontrol = new YetkiKontrol(new KutuphaneDbContext());
+            _personelService = new PersonelManager(new PersonelDal());
         }
         private void frmMain_Load(object sender, EventArgs e)
         {
+            panel_Giris.Location = new Point(0, 0);
             CheckDatabaseConnection();
+
+            if (Properties.Settings.Default.RememberMe)
+            {
+                textBox_KullaniciAdi.Text = Properties.Settings.Default.SavedUserName;
+                textBox_Sifre.Text = Properties.Settings.Default.SavedPassword;
+                checkBox_BeniHatirla.Checked = true;
+            }
+        }
+        private void btnGiris_Click(object sender, EventArgs e)
+        {
+            LoginUserDto loginUserDto = new()
+            {
+                KullaniciAdi = textBox_KullaniciAdi.Text,
+                Sifre = SecurityHelper.EncodeBase64(textBox_Sifre.Text)
+            };
+
+            var result = _personelService.Login(loginUserDto);
+
+            if (!result.IsSuccess)
+            {
+                MessageBox.Show(result.Message, "Giriş Hatalı",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            var personelResult = _personelService.PersonelBilgiGetirServis(
+                p => p.KullaniciAdi == loginUserDto.KullaniciAdi);
+
+            if (!personelResult.IsSuccess || personelResult.Data.Count == 0)
+            {
+                MessageBox.Show("Personel bilgileri alınamadı", "Hata",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (checkBox_BeniHatirla.Checked)
+            {
+                Properties.Settings.Default.SavedUserName = textBox_KullaniciAdi.Text;
+                Properties.Settings.Default.SavedPassword = textBox_Sifre.Text;
+                Properties.Settings.Default.RememberMe = true;
+                Properties.Settings.Default.Save();
+            }
+            else
+            {
+                Properties.Settings.Default.SavedUserName = "";
+                Properties.Settings.Default.SavedPassword = "";
+                Properties.Settings.Default.RememberMe = false;
+                Properties.Settings.Default.Save();
+            }
+
+            girisBasarili(personelResult.Data.First());
+        }
+        private void girisBasarili(PersonelBilgileriDto personel)
+        {
+            HideAllMenus(menuStrip1.Items);
+            loginPersoneli = personel;
+
+            GirisYapanPersonelId = personel.PersonelId;
+            GirisYapanPersonelAd = personel.Ad;
+            GirisYapanPersonelSoyad = personel.Soyad;
+
+            lblKullaniciAdi.Text = $"Hoşgeldin, {GirisYapanPersonelAd} {GirisYapanPersonelSoyad}";
+
+            panel_Giris.Visible = false;
+            panel_Ust.Visible = true;
+            flowLayoutPanel_Kartlar.Visible = true;
+            menuStrip1.Visible = true;
+
+            SetForLoginView(false);
+            ShowHideTopPanels(true, true);
+
+            Listele();
+            SetMenuVisibility(GirisYapanPersonelId);
+            var perms = _yetkiKontrol.GetUserPermissions(GirisYapanPersonelId);
+            ApplyMenuPermissions(menuStrip1.Items, perms);
         }
         private void CheckDatabaseConnection()
         {
@@ -103,43 +185,20 @@ namespace Kutuphane.UI
             GirisYapanPersonelAd = null;
             GirisYapanPersonelSoyad = null;
             loginPersoneli = null;
-            lblKullaniciAdi.Text = string.Empty;
 
+            lblKullaniciAdi.Text = string.Empty;
 
             foreach (Form child in MdiChildren)
                 child.Close();
 
             timer_Dashboard.Stop();
 
+            panel_Giris.Visible = true;
+            panel_Ust.Visible = false;
+            flowLayoutPanel_Kartlar.Visible = false;
+            menuStrip1.Visible = false;
+
             SetForLoginView(true);
-
-            frmGiris girisForm = new frmGiris();
-            girisForm.MdiParent = this;
-            girisForm.FormClosed += LoginFormClosed;
-            girisForm.Show();
-        }
-        private void LoginFormClosed(object sender, FormClosedEventArgs e)
-        {
-            frmGiris girisForm = sender as frmGiris;
-
-            if (girisForm?.GirisYapanPersonel == null)
-            {
-                Application.Exit();
-                return;
-            }
-
-            loginPersoneli = girisForm.GirisYapanPersonel;
-            GirisYapanPersonelId = loginPersoneli.PersonelId;
-            GirisYapanPersonelAd = loginPersoneli.Ad;
-            GirisYapanPersonelSoyad = loginPersoneli.Soyad;
-
-            lblKullaniciAdi.Text = $"Hoşgeldin, {GirisYapanPersonelAd} {GirisYapanPersonelSoyad}";
-
-            SetForLoginView(false);
-            ShowHideTopPanels(true, true);
-            timer_Dashboard.Start();
-            Listele();
-            SetMenuVisibility(GirisYapanPersonelId);
         }
         private void Listele()
         {
@@ -263,7 +322,6 @@ namespace Kutuphane.UI
             string baslik = string.IsNullOrEmpty(childForm.Text) ? FormName : childForm.Text;
             label_Mesaj.Text = $" {baslik}";
             label_Mesaj.ForeColor = Color.White;
-
             childForm.Show();
         }
         private void gostergePaneliToolStripMenuItem_Click(object sender, EventArgs e)
@@ -279,14 +337,123 @@ namespace Kutuphane.UI
         {
             Logout();
         }
+        private readonly Dictionary<string, string> _yetkiMap = new()
+        {
+            { "gostergePaneliToolStripMenuItem", "DASHBOARD" },
+            { "yerlesimAyarlariToolStripMenuItem", "YERLESIM_AYARLARI" },
+            { "raporlamaToolStripMenuItem", "RAPORLAMA" },
+            { "ayarlarToolStripMenuItem", "AYARLAR"},
+            // Kitap
+
+            { "kitapToolStripMenuItem", "KITAP_LISTELE" },
+            { "btnKitapEkle", "KITAP_EKLE" },
+            { "btnKitapGuncelle", "KITAP_GUNCELLE" },
+            { "btnKitapSil", "KITAP_SIL" },
+        
+            // Kategori
+            { "kategoriIslemleriToolStripMenuItem", "KATEGORI_LISTELE" },
+            { "btnKategoriEkle", "KATEGORI_EKLE" },
+            { "btnKategoriGuncelle", "KATEGORI_GUNCELLE" },
+            { "btnKategoriSil", "KATEGORI_SIL" },
+        
+            // Yazar
+            { "yazarToolStripMenuItem", "YAZAR_LISTELE" },
+            { "btnYazarEkle", "YAZAR_EKLE" },
+            { "btnYazarGuncelle", "YAZAR_GUNCELLE" },
+            { "btnYazarSil", "YAZAR_SIL" },
+        
+            // Yayınevi
+            { "yayineviToolStripMenuItem", "YAYINEVI_LISTELE" },
+            { "btnYayineviEkle", "YAYINEVI_EKLE" },
+            { "btnYayineviGuncelle", "YAYINEVI_GUNCELLE" },
+            { "btnYayineviSil", "YAYINEVI_SIL" },
+        
+            // Dil
+            { "dilToolStripMenuItem", "DIL_LISTELE" },
+            { "btnDilEkle", "DIL_EKLE" },
+            { "btnDilGuncelle", "DIL_GUNCELLE" },
+            { "btnDilSil", "DIL_SIL" },
+        
+            // Ödünç
+            { "oduncToolStripMenuItem", "ODUNC_LISTELE" },
+            { "btnOduncVer", "ODUNC_VER" },
+            { "btnIadeAl", "IADE_AL" },
+        
+            // Üye
+            { "uyeToolStripMenuItem", "UYE_LISTELE" },
+            { "btnUyeEkle", "UYE_EKLE" },
+            { "btnUyeGuncelle", "UYE_GUNCELLE" },
+            { "btnUyeSil", "UYE_SIL" },
+        
+            // Personel
+            { "personelToolStripMenuItem", "PERSONEL_LISTELE" },
+            { "btnPersonelEkle", "PERSONEL_EKLE" },
+            { "btnPersonelGuncelle", "PERSONEL_GUNCELLE" },
+            { "btnPersonelSil", "PERSONEL_SIL" },
+        
+            // Yönetim
+            { "yonetimToolStripMenuItem", "YONETIM_LISTELE" },
+            { "btnYonetimEkle", "YONETIM_EKLE" },
+            { "btnYonetimGuncelle", "YONETIM_GUNCELLE" },
+            { "btnYonetimSil", "YONETIM_SIL" }
+        };
+        private bool ApplyMenuPermissions(ToolStripItemCollection items, HashSet<string> perms)
+        {
+            bool anyVisible = false;
+
+            foreach (ToolStripItem item in items)
+            {
+                if (item.Name == "cikisToolStripMenuItem")
+                {
+                    item.Visible = true;
+                    anyVisible = true;
+                    continue;
+                }
+
+                bool visible = false;
+
+                if (_yetkiMap.TryGetValue(item.Name, out var yetki))
+                    visible = perms.Contains(yetki);
+
+                if (item is ToolStripMenuItem menuItem && menuItem.DropDownItems.Count > 0)
+                {
+                    bool childVisible = ApplyMenuPermissions(menuItem.DropDownItems, perms);
+                    visible = visible || childVisible;
+                }
+
+                item.Visible = visible;
+                anyVisible |= visible;
+            }
+
+            return anyVisible;
+        }
         private void SetMenuVisibility(int personelId)
         {
             var userPermissions = _yetkiKontrol.GetUserPermissions(personelId);
 
-            var gostergePaneliItem = menuStrip1.Items["gostergePaneliToolStripMenuItem"];
-            if (gostergePaneliItem != null)
+            foreach (var map in _yetkiMap)
             {
-                gostergePaneliItem.Visible = userPermissions.Contains("DASHBOARD");
+                var menuItem = menuStrip1.Items[map.Key];
+                if (menuItem != null)
+                {
+                    menuItem.Visible = userPermissions.Contains(map.Value);
+                }
+            }
+        }
+        private void HideAllMenus(ToolStripItemCollection items)
+        {
+            foreach (ToolStripItem item in items)
+            {
+                if (item.Name == "cikisToolStripMenuItem")
+                {
+                    item.Visible = true;
+                    continue;
+                }
+
+                item.Visible = false;
+
+                if (item is ToolStripMenuItem menuItem && menuItem.DropDownItems.Count > 0)
+                    HideAllMenus(menuItem.DropDownItems);
             }
         }
     }

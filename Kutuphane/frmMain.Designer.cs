@@ -35,6 +35,18 @@ namespace Kutuphane.UI
             panel_Ust = new Panel();
             label_Mesaj = new Label();
             lblKullaniciAdi = new Label();
+            panel_Giris = new Panel();
+            panel_Sol = new Panel();
+            label_Logo = new Label();
+            label_Baslik2 = new Label();
+            label_Baslik1 = new Label();
+            checkBox_BeniHatirla = new CheckBox();
+            btnCikis = new Button();
+            btnGiris = new Button();
+            label7 = new Label();
+            textBox_Sifre = new TextBox();
+            textBox_KullaniciAdi = new TextBox();
+            label9 = new Label();
             flowLayoutPanel_Kartlar = new FlowLayoutPanel();
             panel_Kitap = new Panel();
             label_KitapSayisi = new Label();
@@ -72,7 +84,10 @@ namespace Kutuphane.UI
             raporlamaToolStripMenuItem = new ToolStripMenuItem();
             ayarlarToolStripMenuItem = new ToolStripMenuItem();
             cikisToolStripMenuItem = new ToolStripMenuItem();
+            yonetimToolStripMenuItem = new ToolStripMenuItem();
             panel_Ust.SuspendLayout();
+            panel_Giris.SuspendLayout();
+            panel_Sol.SuspendLayout();
             flowLayoutPanel_Kartlar.SuspendLayout();
             panel_Kitap.SuspendLayout();
             panel1.SuspendLayout();
@@ -117,9 +132,156 @@ namespace Kutuphane.UI
             lblKullaniciAdi.TabIndex = 1;
             lblKullaniciAdi.Text = "👤 Hoşgeldin,";
             // 
+            // panel_Giris
+            // 
+            panel_Giris.Controls.Add(panel_Sol);
+            panel_Giris.Controls.Add(checkBox_BeniHatirla);
+            panel_Giris.Controls.Add(btnCikis);
+            panel_Giris.Controls.Add(btnGiris);
+            panel_Giris.Controls.Add(label7);
+            panel_Giris.Controls.Add(textBox_Sifre);
+            panel_Giris.Controls.Add(textBox_KullaniciAdi);
+            panel_Giris.Controls.Add(label9);
+            panel_Giris.Location = new Point(700, 341);
+            panel_Giris.MaximumSize = new Size(635, 350);
+            panel_Giris.Name = "panel_Giris";
+            panel_Giris.Size = new Size(635, 350);
+            panel_Giris.TabIndex = 8;
+            // 
+            // panel_Sol
+            // 
+            panel_Sol.BackColor = Color.FromArgb(41, 128, 185);
+            panel_Sol.Controls.Add(label_Logo);
+            panel_Sol.Controls.Add(label_Baslik2);
+            panel_Sol.Controls.Add(label_Baslik1);
+            panel_Sol.Dock = DockStyle.Left;
+            panel_Sol.Location = new Point(0, 0);
+            panel_Sol.Name = "panel_Sol";
+            panel_Sol.Size = new Size(250, 350);
+            panel_Sol.TabIndex = 5;
+            // 
+            // label_Logo
+            // 
+            label_Logo.AutoSize = true;
+            label_Logo.Font = new Font("Segoe UI", 60F);
+            label_Logo.ForeColor = Color.White;
+            label_Logo.Location = new Point(55, 60);
+            label_Logo.Name = "label_Logo";
+            label_Logo.Size = new Size(155, 106);
+            label_Logo.TabIndex = 2;
+            label_Logo.Text = "🔐";
+            // 
+            // label_Baslik2
+            // 
+            label_Baslik2.AutoSize = true;
+            label_Baslik2.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point, 162);
+            label_Baslik2.ForeColor = Color.White;
+            label_Baslik2.Location = new Point(48, 208);
+            label_Baslik2.Name = "label_Baslik2";
+            label_Baslik2.Size = new Size(137, 30);
+            label_Baslik2.TabIndex = 1;
+            label_Baslik2.Text = "Otomasyonu";
+            // 
+            // label_Baslik1
+            // 
+            label_Baslik1.AutoSize = true;
+            label_Baslik1.Font = new Font("Segoe UI", 20F, FontStyle.Bold, GraphicsUnit.Point, 162);
+            label_Baslik1.ForeColor = Color.White;
+            label_Baslik1.Location = new Point(45, 171);
+            label_Baslik1.Name = "label_Baslik1";
+            label_Baslik1.Size = new Size(157, 37);
+            label_Baslik1.TabIndex = 0;
+            label_Baslik1.Text = "Kütüphane";
+            // 
+            // checkBox_BeniHatirla
+            // 
+            checkBox_BeniHatirla.AutoSize = true;
+            checkBox_BeniHatirla.Font = new Font("Segoe UI", 10F);
+            checkBox_BeniHatirla.ForeColor = Color.FromArgb(64, 64, 64);
+            checkBox_BeniHatirla.Location = new Point(285, 202);
+            checkBox_BeniHatirla.Name = "checkBox_BeniHatirla";
+            checkBox_BeniHatirla.Size = new Size(98, 23);
+            checkBox_BeniHatirla.TabIndex = 3;
+            checkBox_BeniHatirla.Text = "Beni Hatırla";
+            checkBox_BeniHatirla.UseVisualStyleBackColor = true;
+            // 
+            // btnCikis
+            // 
+            btnCikis.FlatAppearance.BorderSize = 0;
+            btnCikis.FlatStyle = FlatStyle.Flat;
+            btnCikis.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            btnCikis.ForeColor = Color.FromArgb(192, 57, 43);
+            btnCikis.Location = new Point(592, 1);
+            btnCikis.Name = "btnCikis";
+            btnCikis.Size = new Size(40, 40);
+            btnCikis.TabIndex = 6;
+            btnCikis.Text = "X";
+            btnCikis.UseVisualStyleBackColor = true;
+            btnCikis.Visible = false;
+            // 
+            // btnGiris
+            // 
+            btnGiris.BackColor = Color.FromArgb(39, 174, 96);
+            btnGiris.Cursor = Cursors.Hand;
+            btnGiris.FlatAppearance.BorderSize = 0;
+            btnGiris.FlatStyle = FlatStyle.Flat;
+            btnGiris.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 162);
+            btnGiris.ForeColor = Color.White;
+            btnGiris.Location = new Point(285, 245);
+            btnGiris.Name = "btnGiris";
+            btnGiris.Size = new Size(301, 44);
+            btnGiris.TabIndex = 4;
+            btnGiris.Text = "GİRİŞ YAP";
+            btnGiris.UseVisualStyleBackColor = false;
+            btnGiris.Click += btnGiris_Click;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
+            label7.ForeColor = Color.DimGray;
+            label7.Location = new Point(285, 135);
+            label7.Name = "label7";
+            label7.Size = new Size(65, 19);
+            label7.TabIndex = 3;
+            label7.Text = "🔑 Şifre:";
+            // 
+            // textBox_Sifre
+            // 
+            textBox_Sifre.Font = new Font("Segoe UI", 12F);
+            textBox_Sifre.Location = new Point(285, 158);
+            textBox_Sifre.Margin = new Padding(4);
+            textBox_Sifre.Name = "textBox_Sifre";
+            textBox_Sifre.PasswordChar = '●';
+            textBox_Sifre.PlaceholderText = "Şifrenizi giriniz";
+            textBox_Sifre.Size = new Size(298, 29);
+            textBox_Sifre.TabIndex = 2;
+            textBox_Sifre.UseSystemPasswordChar = true;
+            // 
+            // textBox_KullaniciAdi
+            // 
+            textBox_KullaniciAdi.Font = new Font("Segoe UI", 12F);
+            textBox_KullaniciAdi.Location = new Point(285, 82);
+            textBox_KullaniciAdi.Margin = new Padding(4);
+            textBox_KullaniciAdi.Name = "textBox_KullaniciAdi";
+            textBox_KullaniciAdi.PlaceholderText = "Kullanıcı adınızı giriniz";
+            textBox_KullaniciAdi.Size = new Size(298, 29);
+            textBox_KullaniciAdi.TabIndex = 1;
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
+            label9.ForeColor = Color.DimGray;
+            label9.Location = new Point(285, 59);
+            label9.Name = "label9";
+            label9.Size = new Size(113, 19);
+            label9.TabIndex = 3;
+            label9.Text = "👤 Kullanıcı Adı:";
+            // 
             // flowLayoutPanel_Kartlar
             // 
-            flowLayoutPanel_Kartlar.BackColor = Color.FromArgb(44, 62, 80);
+            flowLayoutPanel_Kartlar.BackColor = Color.FromArgb(236, 240, 241);
             flowLayoutPanel_Kartlar.Controls.Add(panel_Kitap);
             flowLayoutPanel_Kartlar.Controls.Add(panel1);
             flowLayoutPanel_Kartlar.Controls.Add(panel2);
@@ -363,7 +525,7 @@ namespace Kutuphane.UI
             // menuStrip1
             // 
             menuStrip1.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 162);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { gostergePaneliToolStripMenuItem, yerlesimAyarlariToolStripMenuItem, kitapIslemleriToolStripMenuItem, oduncToolStripMenuItem, uyeToolStripMenuItem, personelToolStripMenuItem, raporlamaToolStripMenuItem, ayarlarToolStripMenuItem, cikisToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { gostergePaneliToolStripMenuItem, yerlesimAyarlariToolStripMenuItem, kitapIslemleriToolStripMenuItem, oduncToolStripMenuItem, uyeToolStripMenuItem, personelToolStripMenuItem, raporlamaToolStripMenuItem, ayarlarToolStripMenuItem, cikisToolStripMenuItem, yonetimToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.RenderMode = ToolStripRenderMode.Professional;
@@ -377,7 +539,7 @@ namespace Kutuphane.UI
             gostergePaneliToolStripMenuItem.Name = "gostergePaneliToolStripMenuItem";
             gostergePaneliToolStripMenuItem.Size = new Size(156, 24);
             gostergePaneliToolStripMenuItem.Text = "📊 Gösterge Paneli";
-            gostergePaneliToolStripMenuItem.Click += menuStrip_Click;
+            gostergePaneliToolStripMenuItem.Click += gostergePaneliToolStripMenuItem_Click;
             // 
             // yerlesimAyarlariToolStripMenuItem
             // 
@@ -487,11 +649,21 @@ namespace Kutuphane.UI
             // 
             // cikisToolStripMenuItem
             // 
+            cikisToolStripMenuItem.Alignment = ToolStripItemAlignment.Right;
             cikisToolStripMenuItem.ForeColor = Color.FromArgb(192, 57, 43);
             cikisToolStripMenuItem.Name = "cikisToolStripMenuItem";
             cikisToolStripMenuItem.Size = new Size(104, 24);
             cikisToolStripMenuItem.Text = "🔒 Çıkış Yap";
             cikisToolStripMenuItem.Click += cikisYapToolStripMenuItem_Click;
+            // 
+            // yonetimToolStripMenuItem
+            // 
+            yonetimToolStripMenuItem.ForeColor = Color.FromArgb(44, 62, 80);
+            yonetimToolStripMenuItem.Name = "yonetimToolStripMenuItem";
+            yonetimToolStripMenuItem.Size = new Size(138, 24);
+            yonetimToolStripMenuItem.Tag = "frmAdmin";
+            yonetimToolStripMenuItem.Text = "Yönetim Ayarları";
+            yonetimToolStripMenuItem.Click += menuStrip_Click;
             // 
             // frmMain
             // 
@@ -499,6 +671,7 @@ namespace Kutuphane.UI
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(1405, 711);
+            Controls.Add(panel_Giris);
             Controls.Add(flowLayoutPanel_Kartlar);
             Controls.Add(panel_Ust);
             Controls.Add(menuStrip1);
@@ -506,12 +679,16 @@ namespace Kutuphane.UI
             Icon = (Icon)resources.GetObject("$this.Icon");
             IsMdiContainer = true;
             Name = "frmMain";
-            StartPosition = FormStartPosition.CenterParent;
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Kütüphane Otomasyonu";
             WindowState = FormWindowState.Maximized;
             Load += frmMain_Load;
             panel_Ust.ResumeLayout(false);
             panel_Ust.PerformLayout();
+            panel_Giris.ResumeLayout(false);
+            panel_Giris.PerformLayout();
+            panel_Sol.ResumeLayout(false);
+            panel_Sol.PerformLayout();
             flowLayoutPanel_Kartlar.ResumeLayout(false);
             panel_Kitap.ResumeLayout(false);
             panel_Kitap.PerformLayout();
@@ -576,5 +753,18 @@ namespace Kutuphane.UI
         private ToolStripMenuItem ayarlarToolStripMenuItem;
         private ToolStripMenuItem cikisToolStripMenuItem;
         private ToolStripMenuItem kitapToolStripMenuItem;
+        private Panel panel_Giris;
+        private Panel panel_Sol;
+        private Label label_Logo;
+        private Label label_Baslik2;
+        private Label label_Baslik1;
+        private CheckBox checkBox_BeniHatirla;
+        private Button btnCikis;
+        private Button btnGiris;
+        private Label label7;
+        private TextBox textBox_Sifre;
+        private TextBox textBox_KullaniciAdi;
+        private Label label9;
+        private ToolStripMenuItem yonetimToolStripMenuItem;
     }
 }

@@ -72,7 +72,11 @@ namespace Kutuphane.DAL.Concrete.Configuration
                 new Yetki { YetkiId = 33, YetkiAdi = "Yönetim Listeleme", YetkiKodu = "YONETIM_LISTELE" },
                 new Yetki { YetkiId = 34, YetkiAdi = "Yönetim Ekleme", YetkiKodu = "YONETIM_EKLE" },
                 new Yetki { YetkiId = 35, YetkiAdi = "Yönetim Güncelleme", YetkiKodu = "YONETIM_GUNCELLE" },
-                new Yetki { YetkiId = 36, YetkiAdi = "Yönetim Silme", YetkiKodu = "YONETIM_SIL" }
+                new Yetki { YetkiId = 36, YetkiAdi = "Yönetim Silme", YetkiKodu = "YONETIM_SIL" },
+
+                new Yetki { YetkiId = 37, YetkiAdi = "Raporlama", YetkiKodu = "RAPORLAMA" },
+                new Yetki { YetkiId = 38, YetkiAdi = "Ayarlar", YetkiKodu = "AYARLAR" },
+                new Yetki { YetkiId = 39, YetkiAdi = "Yerleşim Ayarları", YetkiKodu = "YERLESIM_AYARLARI" }
             );
         }
     }
