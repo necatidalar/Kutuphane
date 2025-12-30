@@ -20,27 +20,26 @@ DBCC CHECKIDENT ('Uyeler', RESEED, 0);
 INSERT INTO Personeller (Ad, Soyad, CinsiyetId, KullaniciAdi, Sifre, AktifMi)
 VALUES
 ('Necati','DALAR',1,'necatidalar','MTIzNDU=',1),
-('Ali','Yılmaz',1,'ali','123',1),
-('Ayşe','Demir',2,'ayse','123',1),
-('Mehmet','Kaya',1,'mehmet','123',1),
-('Fatma','Çelik',2,'fatma','123',1),
-('Hasan','Şahin',1,'hasan','123',1),
-('Elif','Aydın',2,'elif','123',1),
-('Murat','Koç',1,'murat','123',1),
-('Zeynep','Doğan',2,'zeynep','123',1),
-('Kemal','Arslan',1,'kemal','123',1),
-('Derya','Yıldız',2,'derya','123',1),
-('Burak','Polat',1,'burak','123',1),
-('Selin','Aksoy',2,'selin','123',1),
-('Serkan','Güneş',1,'serkan','123',1),
-('Sibel','Bulut',2,'sibel','123',1),
-('Onur','Eren',1,'onur','123',1),
-('Ceren','Kurt',2,'ceren','123',1),
-('Emre','Taş',1,'emre','123',1),
-('Nihan','Karaca',2,'nihan','123',1),
-('Volkan','Öztürk',1,'volkan','123',1),
-('Buse','Çetin',2,'buse','123',1);
-
+('Ali','Yılmaz',1,'ali','MTIzNDU=',1),
+('Ayşe','Demir',2,'ayse','MTIzNDU=',1),
+('Mehmet','Kaya',1,'mehmet','MTIzNDU=',1),
+('Fatma','Çelik',2,'fatma','MTIzNDU=',1),
+('Hasan','Şahin',1,'hasan','MTIzNDU=',1),
+('Elif','Aydın',2,'elif','MTIzNDU=',1),
+('Murat','Koç',1,'murat','MTIzNDU=',1),
+('Zeynep','Doğan',2,'zeynep','MTIzNDU=',1),
+('Kemal','Arslan',1,'kemal','MTIzNDU=',1),
+('Derya','Yıldız',2,'derya','MTIzNDU=',1),
+('Burak','Polat',1,'burak','MTIzNDU=',1),
+('Selin','Aksoy',2,'selin','MTIzNDU=',1),
+('Serkan','Güneş',1,'serkan','MTIzNDU=',1),
+('Sibel','Bulut',2,'sibel','MTIzNDU=',1),
+('Onur','Eren',1,'onur','MTIzNDU=',1),
+('Ceren','Kurt',2,'ceren','MTIzNDU=',1),
+('Emre','Taş',1,'emre','MTIzNDU=',1),
+('Nihan','Karaca',2,'nihan','MTIzNDU=',1),
+('Volkan','Öztürk',1,'volkan','MTIzNDU=',1),
+('Buse','Çetin',2,'buse','MTIzNDU=',1);
 INSERT INTO Yayinevleri (Ad, KurulusYili, AktifMi)
 VALUES
 ('Can Yayınları',1981,1),
@@ -63,7 +62,6 @@ VALUES
 ('Artemis',2010,1),
 ('Martı',2006,1),
 ('Altın Kitaplar',1956,1);
-
 INSERT INTO Yazarlar (Ad, Soyad, DogumTarihi, OlumTarihi, AktifMi)
 VALUES
 ('Orhan','Kemal','1914-09-15','1970-06-02',1),
@@ -86,7 +84,6 @@ VALUES
 ('Sezai','Karakoç','1933-01-22','2021-11-16',1),
 ('Cengiz','Aytmatov','1928-12-12','2008-06-10',1),
 ('Stefan','Zweig','1881-11-28','1942-02-22',1);
-
 INSERT INTO Kitaplar
 (KitapAdi, ISBN, YazarId, YayineviId, KategoriId, BasimYili, SayfaSayisi, DilId, Stok, Aktif)
 VALUES
@@ -180,8 +177,6 @@ VALUES
 ('Hızırla Kırk Saat','9780078',18,18,1,1974,260,1,8,1),
 ('Toprak Ana','9780079',19,19,1,1980,390,1,5,1),
 ('Ay Işığı Sokağı','9780080',20,20,1,1936,100,1,10,1);
-
-
 INSERT INTO Uyeler
 (TcPass, Ad, Soyad, CinsiyetId, DogumTarihi, Telefon, Eposta, Adres, AdresDetay, AktifMi)
 VALUES
@@ -206,7 +201,6 @@ VALUES
 ('19191919191','Nihan','Karaca',2,'1993-06-26','05551919191','nihan@gmail.com','Denizli','Pamukkale',1),
 ('20202020202','Volkan','Öztürk',1,'1987-07-07','05552020202','volkan@gmail.com','Manisa','Şehzadeler',1),
 ('21212121212','Buse','Çetin',2,'1999-08-16','05552121212','buse@gmail.com','Isparta','Merkez',1);
-
 INSERT INTO Oduncler
 (UyeId, KitapId, AlisTarihi, TeslimTarihi, TeslimEdildi, TeslimEdenPersonelId, TeslimAlanPersonelId)
 VALUES
@@ -231,7 +225,6 @@ VALUES
 (18,18,'2025-09-18','2025-10-18',0,2,NULL),
 (19,19,'2025-09-19','2025-10-19',0,1,NULL),
 (20,20,'2025-09-20','2025-10-20',0,3,NULL);
-
 INSERT INTO Oduncler
 (UyeId, KitapId, AlisTarihi, TeslimTarihi, TeslimEdildi, TeslimEdenPersonelId, TeslimAlanPersonelId)
 VALUES
@@ -282,7 +275,6 @@ VALUES
 (18,10,'2025-09-18','2025-10-18',0,3,NULL),
 (19,4,'2025-09-19','2025-10-19',0,1,NULL),
 (20,8,'2025-09-20','2025-10-20',0,2,NULL);
-
 INSERT INTO Oduncler
 (UyeId, KitapId, AlisTarihi, TeslimTarihi, TeslimEdildi, TeslimEdenPersonelId, TeslimAlanPersonelId)
 VALUES
@@ -333,7 +325,6 @@ VALUES
 (18,19,'2025-12-23','2026-02-06',0,2,NULL),
 (19,20,'2025-12-23','2026-02-06',0,3,NULL),
 (20,1,'2025-12-23','2026-02-06',0,1,NULL);
-
 INSERT INTO Uyeler
 (TcPass, Ad, Soyad, CinsiyetId, DogumTarihi, Telefon, Eposta, Adres, AdresDetay, AktifMi)
 VALUES
@@ -560,3 +551,278 @@ VALUES
 ('Yansıma Yayın',2009,1),
 ('İz Yayıncılık',1985,1),
 ('Siyah Beyaz Kitap',2020,1);
+INSERT INTO Kitaplar
+(KitapAdi, ISBN, YazarId, YayineviId, KategoriId, BasimYili, SayfaSayisi, DilId, Stok, Aktif)
+VALUES
+('Sessiz Sokaklar','9780081',21,21,1,2001,240,1,5,1),
+('Gölgedeki Adam','9780082',22,22,1,2002,260,1,4,1),
+('Kayıp Zaman','9780083',23,23,1,2003,310,1,6,1),
+('Bir Sonbahar Hikayesi','9780084',24,24,1,2004,280,1,5,1),
+('Uzak Şehir','9780085',25,25,1,2005,350,1,3,1),
+
+('Rüzgarın Sesi','9780086',26,26,1,2006,190,1,7,1),
+('Kırık Hayatlar','9780087',27,27,1,2007,220,1,4,1),
+('Gecenin İçinden','9780088',28,28,1,2008,270,1,5,1),
+('Bir Yabancı','9780089',29,29,1,2009,300,1,6,1),
+('Sisli Liman','9780090',30,30,1,2010,260,1,4,1),
+
+('Yitik Düşler','9780091',31,31,1,2011,240,1,5,1),
+('Son Mektup','9780092',32,32,1,2012,210,1,6,1),
+('Gizli Defter','9780093',33,33,1,2013,280,1,4,1),
+('Karanlık Yol','9780094',34,34,1,2014,320,1,5,1),
+('Bir Gün Daha','9780095',35,35,1,2015,250,1,7,1),
+
+('Yalnızlık Defteri','9780096',36,36,1,2016,230,1,4,1),
+('Kıyıya Vuranlar','9780097',37,37,1,2017,290,1,6,1),
+('Beyaz Sessizlik','9780098',38,38,1,2018,270,1,5,1),
+('Zamanın Gölgesi','9780099',39,39,1,2019,310,1,4,1),
+('Son Durak','9780100',40,40,1,2020,260,1,6,1),
+
+('Bir Akşamüstü','9780101',41,41,1,2021,220,1,5,1),
+('Kırılma Noktası','9780102',42,42,1,2022,340,1,4,1),
+('Göç Yolu','9780103',43,43,1,2000,360,1,6,1),
+('Uykusuz Gece','9780104',44,44,1,1999,280,1,5,1),
+('Bir Şehir Masalı','9780105',45,45,1,1998,300,1,4,1),
+
+('Yarım Kalan','9780106',46,46,1,1997,240,1,6,1),
+('Sessiz Çığlık','9780107',47,47,1,1996,270,1,5,1),
+('Gökyüzü Maviydi','9780108',48,48,1,1995,260,1,4,1),
+('Bir Umut','9780109',49,49,1,1994,230,1,6,1),
+('Kapanmayan Defter','9780110',50,50,1,1993,310,1,5,1),
+
+('Kayıp İzler','9780111',51,51,1,1992,280,1,4,1),
+('Sonbahar Yağmuru','9780112',52,52,1,1991,250,1,6,1),
+('Yolculuk','9780113',53,53,1,1990,330,1,5,1),
+('Bir Hayat','9780114',54,54,1,1989,360,1,4,1),
+('Geceye Dair','9780115',55,55,1,1988,290,1,6,1),
+
+('Eski Fotoğraflar','9780116',56,56,1,1987,260,1,5,1),
+('Hatıra Defteri','9780117',57,57,1,1986,240,1,4,1),
+('Uzak Hatıralar','9780118',58,58,1,1985,320,1,6,1),
+('Bir Zamanlar','9780119',59,59,1,1984,300,1,5,1),
+('Sessiz Tanık','9780120',60,60,1,1983,270,1,4,1),
+
+('Karanlık Günler','9780121',61,61,1,1982,350,1,6,1),
+('Yitik Şehir','9780122',62,62,1,1981,330,1,5,1),
+('Bir An','9780MTIzNDU=',63,63,1,1980,220,1,4,1),
+('Son Yol','9780124',64,64,1,1979,360,1,6,1),
+('Gecenin Sonu','9780125',65,65,1,1978,310,1,5,1),
+
+('Sessiz Dönüş','9780126',66,66,1,1977,280,1,4,1),
+('Bir Mektup','9780127',67,67,1,1976,240,1,6,1),
+('Kırık Saat','9780128',68,68,1,1975,260,1,5,1),
+('Yol Ayrımı','9780129',69,69,1,1974,340,1,4,1),
+('Son Işık','9780130',70,70,1,1973,300,1,6,1);
+
+INSERT INTO Yazarlar (Ad, Soyad, DogumTarihi, OlumTarihi, AktifMi)
+VALUES
+('Alp','Ersoy','1975-01-10',NULL,1),
+('Selçuk','Yener','1976-02-14',NULL,1),
+('Murat','Kocaman','1977-03-18',NULL,1),
+('Hülya','Özdemir','1978-04-22',NULL,1),
+('Serap','Ulu','1979-05-30',NULL,1),
+
+('Cihan','Öztekin','1980-06-11',NULL,1),
+('Burcu','Kar','1981-07-19',NULL,1),
+('Emrah','Taşkaya','1982-08-25',NULL,1),
+('Duygu','Aktaş','1983-09-03',NULL,1),
+('Volkan','Eroğlu','1984-10-09',NULL,1),
+
+('Sinem','Arman','1985-11-17',NULL,1),
+('Tolunay','Çetin','1986-12-21',NULL,1),
+('Bahar','Kılıç','1987-01-14',NULL,1),
+('Erhan','Gürsoy','1988-02-26',NULL,1),
+('Gizem','Yurt','1989-03-08',NULL,1),
+
+('Okan','Sezgin','1990-04-19',NULL,1),
+('İrem','Bulur','1991-05-27',NULL,1),
+('Kerem','Şanal','1992-06-06',NULL,1),
+('Pelin','Acar','1993-07-15',NULL,1),
+('Fırat','Bayındır','1994-08-23',NULL,1),
+
+('Zehra','Işın','1995-09-12',NULL,1),
+('Berkay','Özkan','1996-10-04',NULL,1),
+('Elvan','Demirel','1997-11-28',NULL,1),
+('Kaan','Sönmez','1998-12-09',NULL,1),
+('Nazlı','Ekin','1999-01-31',NULL,1),
+
+('Batı','Korkut','2000-02-18',NULL,1),
+('Eylül','Çakmak','2001-03-07',NULL,1),
+('Aras','Yıldır','2002-04-16',NULL,1),
+('Nehir','Tunç','2003-05-25',NULL,1),
+('Atlas','Bozyel','2004-06-30',NULL,1);
+INSERT INTO Yazarlar (Ad, Soyad, DogumTarihi, OlumTarihi, AktifMi)
+VALUES
+('Rasim','Kurtuluş','1965-01-12',NULL,1),
+('Ebru','Sancak','1966-02-18',NULL,1),
+('Levent','Başaran','1967-03-21',NULL,1),
+('Sibel','Korkusuz','1968-04-09',NULL,1),
+('Tayfun','Erginer','1969-05-27',NULL,1),
+
+('Melike','Doğaner','1970-06-15',NULL,1),
+('Yavuz','Gürel','1971-07-03',NULL,1),
+('Sevilay','Özcan','1972-08-11',NULL,1),
+('Cem','Kutlu','1973-09-19',NULL,1),
+('Hande','Altıntaş','1974-10-05',NULL,1),
+
+('İlhan','Sarıkaya','1975-11-23',NULL,1),
+('Pınar','Erdem','1976-12-14',NULL,1),
+('Korhan','Aydınalp','1977-01-28',NULL,1),
+('Nermin','Çavdar','1978-02-07',NULL,1),
+('Barış','Soysal','1979-03-16',NULL,1),
+
+('Deniz','Işıker','1980-04-04',NULL,1),
+('Serhat','Karabulak','1981-05-22',NULL,1),
+('Dilan','Gürbüz','1982-06-30',NULL,1),
+('Oğuzhan','Sevim','1983-07-18',NULL,1),
+('Zeyno','Baykal','1984-08-26',NULL,1),
+
+('Kıvanç','Toraman','1985-09-13',NULL,1),
+('Elif','Uzgören','1986-10-21',NULL,1),
+('Hakan','Bulucu','1987-11-09',NULL,1),
+('Büşra','Yetiş','1988-12-02',NULL,1),
+('Serkan','Aksakal','1989-01-17',NULL,1),
+
+('Aslı','Erdoğan','1990-02-25',NULL,1),
+('Mert','Sağlam','1991-03-14',NULL,1),
+('Nilay','Kaptan','1992-04-06',NULL,1),
+('Ulaş','Demirci','1993-05-19',NULL,1),
+('Ece','Şener','1994-06-27',NULL,1),
+
+('Furkan','Albay','1995-07-11',NULL,1),
+('İlayda','Gencer','1996-08-03',NULL,1),
+('Burhan','Yılmazer','1997-09-22',NULL,1),
+('Selma','Taşkıran','1998-10-08',NULL,1),
+('Batuhan','Özbay','1999-11-29',NULL,1),
+
+('Cansu','Arpacı','2000-12-16',NULL,1),
+('Onat','Kireç','2001-01-05',NULL,1),
+('Eylül','Karaman','2002-02-18',NULL,1),
+('Arda','Köse','2003-03-27',NULL,1),
+('Nisan','Ural','2004-04-09',NULL,1),
+
+('Kaan','Çetinkaya','2005-05-21',NULL,1),
+('Sude','Polater','2006-06-12',NULL,1),
+('Mira','Gökçe','2007-07-03',NULL,1),
+('Doruk','Sezgin','2008-08-14',NULL,1),
+('İpek','Gürler','2009-09-26',NULL,1),
+
+('Alper','Yalın','2010-10-07',NULL,1),
+('Ela','Dinler','2011-11-18',NULL,1),
+('Berk','Akpınar','2012-12-01',NULL,1),
+('Defne','Kalaycı','2013-01-20',NULL,1),
+('Eren','Tosun','2014-02-28',NULL,1),
+
+('Yaren','Boz','2015-03-16',NULL,1),
+('Metehan','Uslu','2016-04-25',NULL,1),
+('Zümra','Kapan','2017-05-13',NULL,1),
+('Atlas','Yörükoğlu','2018-06-07',NULL,1),
+('Lina','Özgen','2019-07-30',NULL,1);
+INSERT INTO Yayinevleri (Ad, KurulusYili, AktifMi)
+VALUES
+('Ufuk Çizgi Yayınları',1980,1),
+('Karanfil Kitap',1985,1),
+('Pera Yayıncılık',1992,1),
+('Zaman Kitaplığı',1998,1),
+('Nilüfer Yayın',2001,1),
+
+('Sahra Kitap',2003,1),
+('Arasta Yayınları',2005,1),
+('Mola Kitap',2007,1),
+('Pan Kitaplık',2009,1),
+('Kıyı Yayın',2011,1),
+
+('Birikim Kitap',1987,1),
+('Eşik Yayınları',1990,1),
+('İlmek Kitap',1994,1),
+('Yol Yayınları',1996,1),
+('Harman Kitap',1999,1),
+
+('Punto Yayıncılık',2002,1),
+('Raf Kitap',2004,1),
+('İzlek Yayınları',2006,1),
+('Anka Kitap',2008,1),
+('Tema Yayın',2010,1),
+
+('Odak Kitap',2012,1),
+('Çera Yayınları',2013,1),
+('Kapsam Kitap',2014,1),
+('Yansı Kitap',2015,1),
+('Mühür Yayın',2016,1),
+
+('Köprü Kitap',2017,1),
+('Seyir Yayınları',2018,1),
+('Sarmaşık Kitap',2019,1),
+('İthaf Yayın',2020,1),
+('Rota Plus',2021,1);
+
+INSERT INTO Kitaplar
+(KitapAdi, ISBN, YazarId, YayineviId, KategoriId, BasimYili, SayfaSayisi, DilId, Stok, Aktif)
+VALUES
+('Gece Yolcusu','9780151',71,71,1,2001,280,1,5,1),
+('Kül ve Zaman','9780152',72,72,1,2002,320,1,4,1),
+('Sessiz Liman','9780153',73,73,1,2003,260,1,6,1),
+('Bir Kış Sabahı','9780154',74,74,1,2004,240,1,5,1),
+('Uzak Işık','9780155',75,75,1,2005,300,1,3,1),
+
+('Gölgeler Şehri','9780156',76,76,1,2006,350,1,4,1),
+('Son Perde','9780157',77,77,1,2007,270,1,6,1),
+('Kayıp Yollar','9780158',78,78,1,2008,310,1,5,1),
+('Bir Akşam','9780159',79,79,1,2009,220,1,4,1),
+('Gizli Ses','9780160',80,80,1,2010,260,1,7,1),
+
+('Yalnız Adam','9780161',81,81,1,2011,330,1,5,1),
+('Karanlık Defter','9780162',82,82,1,2012,290,1,4,1),
+('Rüzgârın Ardından','9780163',83,83,1,2013,340,1,6,1),
+('Bir Yolculuk','9780164',84,84,1,2014,280,1,5,1),
+('Gecenin Hatırası','9780165',85,85,1,2015,250,1,4,1),
+
+
+('Karanlık Yolculuk','9780201',1,1,1,2001,310,1,4,1),
+('Bir Başlangıç','9780202',2,2,1,2002,280,1,6,1),
+('Sonbahar Akşamı','9780203',3,3,1,2003,340,1,5,1),
+('Sessiz Çizgi','9780204',4,4,1,2004,260,1,4,1),
+('Uzak Hat','9780205',5,5,1,2005,300,1,6,1),
+
+('Zaman Defteri','9780206',6,6,1,2006,320,1,5,1),
+('Bir Adım','9780207',7,7,1,2007,240,1,4,1),
+('Gölgede Kalan','9780208',8,8,1,2008,360,1,6,1),
+('Son Dönüş','9780209',9,9,1,2009,290,1,5,1),
+('Gece Yolunda','9780210',10,10,1,2010,270,1,4,1),
+
+('Bir Umut Daha','9780211',11,11,1,2011,300,1,6,1),
+('Sessiz Rüzgâr','9780212',12,12,1,2012,330,1,5,1),
+('Zamanın Sesi','9780213',13,13,1,2013,260,1,4,1),
+('Karanlıkta','9780214',14,14,1,2014,350,1,6,1),
+('Bir Hat','9780215',15,15,1,2015,280,1,5,1),
+
+('Son Işıklar','9780216',16,16,1,2016,310,1,4,1),
+('Geceden Kalan','9780217',17,17,1,2017,340,1,6,1),
+('Sessiz Yollar','9780218',18,18,1,2018,270,1,5,1),
+('Bir Anı','9780219',19,19,1,2019,250,1,4,1),
+('Zamanın Sonu','9780220',20,20,1,2020,360,1,6,1),
+
+('Kırık Yol','9780221',21,21,1,2021,300,1,5,1),
+('Son Durak','9780222',22,22,1,2022,280,1,4,1),
+('Sessiz Ufuk','9780223',23,23,1,2000,330,1,6,1),
+('Bir Düş','9780224',24,24,1,1999,260,1,5,1),
+('Gölge Saat','9780225',25,25,1,1998,310,1,4,1),
+
+('Karanlık Kıyı','9780226',26,26,1,1997,350,1,6,1),
+('Son Yolcu','9780227',27,27,1,1996,290,1,5,1),
+('Bir İz','9780228',28,28,1,1995,270,1,4,1),
+('Sessiz Hatıra','9780229',29,29,1,1994,320,1,6,1),
+('Zamanın Gölü','9780230',30,30,1,1993,300,1,5,1),
+
+('Kayıp Umut','9780231',31,31,1,1992,260,1,4,1),
+('Son Defter','9780232',32,32,1,1991,340,1,6,1),
+('Bir Gece','9780233',33,33,1,1990,280,1,5,1),
+('Sessiz Saat','9780234',34,34,1,1989,310,1,4,1),
+('Karanlık İz','9780235',35,35,1,1988,360,1,6,1),
+
+('Yolun Kıyısı','9780236',36,36,1,1987,300,1,5,1),
+('Bir Hatıra Daha','9780237',37,37,1,1986,270,1,4,1),
+('Son Gece','9780238',38,38,1,1985,330,1,6,1),
+('Sessiz Umut','9780239',39,39,1,1984,290,1,5,1),
+('Zaman Yolcusu','9780240',40,40,1,1983,350,1,4,1);
+

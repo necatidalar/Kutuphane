@@ -108,5 +108,10 @@ namespace Kutuphane.BLL.Concrete
         {
             return _kitapDal.KitapListeDetayliGetir(predicate);
         }
+
+        public IDataResult<List<OduncKitapDto>> OduncIcinListeGetir(Expression<Func<Kitap, bool>>? predicate = null)
+        {
+            return _kitapDal.OduncIcinListeGetir(predicate);
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Kutuphane.BLL.Concrete;
+﻿using Kutuphane.BLL.Abstract;
+using Kutuphane.BLL.Concrete;
 using Kutuphane.DAL.Concrete;
 using Kutuphane.Model.DTO;
 using Kutuphane.Model.Entity;
@@ -8,12 +9,13 @@ namespace Kutuphane.UI
     public partial class frmOduncIslemleri : Form
     {
         private readonly UyeManager _uyeManager;
-        private readonly KitapManager _kitapManager;
+        private readonly IKitapService _kitapService;
         private readonly OduncManager _oduncManager;
 
         private int _secilenUyeId = 0;
         private int _girisYapanPersonelId = 0;
         private List<KitapDto> _sepetiKitaplar = new();
+        List<OduncKitapDto> oduncKitapListe = new();
         public int GirisYapanPersonelId
         {
             get => _girisYapanPersonelId;
@@ -29,15 +31,29 @@ namespace Kutuphane.UI
         }
         private void frmOduncIslemleri_Load(object sender, EventArgs e)
         {
+
+            InitializeDataLoads();
+            InitialieUIComponents();
+
+        }
+        private void InitializeDataLoads()
+        {
+            var odunckitapresult = _kitapService.OduncIcinListeGetir();
+            oduncKitapListe = odunckitapresult.Data;
+        }
+
+        private void InitialieUIComponents()
+        {
             TumOdunclerListViewDuzenle();
             TumOduncleriListele();
             SepetListViewDuzenle();
             KitapListeListViewDuzenle();
             UyeninAldigiKitapListViewDuzenle();
             UyeListViewDuzenle();
-
             dateTimePicker_TeslimTarihi.Value = DateTime.Now.AddDays(45);
         }
+
+
         private void TumOdunclerListViewDuzenle()
         {
             listView_AlinanTumKitaplarinListesi.View = View.Details;

@@ -17,6 +17,7 @@ namespace Kutuphane.UI
         public string GirisYapanPersonelAd { get; private set; }
         public string GirisYapanPersonelSoyad { get; private set; }
         public PersonelBilgileriDto loginPersoneli { get; set; }
+        private readonly YetkiKontrol _yetkiKontrol;
         public frmMain()
         {
             InitializeComponent();
@@ -27,12 +28,11 @@ namespace Kutuphane.UI
             _yazarManager = new YazarManager(new YazarDal());
             _yayineviManager = new YayineviManager(new YayineviDal());
             loginPersoneli = new PersonelBilgileriDto();
+            _yetkiKontrol = new YetkiKontrol(new KutuphaneDbContext());
         }
         private void frmMain_Load(object sender, EventArgs e)
         {
             CheckDatabaseConnection();
-            //SetForLoginView(true);
-            //Logout();
         }
         private void CheckDatabaseConnection()
         {
@@ -118,6 +118,7 @@ namespace Kutuphane.UI
             girisForm.FormClosed += LoginFormClosed;
             girisForm.Show();
         }
+
         private void LoginFormClosed(object sender, FormClosedEventArgs e)
         {
             frmGiris girisForm = sender as frmGiris;
@@ -129,7 +130,6 @@ namespace Kutuphane.UI
             }
 
             loginPersoneli = girisForm.GirisYapanPersonel;
-
             GirisYapanPersonelId = loginPersoneli.PersonelId;
             GirisYapanPersonelAd = loginPersoneli.Ad;
             GirisYapanPersonelSoyad = loginPersoneli.Soyad;
@@ -140,6 +140,7 @@ namespace Kutuphane.UI
             ShowHideTopPanels(true, true);
             timer_Dashboard.Start();
             Listele();
+            SetMenuVisibility(GirisYapanPersonelId);
         }
         private void Listele()
         {
@@ -278,6 +279,29 @@ namespace Kutuphane.UI
         private void cikisYapToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Logout();
+        }
+
+        private void SetMenuVisibility(int personelId)
+        {
+            var userPermissions = _yetkiKontrol.GetUserPermissions(personelId);
+
+            var gostergePaneliItem = menuStrip1.Items["gostergePaneliToolStripMenuItem"];
+            if (gostergePaneliItem != null)
+            {
+                gostergePaneliItem.Visible = userPermissions.Contains("DASHBOARD");
+            }
+
+            var kitapItem = menuStrip1.Items["kitapToolStripMenuItem"];
+            if (kitapItem != null)
+            {
+                kitapItem.Visible = userPermissions.Contains("KITAP_LISTELE");
+            }
+
+            var yerlesimItem = menuStrip1.Items["yerlesimAyarlariToolStripMenuItem"];
+            if (yerlesimItem != null)
+            {
+                yerlesimItem.Visible = userPermissions.Contains("YERLESIM_AYARLARI");
+            }
         }
     }
 }

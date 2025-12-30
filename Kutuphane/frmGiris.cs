@@ -33,9 +33,11 @@ namespace Kutuphane.UI
 
         private void btnGiris_Click(object sender, EventArgs e)
         {
-            LoginUserDto loginUserDto = new();
-            loginUserDto.KullaniciAdi = textBox_KullaniciAdi.Text;
-            loginUserDto.Sifre = SecurityHelper.EncodeBase64(textBox_Sifre.Text);
+            LoginUserDto loginUserDto = new()
+            {
+                KullaniciAdi = textBox_KullaniciAdi.Text,
+                Sifre = SecurityHelper.EncodeBase64(textBox_Sifre.Text)
+            };
 
             var result = _personelService.Login(loginUserDto);
 
