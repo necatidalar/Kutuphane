@@ -118,7 +118,6 @@ namespace Kutuphane.UI
             girisForm.FormClosed += LoginFormClosed;
             girisForm.Show();
         }
-
         private void LoginFormClosed(object sender, FormClosedEventArgs e)
         {
             frmGiris girisForm = sender as frmGiris;
@@ -280,7 +279,6 @@ namespace Kutuphane.UI
         {
             Logout();
         }
-
         private void SetMenuVisibility(int personelId)
         {
             var userPermissions = _yetkiKontrol.GetUserPermissions(personelId);
@@ -289,18 +287,6 @@ namespace Kutuphane.UI
             if (gostergePaneliItem != null)
             {
                 gostergePaneliItem.Visible = userPermissions.Contains("DASHBOARD");
-            }
-
-            var kitapItem = menuStrip1.Items["kitapToolStripMenuItem"];
-            if (kitapItem != null)
-            {
-                kitapItem.Visible = userPermissions.Contains("KITAP_LISTELE");
-            }
-
-            var yerlesimItem = menuStrip1.Items["yerlesimAyarlariToolStripMenuItem"];
-            if (yerlesimItem != null)
-            {
-                yerlesimItem.Visible = userPermissions.Contains("YERLESIM_AYARLARI");
             }
         }
     }

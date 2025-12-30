@@ -35,22 +35,6 @@ namespace Kutuphane.UI
             panel_Ust = new Panel();
             label_Mesaj = new Label();
             lblKullaniciAdi = new Label();
-            menuStrip1 = new MenuStrip();
-            gostergePaneliToolStripMenuItem = new ToolStripMenuItem();
-            yerlesimAyarlariToolStripMenuItem = new ToolStripMenuItem();
-            kitapIslemleriToolStripMenuItem = new ToolStripMenuItem();
-            kitapToolStripMenuItem = new ToolStripMenuItem();
-            kategoriIslemleriiToolStripMenuItem = new ToolStripMenuItem();
-            yazarIslemleriToolStripMenuItem = new ToolStripMenuItem();
-            dilIslemleriToolStripMenuItem = new ToolStripMenuItem();
-            yayineviIslemleriToolStripMenuItem = new ToolStripMenuItem();
-            oduncIslemleriToolStripMenuItem = new ToolStripMenuItem();
-            uyeIslemleriToolStripMenuItem = new ToolStripMenuItem();
-            personelIslemleriToolStripMenuItem = new ToolStripMenuItem();
-            raporlamaToolStripMenuItem = new ToolStripMenuItem();
-            ayarlarToolStripMenuItem = new ToolStripMenuItem();
-            adminToolStripMenuItem = new ToolStripMenuItem();
-            cikisYapToolStripMenuItem = new ToolStripMenuItem();
             flowLayoutPanel_Kartlar = new FlowLayoutPanel();
             panel_Kitap = new Panel();
             label_KitapSayisi = new Label();
@@ -73,8 +57,22 @@ namespace Kutuphane.UI
             label_GecikmisUyeSayisi = new Label();
             label4 = new Label();
             timer_Dashboard = new System.Windows.Forms.Timer(components);
+            menuStrip1 = new MenuStrip();
+            gostergePaneliToolStripMenuItem = new ToolStripMenuItem();
+            yerlesimAyarlariToolStripMenuItem = new ToolStripMenuItem();
+            kitapIslemleriToolStripMenuItem = new ToolStripMenuItem();
+            kitapToolStripMenuItem = new ToolStripMenuItem();
+            kategoriIslemleriToolStripMenuItem = new ToolStripMenuItem();
+            yazarToolStripMenuItem = new ToolStripMenuItem();
+            yayineviToolStripMenuItem = new ToolStripMenuItem();
+            dilToolStripMenuItem = new ToolStripMenuItem();
+            oduncToolStripMenuItem = new ToolStripMenuItem();
+            uyeToolStripMenuItem = new ToolStripMenuItem();
+            personelToolStripMenuItem = new ToolStripMenuItem();
+            raporlamaToolStripMenuItem = new ToolStripMenuItem();
+            ayarlarToolStripMenuItem = new ToolStripMenuItem();
+            cikisToolStripMenuItem = new ToolStripMenuItem();
             panel_Ust.SuspendLayout();
-            menuStrip1.SuspendLayout();
             flowLayoutPanel_Kartlar.SuspendLayout();
             panel_Kitap.SuspendLayout();
             panel1.SuspendLayout();
@@ -82,6 +80,7 @@ namespace Kutuphane.UI
             panel_Uye.SuspendLayout();
             panel_Odunc.SuspendLayout();
             panel_Geciklis.SuspendLayout();
+            menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // panel_Ust
@@ -90,9 +89,9 @@ namespace Kutuphane.UI
             panel_Ust.Controls.Add(label_Mesaj);
             panel_Ust.Controls.Add(lblKullaniciAdi);
             panel_Ust.Dock = DockStyle.Top;
-            panel_Ust.Location = new Point(0, 32);
+            panel_Ust.Location = new Point(0, 28);
             panel_Ust.Name = "panel_Ust";
-            panel_Ust.Size = new Size(1326, 60);
+            panel_Ust.Size = new Size(1405, 60);
             panel_Ust.TabIndex = 4;
             // 
             // label_Mesaj
@@ -118,152 +117,9 @@ namespace Kutuphane.UI
             lblKullaniciAdi.TabIndex = 1;
             lblKullaniciAdi.Text = "👤 Hoşgeldin,";
             // 
-            // menuStrip1
-            // 
-            menuStrip1.BackColor = Color.WhiteSmoke;
-            menuStrip1.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 162);
-            menuStrip1.ImageScalingSize = new Size(20, 20);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { gostergePaneliToolStripMenuItem, yerlesimAyarlariToolStripMenuItem, kitapIslemleriToolStripMenuItem, oduncIslemleriToolStripMenuItem, uyeIslemleriToolStripMenuItem, personelIslemleriToolStripMenuItem, raporlamaToolStripMenuItem, ayarlarToolStripMenuItem, adminToolStripMenuItem, cikisYapToolStripMenuItem });
-            menuStrip1.Location = new Point(0, 0);
-            menuStrip1.Name = "menuStrip1";
-            menuStrip1.Padding = new Padding(6, 4, 0, 4);
-            menuStrip1.Size = new Size(1326, 32);
-            menuStrip1.TabIndex = 3;
-            menuStrip1.Text = "menuStrip1";
-            // 
-            // gostergePaneliToolStripMenuItem
-            // 
-            gostergePaneliToolStripMenuItem.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
-            gostergePaneliToolStripMenuItem.ForeColor = Color.FromArgb(44, 62, 80);
-            gostergePaneliToolStripMenuItem.Name = "gostergePaneliToolStripMenuItem";
-            gostergePaneliToolStripMenuItem.Size = new Size(153, 24);
-            gostergePaneliToolStripMenuItem.Text = "📊 Gösterge Paneli";
-            gostergePaneliToolStripMenuItem.Click += gostergePaneliToolStripMenuItem_Click;
-            // 
-            // yerlesimAyarlariToolStripMenuItem
-            // 
-            yerlesimAyarlariToolStripMenuItem.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
-            yerlesimAyarlariToolStripMenuItem.ForeColor = Color.FromArgb(44, 62, 80);
-            yerlesimAyarlariToolStripMenuItem.Name = "yerlesimAyarlariToolStripMenuItem";
-            yerlesimAyarlariToolStripMenuItem.Size = new Size(162, 24);
-            yerlesimAyarlariToolStripMenuItem.Tag = "frmYeslesimAyarlari";
-            yerlesimAyarlariToolStripMenuItem.Text = "⚙ Yerleşim Ayarları";
-            yerlesimAyarlariToolStripMenuItem.Click += menuStrip_Click;
-            // 
-            // kitapIslemleriToolStripMenuItem
-            // 
-            kitapIslemleriToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { kitapToolStripMenuItem, kategoriIslemleriiToolStripMenuItem, yazarIslemleriToolStripMenuItem, dilIslemleriToolStripMenuItem, yayineviIslemleriToolStripMenuItem });
-            kitapIslemleriToolStripMenuItem.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
-            kitapIslemleriToolStripMenuItem.ForeColor = Color.FromArgb(44, 62, 80);
-            kitapIslemleriToolStripMenuItem.Name = "kitapIslemleriToolStripMenuItem";
-            kitapIslemleriToolStripMenuItem.Size = new Size(141, 24);
-            kitapIslemleriToolStripMenuItem.Text = "📚 Kitap İşlemleri";
-            // 
-            // kitapToolStripMenuItem
-            // 
-            kitapToolStripMenuItem.Name = "kitapToolStripMenuItem";
-            kitapToolStripMenuItem.Size = new Size(197, 24);
-            kitapToolStripMenuItem.Tag = "frmKitapIslemleri";
-            kitapToolStripMenuItem.Text = "Kitap İşlemleri";
-            kitapToolStripMenuItem.Click += menuStrip_Click;
-            // 
-            // kategoriIslemleriiToolStripMenuItem
-            // 
-            kategoriIslemleriiToolStripMenuItem.Name = "kategoriIslemleriiToolStripMenuItem";
-            kategoriIslemleriiToolStripMenuItem.Size = new Size(197, 24);
-            kategoriIslemleriiToolStripMenuItem.Tag = "frmKategoriIslemleri";
-            kategoriIslemleriiToolStripMenuItem.Text = "Kategori İşlemleri";
-            kategoriIslemleriiToolStripMenuItem.Click += menuStrip_Click;
-            // 
-            // yazarIslemleriToolStripMenuItem
-            // 
-            yazarIslemleriToolStripMenuItem.Name = "yazarIslemleriToolStripMenuItem";
-            yazarIslemleriToolStripMenuItem.Size = new Size(197, 24);
-            yazarIslemleriToolStripMenuItem.Tag = "frmYazarIslemleri";
-            yazarIslemleriToolStripMenuItem.Text = "Yazar İşlemleri";
-            yazarIslemleriToolStripMenuItem.Click += menuStrip_Click;
-            // 
-            // dilIslemleriToolStripMenuItem
-            // 
-            dilIslemleriToolStripMenuItem.Name = "dilIslemleriToolStripMenuItem";
-            dilIslemleriToolStripMenuItem.Size = new Size(197, 24);
-            dilIslemleriToolStripMenuItem.Tag = "frmDilIslemleri";
-            dilIslemleriToolStripMenuItem.Text = "Dil İşlemleri";
-            dilIslemleriToolStripMenuItem.Click += menuStrip_Click;
-            // 
-            // yayineviIslemleriToolStripMenuItem
-            // 
-            yayineviIslemleriToolStripMenuItem.Name = "yayineviIslemleriToolStripMenuItem";
-            yayineviIslemleriToolStripMenuItem.Size = new Size(197, 24);
-            yayineviIslemleriToolStripMenuItem.Tag = "frmYayineviIslemleri";
-            yayineviIslemleriToolStripMenuItem.Text = "Yayınevi İşlemleri";
-            yayineviIslemleriToolStripMenuItem.Click += menuStrip_Click;
-            // 
-            // oduncIslemleriToolStripMenuItem
-            // 
-            oduncIslemleriToolStripMenuItem.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
-            oduncIslemleriToolStripMenuItem.ForeColor = Color.FromArgb(44, 62, 80);
-            oduncIslemleriToolStripMenuItem.Name = "oduncIslemleriToolStripMenuItem";
-            oduncIslemleriToolStripMenuItem.Size = new Size(153, 24);
-            oduncIslemleriToolStripMenuItem.Tag = "frmOduncIslemleri";
-            oduncIslemleriToolStripMenuItem.Text = "🔄 Ödünç İşlemleri";
-            oduncIslemleriToolStripMenuItem.Click += menuStrip_Click;
-            // 
-            // uyeIslemleriToolStripMenuItem
-            // 
-            uyeIslemleriToolStripMenuItem.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
-            uyeIslemleriToolStripMenuItem.ForeColor = Color.FromArgb(44, 62, 80);
-            uyeIslemleriToolStripMenuItem.Name = "uyeIslemleriToolStripMenuItem";
-            uyeIslemleriToolStripMenuItem.Size = new Size(135, 24);
-            uyeIslemleriToolStripMenuItem.Tag = "frmUyeIslemleri";
-            uyeIslemleriToolStripMenuItem.Text = "👥 Üye İşlemleri";
-            uyeIslemleriToolStripMenuItem.Click += menuStrip_Click;
-            // 
-            // personelIslemleriToolStripMenuItem
-            // 
-            personelIslemleriToolStripMenuItem.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
-            personelIslemleriToolStripMenuItem.ForeColor = Color.FromArgb(44, 62, 80);
-            personelIslemleriToolStripMenuItem.Name = "personelIslemleriToolStripMenuItem";
-            personelIslemleriToolStripMenuItem.Size = new Size(165, 24);
-            personelIslemleriToolStripMenuItem.Tag = "frmPersonelIslemleri";
-            personelIslemleriToolStripMenuItem.Text = "👔 Personel İşlemleri";
-            personelIslemleriToolStripMenuItem.Click += menuStrip_Click;
-            // 
-            // raporlamaToolStripMenuItem
-            // 
-            raporlamaToolStripMenuItem.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
-            raporlamaToolStripMenuItem.ForeColor = Color.FromArgb(44, 62, 80);
-            raporlamaToolStripMenuItem.Name = "raporlamaToolStripMenuItem";
-            raporlamaToolStripMenuItem.Size = new Size(121, 24);
-            raporlamaToolStripMenuItem.Text = "📝 Raporlama";
-            // 
-            // ayarlarToolStripMenuItem
-            // 
-            ayarlarToolStripMenuItem.Name = "ayarlarToolStripMenuItem";
-            ayarlarToolStripMenuItem.Size = new Size(93, 24);
-            ayarlarToolStripMenuItem.Tag = "";
-            ayarlarToolStripMenuItem.Text = "⚙ Ayarlar";
-            // 
-            // adminToolStripMenuItem
-            // 
-            adminToolStripMenuItem.Name = "adminToolStripMenuItem";
-            adminToolStripMenuItem.Size = new Size(143, 24);
-            adminToolStripMenuItem.Tag = "frmAdmin";
-            adminToolStripMenuItem.Text = "🖥️ Yönetim Paneli";
-            adminToolStripMenuItem.Click += menuStrip_Click;
-            // 
-            // cikisYapToolStripMenuItem
-            // 
-            cikisYapToolStripMenuItem.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
-            cikisYapToolStripMenuItem.ForeColor = Color.FromArgb(192, 57, 43);
-            cikisYapToolStripMenuItem.Name = "cikisYapToolStripMenuItem";
-            cikisYapToolStripMenuItem.Size = new Size(103, 24);
-            cikisYapToolStripMenuItem.Text = "🔒 Çıkış Yap";
-            cikisYapToolStripMenuItem.Click += cikisYapToolStripMenuItem_Click;
-            // 
             // flowLayoutPanel_Kartlar
             // 
-            flowLayoutPanel_Kartlar.BackColor = Color.FromArgb(236, 240, 241);
+            flowLayoutPanel_Kartlar.BackColor = Color.FromArgb(44, 62, 80);
             flowLayoutPanel_Kartlar.Controls.Add(panel_Kitap);
             flowLayoutPanel_Kartlar.Controls.Add(panel1);
             flowLayoutPanel_Kartlar.Controls.Add(panel2);
@@ -271,11 +127,11 @@ namespace Kutuphane.UI
             flowLayoutPanel_Kartlar.Controls.Add(panel_Odunc);
             flowLayoutPanel_Kartlar.Controls.Add(panel_Geciklis);
             flowLayoutPanel_Kartlar.Dock = DockStyle.Fill;
-            flowLayoutPanel_Kartlar.Location = new Point(0, 92);
+            flowLayoutPanel_Kartlar.Location = new Point(0, 88);
             flowLayoutPanel_Kartlar.Margin = new Padding(6);
             flowLayoutPanel_Kartlar.Name = "flowLayoutPanel_Kartlar";
             flowLayoutPanel_Kartlar.Padding = new Padding(10);
-            flowLayoutPanel_Kartlar.Size = new Size(1326, 619);
+            flowLayoutPanel_Kartlar.Size = new Size(1405, 623);
             flowLayoutPanel_Kartlar.TabIndex = 7;
             // 
             // panel_Kitap
@@ -504,18 +360,151 @@ namespace Kutuphane.UI
             timer_Dashboard.Interval = 10000;
             timer_Dashboard.Tick += timer_Dashboard_Tick;
             // 
+            // menuStrip1
+            // 
+            menuStrip1.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 162);
+            menuStrip1.Items.AddRange(new ToolStripItem[] { gostergePaneliToolStripMenuItem, yerlesimAyarlariToolStripMenuItem, kitapIslemleriToolStripMenuItem, oduncToolStripMenuItem, uyeToolStripMenuItem, personelToolStripMenuItem, raporlamaToolStripMenuItem, ayarlarToolStripMenuItem, cikisToolStripMenuItem });
+            menuStrip1.Location = new Point(0, 0);
+            menuStrip1.Name = "menuStrip1";
+            menuStrip1.RenderMode = ToolStripRenderMode.Professional;
+            menuStrip1.Size = new Size(1405, 28);
+            menuStrip1.TabIndex = 3;
+            menuStrip1.Text = "menuStrip1";
+            // 
+            // gostergePaneliToolStripMenuItem
+            // 
+            gostergePaneliToolStripMenuItem.ForeColor = Color.FromArgb(44, 62, 80);
+            gostergePaneliToolStripMenuItem.Name = "gostergePaneliToolStripMenuItem";
+            gostergePaneliToolStripMenuItem.Size = new Size(156, 24);
+            gostergePaneliToolStripMenuItem.Text = "📊 Gösterge Paneli";
+            gostergePaneliToolStripMenuItem.Click += menuStrip_Click;
+            // 
+            // yerlesimAyarlariToolStripMenuItem
+            // 
+            yerlesimAyarlariToolStripMenuItem.ForeColor = Color.FromArgb(44, 62, 80);
+            yerlesimAyarlariToolStripMenuItem.Name = "yerlesimAyarlariToolStripMenuItem";
+            yerlesimAyarlariToolStripMenuItem.Size = new Size(165, 24);
+            yerlesimAyarlariToolStripMenuItem.Tag = "frmYeslesimAyarlari";
+            yerlesimAyarlariToolStripMenuItem.Text = "⚙ Yerleşim Ayarları";
+            yerlesimAyarlariToolStripMenuItem.Click += menuStrip_Click;
+            // 
+            // kitapIslemleriToolStripMenuItem
+            // 
+            kitapIslemleriToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { kitapToolStripMenuItem, kategoriIslemleriToolStripMenuItem, yazarToolStripMenuItem, yayineviToolStripMenuItem, dilToolStripMenuItem });
+            kitapIslemleriToolStripMenuItem.ForeColor = Color.FromArgb(44, 62, 80);
+            kitapIslemleriToolStripMenuItem.Name = "kitapIslemleriToolStripMenuItem";
+            kitapIslemleriToolStripMenuItem.Size = new Size(146, 24);
+            kitapIslemleriToolStripMenuItem.Text = "📚 Kitap İşlemleri";
+            kitapIslemleriToolStripMenuItem.Click += menuStrip_Click;
+            // 
+            // kitapToolStripMenuItem
+            // 
+            kitapToolStripMenuItem.ForeColor = Color.FromArgb(44, 62, 80);
+            kitapToolStripMenuItem.Name = "kitapToolStripMenuItem";
+            kitapToolStripMenuItem.Size = new Size(202, 24);
+            kitapToolStripMenuItem.Tag = "frmKitapIslemleri";
+            kitapToolStripMenuItem.Text = "Kitap İşlemleri";
+            kitapToolStripMenuItem.Click += menuStrip_Click;
+            // 
+            // kategoriIslemleriToolStripMenuItem
+            // 
+            kategoriIslemleriToolStripMenuItem.ForeColor = Color.FromArgb(44, 62, 80);
+            kategoriIslemleriToolStripMenuItem.Name = "kategoriIslemleriToolStripMenuItem";
+            kategoriIslemleriToolStripMenuItem.Size = new Size(202, 24);
+            kategoriIslemleriToolStripMenuItem.Tag = "frmKategoriIslemleri";
+            kategoriIslemleriToolStripMenuItem.Text = "Kategori İşlemleri";
+            kategoriIslemleriToolStripMenuItem.Click += menuStrip_Click;
+            // 
+            // yazarToolStripMenuItem
+            // 
+            yazarToolStripMenuItem.ForeColor = Color.FromArgb(44, 62, 80);
+            yazarToolStripMenuItem.Name = "yazarToolStripMenuItem";
+            yazarToolStripMenuItem.Size = new Size(202, 24);
+            yazarToolStripMenuItem.Tag = "frmYazarIslemleri";
+            yazarToolStripMenuItem.Text = "Yazar İşlemleri";
+            yazarToolStripMenuItem.Click += menuStrip_Click;
+            // 
+            // yayineviToolStripMenuItem
+            // 
+            yayineviToolStripMenuItem.ForeColor = Color.FromArgb(44, 62, 80);
+            yayineviToolStripMenuItem.Name = "yayineviToolStripMenuItem";
+            yayineviToolStripMenuItem.Size = new Size(202, 24);
+            yayineviToolStripMenuItem.Tag = "frmYayineviIslemleri";
+            yayineviToolStripMenuItem.Text = "Yayınevi İşlemleri";
+            yayineviToolStripMenuItem.Click += menuStrip_Click;
+            // 
+            // dilToolStripMenuItem
+            // 
+            dilToolStripMenuItem.ForeColor = Color.FromArgb(44, 62, 80);
+            dilToolStripMenuItem.Name = "dilToolStripMenuItem";
+            dilToolStripMenuItem.Size = new Size(202, 24);
+            dilToolStripMenuItem.Tag = "frmDilIslemleri";
+            dilToolStripMenuItem.Text = "Dil İşlemleri";
+            dilToolStripMenuItem.Click += menuStrip_Click;
+            // 
+            // oduncToolStripMenuItem
+            // 
+            oduncToolStripMenuItem.ForeColor = Color.FromArgb(44, 62, 80);
+            oduncToolStripMenuItem.Name = "oduncToolStripMenuItem";
+            oduncToolStripMenuItem.Size = new Size(156, 24);
+            oduncToolStripMenuItem.Tag = "frmOduncIslemleri";
+            oduncToolStripMenuItem.Text = "🔄 Ödünç İşlemleri";
+            oduncToolStripMenuItem.Click += menuStrip_Click;
+            // 
+            // uyeToolStripMenuItem
+            // 
+            uyeToolStripMenuItem.ForeColor = Color.FromArgb(44, 62, 80);
+            uyeToolStripMenuItem.Name = "uyeToolStripMenuItem";
+            uyeToolStripMenuItem.Size = new Size(138, 24);
+            uyeToolStripMenuItem.Tag = "frmUyeIslemleri";
+            uyeToolStripMenuItem.Text = "👥 Üye İşlemleri";
+            uyeToolStripMenuItem.Click += menuStrip_Click;
+            // 
+            // personelToolStripMenuItem
+            // 
+            personelToolStripMenuItem.ForeColor = Color.FromArgb(44, 62, 80);
+            personelToolStripMenuItem.Name = "personelToolStripMenuItem";
+            personelToolStripMenuItem.Size = new Size(170, 24);
+            personelToolStripMenuItem.Tag = "frmPersonelIslemleri";
+            personelToolStripMenuItem.Text = "👔 Personel İşlemleri";
+            personelToolStripMenuItem.Click += menuStrip_Click;
+            // 
+            // raporlamaToolStripMenuItem
+            // 
+            raporlamaToolStripMenuItem.ForeColor = Color.FromArgb(44, 62, 80);
+            raporlamaToolStripMenuItem.Name = "raporlamaToolStripMenuItem";
+            raporlamaToolStripMenuItem.Size = new Size(123, 24);
+            raporlamaToolStripMenuItem.Text = "📝 Raporlama";
+            raporlamaToolStripMenuItem.Click += menuStrip_Click;
+            // 
+            // ayarlarToolStripMenuItem
+            // 
+            ayarlarToolStripMenuItem.ForeColor = Color.FromArgb(44, 62, 80);
+            ayarlarToolStripMenuItem.Name = "ayarlarToolStripMenuItem";
+            ayarlarToolStripMenuItem.Size = new Size(98, 24);
+            ayarlarToolStripMenuItem.Text = "⚙ Ayarlar";
+            ayarlarToolStripMenuItem.Click += menuStrip_Click;
+            // 
+            // cikisToolStripMenuItem
+            // 
+            cikisToolStripMenuItem.ForeColor = Color.FromArgb(192, 57, 43);
+            cikisToolStripMenuItem.Name = "cikisToolStripMenuItem";
+            cikisToolStripMenuItem.Size = new Size(104, 24);
+            cikisToolStripMenuItem.Text = "🔒 Çıkış Yap";
+            cikisToolStripMenuItem.Click += cikisYapToolStripMenuItem_Click;
+            // 
             // frmMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(1326, 711);
+            ClientSize = new Size(1405, 711);
             Controls.Add(flowLayoutPanel_Kartlar);
             Controls.Add(panel_Ust);
             Controls.Add(menuStrip1);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
             IsMdiContainer = true;
-            MainMenuStrip = menuStrip1;
             Name = "frmMain";
             StartPosition = FormStartPosition.CenterParent;
             Text = "Kütüphane Otomasyonu";
@@ -523,8 +512,6 @@ namespace Kutuphane.UI
             Load += frmMain_Load;
             panel_Ust.ResumeLayout(false);
             panel_Ust.PerformLayout();
-            menuStrip1.ResumeLayout(false);
-            menuStrip1.PerformLayout();
             flowLayoutPanel_Kartlar.ResumeLayout(false);
             panel_Kitap.ResumeLayout(false);
             panel_Kitap.PerformLayout();
@@ -538,6 +525,8 @@ namespace Kutuphane.UI
             panel_Odunc.PerformLayout();
             panel_Geciklis.ResumeLayout(false);
             panel_Geciklis.PerformLayout();
+            menuStrip1.ResumeLayout(false);
+            menuStrip1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -546,19 +535,6 @@ namespace Kutuphane.UI
 
         private Panel panel_Ust;
         private Label lblKullaniciAdi;
-        private MenuStrip menuStrip1;
-        private ToolStripMenuItem gostergePaneliToolStripMenuItem;
-        private ToolStripMenuItem yerlesimAyarlariToolStripMenuItem;
-        private ToolStripMenuItem kitapIslemleriToolStripMenuItem;
-        private ToolStripMenuItem kategoriIslemleriiToolStripMenuItem;
-        private ToolStripMenuItem yazarIslemleriToolStripMenuItem;
-        private ToolStripMenuItem dilIslemleriToolStripMenuItem;
-        private ToolStripMenuItem yayineviIslemleriToolStripMenuItem;
-        private ToolStripMenuItem oduncIslemleriToolStripMenuItem;
-        private ToolStripMenuItem uyeIslemleriToolStripMenuItem;
-        private ToolStripMenuItem personelIslemleriToolStripMenuItem;
-        private ToolStripMenuItem cikisYapToolStripMenuItem;
-        private ToolStripMenuItem raporlamaToolStripMenuItem;
         private Panel panel_Kitap;
         private Panel panel_Uye;
         private Panel panel_Odunc;
@@ -578,15 +554,27 @@ namespace Kutuphane.UI
         private Label label4;
         private FlowLayoutPanel flowLayoutPanel_Kartlar;
         private System.Windows.Forms.Timer timer_Dashboard;
-        private ToolStripMenuItem kitapToolStripMenuItem;
         private Label label_Mesaj;
         private Label label_UyeKadinSayisi;
         private Label label_UyeErkekSayisi;
-        private ToolStripMenuItem ayarlarToolStripMenuItem;
         private Panel panel1;
         private Label label_YazarSayisi;
         private Label label8;
         private Panel panel2;
-        private ToolStripMenuItem adminToolStripMenuItem;
+        private MenuStrip menuStrip1;
+        private ToolStripMenuItem gostergePaneliToolStripMenuItem;
+        private ToolStripMenuItem yerlesimAyarlariToolStripMenuItem;
+        private ToolStripMenuItem kitapIslemleriToolStripMenuItem;
+        private ToolStripMenuItem kategoriIslemleriToolStripMenuItem;
+        private ToolStripMenuItem yazarToolStripMenuItem;
+        private ToolStripMenuItem yayineviToolStripMenuItem;
+        private ToolStripMenuItem dilToolStripMenuItem;
+        private ToolStripMenuItem oduncToolStripMenuItem;
+        private ToolStripMenuItem uyeToolStripMenuItem;
+        private ToolStripMenuItem personelToolStripMenuItem;
+        private ToolStripMenuItem raporlamaToolStripMenuItem;
+        private ToolStripMenuItem ayarlarToolStripMenuItem;
+        private ToolStripMenuItem cikisToolStripMenuItem;
+        private ToolStripMenuItem kitapToolStripMenuItem;
     }
 }

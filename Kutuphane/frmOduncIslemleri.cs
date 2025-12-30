@@ -26,7 +26,7 @@ namespace Kutuphane.UI
         {
             InitializeComponent();
             _uyeManager = new UyeManager(new UyeDal());
-            _kitapManager = new KitapManager(new KitapDal());
+            _kitapService = new KitapManager(new KitapDal());
             _oduncManager = new OduncManager(new OduncDal());
         }
         private void frmOduncIslemleri_Load(object sender, EventArgs e)
@@ -126,9 +126,9 @@ namespace Kutuphane.UI
 
                 _oduncManager.UpdateService(odunc);
 
-                var kitap = _kitapManager.GetByFilterService(x => x.KitapId == odunc.KitapId).Data;
+                var kitap = _kitapService.GetByFilterService(x => x.KitapId == odunc.KitapId).Data;
                 kitap.Stok++;
-                _kitapManager.UpdateService(kitap);
+                _kitapService.UpdateService(kitap);
 
                 basarili++;
             }
@@ -284,7 +284,7 @@ namespace Kutuphane.UI
 
                 foreach (var kitap in _sepetiKitaplar)
                 {
-                    var kitapResult = _kitapManager.GetByFilterService(x => x.KitapId == kitap.KitapId);
+                    var kitapResult = _kitapService.GetByFilterService(x => x.KitapId == kitap.KitapId);
 
                     if (!kitapResult.IsSuccess || kitapResult.Data == null || kitapResult.Data.Stok <= 0)
                     {
@@ -308,7 +308,7 @@ namespace Kutuphane.UI
                     if (result.IsSuccess)
                     {
                         kitapResult.Data.Stok--;
-                        _kitapManager.UpdateService(kitapResult.Data);
+                        _kitapService.UpdateService(kitapResult.Data);
 
                         basariSayisi++;
                     }
@@ -376,11 +376,11 @@ namespace Kutuphane.UI
                         continue;
                     }
 
-                    var kitapResult = _kitapManager.GetByFilterService(x => x.KitapId == odunc.KitapId);
+                    var kitapResult = _kitapService.GetByFilterService(x => x.KitapId == odunc.KitapId);
                     if (kitapResult.IsSuccess && kitapResult.Data != null)
                     {
                         kitapResult.Data.Stok++;
-                        _kitapManager.UpdateService(kitapResult.Data);
+                        _kitapService.UpdateService(kitapResult.Data);
                     }
 
                     basarili++;
@@ -404,7 +404,7 @@ namespace Kutuphane.UI
 
             try
             {
-                var result = _kitapManager.KitapListeDetayliGetirServis(x =>
+                var result = _kitapService.KitapListeDetayliGetirServis(x =>
                     x.Aktif &&
                     x.Stok > 0 &&
                     (x.KitapAdi.Contains(aramaMetni) ||

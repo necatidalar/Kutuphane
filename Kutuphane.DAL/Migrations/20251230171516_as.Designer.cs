@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Kutuphane.DAL.Migrations
 {
     [DbContext(typeof(KutuphaneDbContext))]
-    [Migration("20251230050242_ss")]
-    partial class ss
+    [Migration("20251230171516_as")]
+    partial class @as
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

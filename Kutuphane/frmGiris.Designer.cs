@@ -172,6 +172,7 @@
             btnCikis.TabIndex = 6;
             btnCikis.Text = "X";
             btnCikis.UseVisualStyleBackColor = true;
+            btnCikis.Visible = false;
             btnCikis.Click += btnCikis_Click;
             // 
             // frmGiris
@@ -181,6 +182,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(635, 350);
+            ControlBox = false;
             Controls.Add(btnCikis);
             Controls.Add(checkBox_BeniHatirla);
             Controls.Add(btnGiris);
@@ -194,6 +196,7 @@
             Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(4);
             MaximizeBox = false;
+            MinimizeBox = false;
             Name = "frmGiris";
             Text = "Kütüphane Giriş";
             WindowState = FormWindowState.Maximized;
