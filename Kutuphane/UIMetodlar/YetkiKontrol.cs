@@ -10,8 +10,7 @@ namespace Kutuphane.UI.UIMetodlar
         {
             _context = context;
         }
-
-        public HashSet<string> GetUserPermissions(int personelId)
+        public HashSet<string> KullaniciYetkileriniAl(int personelId)
         {
             return _context.PersonelRolleri
                 .Where(pr => pr.PersonelId == personelId)

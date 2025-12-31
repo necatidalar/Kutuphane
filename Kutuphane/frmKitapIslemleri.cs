@@ -17,7 +17,6 @@ namespace Kutuphane.UI
         {
             InitializeComponent();
         }
-
         private void frmKitapIslemleri_Load(object sender, EventArgs e)
         {
             ComboDoldur();
@@ -63,7 +62,7 @@ namespace Kutuphane.UI
             }
 
             var liste = kitapResult.Data;
-            //Arama
+
             if (!string.IsNullOrWhiteSpace(aramaMetni))
             {
                 aramaMetni = aramaMetni.ToLower();
@@ -347,7 +346,6 @@ namespace Kutuphane.UI
         {
             Listele();
         }
-
         Dictionary<string, bool> sortDirections = new();
         private void dataGrid_Kitap_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {

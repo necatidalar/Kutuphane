@@ -8,21 +8,19 @@ namespace Kutuphane.UI
 {
     public partial class frmYayineviIslemleri : Form
     {
+        BindingList<Yayinevi> bilYayinevi = new BindingList<Yayinevi>();
+        IYayineviService yayineviService = new YayineviManager(new YayineviDal());
+        bool silinenModu = false;
         public frmYayineviIslemleri()
         {
             InitializeComponent();
         }
-
         private void frmYayineviIslemleri_Load(object sender, EventArgs e)
         {
             dataGrid_Yayinevi.DataSource = bilYayinevi;
             Listele();
             PasifUyeKontrol();
         }
-
-        BindingList<Yayinevi> bilYayinevi = new BindingList<Yayinevi>();
-        IYayineviService yayineviService = new YayineviManager(new YayineviDal());
-        bool silinenModu = false;
         private void Listele()
         {
             var yayineviResult = yayineviService.GetListByFilterService(x =>
@@ -229,7 +227,6 @@ namespace Kutuphane.UI
         {
             Listele();
         }
-
         Dictionary<string, bool> sortDirections = new();
         private void dataGrid_Yayinevi_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {

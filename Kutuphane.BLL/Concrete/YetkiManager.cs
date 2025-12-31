@@ -1,6 +1,7 @@
 ﻿using Core.Utility.Results;
 using Kutuphane.BLL.Abstract;
 using Kutuphane.DAL.Abstract;
+using Kutuphane.DAL.Contexes;
 using Kutuphane.Model.Entity;
 using System.Linq.Expressions;
 
@@ -9,12 +10,12 @@ namespace Kutuphane.BLL.Concrete
     public class YetkiManager : IYetkiService
     {
         readonly IYetkiDal _yetkiDal;
+        private readonly KutuphaneDbContext _context;
 
         public YetkiManager(IYetkiDal yetkiDal)
         {
             _yetkiDal = yetkiDal;
         }
-
         private IResult Validate(Yetki entity)
         {
             if (entity == null)
@@ -28,7 +29,6 @@ namespace Kutuphane.BLL.Concrete
 
             return new SuccessResult();
         }
-
         public IResult AddService(Yetki entity)
         {
             var validationResult = Validate(entity);
@@ -41,7 +41,6 @@ namespace Kutuphane.BLL.Concrete
 
             return _yetkiDal.Add(entity);
         }
-
         public IResult UpdateService(Yetki entity)
         {
             if (entity.YetkiId <= 0)
@@ -61,12 +60,10 @@ namespace Kutuphane.BLL.Concrete
 
             return _yetkiDal.Update(entity);
         }
-
         public IDataResult<Yetki> GetByFilterService(Expression<Func<Yetki, bool>>? predicate = null)
         {
             return _yetkiDal.GetByFilter(predicate);
         }
-
         public IDataResult<List<Yetki>> GetListByFilterService(Expression<Func<Yetki, bool>>? predicate = null)
         {
             return _yetkiDal.GetListByFilter(predicate);

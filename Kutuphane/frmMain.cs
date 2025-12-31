@@ -89,7 +89,7 @@ namespace Kutuphane.UI
                 Properties.Settings.Default.RememberMe = false;
                 Properties.Settings.Default.Save();
             }
-
+            gostegePanelGoster();
             girisBasarili(personelResult.Data.First());
         }
         private void girisBasarili(PersonelBilgileriDto personel)
@@ -113,7 +113,7 @@ namespace Kutuphane.UI
 
             Listele();
             SetMenuVisibility(GirisYapanPersonelId);
-            var perms = _yetkiKontrol.GetUserPermissions(GirisYapanPersonelId);
+            var perms = _yetkiKontrol.KullaniciYetkileriniAl(GirisYapanPersonelId);
             ApplyMenuPermissions(menuStrip1.Items, perms);
         }
         private void CheckDatabaseConnection()
@@ -271,12 +271,26 @@ namespace Kutuphane.UI
 
                 foreach (var formType in formTypes)
                 {
-                    using (var tempForm = (Form)Activator.CreateInstance(formType))
+                    if (formType.Name == "frmDilIslemleri")
                     {
-                        if (tempForm.Name != null &&
-                            tempForm.Name.Equals(searchTag, StringComparison.OrdinalIgnoreCase))
+                        using (var tempForm = (Form)Activator.CreateInstance(formType, new object[] { GirisYapanPersonelId }))
                         {
-                            return formType;
+                            if (tempForm.Name != null &&
+                                tempForm.Name.Equals(searchTag, StringComparison.OrdinalIgnoreCase))
+                            {
+                                return formType;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        using (var tempForm = (Form)Activator.CreateInstance(formType))
+                        {
+                            if (tempForm.Name != null &&
+                                tempForm.Name.Equals(searchTag, StringComparison.OrdinalIgnoreCase))
+                            {
+                                return formType;
+                            }
                         }
                     }
                 }
@@ -302,8 +316,12 @@ namespace Kutuphane.UI
             }
 
             ShowHideTopPanels(false, true);
+            Form? childForm;
+            if (FormName == "frmDilIslemleri")
+                childForm = (Form)Activator.CreateInstance(formType, new object[] { GirisYapanPersonelId });
+            else
+                childForm = (Form)Activator.CreateInstance(formType);
 
-            Form? childForm = (Form)Activator.CreateInstance(formType);
             if (childForm == null) return;
 
             if (childForm is frmOduncIslemleri oduncForm)
@@ -325,6 +343,10 @@ namespace Kutuphane.UI
             childForm.Show();
         }
         private void gostergePaneliToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            gostegePanelGoster();
+        }
+        private void gostegePanelGoster()
         {
             Listele();
             ShowHideTopPanels(true, true);
@@ -429,7 +451,7 @@ namespace Kutuphane.UI
         }
         private void SetMenuVisibility(int personelId)
         {
-            var userPermissions = _yetkiKontrol.GetUserPermissions(personelId);
+            var userPermissions = _yetkiKontrol.KullaniciYetkileriniAl(personelId);
 
             foreach (var map in _yetkiMap)
             {

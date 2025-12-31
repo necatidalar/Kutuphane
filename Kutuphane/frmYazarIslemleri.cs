@@ -9,16 +9,14 @@ namespace Kutuphane.UI
 {
     public partial class frmYazarIslemleri : Form
     {
+        BindingList<YazarDto> bilYazar = new BindingList<YazarDto>();
+        IYazarService yazarService = new YazarManager(new YazarDal());
+        bool silinenModu = false;
         public frmYazarIslemleri()
         {
             InitializeComponent();
             dataGrid_Yazar.DataSource = bilYazar;
         }
-
-        BindingList<YazarDto> bilYazar = new BindingList<YazarDto>();
-        IYazarService yazarService = new YazarManager(new YazarDal());
-        bool silinenModu = false;
-
         private void frmYazarIslemleri_Load(object sender, EventArgs e)
         {
             dateTimePicker_DogumTarihi.ShowCheckBox = true;
@@ -278,12 +276,10 @@ namespace Kutuphane.UI
             dataGrid_Yazar.ClearSelection();
             KutulariTemizle();
         }
-
         private void textBox_Ara_TextChanged(object sender, EventArgs e)
         {
             Listele();
         }
-
         private void comboBox_Sirala_SelectedIndexChanged(object sender, EventArgs e)
         {
             Listele();

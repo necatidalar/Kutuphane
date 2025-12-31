@@ -8,24 +8,24 @@ namespace Kutuphane.UI
 {
     public partial class frmOduncIslemleri : Form
     {
-        private readonly UyeManager _uyeManager;
+        private readonly IUyeService _uyeService;
         private readonly IKitapService _kitapService;
         private readonly OduncManager _oduncManager;
 
         private int _secilenUyeId = 0;
         private int _girisYapanPersonelId = 0;
-        private List<KitapDto> _sepetiKitaplar = new();
+        private List<OduncKitapDto> _sepetiKitaplar = new();
         List<OduncKitapDto> oduncKitapListe = new();
+        List<OduncUyeDto> oduncUyeListe = new();
         public int GirisYapanPersonelId
         {
             get => _girisYapanPersonelId;
             set => _girisYapanPersonelId = value;
         }
-
         public frmOduncIslemleri()
         {
             InitializeComponent();
-            _uyeManager = new UyeManager(new UyeDal());
+            _uyeService = new UyeManager(new UyeDal());
             _kitapService = new KitapManager(new KitapDal());
             _oduncManager = new OduncManager(new OduncDal());
         }
@@ -38,10 +38,12 @@ namespace Kutuphane.UI
         }
         private void InitializeDataLoads()
         {
-            var odunckitapresult = _kitapService.OduncIcinListeGetir();
+            var odunckitapresult = _kitapService.OduncIcinListeGetir(k=> k.Aktif==true);
             oduncKitapListe = odunckitapresult.Data;
-        }
 
+            var oduncUyeresult = _uyeService.OduncUyeListeDetayliGetirServis(x => x.AktifMi==true);
+            oduncUyeListe = oduncUyeresult.Data;
+        }
         private void InitialieUIComponents()
         {
             TumOdunclerListViewDuzenle();
@@ -52,8 +54,6 @@ namespace Kutuphane.UI
             UyeListViewDuzenle();
             dateTimePicker_TeslimTarihi.Value = DateTime.Now.AddDays(45);
         }
-
-
         private void TumOdunclerListViewDuzenle()
         {
             listView_AlinanTumKitaplarinListesi.View = View.Details;
@@ -173,7 +173,7 @@ namespace Kutuphane.UI
             listView_UyeninAldigiKitapListesi.Columns.Add("Teslim Tarihi", 150);
             listView_UyeninAldigiKitapListesi.Columns.Add("Durum", 150);
         }
-        private void UyeSecimi(Uye uye)
+        private void UyeSecimi(OduncUyeDto uye)
         {
             _secilenUyeId = uye.UyeId;
             label_AdSoyad.Text = $"Seçili Üye: {uye.Ad} {uye.Soyad}";
@@ -181,12 +181,13 @@ namespace Kutuphane.UI
         }
         private void listView_Uyeler_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (listView_Uyeler.SelectedItems.Count > 0)
-            {
-                ListViewItem secilenSatir = listView_Uyeler.SelectedItems[0];
-                Uye secilenUye = (Uye)secilenSatir.Tag;
-                UyeSecimi(secilenUye);
-            }
+            if (listView_Uyeler.SelectedItems.Count == 0)
+                return;
+
+            var secilenSatir = listView_Uyeler.SelectedItems[0];
+            var secilenUye = (OduncUyeDto)secilenSatir.Tag;
+
+            UyeSecimi(secilenUye);
         }
         private void UyeninAldigiKitaplarıListele()
         {
@@ -229,10 +230,7 @@ namespace Kutuphane.UI
                 return;
 
             var secilenItem = listView_KitapListesi.SelectedItems[0];
-            var kitap = secilenItem.Tag as KitapDto;
-
-            if (kitap == null)
-                return;
+            var kitap = (OduncKitapDto)secilenItem.Tag;
 
             _sepetiKitaplar.Add(kitap);
             SepetGuncelle();
@@ -244,8 +242,8 @@ namespace Kutuphane.UI
             {
                 var item = new ListViewItem(kitap.KitapAdi);
                 item.SubItems.Add(kitap.ISBN ?? string.Empty);
-                item.SubItems.Add($"{kitap.YazarAd} {kitap.YazarSoyad}");
-                item.Tag = kitap.KitapId;
+                item.SubItems.Add(kitap.Yazar ?? string.Empty);
+                item.Tag = kitap.Id;
 
                 listView_Sepet.Items.Add(item);
             }
@@ -284,7 +282,7 @@ namespace Kutuphane.UI
 
                 foreach (var kitap in _sepetiKitaplar)
                 {
-                    var kitapResult = _kitapService.GetByFilterService(x => x.KitapId == kitap.KitapId);
+                    var kitapResult = _kitapService.GetByFilterService(x => x.KitapId == kitap.Id);
 
                     if (!kitapResult.IsSuccess || kitapResult.Data == null || kitapResult.Data.Stok <= 0)
                     {
@@ -295,7 +293,7 @@ namespace Kutuphane.UI
                     var odunc = new Odunc
                     {
                         UyeId = _secilenUyeId,
-                        KitapId = kitap.KitapId,
+                        KitapId = kitap.Id,
                         AlisTarihi = DateTime.Now,
                         //TeslimTarihi = DateTime.Now.AddDays(45),
                         TeslimTarihi = dateTimePicker_TeslimTarihi.Value.Date,
@@ -400,25 +398,25 @@ namespace Kutuphane.UI
         }
         private void textBox_KitapAra_TextChanged(object sender, EventArgs e)
         {
-            string aramaMetni = textBox_KitapAra.Text.Trim();
+            string aramaMetni = textBox_KitapAra.Text.Trim().ToLower();
+            if(string.IsNullOrWhiteSpace(textBox_KitapAra.Text))
+                listView_KitapListesi.Items.Clear();
 
+            if (textBox_KitapAra.Text.Trim().Length < 3)
+            {
+                return;
+            }
             try
             {
-                var result = _kitapService.KitapListeDetayliGetirServis(x =>
-                    x.Aktif &&
-                    x.Stok > 0 &&
-                    (x.KitapAdi.Contains(aramaMetni) ||
-                     x.ISBN.Contains(aramaMetni) ||
-                     x.Yazar.Ad.Contains(aramaMetni) ||
-                     x.Yazar.Soyad.Contains(aramaMetni))
-                );
-
                 listView_KitapListesi.Items.Clear();
-                foreach (var kitap in result.Data)
+                foreach (var kitap in oduncKitapListe.FindAll(k=> 
+                     k.ISBN.ToLower().Contains(aramaMetni)||
+                     k.KitapAdi.ToLower().Contains(aramaMetni)||
+                     k.Yazar.ToLower().Contains(aramaMetni)))
                 {
                     var item = new ListViewItem(kitap.KitapAdi);
                     item.SubItems.Add(kitap.ISBN ?? string.Empty);
-                    item.SubItems.Add($"{kitap.YazarAd} {kitap.YazarSoyad}");
+                    item.SubItems.Add(kitap.Yazar ?? string.Empty);
                     item.Tag = kitap;
 
                     listView_KitapListesi.Items.Add(item);
@@ -432,31 +430,29 @@ namespace Kutuphane.UI
         private void textBox_UyeAra_TextChanged(object sender, EventArgs e)
         {
             string aramaMetni = textBox_UyeAra.Text.Trim();
+
+            if (string.IsNullOrWhiteSpace(textBox_UyeAra.Text))
+                listView_Uyeler.Items.Clear();
+
+            if (textBox_UyeAra.Text.Trim().Length < 3)
+                return;
+
             listView_Uyeler.Items.Clear();
 
-            if (string.IsNullOrEmpty(aramaMetni)) return;
-
-            var result = _uyeManager.GetListByFilterService(x =>
-                x.AktifMi &&
-                (x.TcPass.Contains(aramaMetni) ||
-                 x.Ad.Contains(aramaMetni) ||
-                 x.Soyad.Contains(aramaMetni))
-            );
-
-            if (result.IsSuccess && result.Data.Count > 0)
+            listView_Uyeler.BeginUpdate();
+            foreach (var uye in oduncUyeListe.FindAll(u =>
+            u.TcPass.ToLower().Contains(aramaMetni) ||
+            u.Soyad.ToLower().Contains(aramaMetni) ||
+            u.Ad.ToLower().Contains(aramaMetni)))
             {
-                listView_Uyeler.BeginUpdate();
-                foreach (var uye in result.Data)
-                {
-                    ListViewItem item = new ListViewItem(uye.TcPass);
-                    item.SubItems.Add(uye.Ad);
-                    item.SubItems.Add(uye.Soyad);
-                    item.Tag = uye;
+                ListViewItem item = new ListViewItem(uye.TcPass);
+                item.SubItems.Add(uye.Ad);
+                item.SubItems.Add(uye.Soyad);
+                item.Tag = uye;
 
-                    listView_Uyeler.Items.Add(item);
-                }
-                listView_Uyeler.EndUpdate();
+                listView_Uyeler.Items.Add(item);
             }
+            listView_Uyeler.EndUpdate();
         }
         private void listView_Sepet_DoubleClick(object sender, EventArgs e)
         {
@@ -466,7 +462,7 @@ namespace Kutuphane.UI
             var secilenItem = listView_Sepet.SelectedItems[0];
             int kitapId = (int)secilenItem.Tag;
 
-            var kitap = _sepetiKitaplar.FirstOrDefault(x => x.KitapId == kitapId);
+            var kitap = _sepetiKitaplar.FirstOrDefault(x => x.Id == kitapId);
             if (kitap == null)
                 return;
 

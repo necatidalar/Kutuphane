@@ -1,30 +1,66 @@
 ﻿using Kutuphane.BLL.Abstract;
 using Kutuphane.BLL.Concrete;
 using Kutuphane.DAL.Concrete;
+using Kutuphane.DAL.Contexes;
 using Kutuphane.Model.Entity;
+using Kutuphane.UI.UIMetodlar;
 using System.ComponentModel;
+using System.Windows.Forms;
 
 namespace Kutuphane.UI
 {
     public partial class frmDilIslemleri : Form
     {
-        public frmDilIslemleri()
-        {
-            InitializeComponent();
-            dataGrid_Dil.DataSource = bilDil;
-
-        }
-
         BindingList<Dil> bilDil = new BindingList<Dil>();
         IDilService dilService = new DilManager(new DilDal());
         bool silinenModu = false;
 
+        private readonly YetkiKontrol _yetkiKontrol;
+        private readonly int _personelId;
+        private HashSet<string> _userPermissions;
+
+        //public frmDilIslemleri()
+        //{ InitializeComponent(); }
+
+        public frmDilIslemleri(int personelId)
+        {
+            InitializeComponent();
+            dataGrid_Dil.DataSource = bilDil;
+            _personelId = personelId;
+            _yetkiKontrol = new YetkiKontrol(new KutuphaneDbContext());
+            _userPermissions = _yetkiKontrol.KullaniciYetkileriniAl(_personelId);
+        }
         private void frmDilIslemleri_Load(object sender, EventArgs e)
         {
-            Listele();
-            PasifUyeKontrol();
+            YetkiKontrol();
+            if (_userPermissions.Contains("DIL_LISTELE"))
+            {
+                Listele();
+                PasifUyeKontrol();
+            }
             KutulariTemizle();
             dataGrid_Dil.ClearSelection();
+        }
+        private void YetkiKontrol()
+        {
+            bool listele = _userPermissions.Contains("DIL_LISTELE");
+            bool ekle = _userPermissions.Contains("DIL_EKLE");
+            bool guncelle = _userPermissions.Contains("DIL_GUNCELLE");
+            bool sil = _userPermissions.Contains("DIL_SIL");
+
+            dataGrid_Dil.Enabled = listele;
+            btnKaydet.Visible = ekle;
+            btnDuzenle.Visible = listele && guncelle;
+            btnSil.Visible = listele && sil;
+
+            btnSilinenleriGoster.Visible = listele;
+            btnGeriYukle.Visible = listele && sil;
+
+            btnTemizle.Visible = ekle || guncelle;
+            groupBox1.Visible = ekle || guncelle || sil;
+
+            label_txtAra.Visible = listele;
+            textBox_Ara.Visible = listele;
         }
         private void Listele()
         {
@@ -131,10 +167,13 @@ namespace Kutuphane.UI
         }
         private void PasifUyeKontrol()
         {
-            dataGrid_Dil.ClearSelection();
-
+            bool listele = _userPermissions.Contains("DIL_LISTELE");
+            if (!listele)
+            {
+                btnSilinenleriGoster.Visible = false;
+                return;
+            }
             var pasifResult = dilService.GetListByFilterService(x => x.AktifMi == false);
-
             btnSilinenleriGoster.Visible = pasifResult.IsSuccess && pasifResult.Data.Any();
         }
         private void btnSilinenleriGoster_Click(object sender, EventArgs e)
@@ -254,7 +293,6 @@ namespace Kutuphane.UI
             Listele();
             dataGrid_Dil.Refresh();
         }
-
         Dictionary<string, bool> sortDirections = new();
         private void dataGrid_Dil_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {

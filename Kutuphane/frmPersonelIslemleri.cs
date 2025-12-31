@@ -54,7 +54,6 @@ namespace Kutuphane.UI
                 MessageBox.Show("Listeleme sırasında hata oluştu:\n" + ex.Message);
             }
         }
-
         private void ComboDoldur()
         {
             try
@@ -371,7 +370,6 @@ namespace Kutuphane.UI
         {
             Listele();
         }
-
         Dictionary<string, bool> sortDirections = new();
         private void dataGrid_Personel_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {

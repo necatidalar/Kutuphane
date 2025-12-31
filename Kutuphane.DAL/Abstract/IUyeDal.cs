@@ -9,6 +9,6 @@ namespace Kutuphane.DAL.Abstract
     public interface IUyeDal : IDalVeriCekme<Uye>, IDalVeriOlusturma<Uye>, IDalVeriGunceleme<Uye>
     {
         IDataResult<List<UyeDto>> UyeListeDetayliGetir(Expression<Func<Uye, bool>>? predicate = null);
+        public IDataResult<List<OduncUyeDto>> OduncUyeListeDetayliGetir(Expression<Func<Uye, bool>>? predicate = null);
     }
-
 }

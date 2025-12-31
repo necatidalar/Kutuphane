@@ -65,7 +65,6 @@ namespace Kutuphane.BLL.Concrete
 
             return new SuccessResult();
         }
-
         public IResult AddService(Uye entity)
         {
             var valid = Validate(entity);
@@ -74,7 +73,6 @@ namespace Kutuphane.BLL.Concrete
 
             return _uyeDal.Add(entity);
         }
-
         public IResult UpdateService(Uye entity)
         {
             var valid = Validate(entity);
@@ -83,20 +81,22 @@ namespace Kutuphane.BLL.Concrete
 
             return _uyeDal.Update(entity);
         }
-
         public IDataResult<Uye> GetByFilterService(Expression<Func<Uye, bool>>? predicate = null)
         {
             return _uyeDal.GetByFilter(predicate);
         }
-
         public IDataResult<List<Uye>> GetListByFilterService(Expression<Func<Uye, bool>>? predicate = null)
         {
             return _uyeDal.GetListByFilter(predicate);
         }
-
         public IDataResult<List<UyeDto>> UyeListeDetayliGetirServis(Expression<Func<Uye, bool>>? predicate = null)
         {
             return _uyeDal.UyeListeDetayliGetir(predicate);
+        }
+
+        public IDataResult<List<OduncUyeDto>> OduncUyeListeDetayliGetirServis(Expression<Func<Uye, bool>>? predicate = null)
+        {
+            return _uyeDal.OduncUyeListeDetayliGetir(predicate);
         }
     }
 }
