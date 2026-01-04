@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Kutuphane.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class @as : Migration
+    public partial class ff : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -242,12 +242,14 @@ namespace Kutuphane.DAL.Migrations
                 name: "PersonelRolleri",
                 columns: table => new
                 {
+                    PersonelRolId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     PersonelId = table.Column<int>(type: "int", nullable: false),
                     RolId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PersonelRolleri", x => new { x.PersonelId, x.RolId });
+                    table.PrimaryKey("PK_PersonelRolleri", x => x.PersonelRolId);
                     table.ForeignKey(
                         name: "FK_PersonelRolleri_Personeller_PersonelId",
                         column: x => x.PersonelId,
@@ -508,7 +510,10 @@ namespace Kutuphane.DAL.Migrations
                     { 33, "Yönetim Listeleme", "YONETIM_LISTELE" },
                     { 34, "Yönetim Ekleme", "YONETIM_EKLE" },
                     { 35, "Yönetim Güncelleme", "YONETIM_GUNCELLE" },
-                    { 36, "Yönetim Silme", "YONETIM_SIL" }
+                    { 36, "Yönetim Silme", "YONETIM_SIL" },
+                    { 37, "Raporlama", "RAPORLAMA" },
+                    { 38, "Ayarlar", "AYARLAR" },
+                    { 39, "Yerleşim Ayarları", "YERLESIM_AYARLARI" }
                 });
 
             migrationBuilder.InsertData(
@@ -567,11 +572,11 @@ namespace Kutuphane.DAL.Migrations
 
             migrationBuilder.InsertData(
                 table: "PersonelRolleri",
-                columns: new[] { "PersonelId", "RolId" },
+                columns: new[] { "PersonelRolId", "PersonelId", "RolId" },
                 values: new object[,]
                 {
-                    { 1, 1 },
-                    { 2, 2 }
+                    { 1, 1, 1 },
+                    { 2, 2, 2 }
                 });
 
             migrationBuilder.CreateIndex(
@@ -628,6 +633,12 @@ namespace Kutuphane.DAL.Migrations
                 name: "IX_Personeller_CinsiyetId",
                 table: "Personeller",
                 column: "CinsiyetId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PersonelRolleri_PersonelId_RolId",
+                table: "PersonelRolleri",
+                columns: new[] { "PersonelId", "RolId" },
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_PersonelRolleri_RolId",

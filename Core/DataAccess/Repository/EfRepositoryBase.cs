@@ -10,8 +10,6 @@ namespace Core.DataAccess.Repository
         where TEntity : class, IEntity, new()
         where TContext : DbContext, new()
     {
-
-
         public IDataResult<List<TEntity>> GetListByFilter(Expression<Func<TEntity, bool>>? predicate = null)
         {
             try
@@ -27,7 +25,6 @@ namespace Core.DataAccess.Repository
             }
 
         }
-
         public IDataResult<TEntity?> GetByFilter(Expression<Func<TEntity, bool>>? predicate = null)
         {
             try
@@ -44,7 +41,6 @@ namespace Core.DataAccess.Repository
             }
 
         }
-
         public IResult Add(TEntity entity)
         {
             try
@@ -61,7 +57,6 @@ namespace Core.DataAccess.Repository
             }
 
         }
-
         public IResult Update(TEntity entity)
         {
             try
@@ -78,7 +73,6 @@ namespace Core.DataAccess.Repository
             }
 
         }
-
         public IResult Delete(TEntity entity)
         {
             try
@@ -92,7 +86,6 @@ namespace Core.DataAccess.Repository
             {
                 return new ErrorResult(e.Message);
             }
-
         }
     }
 }

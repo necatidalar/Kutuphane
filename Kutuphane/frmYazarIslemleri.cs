@@ -1,8 +1,11 @@
 ﻿using Kutuphane.BLL.Abstract;
 using Kutuphane.BLL.Concrete;
 using Kutuphane.DAL.Concrete;
+using Kutuphane.DAL.Contexes;
 using Kutuphane.Model.DTO;
 using Kutuphane.Model.Entity;
+using Kutuphane.UI.Theme;
+using Kutuphane.UI.UIMetodlar;
 using System.ComponentModel;
 
 namespace Kutuphane.UI
@@ -12,9 +15,17 @@ namespace Kutuphane.UI
         BindingList<YazarDto> bilYazar = new BindingList<YazarDto>();
         IYazarService yazarService = new YazarManager(new YazarDal());
         bool silinenModu = false;
-        public frmYazarIslemleri()
+
+        private readonly YetkiKontrol _yetkiKontrol;
+        private readonly int _personelId;
+        private HashSet<string> _userPermissions;
+
+        public frmYazarIslemleri(int personelId)
         {
             InitializeComponent();
+            _personelId = personelId;
+            _yetkiKontrol = new YetkiKontrol(new KutuphaneDbContext());
+            _userPermissions = _yetkiKontrol.KullaniciYetkileriniAl(_personelId);
             dataGrid_Yazar.DataSource = bilYazar;
         }
         private void frmYazarIslemleri_Load(object sender, EventArgs e)
@@ -24,10 +35,36 @@ namespace Kutuphane.UI
             dateTimePicker_OlumTarihi.ShowCheckBox = true;
             dateTimePicker_OlumTarihi.Checked = false;
 
-            Listele();
-            PasifUyeKontrol();
+            YetkiKontrol();
+            if (_userPermissions.Contains("YAZAR_LISTELE"))
+            {
+                Listele();
+                PasifKontrol();
+            }
             KutulariTemizle();
             dataGrid_Yazar.ClearSelection();
+            DataGridThemeManager.Apply(dataGrid_Yazar);
+        }
+        private void YetkiKontrol()
+        {
+            bool listele = _userPermissions.Contains("YAZAR_LISTELE");
+            bool ekle = _userPermissions.Contains("YAZAR_EKLE");
+            bool guncelle = _userPermissions.Contains("YAZAR_GUNCELLE");
+            bool sil = _userPermissions.Contains("YAZAR_SIL");
+
+            dataGrid_Yazar.Enabled = listele;
+            btnKaydet.Visible = ekle;
+            btnDuzenle.Visible = listele && guncelle;
+            btnSil.Visible = listele && sil;
+
+            btnSilinenleriGoster.Visible = listele;
+            btnGeriYukle.Visible = listele && sil;
+
+            btnTemizle.Visible = ekle || guncelle;
+            groupBox1.Visible = ekle || guncelle || sil;
+
+            label_txtAra.Visible = listele;
+            textBox_Ara.Visible = listele;
         }
         private void Listele()
         {
@@ -52,7 +89,7 @@ namespace Kutuphane.UI
 
             dataGrid_Yazar.ClearSelection();
             KutulariTemizle();
-            PasifUyeKontrol();
+            PasifKontrol();
         }
         private void btnKaydet_Click(object sender, EventArgs e)
         {
@@ -136,7 +173,7 @@ namespace Kutuphane.UI
             {
                 MessageBox.Show("Yazar başarıyla silindi (pasif edildi).", "Başarılı");
                 Listele();
-                PasifUyeKontrol();
+                PasifKontrol();
             }
             else
                 MessageBox.Show(uyeResult.Message, "Hata");
@@ -158,12 +195,16 @@ namespace Kutuphane.UI
 
             dataGrid_Yazar.ClearSelection();
         }
-        private void PasifUyeKontrol()
+        private void PasifKontrol()
         {
+            bool listele = _userPermissions.Contains("YAZAR_LISTELE");
+            if (!listele)
+            {
+                btnSilinenleriGoster.Visible = false;
+                return;
+            }
             dataGrid_Yazar.ClearSelection();
-
             var pasifResult = yazarService.GetListByFilterService(x => x.AktifMi == false);
-
             btnSilinenleriGoster.Visible = pasifResult.IsSuccess && pasifResult.Data.Any();
         }
         private void btnSilinenleriGoster_Click(object sender, EventArgs e)
@@ -231,7 +272,7 @@ namespace Kutuphane.UI
             btnKaydet.Enabled = true;
             btnDuzenle.Enabled = true;
             btnSil.Enabled = true;
-            PasifUyeKontrol();
+            PasifKontrol();
             KutulariTemizle();
             dataGrid_Yazar.ClearSelection();
         }

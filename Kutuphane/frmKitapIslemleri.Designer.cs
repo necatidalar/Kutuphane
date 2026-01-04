@@ -32,8 +32,6 @@ namespace Kutuphane.UI
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmKitapIslemleri));
             groupBox1 = new GroupBox();
             btnGeriYukle = new Button();
@@ -64,24 +62,24 @@ namespace Kutuphane.UI
             textBox_KitapId = new TextBox();
             kitapDtoBindingSource = new BindingSource(components);
             textBox_Ara = new TextBox();
-            aktifDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
-            stokDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            dilDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            dilIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            sayfaSayisiDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            basimYiliDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            kategoriAdiDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            kategoriIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            yayineviAdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            yayineviIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            yazarSoyadDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            yazarAdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            yazarIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            ıSBNDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            kitapAdiDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            kitapIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            label_txtAra = new Label();
             dataGrid_Kitap = new DataGridView();
-            label1 = new Label();
+            kitapIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            kitapAdiDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            ıSBNDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            yazarIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            yazarAdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            yazarSoyadDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            yayineviIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            yayineviAdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            kategoriIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            kategoriAdiDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            basimYiliDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            sayfaSayisiDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            dilIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            dilDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            stokDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            aktifDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)kitapDtoBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGrid_Kitap).BeginInit();
@@ -413,186 +411,143 @@ namespace Kutuphane.UI
             textBox_Ara.TabIndex = 17;
             textBox_Ara.TextChanged += textBox_Ara_TextChanged;
             // 
-            // aktifDataGridViewCheckBoxColumn
+            // label_txtAra
             // 
-            aktifDataGridViewCheckBoxColumn.DataPropertyName = "Aktif";
-            aktifDataGridViewCheckBoxColumn.HeaderText = "Aktif";
-            aktifDataGridViewCheckBoxColumn.Name = "aktifDataGridViewCheckBoxColumn";
-            aktifDataGridViewCheckBoxColumn.ReadOnly = true;
-            aktifDataGridViewCheckBoxColumn.Visible = false;
+            label_txtAra.AutoSize = true;
+            label_txtAra.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            label_txtAra.ForeColor = Color.FromArgb(64, 64, 64);
+            label_txtAra.Location = new Point(381, 16);
+            label_txtAra.Name = "label_txtAra";
+            label_txtAra.Size = new Size(51, 17);
+            label_txtAra.TabIndex = 20;
+            label_txtAra.Text = "Arama:";
             // 
-            // stokDataGridViewTextBoxColumn
+            // dataGrid_Kitap
             // 
-            stokDataGridViewTextBoxColumn.DataPropertyName = "Stok";
-            stokDataGridViewTextBoxColumn.HeaderText = "Stok Miktarı";
-            stokDataGridViewTextBoxColumn.Name = "stokDataGridViewTextBoxColumn";
-            stokDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // dilDataGridViewTextBoxColumn
-            // 
-            dilDataGridViewTextBoxColumn.DataPropertyName = "Dil";
-            dilDataGridViewTextBoxColumn.HeaderText = "Dil";
-            dilDataGridViewTextBoxColumn.Name = "dilDataGridViewTextBoxColumn";
-            dilDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // dilIdDataGridViewTextBoxColumn
-            // 
-            dilIdDataGridViewTextBoxColumn.DataPropertyName = "DilId";
-            dilIdDataGridViewTextBoxColumn.HeaderText = "DilId";
-            dilIdDataGridViewTextBoxColumn.Name = "dilIdDataGridViewTextBoxColumn";
-            dilIdDataGridViewTextBoxColumn.ReadOnly = true;
-            dilIdDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // sayfaSayisiDataGridViewTextBoxColumn
-            // 
-            sayfaSayisiDataGridViewTextBoxColumn.DataPropertyName = "SayfaSayisi";
-            sayfaSayisiDataGridViewTextBoxColumn.HeaderText = "Sayfa Sayısı";
-            sayfaSayisiDataGridViewTextBoxColumn.Name = "sayfaSayisiDataGridViewTextBoxColumn";
-            sayfaSayisiDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // basimYiliDataGridViewTextBoxColumn
-            // 
-            basimYiliDataGridViewTextBoxColumn.DataPropertyName = "BasimYili";
-            basimYiliDataGridViewTextBoxColumn.HeaderText = "Basım Yılı";
-            basimYiliDataGridViewTextBoxColumn.Name = "basimYiliDataGridViewTextBoxColumn";
-            basimYiliDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // kategoriAdiDataGridViewTextBoxColumn
-            // 
-            kategoriAdiDataGridViewTextBoxColumn.DataPropertyName = "KategoriAdi";
-            kategoriAdiDataGridViewTextBoxColumn.HeaderText = "Kategori Adı";
-            kategoriAdiDataGridViewTextBoxColumn.Name = "kategoriAdiDataGridViewTextBoxColumn";
-            kategoriAdiDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // kategoriIdDataGridViewTextBoxColumn
-            // 
-            kategoriIdDataGridViewTextBoxColumn.DataPropertyName = "KategoriId";
-            kategoriIdDataGridViewTextBoxColumn.HeaderText = "KategoriId";
-            kategoriIdDataGridViewTextBoxColumn.Name = "kategoriIdDataGridViewTextBoxColumn";
-            kategoriIdDataGridViewTextBoxColumn.ReadOnly = true;
-            kategoriIdDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // yayineviAdDataGridViewTextBoxColumn
-            // 
-            yayineviAdDataGridViewTextBoxColumn.DataPropertyName = "YayineviAd";
-            yayineviAdDataGridViewTextBoxColumn.HeaderText = "Yayınevi Adı";
-            yayineviAdDataGridViewTextBoxColumn.Name = "yayineviAdDataGridViewTextBoxColumn";
-            yayineviAdDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // yayineviIdDataGridViewTextBoxColumn
-            // 
-            yayineviIdDataGridViewTextBoxColumn.DataPropertyName = "YayineviId";
-            yayineviIdDataGridViewTextBoxColumn.HeaderText = "YayineviId";
-            yayineviIdDataGridViewTextBoxColumn.Name = "yayineviIdDataGridViewTextBoxColumn";
-            yayineviIdDataGridViewTextBoxColumn.ReadOnly = true;
-            yayineviIdDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // yazarSoyadDataGridViewTextBoxColumn
-            // 
-            yazarSoyadDataGridViewTextBoxColumn.DataPropertyName = "YazarSoyad";
-            yazarSoyadDataGridViewTextBoxColumn.HeaderText = "Yazar Soyadı";
-            yazarSoyadDataGridViewTextBoxColumn.Name = "yazarSoyadDataGridViewTextBoxColumn";
-            yazarSoyadDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // yazarAdDataGridViewTextBoxColumn
-            // 
-            yazarAdDataGridViewTextBoxColumn.DataPropertyName = "YazarAd";
-            yazarAdDataGridViewTextBoxColumn.HeaderText = "Yazar Adı";
-            yazarAdDataGridViewTextBoxColumn.Name = "yazarAdDataGridViewTextBoxColumn";
-            yazarAdDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // yazarIdDataGridViewTextBoxColumn
-            // 
-            yazarIdDataGridViewTextBoxColumn.DataPropertyName = "YazarId";
-            yazarIdDataGridViewTextBoxColumn.HeaderText = "YazarId";
-            yazarIdDataGridViewTextBoxColumn.Name = "yazarIdDataGridViewTextBoxColumn";
-            yazarIdDataGridViewTextBoxColumn.ReadOnly = true;
-            yazarIdDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // ıSBNDataGridViewTextBoxColumn
-            // 
-            ıSBNDataGridViewTextBoxColumn.DataPropertyName = "ISBN";
-            ıSBNDataGridViewTextBoxColumn.HeaderText = "ISBN";
-            ıSBNDataGridViewTextBoxColumn.Name = "ıSBNDataGridViewTextBoxColumn";
-            ıSBNDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // kitapAdiDataGridViewTextBoxColumn
-            // 
-            kitapAdiDataGridViewTextBoxColumn.DataPropertyName = "KitapAdi";
-            kitapAdiDataGridViewTextBoxColumn.HeaderText = "Kitap Adı";
-            kitapAdiDataGridViewTextBoxColumn.Name = "kitapAdiDataGridViewTextBoxColumn";
-            kitapAdiDataGridViewTextBoxColumn.ReadOnly = true;
+            dataGrid_Kitap.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dataGrid_Kitap.AutoGenerateColumns = false;
+            dataGrid_Kitap.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGrid_Kitap.Columns.AddRange(new DataGridViewColumn[] { kitapIdDataGridViewTextBoxColumn, kitapAdiDataGridViewTextBoxColumn, ıSBNDataGridViewTextBoxColumn, yazarIdDataGridViewTextBoxColumn, yazarAdDataGridViewTextBoxColumn, yazarSoyadDataGridViewTextBoxColumn, yayineviIdDataGridViewTextBoxColumn, yayineviAdDataGridViewTextBoxColumn, kategoriIdDataGridViewTextBoxColumn, kategoriAdiDataGridViewTextBoxColumn, basimYiliDataGridViewTextBoxColumn, sayfaSayisiDataGridViewTextBoxColumn, dilIdDataGridViewTextBoxColumn, dilDataGridViewTextBoxColumn, stokDataGridViewTextBoxColumn, aktifDataGridViewCheckBoxColumn });
+            dataGrid_Kitap.DataSource = kitapDtoBindingSource;
+            dataGrid_Kitap.Location = new Point(381, 44);
+            dataGrid_Kitap.Name = "dataGrid_Kitap";
+            dataGrid_Kitap.Size = new Size(831, 600);
+            dataGrid_Kitap.TabIndex = 21;
+            dataGrid_Kitap.CellFormatting += dataGrid_Kitap_CellFormatting;
+            dataGrid_Kitap.CellPainting += dataGrid_Kitap_CellPainting;
+            dataGrid_Kitap.ColumnHeaderMouseClick += dataGrid_Kitap_ColumnHeaderMouseClick;
+            dataGrid_Kitap.SelectionChanged += dataGrid_Kitap_SelectionChanged;
             // 
             // kitapIdDataGridViewTextBoxColumn
             // 
             kitapIdDataGridViewTextBoxColumn.DataPropertyName = "KitapId";
             kitapIdDataGridViewTextBoxColumn.HeaderText = "KitapId";
             kitapIdDataGridViewTextBoxColumn.Name = "kitapIdDataGridViewTextBoxColumn";
-            kitapIdDataGridViewTextBoxColumn.ReadOnly = true;
             kitapIdDataGridViewTextBoxColumn.Visible = false;
             // 
-            // dataGrid_Kitap
+            // kitapAdiDataGridViewTextBoxColumn
             // 
-            dataGrid_Kitap.AllowUserToAddRows = false;
-            dataGrid_Kitap.AllowUserToDeleteRows = false;
-            dataGrid_Kitap.AllowUserToOrderColumns = true;
-            dataGrid_Kitap.AllowUserToResizeRows = false;
-            dataGrid_Kitap.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            dataGrid_Kitap.AutoGenerateColumns = false;
-            dataGrid_Kitap.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGrid_Kitap.BackgroundColor = Color.White;
-            dataGrid_Kitap.BorderStyle = BorderStyle.None;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(41, 128, 185);
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 162);
-            dataGridViewCellStyle1.ForeColor = Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(41, 128, 185);
-            dataGridViewCellStyle1.SelectionForeColor = Color.White;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dataGrid_Kitap.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            dataGrid_Kitap.ColumnHeadersHeight = 30;
-            dataGrid_Kitap.Columns.AddRange(new DataGridViewColumn[] { kitapIdDataGridViewTextBoxColumn, kitapAdiDataGridViewTextBoxColumn, ıSBNDataGridViewTextBoxColumn, yazarIdDataGridViewTextBoxColumn, yazarAdDataGridViewTextBoxColumn, yazarSoyadDataGridViewTextBoxColumn, yayineviIdDataGridViewTextBoxColumn, yayineviAdDataGridViewTextBoxColumn, kategoriIdDataGridViewTextBoxColumn, kategoriAdiDataGridViewTextBoxColumn, basimYiliDataGridViewTextBoxColumn, sayfaSayisiDataGridViewTextBoxColumn, dilIdDataGridViewTextBoxColumn, dilDataGridViewTextBoxColumn, stokDataGridViewTextBoxColumn, aktifDataGridViewCheckBoxColumn });
-            dataGrid_Kitap.DataSource = kitapDtoBindingSource;
-            dataGrid_Kitap.EnableHeadersVisualStyles = false;
-            dataGrid_Kitap.GridColor = Color.LightGray;
-            dataGrid_Kitap.Location = new Point(381, 44);
-            dataGrid_Kitap.MultiSelect = false;
-            dataGrid_Kitap.Name = "dataGrid_Kitap";
-            dataGrid_Kitap.ReadOnly = true;
-            dataGrid_Kitap.RowHeadersVisible = false;
-            dataGridViewCellStyle2.BackColor = Color.White;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 162);
-            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(170, 204, 255);
-            dataGridViewCellStyle2.SelectionForeColor = Color.Black;
-            dataGrid_Kitap.RowsDefaultCellStyle = dataGridViewCellStyle2;
-            dataGrid_Kitap.RowTemplate.Height = 32;
-            dataGrid_Kitap.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGrid_Kitap.Size = new Size(831, 600);
-            dataGrid_Kitap.TabIndex = 19;
-            dataGrid_Kitap.CellFormatting += dataGrid_Kitap_CellFormatting;
-            dataGrid_Kitap.CellPainting += dataGrid_Kitap_CellPainting;
-            dataGrid_Kitap.ColumnHeaderMouseClick += dataGrid_Kitap_ColumnHeaderMouseClick;
-            dataGrid_Kitap.SelectionChanged += dataGrid_Kitap_SelectionChanged;
+            kitapAdiDataGridViewTextBoxColumn.DataPropertyName = "KitapAdi";
+            kitapAdiDataGridViewTextBoxColumn.HeaderText = "Kitap Adı";
+            kitapAdiDataGridViewTextBoxColumn.Name = "kitapAdiDataGridViewTextBoxColumn";
             // 
-            // label1
+            // ıSBNDataGridViewTextBoxColumn
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
-            label1.ForeColor = Color.FromArgb(64, 64, 64);
-            label1.Location = new Point(381, 16);
-            label1.Name = "label1";
-            label1.Size = new Size(51, 17);
-            label1.TabIndex = 20;
-            label1.Text = "Arama:";
+            ıSBNDataGridViewTextBoxColumn.DataPropertyName = "ISBN";
+            ıSBNDataGridViewTextBoxColumn.HeaderText = "ISBN";
+            ıSBNDataGridViewTextBoxColumn.Name = "ıSBNDataGridViewTextBoxColumn";
+            // 
+            // yazarIdDataGridViewTextBoxColumn
+            // 
+            yazarIdDataGridViewTextBoxColumn.DataPropertyName = "YazarId";
+            yazarIdDataGridViewTextBoxColumn.HeaderText = "YazarId";
+            yazarIdDataGridViewTextBoxColumn.Name = "yazarIdDataGridViewTextBoxColumn";
+            yazarIdDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // yazarAdDataGridViewTextBoxColumn
+            // 
+            yazarAdDataGridViewTextBoxColumn.DataPropertyName = "YazarAd";
+            yazarAdDataGridViewTextBoxColumn.HeaderText = "Yazar Adı";
+            yazarAdDataGridViewTextBoxColumn.Name = "yazarAdDataGridViewTextBoxColumn";
+            // 
+            // yazarSoyadDataGridViewTextBoxColumn
+            // 
+            yazarSoyadDataGridViewTextBoxColumn.DataPropertyName = "YazarSoyad";
+            yazarSoyadDataGridViewTextBoxColumn.HeaderText = "Yazar Soyadı";
+            yazarSoyadDataGridViewTextBoxColumn.Name = "yazarSoyadDataGridViewTextBoxColumn";
+            // 
+            // yayineviIdDataGridViewTextBoxColumn
+            // 
+            yayineviIdDataGridViewTextBoxColumn.DataPropertyName = "YayineviId";
+            yayineviIdDataGridViewTextBoxColumn.HeaderText = "YayineviId";
+            yayineviIdDataGridViewTextBoxColumn.Name = "yayineviIdDataGridViewTextBoxColumn";
+            yayineviIdDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // yayineviAdDataGridViewTextBoxColumn
+            // 
+            yayineviAdDataGridViewTextBoxColumn.DataPropertyName = "YayineviAd";
+            yayineviAdDataGridViewTextBoxColumn.HeaderText = "Yayinevi Adı";
+            yayineviAdDataGridViewTextBoxColumn.Name = "yayineviAdDataGridViewTextBoxColumn";
+            // 
+            // kategoriIdDataGridViewTextBoxColumn
+            // 
+            kategoriIdDataGridViewTextBoxColumn.DataPropertyName = "KategoriId";
+            kategoriIdDataGridViewTextBoxColumn.HeaderText = "KategoriId";
+            kategoriIdDataGridViewTextBoxColumn.Name = "kategoriIdDataGridViewTextBoxColumn";
+            kategoriIdDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // kategoriAdiDataGridViewTextBoxColumn
+            // 
+            kategoriAdiDataGridViewTextBoxColumn.DataPropertyName = "KategoriAdi";
+            kategoriAdiDataGridViewTextBoxColumn.HeaderText = "Kategori Adı";
+            kategoriAdiDataGridViewTextBoxColumn.Name = "kategoriAdiDataGridViewTextBoxColumn";
+            // 
+            // basimYiliDataGridViewTextBoxColumn
+            // 
+            basimYiliDataGridViewTextBoxColumn.DataPropertyName = "BasimYili";
+            basimYiliDataGridViewTextBoxColumn.HeaderText = "Basım Yılı";
+            basimYiliDataGridViewTextBoxColumn.Name = "basimYiliDataGridViewTextBoxColumn";
+            // 
+            // sayfaSayisiDataGridViewTextBoxColumn
+            // 
+            sayfaSayisiDataGridViewTextBoxColumn.DataPropertyName = "SayfaSayisi";
+            sayfaSayisiDataGridViewTextBoxColumn.HeaderText = "Sayfa Sayısı";
+            sayfaSayisiDataGridViewTextBoxColumn.Name = "sayfaSayisiDataGridViewTextBoxColumn";
+            // 
+            // dilIdDataGridViewTextBoxColumn
+            // 
+            dilIdDataGridViewTextBoxColumn.DataPropertyName = "DilId";
+            dilIdDataGridViewTextBoxColumn.HeaderText = "DilId";
+            dilIdDataGridViewTextBoxColumn.Name = "dilIdDataGridViewTextBoxColumn";
+            dilIdDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // dilDataGridViewTextBoxColumn
+            // 
+            dilDataGridViewTextBoxColumn.DataPropertyName = "Dil";
+            dilDataGridViewTextBoxColumn.HeaderText = "Dil";
+            dilDataGridViewTextBoxColumn.Name = "dilDataGridViewTextBoxColumn";
+            // 
+            // stokDataGridViewTextBoxColumn
+            // 
+            stokDataGridViewTextBoxColumn.DataPropertyName = "Stok";
+            stokDataGridViewTextBoxColumn.HeaderText = "Stok";
+            stokDataGridViewTextBoxColumn.Name = "stokDataGridViewTextBoxColumn";
+            // 
+            // aktifDataGridViewCheckBoxColumn
+            // 
+            aktifDataGridViewCheckBoxColumn.DataPropertyName = "Aktif";
+            aktifDataGridViewCheckBoxColumn.HeaderText = "Aktif";
+            aktifDataGridViewCheckBoxColumn.Name = "aktifDataGridViewCheckBoxColumn";
+            aktifDataGridViewCheckBoxColumn.Visible = false;
             // 
             // frmKitapIslemleri
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1224, 661);
-            Controls.Add(label1);
-            Controls.Add(textBox_Ara);
             Controls.Add(dataGrid_Kitap);
+            Controls.Add(label_txtAra);
+            Controls.Add(textBox_Ara);
             Controls.Add(groupBox1);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "frmKitapIslemleri";
@@ -635,27 +590,25 @@ namespace Kutuphane.UI
         private Button btnSil;
         private Button btnDuzenle;
         private Button btnKaydet;
-        private DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-        private DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-        private DataGridViewCheckBoxColumn aktifDataGridViewCheckBoxColumn;
-        private DataGridViewTextBoxColumn stokDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn dilDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn dilIdDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn sayfaSayisiDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn basimYiliDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn kategoriAdiDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn kategoriIdDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn yayineviAdDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn yayineviIdDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn yazarSoyadDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn yazarAdDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn yazarIdDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn ıSBNDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn kitapAdiDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn kitapIdDataGridViewTextBoxColumn;
-        private DataGridView dataGrid_Kitap;
         private Button btnGeriYukle;
         private Button btnSilinenleriGoster;
-        private Label label1;
+        private Label label_txtAra;
+        private DataGridView dataGrid_Kitap;
+        private DataGridViewTextBoxColumn kitapIdDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn kitapAdiDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn ıSBNDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn yazarIdDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn yazarAdDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn yazarSoyadDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn yayineviIdDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn yayineviAdDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn kategoriIdDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn kategoriAdiDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn basimYiliDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn sayfaSayisiDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn dilIdDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn dilDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn stokDataGridViewTextBoxColumn;
+        private DataGridViewCheckBoxColumn aktifDataGridViewCheckBoxColumn;
     }
 }

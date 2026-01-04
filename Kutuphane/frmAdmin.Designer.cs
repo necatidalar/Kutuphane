@@ -30,7 +30,9 @@
         {
             components = new System.ComponentModel.Container();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAdmin));
             grpRoller = new GroupBox();
             panelRolIslemleri = new Panel();
@@ -64,6 +66,31 @@
             yetkiBindingSource = new BindingSource(components);
             txtYetkiAra = new TextBox();
             label4 = new Label();
+            grpPersonel = new GroupBox();
+            btnPersonelRolKaydet = new Button();
+            dgvPersonel = new DataGridView();
+            personelIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            adDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            soyadDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            cinsiyetIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            cinsiyetAdiDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            aktifMiDataGridViewCheckBoxColumn1 = new DataGridViewCheckBoxColumn();
+            personelBilgileriDtoBindingSource = new BindingSource(components);
+            txtPersonelAra = new TextBox();
+            labelPersonelAra = new Label();
+            grpPersonelRolleri = new GroupBox();
+            btnRolKaldir = new Button();
+            dgvPersonelRolleri = new DataGridView();
+            personelRolIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            personelIdDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            rolIdDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            personelAdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            personelSoyadDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            rolAdiDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            personelRolDtoBindingSource = new BindingSource(components);
+            button1 = new Button();
+            tableLayoutPanel1 = new TableLayoutPanel();
+            tableLayoutPanel2 = new TableLayoutPanel();
             grpRoller.SuspendLayout();
             panelRolIslemleri.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvRoller).BeginInit();
@@ -71,6 +98,14 @@
             grpYetki.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvYetki).BeginInit();
             ((System.ComponentModel.ISupportInitialize)yetkiBindingSource).BeginInit();
+            grpPersonel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvPersonel).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)personelBilgileriDtoBindingSource).BeginInit();
+            grpPersonelRolleri.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvPersonelRolleri).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)personelRolDtoBindingSource).BeginInit();
+            tableLayoutPanel1.SuspendLayout();
+            tableLayoutPanel2.SuspendLayout();
             SuspendLayout();
             // 
             // grpRoller
@@ -79,14 +114,15 @@
             grpRoller.Controls.Add(dgvRoller);
             grpRoller.Controls.Add(txtRolAra);
             grpRoller.Controls.Add(label1);
-            grpRoller.Dock = DockStyle.Left;
+            grpRoller.Dock = DockStyle.Fill;
             grpRoller.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 162);
             grpRoller.ForeColor = Color.FromArgb(64, 64, 64);
-            grpRoller.Location = new Point(0, 0);
+            grpRoller.Location = new Point(4, 3);
             grpRoller.Margin = new Padding(4, 3, 4, 3);
+            grpRoller.MinimumSize = new Size(419, 744);
             grpRoller.Name = "grpRoller";
             grpRoller.Padding = new Padding(12);
-            grpRoller.Size = new Size(429, 750);
+            grpRoller.Size = new Size(419, 744);
             grpRoller.TabIndex = 1;
             grpRoller.TabStop = false;
             grpRoller.Text = "1. Rol Yönetimi";
@@ -105,14 +141,15 @@
             panelRolIslemleri.Controls.Add(txtRolAdi);
             panelRolIslemleri.Controls.Add(label2);
             panelRolIslemleri.Dock = DockStyle.Bottom;
-            panelRolIslemleri.Location = new Point(12, 502);
+            panelRolIslemleri.Location = new Point(12, 496);
             panelRolIslemleri.Margin = new Padding(4, 3, 4, 3);
             panelRolIslemleri.Name = "panelRolIslemleri";
-            panelRolIslemleri.Size = new Size(405, 236);
+            panelRolIslemleri.Size = new Size(395, 236);
             panelRolIslemleri.TabIndex = 3;
             // 
             // btnRolSil
             // 
+            btnRolSil.Anchor = AnchorStyles.Top;
             btnRolSil.BackColor = Color.FromArgb(214, 48, 49);
             btnRolSil.FlatStyle = FlatStyle.Flat;
             btnRolSil.ForeColor = Color.White;
@@ -127,6 +164,7 @@
             // 
             // btnRolGuncelle
             // 
+            btnRolGuncelle.Anchor = AnchorStyles.Top;
             btnRolGuncelle.BackColor = Color.FromArgb(9, 132, 227);
             btnRolGuncelle.FlatStyle = FlatStyle.Flat;
             btnRolGuncelle.ForeColor = Color.White;
@@ -141,6 +179,7 @@
             // 
             // btnRolEkle
             // 
+            btnRolEkle.Anchor = AnchorStyles.Top;
             btnRolEkle.BackColor = Color.FromArgb(0, 184, 148);
             btnRolEkle.FlatStyle = FlatStyle.Flat;
             btnRolEkle.ForeColor = Color.White;
@@ -155,6 +194,7 @@
             // 
             // txtRolKodu
             // 
+            txtRolKodu.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             txtRolKodu.Location = new Point(23, 141);
             txtRolKodu.Margin = new Padding(4, 3, 4, 3);
             txtRolKodu.Name = "txtRolKodu";
@@ -174,6 +214,7 @@
             // 
             // txtRolId
             // 
+            txtRolId.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             txtRolId.Enabled = false;
             txtRolId.Location = new Point(23, 33);
             txtRolId.Margin = new Padding(4, 3, 4, 3);
@@ -194,6 +235,7 @@
             // 
             // txtRolAdi
             // 
+            txtRolAdi.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             txtRolAdi.Location = new Point(23, 87);
             txtRolAdi.Margin = new Padding(4, 3, 4, 3);
             txtRolAdi.Name = "txtRolAdi";
@@ -238,7 +280,7 @@
             dgvRoller.ReadOnly = true;
             dgvRoller.RowHeadersVisible = false;
             dgvRoller.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvRoller.Size = new Size(399, 423);
+            dgvRoller.Size = new Size(389, 481);
             dgvRoller.TabIndex = 2;
             dgvRoller.ColumnHeaderMouseClick += dgvRoller_ColumnHeaderMouseClick;
             dgvRoller.SelectionChanged += dgvRoller_SelectionChanged;
@@ -301,7 +343,7 @@
             txtRolAra.Margin = new Padding(4, 3, 4, 3);
             txtRolAra.Name = "txtRolAra";
             txtRolAra.PlaceholderText = "Rol adı ara...";
-            txtRolAra.Size = new Size(360, 23);
+            txtRolAra.Size = new Size(350, 23);
             txtRolAra.TabIndex = 1;
             txtRolAra.TextChanged += txtRolAra_TextChanged;
             // 
@@ -325,14 +367,14 @@
             grpYetki.Dock = DockStyle.Fill;
             grpYetki.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 162);
             grpYetki.ForeColor = Color.FromArgb(64, 64, 64);
-            grpYetki.Location = new Point(429, 0);
+            grpYetki.Location = new Point(431, 3);
             grpYetki.Margin = new Padding(4, 3, 4, 3);
             grpYetki.Name = "grpYetki";
             grpYetki.Padding = new Padding(12);
-            grpYetki.Size = new Size(854, 750);
+            grpYetki.Size = new Size(419, 744);
             grpYetki.TabIndex = 2;
             grpYetki.TabStop = false;
-            grpYetki.Text = "2. İşlem Seçimi";
+            grpYetki.Text = "2. Yetki Seçimi";
             // 
             // btnYetkiKaydet
             // 
@@ -342,13 +384,12 @@
             btnYetkiKaydet.FlatStyle = FlatStyle.Flat;
             btnYetkiKaydet.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
             btnYetkiKaydet.ForeColor = Color.White;
-            btnYetkiKaydet.Location = new Point(211, 687);
+            btnYetkiKaydet.Location = new Point(8, 681);
             btnYetkiKaydet.Margin = new Padding(4, 3, 4, 3);
-            btnYetkiKaydet.MaximumSize = new Size(419, 48);
             btnYetkiKaydet.Name = "btnYetkiKaydet";
-            btnYetkiKaydet.Size = new Size(419, 48);
+            btnYetkiKaydet.Size = new Size(404, 48);
             btnYetkiKaydet.TabIndex = 2;
-            btnYetkiKaydet.Text = "DEĞİŞİKLİKLERİ KAYDET";
+            btnYetkiKaydet.Text = "YETKİLERİ KAYDET";
             btnYetkiKaydet.UseVisualStyleBackColor = false;
             btnYetkiKaydet.Click += btnYetkiKaydet_Click;
             // 
@@ -363,14 +404,14 @@
             dgvYetki.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvYetki.Columns.AddRange(new DataGridViewColumn[] { yetkiIdDataGridViewTextBoxColumn, yetkiAdiDataGridViewTextBoxColumn, yetkiKoduDataGridViewTextBoxColumn, Secim, rolYetkileriDataGridViewTextBoxColumn1 });
             dgvYetki.DataSource = yetkiBindingSource;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = SystemColors.Window;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 162);
-            dataGridViewCellStyle2.ForeColor = Color.FromArgb(64, 64, 64);
-            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(178, 190, 195);
-            dataGridViewCellStyle2.SelectionForeColor = Color.Black;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            dgvYetki.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = SystemColors.Window;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 162);
+            dataGridViewCellStyle3.ForeColor = Color.FromArgb(64, 64, 64);
+            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(178, 190, 195);
+            dataGridViewCellStyle3.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
+            dgvYetki.DefaultCellStyle = dataGridViewCellStyle3;
             dgvYetki.Location = new Point(8, 73);
             dgvYetki.Margin = new Padding(4, 3, 4, 3);
             dgvYetki.MultiSelect = false;
@@ -378,7 +419,7 @@
             dgvYetki.ReadOnly = true;
             dgvYetki.RowHeadersVisible = false;
             dgvYetki.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvYetki.Size = new Size(824, 596);
+            dgvYetki.Size = new Size(404, 590);
             dgvYetki.TabIndex = 2;
             dgvYetki.ColumnHeaderMouseClick += dgvYetki_ColumnHeaderMouseClick;
             // 
@@ -406,6 +447,9 @@
             // 
             // Secim
             // 
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyle2.NullValue = false;
+            Secim.DefaultCellStyle = dataGridViewCellStyle2;
             Secim.HeaderText = "✔";
             Secim.Name = "Secim";
             Secim.ReadOnly = true;
@@ -429,8 +473,8 @@
             txtYetkiAra.Location = new Point(55, 35);
             txtYetkiAra.Margin = new Padding(4, 3, 4, 3);
             txtYetkiAra.Name = "txtYetkiAra";
-            txtYetkiAra.PlaceholderText = "İşlem adı veya işlem kodu ara...";
-            txtYetkiAra.Size = new Size(784, 23);
+            txtYetkiAra.PlaceholderText = "İşlem adı ara...";
+            txtYetkiAra.Size = new Size(349, 23);
             txtYetkiAra.TabIndex = 1;
             txtYetkiAra.TextChanged += txtYetkiAra_TextChanged;
             // 
@@ -445,14 +489,284 @@
             label4.TabIndex = 0;
             label4.Text = "Ara:";
             // 
+            // grpPersonel
+            // 
+            grpPersonel.Controls.Add(btnPersonelRolKaydet);
+            grpPersonel.Controls.Add(dgvPersonel);
+            grpPersonel.Controls.Add(txtPersonelAra);
+            grpPersonel.Controls.Add(labelPersonelAra);
+            grpPersonel.Dock = DockStyle.Fill;
+            grpPersonel.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 162);
+            grpPersonel.ForeColor = Color.FromArgb(64, 64, 64);
+            grpPersonel.Location = new Point(3, 3);
+            grpPersonel.Name = "grpPersonel";
+            grpPersonel.Padding = new Padding(12);
+            grpPersonel.Size = new Size(417, 472);
+            grpPersonel.TabIndex = 3;
+            grpPersonel.TabStop = false;
+            grpPersonel.Text = "3. Personel Seçimi";
+            // 
+            // btnPersonelRolKaydet
+            // 
+            btnPersonelRolKaydet.Anchor = AnchorStyles.Bottom;
+            btnPersonelRolKaydet.BackColor = Color.FromArgb(255, 159, 67);
+            btnPersonelRolKaydet.FlatAppearance.BorderSize = 0;
+            btnPersonelRolKaydet.FlatStyle = FlatStyle.Flat;
+            btnPersonelRolKaydet.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            btnPersonelRolKaydet.ForeColor = Color.White;
+            btnPersonelRolKaydet.Location = new Point(10, 409);
+            btnPersonelRolKaydet.Name = "btnPersonelRolKaydet";
+            btnPersonelRolKaydet.Size = new Size(396, 48);
+            btnPersonelRolKaydet.TabIndex = 2;
+            btnPersonelRolKaydet.Text = "SEÇİLİ PERSONELE ROL ATA";
+            btnPersonelRolKaydet.UseVisualStyleBackColor = false;
+            btnPersonelRolKaydet.Click += btnPersonelRolKaydet_Click;
+            // 
+            // dgvPersonel
+            // 
+            dgvPersonel.AllowUserToAddRows = false;
+            dgvPersonel.AllowUserToDeleteRows = false;
+            dgvPersonel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dgvPersonel.AutoGenerateColumns = false;
+            dgvPersonel.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvPersonel.BackgroundColor = Color.White;
+            dgvPersonel.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvPersonel.Columns.AddRange(new DataGridViewColumn[] { personelIdDataGridViewTextBoxColumn, adDataGridViewTextBoxColumn, soyadDataGridViewTextBoxColumn, cinsiyetIdDataGridViewTextBoxColumn, cinsiyetAdiDataGridViewTextBoxColumn, aktifMiDataGridViewCheckBoxColumn1 });
+            dgvPersonel.DataSource = personelBilgileriDtoBindingSource;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = SystemColors.Window;
+            dataGridViewCellStyle4.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 162);
+            dataGridViewCellStyle4.ForeColor = Color.FromArgb(64, 64, 64);
+            dataGridViewCellStyle4.SelectionBackColor = Color.FromArgb(178, 190, 195);
+            dataGridViewCellStyle4.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
+            dgvPersonel.DefaultCellStyle = dataGridViewCellStyle4;
+            dgvPersonel.Location = new Point(12, 64);
+            dgvPersonel.MultiSelect = false;
+            dgvPersonel.Name = "dgvPersonel";
+            dgvPersonel.ReadOnly = true;
+            dgvPersonel.RowHeadersVisible = false;
+            dgvPersonel.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvPersonel.Size = new Size(393, 339);
+            dgvPersonel.TabIndex = 2;
+            dgvPersonel.ColumnHeaderMouseClick += dgvPersonel_ColumnHeaderMouseClick;
+            dgvPersonel.SelectionChanged += dgvPersonel_SelectionChanged;
+            // 
+            // personelIdDataGridViewTextBoxColumn
+            // 
+            personelIdDataGridViewTextBoxColumn.DataPropertyName = "PersonelId";
+            personelIdDataGridViewTextBoxColumn.HeaderText = "PersonelId";
+            personelIdDataGridViewTextBoxColumn.Name = "personelIdDataGridViewTextBoxColumn";
+            personelIdDataGridViewTextBoxColumn.ReadOnly = true;
+            personelIdDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // adDataGridViewTextBoxColumn
+            // 
+            adDataGridViewTextBoxColumn.DataPropertyName = "Ad";
+            adDataGridViewTextBoxColumn.HeaderText = "Ad";
+            adDataGridViewTextBoxColumn.Name = "adDataGridViewTextBoxColumn";
+            adDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // soyadDataGridViewTextBoxColumn
+            // 
+            soyadDataGridViewTextBoxColumn.DataPropertyName = "Soyad";
+            soyadDataGridViewTextBoxColumn.HeaderText = "Soyad";
+            soyadDataGridViewTextBoxColumn.Name = "soyadDataGridViewTextBoxColumn";
+            soyadDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // cinsiyetIdDataGridViewTextBoxColumn
+            // 
+            cinsiyetIdDataGridViewTextBoxColumn.DataPropertyName = "CinsiyetId";
+            cinsiyetIdDataGridViewTextBoxColumn.HeaderText = "CinsiyetId";
+            cinsiyetIdDataGridViewTextBoxColumn.Name = "cinsiyetIdDataGridViewTextBoxColumn";
+            cinsiyetIdDataGridViewTextBoxColumn.ReadOnly = true;
+            cinsiyetIdDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // cinsiyetAdiDataGridViewTextBoxColumn
+            // 
+            cinsiyetAdiDataGridViewTextBoxColumn.DataPropertyName = "CinsiyetAdi";
+            cinsiyetAdiDataGridViewTextBoxColumn.HeaderText = "CinsiyetAdi";
+            cinsiyetAdiDataGridViewTextBoxColumn.Name = "cinsiyetAdiDataGridViewTextBoxColumn";
+            cinsiyetAdiDataGridViewTextBoxColumn.ReadOnly = true;
+            cinsiyetAdiDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // aktifMiDataGridViewCheckBoxColumn1
+            // 
+            aktifMiDataGridViewCheckBoxColumn1.DataPropertyName = "AktifMi";
+            aktifMiDataGridViewCheckBoxColumn1.HeaderText = "AktifMi";
+            aktifMiDataGridViewCheckBoxColumn1.Name = "aktifMiDataGridViewCheckBoxColumn1";
+            aktifMiDataGridViewCheckBoxColumn1.ReadOnly = true;
+            aktifMiDataGridViewCheckBoxColumn1.Visible = false;
+            // 
+            // personelBilgileriDtoBindingSource
+            // 
+            personelBilgileriDtoBindingSource.DataSource = typeof(Model.DTO.PersonelBilgileriDto);
+            // 
+            // txtPersonelAra
+            // 
+            txtPersonelAra.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            txtPersonelAra.Font = new Font("Segoe UI", 9F);
+            txtPersonelAra.Location = new Point(46, 35);
+            txtPersonelAra.Name = "txtPersonelAra";
+            txtPersonelAra.PlaceholderText = "Personel ara...";
+            txtPersonelAra.Size = new Size(359, 23);
+            txtPersonelAra.TabIndex = 1;
+            txtPersonelAra.TextChanged += txtPersonelAra_TextChanged;
+            // 
+            // labelPersonelAra
+            // 
+            labelPersonelAra.AutoSize = true;
+            labelPersonelAra.Font = new Font("Segoe UI", 9F);
+            labelPersonelAra.Location = new Point(12, 38);
+            labelPersonelAra.Name = "labelPersonelAra";
+            labelPersonelAra.Size = new Size(28, 15);
+            labelPersonelAra.TabIndex = 0;
+            labelPersonelAra.Text = "Ara:";
+            // 
+            // grpPersonelRolleri
+            // 
+            grpPersonelRolleri.Controls.Add(btnRolKaldir);
+            grpPersonelRolleri.Controls.Add(dgvPersonelRolleri);
+            grpPersonelRolleri.Controls.Add(button1);
+            grpPersonelRolleri.Dock = DockStyle.Fill;
+            grpPersonelRolleri.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 162);
+            grpPersonelRolleri.ForeColor = Color.FromArgb(64, 64, 64);
+            grpPersonelRolleri.Location = new Point(3, 481);
+            grpPersonelRolleri.Name = "grpPersonelRolleri";
+            grpPersonelRolleri.Padding = new Padding(12);
+            grpPersonelRolleri.Size = new Size(417, 260);
+            grpPersonelRolleri.TabIndex = 4;
+            grpPersonelRolleri.TabStop = false;
+            grpPersonelRolleri.Text = "4. Personel Rolleri";
+            // 
+            // btnRolKaldir
+            // 
+            btnRolKaldir.Anchor = AnchorStyles.Bottom;
+            btnRolKaldir.BackColor = Color.FromArgb(214, 48, 49);
+            btnRolKaldir.FlatAppearance.BorderSize = 0;
+            btnRolKaldir.FlatStyle = FlatStyle.Flat;
+            btnRolKaldir.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            btnRolKaldir.ForeColor = Color.White;
+            btnRolKaldir.Location = new Point(12, 203);
+            btnRolKaldir.Margin = new Padding(4, 3, 4, 3);
+            btnRolKaldir.Name = "btnRolKaldir";
+            btnRolKaldir.Size = new Size(393, 48);
+            btnRolKaldir.TabIndex = 4;
+            btnRolKaldir.Text = "ROL KALDIR";
+            btnRolKaldir.UseVisualStyleBackColor = false;
+            btnRolKaldir.Click += btnRolKaldir_Click;
+            // 
+            // dgvPersonelRolleri
+            // 
+            dgvPersonelRolleri.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dgvPersonelRolleri.AutoGenerateColumns = false;
+            dgvPersonelRolleri.BackgroundColor = Color.White;
+            dgvPersonelRolleri.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvPersonelRolleri.Columns.AddRange(new DataGridViewColumn[] { personelRolIdDataGridViewTextBoxColumn, personelIdDataGridViewTextBoxColumn1, rolIdDataGridViewTextBoxColumn1, personelAdDataGridViewTextBoxColumn, personelSoyadDataGridViewTextBoxColumn, rolAdiDataGridViewTextBoxColumn1 });
+            dgvPersonelRolleri.DataSource = personelRolDtoBindingSource;
+            dgvPersonelRolleri.Location = new Point(12, 33);
+            dgvPersonelRolleri.Name = "dgvPersonelRolleri";
+            dgvPersonelRolleri.Size = new Size(393, 160);
+            dgvPersonelRolleri.TabIndex = 3;
+            dgvPersonelRolleri.ColumnHeaderMouseClick += dgvPersonelRolleri_ColumnHeaderMouseClick;
+            // 
+            // personelRolIdDataGridViewTextBoxColumn
+            // 
+            personelRolIdDataGridViewTextBoxColumn.DataPropertyName = "PersonelRolId";
+            personelRolIdDataGridViewTextBoxColumn.HeaderText = "PersonelRolId";
+            personelRolIdDataGridViewTextBoxColumn.Name = "personelRolIdDataGridViewTextBoxColumn";
+            personelRolIdDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // personelIdDataGridViewTextBoxColumn1
+            // 
+            personelIdDataGridViewTextBoxColumn1.DataPropertyName = "PersonelId";
+            personelIdDataGridViewTextBoxColumn1.HeaderText = "PersonelId";
+            personelIdDataGridViewTextBoxColumn1.Name = "personelIdDataGridViewTextBoxColumn1";
+            personelIdDataGridViewTextBoxColumn1.Visible = false;
+            // 
+            // rolIdDataGridViewTextBoxColumn1
+            // 
+            rolIdDataGridViewTextBoxColumn1.DataPropertyName = "RolId";
+            rolIdDataGridViewTextBoxColumn1.HeaderText = "RolId";
+            rolIdDataGridViewTextBoxColumn1.Name = "rolIdDataGridViewTextBoxColumn1";
+            rolIdDataGridViewTextBoxColumn1.Visible = false;
+            // 
+            // personelAdDataGridViewTextBoxColumn
+            // 
+            personelAdDataGridViewTextBoxColumn.DataPropertyName = "PersonelAd";
+            personelAdDataGridViewTextBoxColumn.HeaderText = "Personel Adı";
+            personelAdDataGridViewTextBoxColumn.Name = "personelAdDataGridViewTextBoxColumn";
+            // 
+            // personelSoyadDataGridViewTextBoxColumn
+            // 
+            personelSoyadDataGridViewTextBoxColumn.DataPropertyName = "PersonelSoyad";
+            personelSoyadDataGridViewTextBoxColumn.HeaderText = "Personel Soyadı";
+            personelSoyadDataGridViewTextBoxColumn.Name = "personelSoyadDataGridViewTextBoxColumn";
+            // 
+            // rolAdiDataGridViewTextBoxColumn1
+            // 
+            rolAdiDataGridViewTextBoxColumn1.DataPropertyName = "RolAdi";
+            rolAdiDataGridViewTextBoxColumn1.HeaderText = "Rol Adı";
+            rolAdiDataGridViewTextBoxColumn1.Name = "rolAdiDataGridViewTextBoxColumn1";
+            // 
+            // personelRolDtoBindingSource
+            // 
+            personelRolDtoBindingSource.DataSource = typeof(Model.DTO.PersonelRolDto);
+            // 
+            // button1
+            // 
+            button1.Anchor = AnchorStyles.Bottom;
+            button1.BackColor = Color.FromArgb(255, 159, 67);
+            button1.FlatAppearance.BorderSize = 0;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            button1.ForeColor = Color.White;
+            button1.Location = new Point(120, 542);
+            button1.Name = "button1";
+            button1.Size = new Size(396, 48);
+            button1.TabIndex = 2;
+            button1.Text = "SEÇİLİ PERSONELE ROL ATA";
+            button1.UseVisualStyleBackColor = false;
+            // 
+            // tableLayoutPanel1
+            // 
+            tableLayoutPanel1.ColumnCount = 3;
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
+            tableLayoutPanel1.Controls.Add(grpRoller, 0, 0);
+            tableLayoutPanel1.Controls.Add(grpYetki, 1, 0);
+            tableLayoutPanel1.Controls.Add(tableLayoutPanel2, 2, 0);
+            tableLayoutPanel1.Dock = DockStyle.Fill;
+            tableLayoutPanel1.Location = new Point(0, 0);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.RowCount = 1;
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tableLayoutPanel1.Size = new Size(1283, 750);
+            tableLayoutPanel1.TabIndex = 5;
+            // 
+            // tableLayoutPanel2
+            // 
+            tableLayoutPanel2.ColumnCount = 1;
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel2.Controls.Add(grpPersonel, 0, 0);
+            tableLayoutPanel2.Controls.Add(grpPersonelRolleri, 0, 1);
+            tableLayoutPanel2.Dock = DockStyle.Fill;
+            tableLayoutPanel2.Location = new Point(857, 3);
+            tableLayoutPanel2.Name = "tableLayoutPanel2";
+            tableLayoutPanel2.RowCount = 2;
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 64.3026F));
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 35.6974F));
+            tableLayoutPanel2.Size = new Size(423, 744);
+            tableLayoutPanel2.TabIndex = 3;
+            // 
             // frmAdmin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(1283, 750);
-            Controls.Add(grpYetki);
-            Controls.Add(grpRoller);
+            Controls.Add(tableLayoutPanel1);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(4, 3, 4, 3);
@@ -471,8 +785,16 @@
             grpYetki.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvYetki).EndInit();
             ((System.ComponentModel.ISupportInitialize)yetkiBindingSource).EndInit();
+            grpPersonel.ResumeLayout(false);
+            grpPersonel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvPersonel).EndInit();
+            ((System.ComponentModel.ISupportInitialize)personelBilgileriDtoBindingSource).EndInit();
+            grpPersonelRolleri.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgvPersonelRolleri).EndInit();
+            ((System.ComponentModel.ISupportInitialize)personelRolDtoBindingSource).EndInit();
+            tableLayoutPanel1.ResumeLayout(false);
+            tableLayoutPanel2.ResumeLayout(false);
             ResumeLayout(false);
-
         }
 
         #endregion
@@ -493,21 +815,49 @@
         private System.Windows.Forms.TextBox txtYetkiAra;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DataGridView dgvYetki;
-        private Button btnYetkiKaydet;
-        private DataGridViewTextBoxColumn rolIdDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn rolAdiDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn rolKoduDataGridViewTextBoxColumn;
-        private DataGridViewCheckBoxColumn aktifMiDataGridViewCheckBoxColumn;
-        private DataGridViewTextBoxColumn personelRolleriDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn rolYetkileriDataGridViewTextBoxColumn;
-        private BindingSource rolBindingSource;
-        private TextBox txtRolId;
-        private Label label5;
-        private BindingSource yetkiBindingSource;
+        private System.Windows.Forms.Button btnYetkiKaydet;
+        private System.Windows.Forms.DataGridViewTextBoxColumn rolIdDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn rolAdiDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn rolKoduDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn aktifMiDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn personelRolleriDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn rolYetkileriDataGridViewTextBoxColumn;
+        private System.Windows.Forms.BindingSource rolBindingSource;
+        private System.Windows.Forms.TextBox txtRolId;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.BindingSource yetkiBindingSource;
+
+        private System.Windows.Forms.GroupBox grpPersonel;
+        private System.Windows.Forms.DataGridView dgvPersonel;
+        private System.Windows.Forms.Button btnPersonelRolKaydet;
+        private System.Windows.Forms.TextBox txtPersonelAra;
+        private System.Windows.Forms.Label labelPersonelAra;
+        private DataGridViewTextBoxColumn personelIdDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn adDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn soyadDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn cinsiyetIdDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn cinsiyetAdiDataGridViewTextBoxColumn;
+        private DataGridViewCheckBoxColumn aktifMiDataGridViewCheckBoxColumn1;
+        private BindingSource personelBilgileriDtoBindingSource;
+        private GroupBox grpPersonelRolleri;
+        private Button button1;
+        private TableLayoutPanel tableLayoutPanel1;
+        private TableLayoutPanel tableLayoutPanel2;
+        private DataGridView dgvPersonelRolleri;
         private DataGridViewTextBoxColumn yetkiIdDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn yetkiKoduDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn yetkiAdiDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn yetkiKoduDataGridViewTextBoxColumn;
         private DataGridViewCheckBoxColumn Secim;
         private DataGridViewTextBoxColumn rolYetkileriDataGridViewTextBoxColumn1;
+        private DataGridViewTextBoxColumn personelAdiDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn personelSoyadiDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn personelRolIdDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn personelIdDataGridViewTextBoxColumn1;
+        private DataGridViewTextBoxColumn rolIdDataGridViewTextBoxColumn1;
+        private DataGridViewTextBoxColumn personelAdDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn personelSoyadDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn rolAdiDataGridViewTextBoxColumn1;
+        private BindingSource personelRolDtoBindingSource;
+        private Button btnRolKaldir;
     }
 }

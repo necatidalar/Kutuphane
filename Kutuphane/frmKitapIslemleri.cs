@@ -1,10 +1,13 @@
 ﻿using Kutuphane.BLL.Abstract;
 using Kutuphane.BLL.Concrete;
 using Kutuphane.DAL.Concrete;
+using Kutuphane.DAL.Contexes;
 using Kutuphane.Model.DTO;
 using Kutuphane.Model.Entity;
+using Kutuphane.UI.Theme;
 using Kutuphane.UI.UIMetodlar;
 using System.ComponentModel;
+using static Kutuphane.UI.frmMain;
 
 namespace Kutuphane.UI
 {
@@ -13,38 +16,48 @@ namespace Kutuphane.UI
         private readonly IKitapService kitapService = new KitapManager(new KitapDal());
         private bool silinenModu = false;
 
-        public frmKitapIslemleri()
+        private readonly YetkiKontrol _yetkiKontrol;
+        private readonly int _personelId;
+        private HashSet<string> _userPermissions;
+        public frmKitapIslemleri(int personelId)
         {
             InitializeComponent();
+            _personelId = personelId;
+            _yetkiKontrol = new YetkiKontrol(new KutuphaneDbContext());
+            _userPermissions = _yetkiKontrol.KullaniciYetkileriniAl(_personelId);
         }
         private void frmKitapIslemleri_Load(object sender, EventArgs e)
         {
+            YetkiKontrol();
+            if (_userPermissions.Contains("KITAP_LISTELE"))
+            {
+                Listele();
+                PasifKontrol();
+            }
             ComboDoldur();
-            Listele();
             Temizle();
-            PasifKontrol();
+            DataGridThemeManager.Apply(dataGrid_Kitap);
         }
-        private void ComboDoldur()
+        private void YetkiKontrol()
         {
-            IYazarService yazarService = new YazarManager(new YazarDal());
-            var yazarResult = yazarService.YazarListeGetirServis(x => x.AktifMi);
-            if (yazarResult.IsSuccess)
-                Metodlar.ComboDoldur(comboBox_Yazar, yazarResult.Data, "AdSoyad", "YazarId");
+            bool listele = _userPermissions.Contains("KITAP_LISTELE");
+            bool ekle = _userPermissions.Contains("KITAP_EKLE");
+            bool guncelle = _userPermissions.Contains("KITAP_GUNCELLE");
+            bool sil = _userPermissions.Contains("KITAP_SIL");
 
-            IKategoriService kategoriService = new KategoriManager(new KategoriDal());
-            var kategoriResult = kategoriService.GetListByFilterService(x => x.AktifMi);
-            if (kategoriResult.IsSuccess)
-                Metodlar.ComboDoldur(comboBox_Kategori, kategoriResult.Data, "KategoriAdi", "KategoriId");
+            dataGrid_Kitap.Enabled = listele;
+            btnKaydet.Visible = ekle;
+            btnDuzenle.Visible = listele && guncelle;
+            btnSil.Visible = listele && sil;
 
-            IYayineviService yayineviService = new YayineviManager(new YayineviDal());
-            var yayineviResult = yayineviService.GetListByFilterService(x => x.AktifMi);
-            if (yayineviResult.IsSuccess)
-                Metodlar.ComboDoldur(comboBox_Yayinevi, yayineviResult.Data, "Ad", "YayineviId");
+            btnSilinenleriGoster.Visible = listele;
+            btnGeriYukle.Visible = listele && sil;
 
-            IDilService dilService = new DilManager(new DilDal());
-            var dilResult = dilService.GetListByFilterService();
-            if (dilResult.IsSuccess)
-                Metodlar.ComboDoldur(comboBox_Dil, dilResult.Data, "DilAdi", "DilId");
+            btnTemizle.Visible = ekle || guncelle;
+            groupBox1.Visible = ekle || guncelle || sil;
+
+            label_txtAra.Visible = listele;
+            textBox_Ara.Visible = listele;
         }
         private void Listele(string? aramaMetni = null)
         {
@@ -85,6 +98,28 @@ namespace Kutuphane.UI
 
             dataGrid_Kitap.ClearSelection();
             dataGrid_Kitap.CurrentCell = null;
+        }
+        private void ComboDoldur()
+        {
+            IYazarService yazarService = new YazarManager(new YazarDal());
+            var yazarResult = yazarService.YazarListeGetirServis(x => x.AktifMi);
+            if (yazarResult.IsSuccess)
+                Metodlar.ComboDoldur(comboBox_Yazar, yazarResult.Data, "AdSoyad", "YazarId");
+
+            IKategoriService kategoriService = new KategoriManager(new KategoriDal());
+            var kategoriResult = kategoriService.GetListByFilterService(x => x.AktifMi);
+            if (kategoriResult.IsSuccess)
+                Metodlar.ComboDoldur(comboBox_Kategori, kategoriResult.Data, "KategoriAdi", "KategoriId");
+
+            IYayineviService yayineviService = new YayineviManager(new YayineviDal());
+            var yayineviResult = yayineviService.GetListByFilterService(x => x.AktifMi);
+            if (yayineviResult.IsSuccess)
+                Metodlar.ComboDoldur(comboBox_Yayinevi, yayineviResult.Data, "Ad", "YayineviId");
+
+            IDilService dilService = new DilManager(new DilDal());
+            var dilResult = dilService.GetListByFilterService();
+            if (dilResult.IsSuccess)
+                Metodlar.ComboDoldur(comboBox_Dil, dilResult.Data, "DilAdi", "DilId");
         }
         private Kitap KitapNesnesiniOlustur(int? kitapId = null)
         {
@@ -198,6 +233,12 @@ namespace Kutuphane.UI
         }
         private void PasifKontrol()
         {
+            bool listele = _userPermissions.Contains("KITAP_LISTELE");
+            if (!listele)
+            {
+                btnSilinenleriGoster.Visible = false;
+                return;
+            }
             dataGrid_Kitap.ClearSelection();
             var pasifResult = kitapService.GetListByFilterService(x => !x.Aktif);
             btnSilinenleriGoster.Visible = pasifResult.IsSuccess && pasifResult.Data?.Any() == true;

@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPersonelIslemleri));
             groupBox1 = new GroupBox();
             comboBox_Cinsiyet = new ComboBox();
@@ -51,6 +49,9 @@
             label2 = new Label();
             textBox_PersonelId = new TextBox();
             label1 = new Label();
+            personelBilgileriDtoBindingSource = new BindingSource(components);
+            textBox_Ara = new TextBox();
+            label_txtAra = new Label();
             dataGrid_Personel = new DataGridView();
             personelIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             adDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -58,12 +59,9 @@
             cinsiyetIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             cinsiyetAdiDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             aktifMiDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
-            personelBilgileriDtoBindingSource = new BindingSource(components);
-            textBox_Ara = new TextBox();
-            label5 = new Label();
             groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGrid_Personel).BeginInit();
             ((System.ComponentModel.ISupportInitialize)personelBilgileriDtoBindingSource).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGrid_Personel).BeginInit();
             SuspendLayout();
             // 
             // groupBox1
@@ -297,41 +295,41 @@
             label1.TabIndex = 0;
             label1.Text = "Personel Id:";
             // 
+            // personelBilgileriDtoBindingSource
+            // 
+            personelBilgileriDtoBindingSource.DataSource = typeof(Model.DTO.PersonelBilgileriDto);
+            // 
+            // textBox_Ara
+            // 
+            textBox_Ara.Font = new Font("Segoe UI", 10F);
+            textBox_Ara.Location = new Point(403, 11);
+            textBox_Ara.Name = "textBox_Ara";
+            textBox_Ara.PlaceholderText = "Ad veya Soyad ile arayın";
+            textBox_Ara.Size = new Size(276, 25);
+            textBox_Ara.TabIndex = 13;
+            textBox_Ara.TextChanged += textBox_Ara_TextChanged;
+            // 
+            // label_txtAra
+            // 
+            label_txtAra.AutoSize = true;
+            label_txtAra.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            label_txtAra.ForeColor = Color.FromArgb(64, 64, 64);
+            label_txtAra.Location = new Point(346, 14);
+            label_txtAra.Name = "label_txtAra";
+            label_txtAra.Size = new Size(51, 17);
+            label_txtAra.TabIndex = 21;
+            label_txtAra.Text = "Arama:";
+            // 
             // dataGrid_Personel
             // 
-            dataGrid_Personel.AllowUserToDeleteRows = false;
-            dataGrid_Personel.AllowUserToOrderColumns = true;
-            dataGrid_Personel.AllowUserToResizeRows = false;
-            dataGrid_Personel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             dataGrid_Personel.AutoGenerateColumns = false;
-            dataGrid_Personel.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGrid_Personel.BackgroundColor = Color.White;
-            dataGrid_Personel.BorderStyle = BorderStyle.None;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(41, 128, 185);
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 162);
-            dataGridViewCellStyle1.ForeColor = Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(41, 128, 185);
-            dataGridViewCellStyle1.SelectionForeColor = Color.White;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dataGrid_Personel.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            dataGrid_Personel.ColumnHeadersHeight = 30;
+            dataGrid_Personel.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGrid_Personel.Columns.AddRange(new DataGridViewColumn[] { personelIdDataGridViewTextBoxColumn, adDataGridViewTextBoxColumn, soyadDataGridViewTextBoxColumn, cinsiyetIdDataGridViewTextBoxColumn, cinsiyetAdiDataGridViewTextBoxColumn, aktifMiDataGridViewCheckBoxColumn });
             dataGrid_Personel.DataSource = personelBilgileriDtoBindingSource;
-            dataGrid_Personel.EnableHeadersVisualStyles = false;
-            dataGrid_Personel.GridColor = Color.LightGray;
             dataGrid_Personel.Location = new Point(346, 42);
-            dataGrid_Personel.MultiSelect = false;
             dataGrid_Personel.Name = "dataGrid_Personel";
-            dataGrid_Personel.RowHeadersVisible = false;
-            dataGridViewCellStyle2.BackColor = Color.White;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 162);
-            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(170, 204, 255);
-            dataGridViewCellStyle2.SelectionForeColor = Color.Black;
-            dataGrid_Personel.RowsDefaultCellStyle = dataGridViewCellStyle2;
-            dataGrid_Personel.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGrid_Personel.Size = new Size(711, 558);
-            dataGrid_Personel.TabIndex = 1;
+            dataGrid_Personel.TabIndex = 22;
             dataGrid_Personel.CellFormatting += dataGrid_Personel_CellFormatting;
             dataGrid_Personel.ColumnHeaderMouseClick += dataGrid_Personel_ColumnHeaderMouseClick;
             dataGrid_Personel.SelectionChanged += dataGrid_Personel_SelectionChanged;
@@ -375,40 +373,15 @@
             aktifMiDataGridViewCheckBoxColumn.Name = "aktifMiDataGridViewCheckBoxColumn";
             aktifMiDataGridViewCheckBoxColumn.Visible = false;
             // 
-            // personelBilgileriDtoBindingSource
-            // 
-            personelBilgileriDtoBindingSource.DataSource = typeof(Model.DTO.PersonelBilgileriDto);
-            // 
-            // textBox_Ara
-            // 
-            textBox_Ara.Font = new Font("Segoe UI", 10F);
-            textBox_Ara.Location = new Point(403, 11);
-            textBox_Ara.Name = "textBox_Ara";
-            textBox_Ara.PlaceholderText = "Ad veya Soyad ile arayın";
-            textBox_Ara.Size = new Size(276, 25);
-            textBox_Ara.TabIndex = 13;
-            textBox_Ara.TextChanged += textBox_Ara_TextChanged;
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
-            label5.ForeColor = Color.FromArgb(64, 64, 64);
-            label5.Location = new Point(346, 14);
-            label5.Name = "label5";
-            label5.Size = new Size(51, 17);
-            label5.TabIndex = 21;
-            label5.Text = "Arama:";
-            // 
             // frmPersonelIslemleri
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(1069, 612);
-            Controls.Add(label5);
-            Controls.Add(textBox_Ara);
             Controls.Add(dataGrid_Personel);
+            Controls.Add(label_txtAra);
+            Controls.Add(textBox_Ara);
             Controls.Add(groupBox1);
             Icon = (Icon)resources.GetObject("$this.Icon");
             MinimumSize = new Size(775, 500);
@@ -418,8 +391,8 @@
             Load += frmPersonelIslemleri_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGrid_Personel).EndInit();
             ((System.ComponentModel.ISupportInitialize)personelBilgileriDtoBindingSource).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGrid_Personel).EndInit();
             ResumeLayout(false);
             PerformLayout();
 
@@ -430,7 +403,6 @@
         private GroupBox groupBox1;
         private TextBox textBox_PersonelId;
         private Label label1;
-        private DataGridView dataGrid_Personel;
         private TextBox textBox_Sifre;
         private Label label4;
         private TextBox textBox_KullaniciAdi;
@@ -454,12 +426,13 @@
         private DataGridViewTextBoxColumn kullaniciAdiDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn sifreDataGridViewTextBoxColumn;
         private BindingSource personelBilgileriDtoBindingSource;
+        private Label label_txtAra;
+        private DataGridView dataGrid_Personel;
         private DataGridViewTextBoxColumn personelIdDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn adDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn soyadDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn cinsiyetIdDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn cinsiyetAdiDataGridViewTextBoxColumn;
         private DataGridViewCheckBoxColumn aktifMiDataGridViewCheckBoxColumn;
-        private Label label5;
     }
 }

@@ -679,26 +679,37 @@ namespace Kutuphane.DAL.Migrations
 
             modelBuilder.Entity("Kutuphane.Model.Entity.PersonelRol", b =>
                 {
+                    b.Property<int>("PersonelRolId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PersonelRolId"));
+
                     b.Property<int>("PersonelId")
                         .HasColumnType("int");
 
                     b.Property<int>("RolId")
                         .HasColumnType("int");
 
-                    b.HasKey("PersonelId", "RolId");
+                    b.HasKey("PersonelRolId");
 
                     b.HasIndex("RolId");
+
+                    b.HasIndex("PersonelId", "RolId")
+                        .IsUnique();
 
                     b.ToTable("PersonelRolleri", (string)null);
 
                     b.HasData(
                         new
                         {
+                            PersonelRolId = 1,
                             PersonelId = 1,
                             RolId = 1
                         },
                         new
                         {
+                            PersonelRolId = 2,
                             PersonelId = 2,
                             RolId = 2
                         });
@@ -1165,6 +1176,24 @@ namespace Kutuphane.DAL.Migrations
                             YetkiId = 36,
                             YetkiAdi = "Yönetim Silme",
                             YetkiKodu = "YONETIM_SIL"
+                        },
+                        new
+                        {
+                            YetkiId = 37,
+                            YetkiAdi = "Raporlama",
+                            YetkiKodu = "RAPORLAMA"
+                        },
+                        new
+                        {
+                            YetkiId = 38,
+                            YetkiAdi = "Ayarlar",
+                            YetkiKodu = "AYARLAR"
+                        },
+                        new
+                        {
+                            YetkiId = 39,
+                            YetkiAdi = "Yerleşim Ayarları",
+                            YetkiKodu = "YERLESIM_AYARLARI"
                         });
                 });
 

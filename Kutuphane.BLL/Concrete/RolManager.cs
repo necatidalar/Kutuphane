@@ -29,12 +29,17 @@ namespace Kutuphane.BLL.Concrete
             if (string.IsNullOrWhiteSpace(entity.RolKodu))
                 return new ErrorResult("Rol kodu boş olamaz.");
 
-            var kodVarMi = _rolDal.GetByFilter(x => x.RolKodu == entity.RolKodu);
+            var kodVarMi = _rolDal.GetByFilter(x =>
+                x.RolKodu == entity.RolKodu &&
+                x.RolId != entity.RolId
+            );
+
             if (kodVarMi.Data != null)
                 return new ErrorResult("Bu rol kodu zaten mevcut.");
 
             return new SuccessResult();
         }
+
 
         public IResult AddService(Rol entity)
         {

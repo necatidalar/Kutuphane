@@ -13,6 +13,5 @@ namespace Kutuphane.UI
             ApplicationConfiguration.Initialize();
             Application.Run(new frmMain());
         }
-
     }
 }

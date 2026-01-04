@@ -22,7 +22,8 @@ namespace Kutuphane.UI
         public PersonelBilgileriDto loginPersoneli { get; set; }
         private readonly YetkiKontrol _yetkiKontrol;
         private readonly IPersonelService _personelService;
-
+        private HashSet<string> _userPermissions = new HashSet<string>();
+    
         public frmMain()
         {
             InitializeComponent();
@@ -94,27 +95,107 @@ namespace Kutuphane.UI
         }
         private void girisBasarili(PersonelBilgileriDto personel)
         {
-            HideAllMenus(menuStrip1.Items);
             loginPersoneli = personel;
 
             GirisYapanPersonelId = personel.PersonelId;
             GirisYapanPersonelAd = personel.Ad;
             GirisYapanPersonelSoyad = personel.Soyad;
 
+            _userPermissions = _yetkiKontrol.KullaniciYetkileriniAl(GirisYapanPersonelId);
+            MenuYetkiKontrol();
+
             lblKullaniciAdi.Text = $"Hoşgeldin, {GirisYapanPersonelAd} {GirisYapanPersonelSoyad}";
 
             panel_Giris.Visible = false;
             panel_Ust.Visible = true;
-            flowLayoutPanel_Kartlar.Visible = true;
             menuStrip1.Visible = true;
 
             SetForLoginView(false);
             ShowHideTopPanels(true, true);
 
             Listele();
-            SetMenuVisibility(GirisYapanPersonelId);
-            var perms = _yetkiKontrol.KullaniciYetkileriniAl(GirisYapanPersonelId);
-            ApplyMenuPermissions(menuStrip1.Items, perms);
+        }
+        private void MenuYetkiKontrol()
+        {
+            bool dashboardMenu = _userPermissions.Contains("DASHBOARD");
+
+            gostergePaneliToolStripMenuItem.Visible = dashboardMenu;
+            flowLayoutPanel_Kartlar.Visible = dashboardMenu;
+
+            yerlesimAyarlariToolStripMenuItem.Visible = _userPermissions.Contains("YERLESIM_AYARLARI");
+            raporlamaToolStripMenuItem.Visible = _userPermissions.Contains("RAPORLAMA");
+            ayarlarToolStripMenuItem.Visible = _userPermissions.Contains("AYARLAR");
+
+            bool dilMenu =
+                _userPermissions.Contains("DIL_LISTELE") ||
+                _userPermissions.Contains("DIL_EKLE") ||
+                _userPermissions.Contains("DIL_GUNCELLE") ||
+                _userPermissions.Contains("DIL_SIL");
+
+            dilToolStripMenuItem.Visible = dilMenu;
+
+            bool kitapMenu =
+                _userPermissions.Contains("KITAP_LISTELE") ||
+                _userPermissions.Contains("KITAP_EKLE") ||
+                _userPermissions.Contains("KITAP_GUNCELLE") ||
+                _userPermissions.Contains("KITAP_SIL");
+
+            kitapToolStripMenuItem.Visible = kitapMenu;
+
+            bool kategoriMenu =
+                _userPermissions.Contains("KATEGORI_LISTELE") ||
+                _userPermissions.Contains("KATEGORI_EKLE") ||
+                _userPermissions.Contains("KATEGORI_GUNCELLE") ||
+                _userPermissions.Contains("KATEGORI_SIL");
+
+            kategoriIslemleriToolStripMenuItem.Visible = kategoriMenu;
+
+            bool yazarMenu =
+                _userPermissions.Contains("YAZAR_LISTELE") ||
+                _userPermissions.Contains("YAZAR_EKLE") ||
+                _userPermissions.Contains("YAZAR_GUNCELLE") ||
+                _userPermissions.Contains("YAZAR_SIL");
+
+            yazarToolStripMenuItem.Visible = yazarMenu;
+
+            bool yayineviMenu =
+                _userPermissions.Contains("YAYINEVI_LISTELE") ||
+                _userPermissions.Contains("YAYINEVI_EKLE") ||
+                _userPermissions.Contains("YAYINEVI_GUNCELLE") ||
+                _userPermissions.Contains("YAYINEVI_SIL");
+
+            yayineviToolStripMenuItem.Visible = yayineviMenu;
+
+            bool oduncMenu =
+                _userPermissions.Contains("ODUNC_LISTELE") ||
+                _userPermissions.Contains("ODUNC_VER") ||
+                _userPermissions.Contains("IADE_AL");
+
+            oduncToolStripMenuItem.Visible = oduncMenu;
+
+            bool uyeMenu =
+                _userPermissions.Contains("UYE_LISTELE") ||
+                _userPermissions.Contains("UYE_EKLE") ||
+                _userPermissions.Contains("UYE_GUNCELLE") ||
+                _userPermissions.Contains("UYE_SIL");
+
+            uyeToolStripMenuItem.Visible = uyeMenu;
+
+            bool personelMenu =
+                _userPermissions.Contains("PERSONEL_LISTELE") ||
+                _userPermissions.Contains("PERSONEL_EKLE") ||
+                _userPermissions.Contains("PERSONEL_GUNCELLE") ||
+                _userPermissions.Contains("PERSONEL_SIL");
+
+            personelToolStripMenuItem.Visible = personelMenu;
+
+            bool yonetimMenu =
+                _userPermissions.Contains("YONETIM_LISTELE") ||
+                _userPermissions.Contains("YONETIM_EKLE") ||
+                _userPermissions.Contains("YONETIM_GUNCELLE") ||
+                _userPermissions.Contains("YONETIM_SIL");
+
+            yonetimToolStripMenuItem.Visible = yonetimMenu;
         }
         private void CheckDatabaseConnection()
         {
@@ -135,6 +216,7 @@ namespace Kutuphane.UI
                         menuStrip1.Enabled = false;
                         flowLayoutPanel_Kartlar.Visible = false;
                         lblKullaniciAdi.Visible = false;
+                        panel_Giris.Visible = false;
                     }
                 }
             }
@@ -146,11 +228,12 @@ namespace Kutuphane.UI
         }
         private void ShowHideTopPanels(bool showDashboard, bool showMenu)
         {
-            //panel_Ust.Visible = showDashboard;
-            flowLayoutPanel_Kartlar.Visible = showDashboard;
+            bool hasDashboardPermission = _userPermissions.Contains("DASHBOARD");
+
+            flowLayoutPanel_Kartlar.Visible = showDashboard && hasDashboardPermission;
             menuStrip1.Visible = showMenu;
 
-            if (showDashboard)
+            if (showDashboard && flowLayoutPanel_Kartlar.Visible)
                 timer_Dashboard.Start();
             else
                 timer_Dashboard.Stop();
@@ -246,7 +329,6 @@ namespace Kutuphane.UI
             label_YayineviSayisi.Text = yayineviResult.IsSuccess
                 ? yayineviResult.Data.Count.ToString()
                 : "0";
-
         }
         private void menuStrip_Click(object sender, EventArgs e)
         {
@@ -271,7 +353,9 @@ namespace Kutuphane.UI
 
                 foreach (var formType in formTypes)
                 {
-                    if (formType.Name == "frmDilIslemleri")
+                    var constructorWithParam = formType.GetConstructor(new[] { typeof(int) });
+
+                    if (constructorWithParam != null)
                     {
                         using (var tempForm = (Form)Activator.CreateInstance(formType, new object[] { GirisYapanPersonelId }))
                         {
@@ -310,17 +394,23 @@ namespace Kutuphane.UI
 
             if (formType == null)
             {
-                MessageBox.Show($"'{FormName}' tag'ine sahip form bulunamadı.", "Uyarı",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show($"'{FormName}' tag'ine sahip form bulunamadı.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             ShowHideTopPanels(false, true);
+
             Form? childForm;
-            if (FormName == "frmDilIslemleri")
+            var constructorWithParam = formType.GetConstructor(new[] { typeof(int) });
+
+            if (constructorWithParam != null)
+            {
                 childForm = (Form)Activator.CreateInstance(formType, new object[] { GirisYapanPersonelId });
+            }
             else
+            {
                 childForm = (Form)Activator.CreateInstance(formType);
+            }
 
             if (childForm == null) return;
 
@@ -358,125 +448,6 @@ namespace Kutuphane.UI
         private void cikisYapToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Logout();
-        }
-        private readonly Dictionary<string, string> _yetkiMap = new()
-        {
-            { "gostergePaneliToolStripMenuItem", "DASHBOARD" },
-            { "yerlesimAyarlariToolStripMenuItem", "YERLESIM_AYARLARI" },
-            { "raporlamaToolStripMenuItem", "RAPORLAMA" },
-            { "ayarlarToolStripMenuItem", "AYARLAR"},
-            // Kitap
-
-            { "kitapToolStripMenuItem", "KITAP_LISTELE" },
-            { "btnKitapEkle", "KITAP_EKLE" },
-            { "btnKitapGuncelle", "KITAP_GUNCELLE" },
-            { "btnKitapSil", "KITAP_SIL" },
-        
-            // Kategori
-            { "kategoriIslemleriToolStripMenuItem", "KATEGORI_LISTELE" },
-            { "btnKategoriEkle", "KATEGORI_EKLE" },
-            { "btnKategoriGuncelle", "KATEGORI_GUNCELLE" },
-            { "btnKategoriSil", "KATEGORI_SIL" },
-        
-            // Yazar
-            { "yazarToolStripMenuItem", "YAZAR_LISTELE" },
-            { "btnYazarEkle", "YAZAR_EKLE" },
-            { "btnYazarGuncelle", "YAZAR_GUNCELLE" },
-            { "btnYazarSil", "YAZAR_SIL" },
-        
-            // Yayınevi
-            { "yayineviToolStripMenuItem", "YAYINEVI_LISTELE" },
-            { "btnYayineviEkle", "YAYINEVI_EKLE" },
-            { "btnYayineviGuncelle", "YAYINEVI_GUNCELLE" },
-            { "btnYayineviSil", "YAYINEVI_SIL" },
-        
-            // Dil
-            { "dilToolStripMenuItem", "DIL_LISTELE" },
-            { "btnDilEkle", "DIL_EKLE" },
-            { "btnDilGuncelle", "DIL_GUNCELLE" },
-            { "btnDilSil", "DIL_SIL" },
-        
-            // Ödünç
-            { "oduncToolStripMenuItem", "ODUNC_LISTELE" },
-            { "btnOduncVer", "ODUNC_VER" },
-            { "btnIadeAl", "IADE_AL" },
-        
-            // Üye
-            { "uyeToolStripMenuItem", "UYE_LISTELE" },
-            { "btnUyeEkle", "UYE_EKLE" },
-            { "btnUyeGuncelle", "UYE_GUNCELLE" },
-            { "btnUyeSil", "UYE_SIL" },
-        
-            // Personel
-            { "personelToolStripMenuItem", "PERSONEL_LISTELE" },
-            { "btnPersonelEkle", "PERSONEL_EKLE" },
-            { "btnPersonelGuncelle", "PERSONEL_GUNCELLE" },
-            { "btnPersonelSil", "PERSONEL_SIL" },
-        
-            // Yönetim
-            { "yonetimToolStripMenuItem", "YONETIM_LISTELE" },
-            { "btnYonetimEkle", "YONETIM_EKLE" },
-            { "btnYonetimGuncelle", "YONETIM_GUNCELLE" },
-            { "btnYonetimSil", "YONETIM_SIL" }
-        };
-        private bool ApplyMenuPermissions(ToolStripItemCollection items, HashSet<string> perms)
-        {
-            bool anyVisible = false;
-
-            foreach (ToolStripItem item in items)
-            {
-                if (item.Name == "cikisToolStripMenuItem")
-                {
-                    item.Visible = true;
-                    anyVisible = true;
-                    continue;
-                }
-
-                bool visible = false;
-
-                if (_yetkiMap.TryGetValue(item.Name, out var yetki))
-                    visible = perms.Contains(yetki);
-
-                if (item is ToolStripMenuItem menuItem && menuItem.DropDownItems.Count > 0)
-                {
-                    bool childVisible = ApplyMenuPermissions(menuItem.DropDownItems, perms);
-                    visible = visible || childVisible;
-                }
-
-                item.Visible = visible;
-                anyVisible |= visible;
-            }
-
-            return anyVisible;
-        }
-        private void SetMenuVisibility(int personelId)
-        {
-            var userPermissions = _yetkiKontrol.KullaniciYetkileriniAl(personelId);
-
-            foreach (var map in _yetkiMap)
-            {
-                var menuItem = menuStrip1.Items[map.Key];
-                if (menuItem != null)
-                {
-                    menuItem.Visible = userPermissions.Contains(map.Value);
-                }
-            }
-        }
-        private void HideAllMenus(ToolStripItemCollection items)
-        {
-            foreach (ToolStripItem item in items)
-            {
-                if (item.Name == "cikisToolStripMenuItem")
-                {
-                    item.Visible = true;
-                    continue;
-                }
-
-                item.Visible = false;
-
-                if (item is ToolStripMenuItem menuItem && menuItem.DropDownItems.Count > 0)
-                    HideAllMenus(menuItem.DropDownItems);
-            }
         }
     }
 }

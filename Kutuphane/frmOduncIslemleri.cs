@@ -1,8 +1,10 @@
 ﻿using Kutuphane.BLL.Abstract;
 using Kutuphane.BLL.Concrete;
 using Kutuphane.DAL.Concrete;
+using Kutuphane.DAL.Contexes;
 using Kutuphane.Model.DTO;
 using Kutuphane.Model.Entity;
+using Kutuphane.UI.UIMetodlar;
 
 namespace Kutuphane.UI
 {
@@ -22,19 +24,44 @@ namespace Kutuphane.UI
             get => _girisYapanPersonelId;
             set => _girisYapanPersonelId = value;
         }
-        public frmOduncIslemleri()
+
+        private readonly YetkiKontrol _yetkiKontrol;
+        private readonly int _personelId;
+        private HashSet<string> _userPermissions;
+        public frmOduncIslemleri(int personelId)
         {
             InitializeComponent();
             _uyeService = new UyeManager(new UyeDal());
             _kitapService = new KitapManager(new KitapDal());
             _oduncManager = new OduncManager(new OduncDal());
+
+            _personelId = personelId;
+            _yetkiKontrol = new YetkiKontrol(new KutuphaneDbContext());
+            _userPermissions = _yetkiKontrol.KullaniciYetkileriniAl(_personelId);
         }
         private void frmOduncIslemleri_Load(object sender, EventArgs e)
         {
-
+            YetkiKontrol();
+            TumOduncleriListele();
             InitializeDataLoads();
             InitialieUIComponents();
+        }
+        private void YetkiKontrol()
+        {
+            bool oduncVer = _userPermissions.Contains("ODUNC_VER");
+            bool iade = _userPermissions.Contains("IADE_AL");
+            bool listele = _userPermissions.Contains("ODUNC_LISTELE");
 
+            groupBox_UyeIslemleri.Enabled = oduncVer || iade;
+
+            groupBox_KitapSecimi_OduncVerme.Enabled = oduncVer;
+            button_OduncVer.Enabled = oduncVer;
+
+            groupBox_IadeIslemleri.Enabled = iade;
+            button_IadeAl.Enabled = iade;
+
+            groupBox_TumOduncler.Visible = listele || iade;
+            button_TumIadeAl.Enabled = iade;
         }
         private void InitializeDataLoads()
         {
@@ -47,26 +74,11 @@ namespace Kutuphane.UI
         private void InitialieUIComponents()
         {
             TumOdunclerListViewDuzenle();
-            TumOduncleriListele();
             SepetListViewDuzenle();
             KitapListeListViewDuzenle();
             UyeninAldigiKitapListViewDuzenle();
             UyeListViewDuzenle();
             dateTimePicker_TeslimTarihi.Value = DateTime.Now.AddDays(45);
-        }
-        private void TumOdunclerListViewDuzenle()
-        {
-            listView_AlinanTumKitaplarinListesi.View = View.Details;
-            listView_AlinanTumKitaplarinListesi.FullRowSelect = true;
-            listView_AlinanTumKitaplarinListesi.GridLines = true;
-            listView_AlinanTumKitaplarinListesi.CheckBoxes = true;
-
-            listView_AlinanTumKitaplarinListesi.Columns.Clear();
-            listView_AlinanTumKitaplarinListesi.Columns.Add("Üye", 200);
-            listView_AlinanTumKitaplarinListesi.Columns.Add("Kitap", 250);
-            listView_AlinanTumKitaplarinListesi.Columns.Add("Alış", 120);
-            listView_AlinanTumKitaplarinListesi.Columns.Add("Teslim", 120);
-            listView_AlinanTumKitaplarinListesi.Columns.Add("Durum", 120);
         }
         private void TumOduncleriListele()
         {
@@ -99,6 +111,55 @@ namespace Kutuphane.UI
 
                 listView_AlinanTumKitaplarinListesi.Items.Add(item);
             }
+        }
+        private void TumOdunclerListViewDuzenle()
+        {
+            listView_AlinanTumKitaplarinListesi.View = View.Details;
+            listView_AlinanTumKitaplarinListesi.FullRowSelect = true;
+            listView_AlinanTumKitaplarinListesi.GridLines = true;
+            listView_AlinanTumKitaplarinListesi.CheckBoxes = true;
+
+            listView_AlinanTumKitaplarinListesi.Columns.Clear();
+            listView_AlinanTumKitaplarinListesi.Columns.Add("Üye", 200);
+            listView_AlinanTumKitaplarinListesi.Columns.Add("Kitap", 250);
+            listView_AlinanTumKitaplarinListesi.Columns.Add("Alış", 120);
+            listView_AlinanTumKitaplarinListesi.Columns.Add("Teslim", 120);
+            listView_AlinanTumKitaplarinListesi.Columns.Add("Durum", 120);
+        }
+        private void UyeListViewDuzenle()
+        {
+            listView_Uyeler.View = View.Details;
+            listView_Uyeler.GridLines = true;
+            listView_Uyeler.FullRowSelect = true;
+
+            listView_Uyeler.Columns.Clear();
+            listView_Uyeler.Columns.Add("TC/Pass", 150);
+            listView_Uyeler.Columns.Add("Ad", 170);
+            listView_Uyeler.Columns.Add("Soyad", 170);
+            listView_Uyeler.SelectedIndexChanged += listView_Uyeler_SelectedIndexChanged;
+        }
+        private void SepetListViewDuzenle()
+        {
+            listView_Sepet.Columns.Clear();
+            listView_Sepet.Columns.Add("Kitap Adı", 250);
+            listView_Sepet.Columns.Add("ISBN", 150);
+            listView_Sepet.Columns.Add("Yazar", 250);
+        }
+        private void KitapListeListViewDuzenle()
+        {
+            listView_KitapListesi.Columns.Clear();
+            listView_KitapListesi.Columns.Add("Kitap Adı", 250);
+            listView_KitapListesi.Columns.Add("ISBN", 150);
+            listView_KitapListesi.Columns.Add("Yazar", 250);
+            listView_KitapListesi.DoubleClick += ListViewKitap_DoubleClick;
+        }
+        private void UyeninAldigiKitapListViewDuzenle()
+        {
+            listView_UyeninAldigiKitapListesi.Columns.Clear();
+            listView_UyeninAldigiKitapListesi.Columns.Add("Kitap Adı", 200);
+            listView_UyeninAldigiKitapListesi.Columns.Add("Alış Tarihi", 150);
+            listView_UyeninAldigiKitapListesi.Columns.Add("Teslim Tarihi", 150);
+            listView_UyeninAldigiKitapListesi.Columns.Add("Durum", 150);
         }
         private void button_TumIadeAl_Click(object sender, EventArgs e)
         {
@@ -137,41 +198,6 @@ namespace Kutuphane.UI
 
             TumOduncleriListele();
             UyeninAldigiKitaplarıListele();
-        }
-        private void UyeListViewDuzenle()
-        {
-            listView_Uyeler.View = View.Details;
-            listView_Uyeler.GridLines = true;
-            listView_Uyeler.FullRowSelect = true;
-
-            listView_Uyeler.Columns.Clear();
-            listView_Uyeler.Columns.Add("TC/Pass", 150);
-            listView_Uyeler.Columns.Add("Ad", 170);
-            listView_Uyeler.Columns.Add("Soyad", 170);
-            listView_Uyeler.SelectedIndexChanged += listView_Uyeler_SelectedIndexChanged;
-        }
-        private void SepetListViewDuzenle()
-        {
-            listView_Sepet.Columns.Clear();
-            listView_Sepet.Columns.Add("Kitap Adı", 250);
-            listView_Sepet.Columns.Add("ISBN", 150);
-            listView_Sepet.Columns.Add("Yazar", 250);
-        }
-        private void KitapListeListViewDuzenle()
-        {
-            listView_KitapListesi.Columns.Clear();
-            listView_KitapListesi.Columns.Add("Kitap Adı", 250);
-            listView_KitapListesi.Columns.Add("ISBN", 150);
-            listView_KitapListesi.Columns.Add("Yazar", 250);
-            listView_KitapListesi.DoubleClick += ListViewKitap_DoubleClick;
-        }
-        private void UyeninAldigiKitapListViewDuzenle()
-        {
-            listView_UyeninAldigiKitapListesi.Columns.Clear();
-            listView_UyeninAldigiKitapListesi.Columns.Add("Kitap Adı", 200);
-            listView_UyeninAldigiKitapListesi.Columns.Add("Alış Tarihi", 150);
-            listView_UyeninAldigiKitapListesi.Columns.Add("Teslim Tarihi", 150);
-            listView_UyeninAldigiKitapListesi.Columns.Add("Durum", 150);
         }
         private void UyeSecimi(OduncUyeDto uye)
         {

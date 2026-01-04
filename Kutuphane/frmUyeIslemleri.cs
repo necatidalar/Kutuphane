@@ -1,29 +1,63 @@
 ﻿using Kutuphane.BLL.Abstract;
 using Kutuphane.BLL.Concrete;
 using Kutuphane.DAL.Concrete;
+using Kutuphane.DAL.Contexes;
 using Kutuphane.Model.DTO;
 using Kutuphane.Model.Entity;
+using Kutuphane.UI.Theme;
+using Kutuphane.UI.UIMetodlar;
 using System.ComponentModel;
 
 namespace Kutuphane.UI
 {
     public partial class frmUyeIslemleri : Form
     {
-        public frmUyeIslemleri()
-        {
-            InitializeComponent();
-            dataGrid_Uye.DataSource = bilUyeDto;
-        }
-
         BindingList<UyeDto> bilUyeDto = new BindingList<UyeDto>();
         IUyeService uyeService = new UyeManager(new UyeDal());
         bool silinenModu = false;
 
+        private readonly YetkiKontrol _yetkiKontrol;
+        private readonly int _personelId;
+        private HashSet<string> _userPermissions;
+        public frmUyeIslemleri(int personelId)
+        {
+            InitializeComponent();
+            dataGrid_Uye.DataSource = bilUyeDto;
+            _personelId = personelId;
+            _yetkiKontrol = new YetkiKontrol(new KutuphaneDbContext());
+            _userPermissions = _yetkiKontrol.KullaniciYetkileriniAl(_personelId);
+        }
         private void frmUyeIslemleri_Load(object sender, EventArgs e)
         {
-            Listele();
-            PasifUyeKontrol();
-            ComboDoldur();
+            YetkiKontrol();
+            if (_userPermissions.Contains("UYE_LISTELE"))
+            {
+                Listele();
+                ComboDoldur();
+                PasifKontrol();
+            }
+            DataGridThemeManager.Apply(dataGrid_Uye);
+        }
+        private void YetkiKontrol()
+        {
+            bool listele = _userPermissions.Contains("UYE_LISTELE");
+            bool ekle = _userPermissions.Contains("UYE_EKLE");
+            bool guncelle = _userPermissions.Contains("UYE_GUNCELLE");
+            bool sil = _userPermissions.Contains("UYE_SIL");
+
+            dataGrid_Uye.Enabled = listele;
+            btnKaydet.Visible = ekle;
+            btnDuzenle.Visible = listele && guncelle;
+            btnSil.Visible = listele && sil;
+
+            btnSilinenleriGoster.Visible = listele;
+            btnGeriYukle.Visible = listele && sil;
+
+            btnTemizle.Visible = ekle || guncelle;
+            groupBox1.Visible = ekle || guncelle || sil;
+
+            label_txtAra.Visible = listele;
+            textBox_Ara.Visible = listele;
         }
         private void Listele()
         {
@@ -192,7 +226,7 @@ namespace Kutuphane.UI
             {
                 MessageBox.Show("Üye başarıyla silindi (pasif edildi).", "Başarılı");
                 Listele();
-                PasifUyeKontrol();
+                PasifKontrol();
             }
             else
                 MessageBox.Show(uyeResult.Message, "Hata");
@@ -241,12 +275,16 @@ namespace Kutuphane.UI
 
             KutulariTemizle();
         }
-        private void PasifUyeKontrol()
+        private void PasifKontrol()
         {
+            bool listele = _userPermissions.Contains("UYE_LISTELE");
+            if (!listele)
+            {
+                btnSilinenleriGoster.Visible = false;
+                return;
+            }
             dataGrid_Uye.ClearSelection();
-
             var pasifResult = uyeService.GetListByFilterService(x => x.AktifMi == false);
-
             btnSilinenleriGoster.Visible = pasifResult.IsSuccess && pasifResult.Data.Any();
         }
         private void btnSilinenleriGoster_Click(object sender, EventArgs e)
@@ -312,7 +350,7 @@ namespace Kutuphane.UI
             btnKaydet.Enabled = true;
             btnDuzenle.Enabled = true;
             btnSil.Enabled = true;
-            PasifUyeKontrol();
+            PasifKontrol();
         }
         private bool BoslukKontrol()
         {

@@ -18,14 +18,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmDilIslemleri));
-            dataGrid_Dil = new DataGridView();
-            dilIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            dilAdiDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            dilKoduDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            aktifMiDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
             dilBindingSource = new BindingSource(components);
             label_txtAra = new Label();
             textBox_Ara = new TextBox();
@@ -44,88 +37,17 @@
             label1 = new Label();
             textBox_DilId = new TextBox();
             label4 = new Label();
-            ((System.ComponentModel.ISupportInitialize)dataGrid_Dil).BeginInit();
+            dataGrid_Dil = new DataGridView();
+            dilIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            dilAdiDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            dilKoduDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            aktifMiDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dilBindingSource).BeginInit();
             groupBox1.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGrid_Dil).BeginInit();
             SuspendLayout();
-            // 
-            // dataGrid_Dil
-            // 
-            dataGrid_Dil.AllowUserToAddRows = false;
-            dataGrid_Dil.AllowUserToDeleteRows = false;
-            dataGrid_Dil.AllowUserToResizeRows = false;
-            dataGrid_Dil.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
-            dataGrid_Dil.AutoGenerateColumns = false;
-            dataGrid_Dil.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGrid_Dil.BackgroundColor = Color.FromArgb(245, 246, 250);
-            dataGrid_Dil.BorderStyle = BorderStyle.None;
-            dataGrid_Dil.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            dataGrid_Dil.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = Color.FromArgb(41, 128, 185);
-            dataGridViewCellStyle3.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
-            dataGridViewCellStyle3.ForeColor = Color.White;
-            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(41, 128, 185);
-            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
-            dataGrid_Dil.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            dataGrid_Dil.ColumnHeadersHeight = 35;
-            dataGrid_Dil.Columns.AddRange(new DataGridViewColumn[] { dilIdDataGridViewTextBoxColumn, dilAdiDataGridViewTextBoxColumn, dilKoduDataGridViewTextBoxColumn, aktifMiDataGridViewCheckBoxColumn });
-            dataGrid_Dil.DataSource = dilBindingSource;
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = Color.White;
-            dataGridViewCellStyle4.Font = new Font("Segoe UI", 9.75F);
-            dataGridViewCellStyle4.ForeColor = Color.FromArgb(71, 69, 94);
-            dataGridViewCellStyle4.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            dataGridViewCellStyle4.SelectionForeColor = Color.FromArgb(71, 69, 94);
-            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
-            dataGrid_Dil.DefaultCellStyle = dataGridViewCellStyle4;
-            dataGrid_Dil.EnableHeadersVisualStyles = false;
-            dataGrid_Dil.GridColor = Color.FromArgb(231, 229, 255);
-            dataGrid_Dil.Location = new Point(325, 55);
-            dataGrid_Dil.MultiSelect = false;
-            dataGrid_Dil.Name = "dataGrid_Dil";
-            dataGrid_Dil.ReadOnly = true;
-            dataGrid_Dil.RowHeadersVisible = false;
-            dataGrid_Dil.RowTemplate.Height = 32;
-            dataGrid_Dil.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGrid_Dil.Size = new Size(606, 484);
-            dataGrid_Dil.TabIndex = 12;
-            dataGrid_Dil.CellFormatting += dataGrid_Dil_CellFormatting;
-            dataGrid_Dil.ColumnHeaderMouseClick += dataGrid_Dil_ColumnHeaderMouseClick;
-            dataGrid_Dil.SelectionChanged += dataGrid_Dil_SelectionChanged;
-            // 
-            // dilIdDataGridViewTextBoxColumn
-            // 
-            dilIdDataGridViewTextBoxColumn.DataPropertyName = "DilId";
-            dilIdDataGridViewTextBoxColumn.HeaderText = "DilId";
-            dilIdDataGridViewTextBoxColumn.Name = "dilIdDataGridViewTextBoxColumn";
-            dilIdDataGridViewTextBoxColumn.ReadOnly = true;
-            dilIdDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // dilAdiDataGridViewTextBoxColumn
-            // 
-            dilAdiDataGridViewTextBoxColumn.DataPropertyName = "DilAdi";
-            dilAdiDataGridViewTextBoxColumn.HeaderText = "Dil Adı";
-            dilAdiDataGridViewTextBoxColumn.Name = "dilAdiDataGridViewTextBoxColumn";
-            dilAdiDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // dilKoduDataGridViewTextBoxColumn
-            // 
-            dilKoduDataGridViewTextBoxColumn.DataPropertyName = "DilKodu";
-            dilKoduDataGridViewTextBoxColumn.HeaderText = "Dil Kodu";
-            dilKoduDataGridViewTextBoxColumn.Name = "dilKoduDataGridViewTextBoxColumn";
-            dilKoduDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // aktifMiDataGridViewCheckBoxColumn
-            // 
-            aktifMiDataGridViewCheckBoxColumn.DataPropertyName = "AktifMi";
-            aktifMiDataGridViewCheckBoxColumn.HeaderText = "Durum";
-            aktifMiDataGridViewCheckBoxColumn.Name = "aktifMiDataGridViewCheckBoxColumn";
-            aktifMiDataGridViewCheckBoxColumn.ReadOnly = true;
-            aktifMiDataGridViewCheckBoxColumn.Visible = false;
             // 
             // dilBindingSource
             // 
@@ -355,35 +277,75 @@
             label4.TabIndex = 30;
             label4.Text = "Dil Kodu:";
             // 
+            // dataGrid_Dil
+            // 
+            dataGrid_Dil.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            dataGrid_Dil.AutoGenerateColumns = false;
+            dataGrid_Dil.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGrid_Dil.Columns.AddRange(new DataGridViewColumn[] { dilIdDataGridViewTextBoxColumn, dilAdiDataGridViewTextBoxColumn, dilKoduDataGridViewTextBoxColumn, aktifMiDataGridViewCheckBoxColumn });
+            dataGrid_Dil.DataSource = dilBindingSource;
+            dataGrid_Dil.Location = new Point(315, 55);
+            dataGrid_Dil.Name = "dataGrid_Dil";
+            dataGrid_Dil.Size = new Size(616, 484);
+            dataGrid_Dil.TabIndex = 18;
+            dataGrid_Dil.CellFormatting += dataGrid_Dil_CellFormatting;
+            dataGrid_Dil.ColumnHeaderMouseClick += dataGrid_Dil_ColumnHeaderMouseClick;
+            dataGrid_Dil.SelectionChanged += dataGrid_Dil_SelectionChanged;
+            // 
+            // dilIdDataGridViewTextBoxColumn
+            // 
+            dilIdDataGridViewTextBoxColumn.DataPropertyName = "DilId";
+            dilIdDataGridViewTextBoxColumn.HeaderText = "DilId";
+            dilIdDataGridViewTextBoxColumn.Name = "dilIdDataGridViewTextBoxColumn";
+            dilIdDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // dilAdiDataGridViewTextBoxColumn
+            // 
+            dilAdiDataGridViewTextBoxColumn.DataPropertyName = "DilAdi";
+            dilAdiDataGridViewTextBoxColumn.HeaderText = "Dil Adı";
+            dilAdiDataGridViewTextBoxColumn.Name = "dilAdiDataGridViewTextBoxColumn";
+            // 
+            // dilKoduDataGridViewTextBoxColumn
+            // 
+            dilKoduDataGridViewTextBoxColumn.DataPropertyName = "DilKodu";
+            dilKoduDataGridViewTextBoxColumn.HeaderText = "Dil Kodu";
+            dilKoduDataGridViewTextBoxColumn.Name = "dilKoduDataGridViewTextBoxColumn";
+            // 
+            // aktifMiDataGridViewCheckBoxColumn
+            // 
+            aktifMiDataGridViewCheckBoxColumn.DataPropertyName = "AktifMi";
+            aktifMiDataGridViewCheckBoxColumn.HeaderText = "AktifMi";
+            aktifMiDataGridViewCheckBoxColumn.Name = "aktifMiDataGridViewCheckBoxColumn";
+            aktifMiDataGridViewCheckBoxColumn.Visible = false;
+            // 
             // frmDilIslemleri
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(943, 551);
+            Controls.Add(dataGrid_Dil);
             Controls.Add(groupBox1);
             Controls.Add(label_txtAra);
             Controls.Add(textBox_Ara);
-            Controls.Add(dataGrid_Dil);
             Icon = (Icon)resources.GetObject("$this.Icon");
             MinimumSize = new Size(818, 590);
             Name = "frmDilIslemleri";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Kütüphane Otomasyonu - Dil İşlemleri";
             Load += frmDilIslemleri_Load;
-            ((System.ComponentModel.ISupportInitialize)dataGrid_Dil).EndInit();
             ((System.ComponentModel.ISupportInitialize)dilBindingSource).EndInit();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             flowLayoutPanel1.ResumeLayout(false);
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGrid_Dil).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-        private DataGridView dataGrid_Dil;
         private Label label_txtAra;
         private TextBox textBox_Ara;
         private GroupBox groupBox1;
@@ -399,12 +361,13 @@
         private TextBox textBox_DilKodu;
         private TextBox textBox_DilAdi;
         private TextBox textBox_DilId;
+        private BindingSource dilBindingSource;
+        private Panel panel1;
+        private FlowLayoutPanel flowLayoutPanel1;
+        private DataGridView dataGrid_Dil;
         private DataGridViewTextBoxColumn dilIdDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn dilAdiDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn dilKoduDataGridViewTextBoxColumn;
         private DataGridViewCheckBoxColumn aktifMiDataGridViewCheckBoxColumn;
-        private BindingSource dilBindingSource;
-        private Panel panel1;
-        private FlowLayoutPanel flowLayoutPanel1;
     }
 }

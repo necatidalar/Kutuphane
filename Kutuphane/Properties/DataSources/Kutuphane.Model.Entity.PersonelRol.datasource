@@ -5,6 +5,6 @@
     Renaming the file extension or editing the content of this file may
     cause the file to be unrecognizable by the program.
 -->
-<GenericObjectDataSource DisplayName="Kategori" Version="1.0" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
-  <TypeInfo>Kutuphane.Model.Entity.Kategori, Kutuphane.Model, Version=1.0.0.29, Culture=neutral, PublicKeyToken=null</TypeInfo>
+<GenericObjectDataSource DisplayName="PersonelRol" Version="1.0" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+  <TypeInfo>Kutuphane.Model.Entity.PersonelRol, Kutuphane.Model, Version=1.0.0.29, Culture=neutral, PublicKeyToken=null</TypeInfo>
 </GenericObjectDataSource>

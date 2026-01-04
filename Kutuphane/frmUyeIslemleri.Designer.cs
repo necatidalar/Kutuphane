@@ -31,11 +31,7 @@ namespace Kutuphane.UI
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmUyeIslemleri));
-            dataGrid_Uye = new DataGridView();
             uyeDtoBindingSource = new BindingSource(components);
             textBox_Ara = new TextBox();
             groupBox1 = new GroupBox();
@@ -66,12 +62,13 @@ namespace Kutuphane.UI
             textBox_TcPass = new TextBox();
             textBox_UyeId = new TextBox();
             comboBox_Filtre = new ComboBox();
-            label1 = new Label();
+            label_txtAra = new Label();
+            dataGrid_Uye = new DataGridView();
             uyeIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             tcPassDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             adDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             soyadDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            cinsiyetIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             cinsiyetDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             dogumTarihiDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             telefonDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -79,52 +76,10 @@ namespace Kutuphane.UI
             adresDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             adresDetayDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             aktifMiDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)dataGrid_Uye).BeginInit();
             ((System.ComponentModel.ISupportInitialize)uyeDtoBindingSource).BeginInit();
             groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGrid_Uye).BeginInit();
             SuspendLayout();
-            // 
-            // dataGrid_Uye
-            // 
-            dataGrid_Uye.AllowUserToAddRows = false;
-            dataGrid_Uye.AllowUserToDeleteRows = false;
-            dataGrid_Uye.AllowUserToOrderColumns = true;
-            dataGrid_Uye.AllowUserToResizeRows = false;
-            dataGrid_Uye.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            dataGrid_Uye.AutoGenerateColumns = false;
-            dataGrid_Uye.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGrid_Uye.BackgroundColor = Color.White;
-            dataGrid_Uye.BorderStyle = BorderStyle.None;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(41, 128, 185);
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 162);
-            dataGridViewCellStyle1.ForeColor = Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(41, 128, 185);
-            dataGridViewCellStyle1.SelectionForeColor = Color.White;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dataGrid_Uye.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            dataGrid_Uye.ColumnHeadersHeight = 30;
-            dataGrid_Uye.Columns.AddRange(new DataGridViewColumn[] { uyeIdDataGridViewTextBoxColumn, tcPassDataGridViewTextBoxColumn, adDataGridViewTextBoxColumn, soyadDataGridViewTextBoxColumn, dataGridViewTextBoxColumn1, cinsiyetDataGridViewTextBoxColumn, dogumTarihiDataGridViewTextBoxColumn, telefonDataGridViewTextBoxColumn, epostaDataGridViewTextBoxColumn, adresDataGridViewTextBoxColumn, adresDetayDataGridViewTextBoxColumn, aktifMiDataGridViewCheckBoxColumn });
-            dataGrid_Uye.DataSource = uyeDtoBindingSource;
-            dataGrid_Uye.EnableHeadersVisualStyles = false;
-            dataGrid_Uye.GridColor = Color.LightGray;
-            dataGrid_Uye.Location = new Point(318, 43);
-            dataGrid_Uye.Name = "dataGrid_Uye";
-            dataGrid_Uye.ReadOnly = true;
-            dataGrid_Uye.RowHeadersVisible = false;
-            dataGrid_Uye.RowHeadersWidth = 51;
-            dataGridViewCellStyle3.BackColor = Color.White;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 162);
-            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(170, 204, 255);
-            dataGridViewCellStyle3.SelectionForeColor = Color.Black;
-            dataGrid_Uye.RowsDefaultCellStyle = dataGridViewCellStyle3;
-            dataGrid_Uye.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGrid_Uye.Size = new Size(814, 621);
-            dataGrid_Uye.TabIndex = 19;
-            dataGrid_Uye.CellFormatting += dataGrid_Uye_CellFormatting;
-            dataGrid_Uye.CellPainting += dataGrid_Uye_CellPainting;
-            dataGrid_Uye.ColumnHeaderMouseClick += dataGrid_Uye_ColumnHeaderMouseClick;
-            dataGrid_Uye.SelectionChanged += dataGrid_Uye_SelectionChanged;
             // 
             // uyeDtoBindingSource
             // 
@@ -462,116 +417,106 @@ namespace Kutuphane.UI
             comboBox_Filtre.TabIndex = 22;
             comboBox_Filtre.SelectedIndexChanged += comboBox_Filtre_SelectedIndexChanged;
             // 
-            // label1
+            // label_txtAra
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
-            label1.ForeColor = Color.FromArgb(64, 64, 64);
-            label1.Location = new Point(318, 15);
-            label1.Name = "label1";
-            label1.Size = new Size(51, 17);
-            label1.TabIndex = 23;
-            label1.Text = "Arama:";
+            label_txtAra.AutoSize = true;
+            label_txtAra.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            label_txtAra.ForeColor = Color.FromArgb(64, 64, 64);
+            label_txtAra.Location = new Point(318, 15);
+            label_txtAra.Name = "label_txtAra";
+            label_txtAra.Size = new Size(51, 17);
+            label_txtAra.TabIndex = 23;
+            label_txtAra.Text = "Arama:";
+            // 
+            // dataGrid_Uye
+            // 
+            dataGrid_Uye.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dataGrid_Uye.AutoGenerateColumns = false;
+            dataGrid_Uye.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGrid_Uye.Columns.AddRange(new DataGridViewColumn[] { uyeIdDataGridViewTextBoxColumn, tcPassDataGridViewTextBoxColumn, adDataGridViewTextBoxColumn, soyadDataGridViewTextBoxColumn, cinsiyetIdDataGridViewTextBoxColumn, cinsiyetDataGridViewTextBoxColumn, dogumTarihiDataGridViewTextBoxColumn, telefonDataGridViewTextBoxColumn, epostaDataGridViewTextBoxColumn, adresDataGridViewTextBoxColumn, adresDetayDataGridViewTextBoxColumn, aktifMiDataGridViewCheckBoxColumn });
+            dataGrid_Uye.DataSource = uyeDtoBindingSource;
+            dataGrid_Uye.Location = new Point(318, 43);
+            dataGrid_Uye.Name = "dataGrid_Uye";
+            dataGrid_Uye.Size = new Size(814, 621);
+            dataGrid_Uye.TabIndex = 24;
+            dataGrid_Uye.CellFormatting += dataGrid_Uye_CellFormatting;
+            dataGrid_Uye.CellPainting += dataGrid_Uye_CellPainting;
+            dataGrid_Uye.ColumnHeaderMouseClick += dataGrid_Uye_ColumnHeaderMouseClick;
+            dataGrid_Uye.SelectionChanged += dataGrid_Uye_SelectionChanged;
             // 
             // uyeIdDataGridViewTextBoxColumn
             // 
             uyeIdDataGridViewTextBoxColumn.DataPropertyName = "UyeId";
             uyeIdDataGridViewTextBoxColumn.HeaderText = "UyeId";
-            uyeIdDataGridViewTextBoxColumn.MinimumWidth = 6;
             uyeIdDataGridViewTextBoxColumn.Name = "uyeIdDataGridViewTextBoxColumn";
-            uyeIdDataGridViewTextBoxColumn.ReadOnly = true;
             uyeIdDataGridViewTextBoxColumn.Visible = false;
             // 
             // tcPassDataGridViewTextBoxColumn
             // 
             tcPassDataGridViewTextBoxColumn.DataPropertyName = "TcPass";
-            tcPassDataGridViewTextBoxColumn.HeaderText = "TC/Pasaport No";
-            tcPassDataGridViewTextBoxColumn.MinimumWidth = 6;
+            tcPassDataGridViewTextBoxColumn.HeaderText = "TC No / Pasaport No ";
             tcPassDataGridViewTextBoxColumn.Name = "tcPassDataGridViewTextBoxColumn";
-            tcPassDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // adDataGridViewTextBoxColumn
             // 
             adDataGridViewTextBoxColumn.DataPropertyName = "Ad";
             adDataGridViewTextBoxColumn.HeaderText = "Adı";
-            adDataGridViewTextBoxColumn.MinimumWidth = 6;
             adDataGridViewTextBoxColumn.Name = "adDataGridViewTextBoxColumn";
-            adDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // soyadDataGridViewTextBoxColumn
             // 
             soyadDataGridViewTextBoxColumn.DataPropertyName = "Soyad";
             soyadDataGridViewTextBoxColumn.HeaderText = "Soyadı";
-            soyadDataGridViewTextBoxColumn.MinimumWidth = 6;
             soyadDataGridViewTextBoxColumn.Name = "soyadDataGridViewTextBoxColumn";
-            soyadDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // dataGridViewTextBoxColumn1
+            // cinsiyetIdDataGridViewTextBoxColumn
             // 
-            dataGridViewTextBoxColumn1.DataPropertyName = "CinsiyetId";
-            dataGridViewTextBoxColumn1.HeaderText = "CinsiyetId";
-            dataGridViewTextBoxColumn1.MinimumWidth = 6;
-            dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            dataGridViewTextBoxColumn1.ReadOnly = true;
-            dataGridViewTextBoxColumn1.Visible = false;
+            cinsiyetIdDataGridViewTextBoxColumn.DataPropertyName = "CinsiyetId";
+            cinsiyetIdDataGridViewTextBoxColumn.HeaderText = "CinsiyetId";
+            cinsiyetIdDataGridViewTextBoxColumn.Name = "cinsiyetIdDataGridViewTextBoxColumn";
+            cinsiyetIdDataGridViewTextBoxColumn.Visible = false;
             // 
             // cinsiyetDataGridViewTextBoxColumn
             // 
             cinsiyetDataGridViewTextBoxColumn.DataPropertyName = "Cinsiyet";
             cinsiyetDataGridViewTextBoxColumn.HeaderText = "Cinsiyet";
-            cinsiyetDataGridViewTextBoxColumn.MinimumWidth = 6;
             cinsiyetDataGridViewTextBoxColumn.Name = "cinsiyetDataGridViewTextBoxColumn";
-            cinsiyetDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // dogumTarihiDataGridViewTextBoxColumn
             // 
             dogumTarihiDataGridViewTextBoxColumn.DataPropertyName = "DogumTarihi";
-            dataGridViewCellStyle2.Format = "dd.MM.yyyy";
-            dogumTarihiDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
             dogumTarihiDataGridViewTextBoxColumn.HeaderText = "Doğum Tarihi";
-            dogumTarihiDataGridViewTextBoxColumn.MinimumWidth = 6;
             dogumTarihiDataGridViewTextBoxColumn.Name = "dogumTarihiDataGridViewTextBoxColumn";
-            dogumTarihiDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // telefonDataGridViewTextBoxColumn
             // 
             telefonDataGridViewTextBoxColumn.DataPropertyName = "Telefon";
             telefonDataGridViewTextBoxColumn.HeaderText = "Telefon";
-            telefonDataGridViewTextBoxColumn.MinimumWidth = 6;
             telefonDataGridViewTextBoxColumn.Name = "telefonDataGridViewTextBoxColumn";
-            telefonDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // epostaDataGridViewTextBoxColumn
             // 
             epostaDataGridViewTextBoxColumn.DataPropertyName = "Eposta";
             epostaDataGridViewTextBoxColumn.HeaderText = "E-Posta";
-            epostaDataGridViewTextBoxColumn.MinimumWidth = 6;
             epostaDataGridViewTextBoxColumn.Name = "epostaDataGridViewTextBoxColumn";
-            epostaDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // adresDataGridViewTextBoxColumn
             // 
             adresDataGridViewTextBoxColumn.DataPropertyName = "Adres";
             adresDataGridViewTextBoxColumn.HeaderText = "Adres";
-            adresDataGridViewTextBoxColumn.MinimumWidth = 6;
             adresDataGridViewTextBoxColumn.Name = "adresDataGridViewTextBoxColumn";
-            adresDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // adresDetayDataGridViewTextBoxColumn
             // 
             adresDetayDataGridViewTextBoxColumn.DataPropertyName = "AdresDetay";
             adresDetayDataGridViewTextBoxColumn.HeaderText = "Adres Detay";
-            adresDetayDataGridViewTextBoxColumn.MinimumWidth = 6;
             adresDetayDataGridViewTextBoxColumn.Name = "adresDetayDataGridViewTextBoxColumn";
-            adresDetayDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // aktifMiDataGridViewCheckBoxColumn
             // 
             aktifMiDataGridViewCheckBoxColumn.DataPropertyName = "AktifMi";
             aktifMiDataGridViewCheckBoxColumn.HeaderText = "AktifMi";
-            aktifMiDataGridViewCheckBoxColumn.MinimumWidth = 6;
             aktifMiDataGridViewCheckBoxColumn.Name = "aktifMiDataGridViewCheckBoxColumn";
-            aktifMiDataGridViewCheckBoxColumn.ReadOnly = true;
             aktifMiDataGridViewCheckBoxColumn.Visible = false;
             // 
             // frmUyeIslemleri
@@ -580,29 +525,27 @@ namespace Kutuphane.UI
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(1144, 676);
-            Controls.Add(label1);
+            Controls.Add(dataGrid_Uye);
+            Controls.Add(label_txtAra);
             Controls.Add(comboBox_Filtre);
             Controls.Add(groupBox1);
             Controls.Add(textBox_Ara);
-            Controls.Add(dataGrid_Uye);
             Icon = (Icon)resources.GetObject("$this.Icon");
             MinimumSize = new Size(1160, 713);
             Name = "frmUyeIslemleri";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Kütüphane Otomasyonu - Üye İşlemleri";
             Load += frmUyeIslemleri_Load;
-            ((System.ComponentModel.ISupportInitialize)dataGrid_Uye).EndInit();
             ((System.ComponentModel.ISupportInitialize)uyeDtoBindingSource).EndInit();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGrid_Uye).EndInit();
             ResumeLayout(false);
             PerformLayout();
 
         }
 
         #endregion
-
-        private DataGridView dataGrid_Uye;
         private DataGridViewTextBoxColumn cinsiyetIDDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn dogumYiliDataGridViewTextBoxColumn;
         private TextBox textBox_Ara;
@@ -635,11 +578,13 @@ namespace Kutuphane.UI
         private DateTimePicker dateTimePicker1;
         private TextBox textBox_Telefon;
         private ComboBox comboBox_Filtre;
+        private Label label_txtAra;
+        private DataGridView dataGrid_Uye;
         private DataGridViewTextBoxColumn uyeIdDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn tcPassDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn adDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn soyadDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private DataGridViewTextBoxColumn cinsiyetIdDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn cinsiyetDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn dogumTarihiDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn telefonDataGridViewTextBoxColumn;
@@ -647,6 +592,5 @@ namespace Kutuphane.UI
         private DataGridViewTextBoxColumn adresDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn adresDetayDataGridViewTextBoxColumn;
         private DataGridViewCheckBoxColumn aktifMiDataGridViewCheckBoxColumn;
-        private Label label1;
     }
 }

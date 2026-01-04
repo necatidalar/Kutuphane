@@ -1,32 +1,65 @@
 ﻿using Kutuphane.BLL.Abstract;
 using Kutuphane.BLL.Concrete;
 using Kutuphane.DAL.Concrete;
+using Kutuphane.DAL.Contexes;
 using Kutuphane.Model.DTO;
 using Kutuphane.Model.Entity;
+using Kutuphane.UI.Theme;
+using Kutuphane.UI.UIMetodlar;
 using System.ComponentModel;
 
 namespace Kutuphane.UI
 {
     public partial class frmPersonelIslemleri : Form
     {
-        public frmPersonelIslemleri()
-        {
-            InitializeComponent();
-            dataGrid_Personel.DataSource = bilPersonel;
-        }
-
-        private void frmPersonelIslemleri_Load(object sender, EventArgs e)
-        {
-            Listele();
-            ComboDoldur();
-            PasifUyeKontrol();
-            btnTemizle.PerformClick();
-        }
-
         BindingList<PersonelBilgileriDto> bilPersonel = new BindingList<PersonelBilgileriDto>();
         IPersonelService personelService = new PersonelManager(new PersonelDal());
         bool silinenModu = false;
 
+        private readonly YetkiKontrol _yetkiKontrol;
+        private readonly int _personelId;
+        private HashSet<string> _userPermissions;
+        public frmPersonelIslemleri(int personelId)
+        {
+            InitializeComponent();
+            _personelId = personelId;
+            _yetkiKontrol = new YetkiKontrol(new KutuphaneDbContext());
+            _userPermissions = _yetkiKontrol.KullaniciYetkileriniAl(_personelId);
+            dataGrid_Personel.DataSource = bilPersonel;
+        }
+        private void frmPersonelIslemleri_Load(object sender, EventArgs e)
+        {
+            YetkiKontrol();
+            if (_userPermissions.Contains("KATEGORI_LISTELE"))
+            {
+                Listele();
+                ComboDoldur();
+                PasifKontrol();
+            }
+            btnTemizle.PerformClick();
+            DataGridThemeManager.Apply(dataGrid_Personel);
+        }
+        private void YetkiKontrol()
+        {
+            bool listele = _userPermissions.Contains("KATEGORI_LISTELE");
+            bool ekle = _userPermissions.Contains("KATEGORI_EKLE");
+            bool guncelle = _userPermissions.Contains("KATEGORI_GUNCELLE");
+            bool sil = _userPermissions.Contains("KATEGORI_SIL");
+
+            dataGrid_Personel.Enabled = listele;
+            btnKaydet.Visible = ekle;
+            btnDuzenle.Visible = listele && guncelle;
+            btnSil.Visible = listele && sil;
+
+            btnSilinenleriGoster.Visible = listele;
+            btnGeriYukle.Visible = listele && sil;
+
+            btnTemizle.Visible = ekle || guncelle;
+            groupBox1.Visible = ekle || guncelle || sil;
+
+            label_txtAra.Visible = listele;
+            textBox_Ara.Visible = listele;
+        }
         private void Listele()
         {
             try
@@ -185,7 +218,7 @@ namespace Kutuphane.UI
                 {
                     MessageBox.Show("Personel başarıyla silindi.", "Başarılı");
                     Listele();
-                    PasifUyeKontrol();
+                    PasifKontrol();
 
                 }
                 else
@@ -210,12 +243,16 @@ namespace Kutuphane.UI
             textBox_PersonelId.Clear();
             dataGrid_Personel.ClearSelection();
         }
-        private void PasifUyeKontrol()
+        private void PasifKontrol()
         {
+            bool listele = _userPermissions.Contains("KATEGORI_LISTELE");
+            if (!listele)
+            {
+                btnSilinenleriGoster.Visible = false;
+                return;
+            }
             dataGrid_Personel.ClearSelection();
-
             var pasifResult = personelService.GetListByFilterService(x => x.AktifMi == false);
-
             btnSilinenleriGoster.Visible = pasifResult.IsSuccess && pasifResult.Data.Any();
         }
         private void btnSilinenleriGoster_Click(object sender, EventArgs e)
@@ -283,7 +320,7 @@ namespace Kutuphane.UI
                 btnKaydet.Enabled = true;
                 btnDuzenle.Enabled = true;
                 btnSil.Enabled = true;
-                PasifUyeKontrol();
+                PasifKontrol();
                 btnTemizle.PerformClick();
                 btnTemizle.PerformClick();
             }

@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmKategoriIslemleri));
             groupBox1 = new GroupBox();
             btnTemizle = new Button();
@@ -43,13 +41,14 @@
             label2 = new Label();
             textBox_KategoriAdi = new TextBox();
             textBox_KategoriId = new TextBox();
-            dataGrid_Kategori = new DataGridView();
-            kategoriIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            kategoriAdiDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            kitapKategorilerDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            kategoriBindingSource = new BindingSource(components);
-            label3 = new Label();
+            label_txtAra = new Label();
             textBox_Ara = new TextBox();
+            dataGrid_Kategori = new DataGridView();
+            kategoriBindingSource = new BindingSource(components);
+            dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
+            dataGridViewCheckBoxColumn1 = new DataGridViewCheckBoxColumn();
+            dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGrid_Kategori).BeginInit();
             ((System.ComponentModel.ISupportInitialize)kategoriBindingSource).BeginInit();
@@ -222,91 +221,17 @@
             textBox_KategoriId.Size = new Size(181, 25);
             textBox_KategoriId.TabIndex = 1;
             // 
-            // dataGrid_Kategori
+            // label_txtAra
             // 
-            dataGrid_Kategori.AllowUserToAddRows = false;
-            dataGrid_Kategori.AllowUserToDeleteRows = false;
-            dataGrid_Kategori.AllowUserToResizeRows = false;
-            dataGrid_Kategori.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
-            dataGrid_Kategori.AutoGenerateColumns = false;
-            dataGrid_Kategori.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGrid_Kategori.BackgroundColor = Color.FromArgb(245, 246, 250);
-            dataGrid_Kategori.BorderStyle = BorderStyle.None;
-            dataGrid_Kategori.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            dataGrid_Kategori.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(41, 128, 185);
-            dataGridViewCellStyle1.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
-            dataGridViewCellStyle1.ForeColor = Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(41, 128, 185);
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dataGrid_Kategori.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            dataGrid_Kategori.ColumnHeadersHeight = 35;
-            dataGrid_Kategori.Columns.AddRange(new DataGridViewColumn[] { kategoriIdDataGridViewTextBoxColumn, kategoriAdiDataGridViewTextBoxColumn, kitapKategorilerDataGridViewTextBoxColumn });
-            dataGrid_Kategori.DataSource = kategoriBindingSource;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.White;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9.75F);
-            dataGridViewCellStyle2.ForeColor = Color.FromArgb(71, 69, 94);
-            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            dataGridViewCellStyle2.SelectionForeColor = Color.FromArgb(71, 69, 94);
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            dataGrid_Kategori.DefaultCellStyle = dataGridViewCellStyle2;
-            dataGrid_Kategori.EnableHeadersVisualStyles = false;
-            dataGrid_Kategori.GridColor = Color.FromArgb(231, 229, 255);
-            dataGrid_Kategori.Location = new Point(325, 55);
-            dataGrid_Kategori.MultiSelect = false;
-            dataGrid_Kategori.Name = "dataGrid_Kategori";
-            dataGrid_Kategori.ReadOnly = true;
-            dataGrid_Kategori.RowHeadersVisible = false;
-            dataGrid_Kategori.RowTemplate.Height = 32;
-            dataGrid_Kategori.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGrid_Kategori.Size = new Size(560, 484);
-            dataGrid_Kategori.TabIndex = 11;
-            dataGrid_Kategori.Tag = "KATEGORI_LISTELE";
-            dataGrid_Kategori.CellFormatting += dataGrid_Kategori_CellFormatting;
-            dataGrid_Kategori.ColumnHeaderMouseClick += dataGrid_Kategori_ColumnHeaderMouseClick;
-            dataGrid_Kategori.SelectionChanged += dataGrid_Kategori_SelectionChanged;
-            // 
-            // kategoriIdDataGridViewTextBoxColumn
-            // 
-            kategoriIdDataGridViewTextBoxColumn.DataPropertyName = "KategoriId";
-            kategoriIdDataGridViewTextBoxColumn.HeaderText = "ID";
-            kategoriIdDataGridViewTextBoxColumn.Name = "kategoriIdDataGridViewTextBoxColumn";
-            kategoriIdDataGridViewTextBoxColumn.ReadOnly = true;
-            kategoriIdDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // kategoriAdiDataGridViewTextBoxColumn
-            // 
-            kategoriAdiDataGridViewTextBoxColumn.DataPropertyName = "KategoriAdi";
-            kategoriAdiDataGridViewTextBoxColumn.HeaderText = "Kategori Adı";
-            kategoriAdiDataGridViewTextBoxColumn.Name = "kategoriAdiDataGridViewTextBoxColumn";
-            kategoriAdiDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // kitapKategorilerDataGridViewTextBoxColumn
-            // 
-            kitapKategorilerDataGridViewTextBoxColumn.DataPropertyName = "KitapKategoriler";
-            kitapKategorilerDataGridViewTextBoxColumn.HeaderText = "KitapKategoriler";
-            kitapKategorilerDataGridViewTextBoxColumn.Name = "kitapKategorilerDataGridViewTextBoxColumn";
-            kitapKategorilerDataGridViewTextBoxColumn.ReadOnly = true;
-            kitapKategorilerDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // kategoriBindingSource
-            // 
-            kategoriBindingSource.DataSource = typeof(Model.Entity.Kategori);
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
-            label3.ForeColor = Color.FromArgb(64, 64, 64);
-            label3.Location = new Point(325, 27);
-            label3.Name = "label3";
-            label3.Size = new Size(51, 17);
-            label3.TabIndex = 6;
-            label3.Tag = "KATEGORI_LISTELE";
-            label3.Text = "Arama:";
+            label_txtAra.AutoSize = true;
+            label_txtAra.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            label_txtAra.ForeColor = Color.FromArgb(64, 64, 64);
+            label_txtAra.Location = new Point(325, 27);
+            label_txtAra.Name = "label_txtAra";
+            label_txtAra.Size = new Size(51, 17);
+            label_txtAra.TabIndex = 6;
+            label_txtAra.Tag = "KATEGORI_LISTELE";
+            label_txtAra.Text = "Arama:";
             // 
             // textBox_Ara
             // 
@@ -319,15 +244,61 @@
             textBox_Ara.Tag = "KATEGORI_LISTELE";
             textBox_Ara.TextChanged += textBox_Ara_TextChanged;
             // 
+            // dataGrid_Kategori
+            // 
+            dataGrid_Kategori.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            dataGrid_Kategori.AutoGenerateColumns = false;
+            dataGrid_Kategori.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGrid_Kategori.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, dataGridViewTextBoxColumn2, dataGridViewCheckBoxColumn1, dataGridViewTextBoxColumn3 });
+            dataGrid_Kategori.DataSource = kategoriBindingSource;
+            dataGrid_Kategori.Location = new Point(318, 55);
+            dataGrid_Kategori.Name = "dataGrid_Kategori";
+            dataGrid_Kategori.Size = new Size(567, 484);
+            dataGrid_Kategori.TabIndex = 10;
+            dataGrid_Kategori.CellFormatting += dataGrid_Kategori_CellFormatting;
+            dataGrid_Kategori.ColumnHeaderMouseClick += dataGrid_Kategori_ColumnHeaderMouseClick;
+            dataGrid_Kategori.SelectionChanged += dataGrid_Kategori_SelectionChanged;
+            // 
+            // kategoriBindingSource
+            // 
+            kategoriBindingSource.DataSource = typeof(Model.Entity.Kategori);
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            dataGridViewTextBoxColumn1.DataPropertyName = "KategoriId";
+            dataGridViewTextBoxColumn1.HeaderText = "KategoriId";
+            dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            dataGridViewTextBoxColumn1.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            dataGridViewTextBoxColumn2.DataPropertyName = "KategoriAdi";
+            dataGridViewTextBoxColumn2.HeaderText = "Kategori Adı";
+            dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            // 
+            // dataGridViewCheckBoxColumn1
+            // 
+            dataGridViewCheckBoxColumn1.DataPropertyName = "AktifMi";
+            dataGridViewCheckBoxColumn1.HeaderText = "AktifMi";
+            dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
+            dataGridViewCheckBoxColumn1.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            dataGridViewTextBoxColumn3.DataPropertyName = "KitapKategoriler";
+            dataGridViewTextBoxColumn3.HeaderText = "KitapKategoriler";
+            dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            dataGridViewTextBoxColumn3.Visible = false;
+            // 
             // frmKategoriIslemleri
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(897, 551);
-            Controls.Add(label3);
-            Controls.Add(textBox_Ara);
             Controls.Add(dataGrid_Kategori);
+            Controls.Add(label_txtAra);
+            Controls.Add(textBox_Ara);
             Controls.Add(groupBox1);
             Icon = (Icon)resources.GetObject("$this.Icon");
             MinimumSize = new Size(800, 590);
@@ -353,16 +324,21 @@
         private TextBox textBox_KategoriId;
         private Label label1;
         private TextBox textBox_KategoriAdi;
-        private DataGridView dataGrid_Kategori;
-        private BindingSource kategoriBindingSource;
-        private Label label3;
+        private Label label_txtAra;
         private TextBox textBox_Ara;
         private Button btnTemizle;
         private Button btnSil;
         private Button btnDuzenle;
         private Button btnKaydet;
+        private DataGridView dataGrid_Kategori;
         private DataGridViewTextBoxColumn kategoriIdDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn kategoriAdiDataGridViewTextBoxColumn;
+        private DataGridViewCheckBoxColumn aktifMiDataGridViewCheckBoxColumn;
         private DataGridViewTextBoxColumn kitapKategorilerDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn1;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private BindingSource kategoriBindingSource;
     }
 }

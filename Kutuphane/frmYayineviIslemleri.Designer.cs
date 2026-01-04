@@ -29,15 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmYayineviIslemleri));
-            dataGrid_Yayinevi = new DataGridView();
-            yayineviIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            adDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            kurulusYiliDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            aktifMiDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
-            yayineviKitaplariDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             yayineviBindingSource = new BindingSource(components);
             textBox_Ara = new TextBox();
             groupBox1 = new GroupBox();
@@ -53,87 +45,17 @@
             textBox_KurulusYili = new TextBox();
             textBox_YayineviAdi = new TextBox();
             textBox_YayineviId = new TextBox();
-            label3 = new Label();
-            ((System.ComponentModel.ISupportInitialize)dataGrid_Yayinevi).BeginInit();
+            label_txtAra = new Label();
+            dataGrid_Yayinevi = new DataGridView();
+            yayineviIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            adDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            kurulusYiliDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            aktifMiDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
+            yayineviKitaplariDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)yayineviBindingSource).BeginInit();
             groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGrid_Yayinevi).BeginInit();
             SuspendLayout();
-            // 
-            // dataGrid_Yayinevi
-            // 
-            dataGrid_Yayinevi.AllowUserToAddRows = false;
-            dataGrid_Yayinevi.AllowUserToDeleteRows = false;
-            dataGrid_Yayinevi.AllowUserToResizeRows = false;
-            dataGrid_Yayinevi.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
-            dataGrid_Yayinevi.AutoGenerateColumns = false;
-            dataGrid_Yayinevi.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGrid_Yayinevi.BackgroundColor = Color.White;
-            dataGrid_Yayinevi.BorderStyle = BorderStyle.None;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(41, 128, 185);
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 162);
-            dataGridViewCellStyle1.ForeColor = Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(41, 128, 185);
-            dataGridViewCellStyle1.SelectionForeColor = Color.White;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dataGrid_Yayinevi.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            dataGrid_Yayinevi.ColumnHeadersHeight = 30;
-            dataGrid_Yayinevi.Columns.AddRange(new DataGridViewColumn[] { yayineviIdDataGridViewTextBoxColumn, adDataGridViewTextBoxColumn, kurulusYiliDataGridViewTextBoxColumn, aktifMiDataGridViewCheckBoxColumn, yayineviKitaplariDataGridViewTextBoxColumn });
-            dataGrid_Yayinevi.DataSource = yayineviBindingSource;
-            dataGrid_Yayinevi.EnableHeadersVisualStyles = false;
-            dataGrid_Yayinevi.GridColor = Color.LightGray;
-            dataGrid_Yayinevi.Location = new Point(318, 42);
-            dataGrid_Yayinevi.Name = "dataGrid_Yayinevi";
-            dataGrid_Yayinevi.ReadOnly = true;
-            dataGrid_Yayinevi.RowHeadersVisible = false;
-            dataGridViewCellStyle2.BackColor = Color.White;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 162);
-            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(170, 204, 255);
-            dataGridViewCellStyle2.SelectionForeColor = Color.Black;
-            dataGrid_Yayinevi.RowsDefaultCellStyle = dataGridViewCellStyle2;
-            dataGrid_Yayinevi.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGrid_Yayinevi.Size = new Size(605, 487);
-            dataGrid_Yayinevi.TabIndex = 2;
-            dataGrid_Yayinevi.ColumnHeaderMouseClick += dataGrid_Yayinevi_ColumnHeaderMouseClick;
-            dataGrid_Yayinevi.SelectionChanged += dataGrid_Yayinevi_SelectionChanged;
-            // 
-            // yayineviIdDataGridViewTextBoxColumn
-            // 
-            yayineviIdDataGridViewTextBoxColumn.DataPropertyName = "YayineviId";
-            yayineviIdDataGridViewTextBoxColumn.HeaderText = "YayineviId";
-            yayineviIdDataGridViewTextBoxColumn.Name = "yayineviIdDataGridViewTextBoxColumn";
-            yayineviIdDataGridViewTextBoxColumn.ReadOnly = true;
-            yayineviIdDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // adDataGridViewTextBoxColumn
-            // 
-            adDataGridViewTextBoxColumn.DataPropertyName = "Ad";
-            adDataGridViewTextBoxColumn.HeaderText = "Adı";
-            adDataGridViewTextBoxColumn.Name = "adDataGridViewTextBoxColumn";
-            adDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // kurulusYiliDataGridViewTextBoxColumn
-            // 
-            kurulusYiliDataGridViewTextBoxColumn.DataPropertyName = "KurulusYili";
-            kurulusYiliDataGridViewTextBoxColumn.HeaderText = "Kuruluş Yılı";
-            kurulusYiliDataGridViewTextBoxColumn.Name = "kurulusYiliDataGridViewTextBoxColumn";
-            kurulusYiliDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // aktifMiDataGridViewCheckBoxColumn
-            // 
-            aktifMiDataGridViewCheckBoxColumn.DataPropertyName = "AktifMi";
-            aktifMiDataGridViewCheckBoxColumn.HeaderText = "AktifMi";
-            aktifMiDataGridViewCheckBoxColumn.Name = "aktifMiDataGridViewCheckBoxColumn";
-            aktifMiDataGridViewCheckBoxColumn.ReadOnly = true;
-            aktifMiDataGridViewCheckBoxColumn.Visible = false;
-            // 
-            // yayineviKitaplariDataGridViewTextBoxColumn
-            // 
-            yayineviKitaplariDataGridViewTextBoxColumn.DataPropertyName = "YayineviKitaplari";
-            yayineviKitaplariDataGridViewTextBoxColumn.HeaderText = "YayineviKitaplari";
-            yayineviKitaplariDataGridViewTextBoxColumn.Name = "yayineviKitaplariDataGridViewTextBoxColumn";
-            yayineviKitaplariDataGridViewTextBoxColumn.ReadOnly = true;
-            yayineviKitaplariDataGridViewTextBoxColumn.Visible = false;
             // 
             // yayineviBindingSource
             // 
@@ -317,16 +239,63 @@
             textBox_YayineviId.Size = new Size(201, 25);
             textBox_YayineviId.TabIndex = 1;
             // 
-            // label3
+            // label_txtAra
             // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
-            label3.ForeColor = Color.FromArgb(64, 64, 64);
-            label3.Location = new Point(318, 14);
-            label3.Name = "label3";
-            label3.Size = new Size(51, 17);
-            label3.TabIndex = 21;
-            label3.Text = "Arama:";
+            label_txtAra.AutoSize = true;
+            label_txtAra.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            label_txtAra.ForeColor = Color.FromArgb(64, 64, 64);
+            label_txtAra.Location = new Point(318, 14);
+            label_txtAra.Name = "label_txtAra";
+            label_txtAra.Size = new Size(51, 17);
+            label_txtAra.TabIndex = 21;
+            label_txtAra.Text = "Arama:";
+            // 
+            // dataGrid_Yayinevi
+            // 
+            dataGrid_Yayinevi.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            dataGrid_Yayinevi.AutoGenerateColumns = false;
+            dataGrid_Yayinevi.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGrid_Yayinevi.Columns.AddRange(new DataGridViewColumn[] { yayineviIdDataGridViewTextBoxColumn, adDataGridViewTextBoxColumn, kurulusYiliDataGridViewTextBoxColumn, aktifMiDataGridViewCheckBoxColumn, yayineviKitaplariDataGridViewTextBoxColumn });
+            dataGrid_Yayinevi.DataSource = yayineviBindingSource;
+            dataGrid_Yayinevi.Location = new Point(318, 42);
+            dataGrid_Yayinevi.Name = "dataGrid_Yayinevi";
+            dataGrid_Yayinevi.Size = new Size(605, 487);
+            dataGrid_Yayinevi.TabIndex = 22;
+            dataGrid_Yayinevi.ColumnHeaderMouseClick += dataGrid_Yayinevi_ColumnHeaderMouseClick;
+            dataGrid_Yayinevi.SelectionChanged += dataGrid_Yayinevi_SelectionChanged;
+            // 
+            // yayineviIdDataGridViewTextBoxColumn
+            // 
+            yayineviIdDataGridViewTextBoxColumn.DataPropertyName = "YayineviId";
+            yayineviIdDataGridViewTextBoxColumn.HeaderText = "YayineviId";
+            yayineviIdDataGridViewTextBoxColumn.Name = "yayineviIdDataGridViewTextBoxColumn";
+            yayineviIdDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // adDataGridViewTextBoxColumn
+            // 
+            adDataGridViewTextBoxColumn.DataPropertyName = "Ad";
+            adDataGridViewTextBoxColumn.HeaderText = "Adı";
+            adDataGridViewTextBoxColumn.Name = "adDataGridViewTextBoxColumn";
+            // 
+            // kurulusYiliDataGridViewTextBoxColumn
+            // 
+            kurulusYiliDataGridViewTextBoxColumn.DataPropertyName = "KurulusYili";
+            kurulusYiliDataGridViewTextBoxColumn.HeaderText = "Kurulus Yılı";
+            kurulusYiliDataGridViewTextBoxColumn.Name = "kurulusYiliDataGridViewTextBoxColumn";
+            // 
+            // aktifMiDataGridViewCheckBoxColumn
+            // 
+            aktifMiDataGridViewCheckBoxColumn.DataPropertyName = "AktifMi";
+            aktifMiDataGridViewCheckBoxColumn.HeaderText = "AktifMi";
+            aktifMiDataGridViewCheckBoxColumn.Name = "aktifMiDataGridViewCheckBoxColumn";
+            aktifMiDataGridViewCheckBoxColumn.Visible = false;
+            // 
+            // yayineviKitaplariDataGridViewTextBoxColumn
+            // 
+            yayineviKitaplariDataGridViewTextBoxColumn.DataPropertyName = "YayineviKitaplari";
+            yayineviKitaplariDataGridViewTextBoxColumn.HeaderText = "YayineviKitaplari";
+            yayineviKitaplariDataGridViewTextBoxColumn.Name = "yayineviKitaplariDataGridViewTextBoxColumn";
+            yayineviKitaplariDataGridViewTextBoxColumn.Visible = false;
             // 
             // frmYayineviIslemleri
             // 
@@ -334,10 +303,10 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(935, 541);
-            Controls.Add(label3);
+            Controls.Add(dataGrid_Yayinevi);
+            Controls.Add(label_txtAra);
             Controls.Add(groupBox1);
             Controls.Add(textBox_Ara);
-            Controls.Add(dataGrid_Yayinevi);
             Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             MinimumSize = new Size(700, 580);
@@ -345,18 +314,16 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Kütüphane Otomasyonu - Yayınevi İşlemleri";
             Load += frmYayineviIslemleri_Load;
-            ((System.ComponentModel.ISupportInitialize)dataGrid_Yayinevi).EndInit();
             ((System.ComponentModel.ISupportInitialize)yayineviBindingSource).EndInit();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGrid_Yayinevi).EndInit();
             ResumeLayout(false);
             PerformLayout();
 
         }
 
         #endregion
-
-        private DataGridView dataGrid_Yayinevi;
         private Button btnAra;
         private TextBox textBox_Ara;
         private GroupBox groupBox1;
@@ -372,12 +339,13 @@
         private TextBox textBox_YayineviId;
         private Label label4;
         private TextBox textBox_KurulusYili;
+        private BindingSource yayineviBindingSource;
+        private Label label_txtAra;
+        private DataGridView dataGrid_Yayinevi;
         private DataGridViewTextBoxColumn yayineviIdDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn adDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn kurulusYiliDataGridViewTextBoxColumn;
         private DataGridViewCheckBoxColumn aktifMiDataGridViewCheckBoxColumn;
         private DataGridViewTextBoxColumn yayineviKitaplariDataGridViewTextBoxColumn;
-        private BindingSource yayineviBindingSource;
-        private Label label3;
     }
 }

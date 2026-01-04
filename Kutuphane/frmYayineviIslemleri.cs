@@ -1,7 +1,10 @@
 ﻿using Kutuphane.BLL.Abstract;
 using Kutuphane.BLL.Concrete;
 using Kutuphane.DAL.Concrete;
+using Kutuphane.DAL.Contexes;
 using Kutuphane.Model.Entity;
+using Kutuphane.UI.Theme;
+using Kutuphane.UI.UIMetodlar;
 using System.ComponentModel;
 
 namespace Kutuphane.UI
@@ -11,15 +14,48 @@ namespace Kutuphane.UI
         BindingList<Yayinevi> bilYayinevi = new BindingList<Yayinevi>();
         IYayineviService yayineviService = new YayineviManager(new YayineviDal());
         bool silinenModu = false;
-        public frmYayineviIslemleri()
+
+        private readonly YetkiKontrol _yetkiKontrol;
+        private readonly int _personelId;
+        private HashSet<string> _userPermissions;
+        public frmYayineviIslemleri(int personelId)
         {
             InitializeComponent();
+            _personelId = personelId;
+            _yetkiKontrol = new YetkiKontrol(new KutuphaneDbContext());
+            _userPermissions = _yetkiKontrol.KullaniciYetkileriniAl(_personelId);
         }
         private void frmYayineviIslemleri_Load(object sender, EventArgs e)
         {
             dataGrid_Yayinevi.DataSource = bilYayinevi;
-            Listele();
-            PasifUyeKontrol();
+            YetkiKontrol();
+            if (_userPermissions.Contains("YAYINEVI_LISTELE"))
+            {
+                Listele();
+                PasifKontrol();
+            }
+            DataGridThemeManager.Apply(dataGrid_Yayinevi);
+        }
+        private void YetkiKontrol()
+        {
+            bool listele = _userPermissions.Contains("YAYINEVI_LISTELE");
+            bool ekle = _userPermissions.Contains("YAYINEVI_EKLE");
+            bool guncelle = _userPermissions.Contains("YAYINEVI_GUNCELLE");
+            bool sil = _userPermissions.Contains("YAYINEVI_SIL");
+
+            dataGrid_Yayinevi.Enabled = listele;
+            btnKaydet.Visible = ekle;
+            btnDuzenle.Visible = listele && guncelle;
+            btnSil.Visible = listele && sil;
+
+            btnSilinenleriGoster.Visible = listele;
+            btnGeriYukle.Visible = listele && sil;
+
+            btnTemizle.Visible = ekle || guncelle;
+            groupBox1.Visible = ekle || guncelle || sil;
+
+            label_txtAra.Visible = listele;
+            textBox_Ara.Visible = listele;
         }
         private void Listele()
         {
@@ -41,7 +77,7 @@ namespace Kutuphane.UI
 
             dataGrid_Yayinevi.ClearSelection();
             KutulariTemizle();
-            PasifUyeKontrol();
+            PasifKontrol();
         }
         private void btnKaydet_Click(object sender, EventArgs e)
         {
@@ -111,7 +147,7 @@ namespace Kutuphane.UI
             {
                 MessageBox.Show("Yayınevi başarıyla silindi (pasif edildi).", "Başarılı");
                 Listele();
-                PasifUyeKontrol();
+                PasifKontrol();
             }
             else
                 MessageBox.Show(uyeResult.Message, "Hata");
@@ -128,12 +164,16 @@ namespace Kutuphane.UI
             textBox_KurulusYili.Clear();
             dataGrid_Yayinevi.ClearSelection();
         }
-        private void PasifUyeKontrol()
+        private void PasifKontrol()
         {
+            bool listele = _userPermissions.Contains("YAYINEVI_LISTELE");
+            if (!listele)
+            {
+                btnSilinenleriGoster.Visible = false;
+                return;
+            }
             dataGrid_Yayinevi.ClearSelection();
-
             var pasifResult = yayineviService.GetListByFilterService(x => x.AktifMi == false);
-
             btnSilinenleriGoster.Visible = pasifResult.IsSuccess && pasifResult.Data.Any();
         }
         private void btnSilinenleriGoster_Click(object sender, EventArgs e)
@@ -201,7 +241,7 @@ namespace Kutuphane.UI
             btnKaydet.Enabled = true;
             btnDuzenle.Enabled = true;
             btnSil.Enabled = true;
-            PasifUyeKontrol();
+            PasifKontrol();
             KutulariTemizle();
             dataGrid_Yayinevi.ClearSelection();
         }

@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmYazarIslemleri));
             textBox_Ara = new TextBox();
             groupBox1 = new GroupBox();
@@ -50,6 +48,8 @@
             label2 = new Label();
             textBox_Ad = new TextBox();
             textBox_YazarId = new TextBox();
+            yazarDtoBindingSource = new BindingSource(components);
+            label_txtAra = new Label();
             dataGrid_Yazar = new DataGridView();
             yazarIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             adDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -58,11 +58,9 @@
             olumTarihiDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             adSoyadDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             yasDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            yazarDtoBindingSource = new BindingSource(components);
-            label3 = new Label();
             groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGrid_Yazar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)yazarDtoBindingSource).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGrid_Yazar).BeginInit();
             SuspendLayout();
             // 
             // textBox_Ara
@@ -97,7 +95,7 @@
             groupBox1.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
             groupBox1.Location = new Point(12, 12);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(300, 517);
+            groupBox1.Size = new Size(300, 440);
             groupBox1.TabIndex = 8;
             groupBox1.TabStop = false;
             groupBox1.Text = "✍️ Yazar İşlemleri";
@@ -286,41 +284,32 @@
             textBox_YazarId.Size = new Size(201, 25);
             textBox_YazarId.TabIndex = 1;
             // 
+            // yazarDtoBindingSource
+            // 
+            yazarDtoBindingSource.DataSource = typeof(Model.DTO.YazarDto);
+            // 
+            // label_txtAra
+            // 
+            label_txtAra.AutoSize = true;
+            label_txtAra.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            label_txtAra.ForeColor = Color.FromArgb(64, 64, 64);
+            label_txtAra.Location = new Point(318, 13);
+            label_txtAra.Name = "label_txtAra";
+            label_txtAra.Size = new Size(51, 17);
+            label_txtAra.TabIndex = 22;
+            label_txtAra.Text = "Arama:";
+            // 
             // dataGrid_Yazar
             // 
-            dataGrid_Yazar.AllowUserToAddRows = false;
-            dataGrid_Yazar.AllowUserToDeleteRows = false;
-            dataGrid_Yazar.AllowUserToResizeRows = false;
             dataGrid_Yazar.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dataGrid_Yazar.AutoGenerateColumns = false;
-            dataGrid_Yazar.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGrid_Yazar.BackgroundColor = Color.White;
-            dataGrid_Yazar.BorderStyle = BorderStyle.None;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(41, 128, 185);
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 162);
-            dataGridViewCellStyle1.ForeColor = Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(41, 128, 185);
-            dataGridViewCellStyle1.SelectionForeColor = Color.White;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dataGrid_Yazar.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            dataGrid_Yazar.ColumnHeadersHeight = 30;
+            dataGrid_Yazar.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGrid_Yazar.Columns.AddRange(new DataGridViewColumn[] { yazarIdDataGridViewTextBoxColumn, adDataGridViewTextBoxColumn, soyadDataGridViewTextBoxColumn, dogumTarihiDataGridViewTextBoxColumn, olumTarihiDataGridViewTextBoxColumn, adSoyadDataGridViewTextBoxColumn, yasDataGridViewTextBoxColumn });
             dataGrid_Yazar.DataSource = yazarDtoBindingSource;
-            dataGrid_Yazar.EnableHeadersVisualStyles = false;
-            dataGrid_Yazar.GridColor = Color.LightGray;
             dataGrid_Yazar.Location = new Point(318, 41);
             dataGrid_Yazar.Name = "dataGrid_Yazar";
-            dataGrid_Yazar.ReadOnly = true;
-            dataGrid_Yazar.RowHeadersVisible = false;
-            dataGridViewCellStyle2.BackColor = Color.White;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 162);
-            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(170, 204, 255);
-            dataGridViewCellStyle2.SelectionForeColor = Color.Black;
-            dataGrid_Yazar.RowsDefaultCellStyle = dataGridViewCellStyle2;
-            dataGrid_Yazar.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGrid_Yazar.Size = new Size(579, 488);
-            dataGrid_Yazar.TabIndex = 14;
+            dataGrid_Yazar.TabIndex = 23;
             dataGrid_Yazar.ColumnHeaderMouseClick += dataGrid_Yazar_ColumnHeaderMouseClick;
             dataGrid_Yazar.SelectionChanged += dataGrid_Yazar_SelectionChanged;
             // 
@@ -329,7 +318,6 @@
             yazarIdDataGridViewTextBoxColumn.DataPropertyName = "YazarId";
             yazarIdDataGridViewTextBoxColumn.HeaderText = "YazarId";
             yazarIdDataGridViewTextBoxColumn.Name = "yazarIdDataGridViewTextBoxColumn";
-            yazarIdDataGridViewTextBoxColumn.ReadOnly = true;
             yazarIdDataGridViewTextBoxColumn.Visible = false;
             // 
             // adDataGridViewTextBoxColumn
@@ -337,28 +325,24 @@
             adDataGridViewTextBoxColumn.DataPropertyName = "Ad";
             adDataGridViewTextBoxColumn.HeaderText = "Adı";
             adDataGridViewTextBoxColumn.Name = "adDataGridViewTextBoxColumn";
-            adDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // soyadDataGridViewTextBoxColumn
             // 
             soyadDataGridViewTextBoxColumn.DataPropertyName = "Soyad";
             soyadDataGridViewTextBoxColumn.HeaderText = "Soyadı";
             soyadDataGridViewTextBoxColumn.Name = "soyadDataGridViewTextBoxColumn";
-            soyadDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // dogumTarihiDataGridViewTextBoxColumn
             // 
             dogumTarihiDataGridViewTextBoxColumn.DataPropertyName = "DogumTarihi";
             dogumTarihiDataGridViewTextBoxColumn.HeaderText = "Doğum Tarihi";
             dogumTarihiDataGridViewTextBoxColumn.Name = "dogumTarihiDataGridViewTextBoxColumn";
-            dogumTarihiDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // olumTarihiDataGridViewTextBoxColumn
             // 
             olumTarihiDataGridViewTextBoxColumn.DataPropertyName = "OlumTarihi";
             olumTarihiDataGridViewTextBoxColumn.HeaderText = "Ölüm Tarihi";
             olumTarihiDataGridViewTextBoxColumn.Name = "olumTarihiDataGridViewTextBoxColumn";
-            olumTarihiDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // adSoyadDataGridViewTextBoxColumn
             // 
@@ -375,29 +359,14 @@
             yasDataGridViewTextBoxColumn.Name = "yasDataGridViewTextBoxColumn";
             yasDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // yazarDtoBindingSource
-            // 
-            yazarDtoBindingSource.DataSource = typeof(Model.DTO.YazarDto);
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
-            label3.ForeColor = Color.FromArgb(64, 64, 64);
-            label3.Location = new Point(318, 13);
-            label3.Name = "label3";
-            label3.Size = new Size(51, 17);
-            label3.TabIndex = 22;
-            label3.Text = "Arama:";
-            // 
             // frmYazarIslemleri
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(909, 541);
-            Controls.Add(label3);
             Controls.Add(dataGrid_Yazar);
+            Controls.Add(label_txtAra);
             Controls.Add(textBox_Ara);
             Controls.Add(groupBox1);
             Icon = (Icon)resources.GetObject("$this.Icon");
@@ -408,8 +377,8 @@
             Load += frmYazarIslemleri_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGrid_Yazar).EndInit();
             ((System.ComponentModel.ISupportInitialize)yazarDtoBindingSource).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGrid_Yazar).EndInit();
             ResumeLayout(false);
             PerformLayout();
 
@@ -432,10 +401,11 @@
         private Label label4;
         private TextBox textBox_Soyad;
         private Label label5;
-        private DataGridView dataGrid_Yazar;
         private DateTimePicker dateTimePicker_OlumTarihi;
         private Label label6;
         private BindingSource yazarDtoBindingSource;
+        private Label label_txtAra;
+        private DataGridView dataGrid_Yazar;
         private DataGridViewTextBoxColumn yazarIdDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn adDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn soyadDataGridViewTextBoxColumn;
@@ -443,6 +413,5 @@
         private DataGridViewTextBoxColumn olumTarihiDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn adSoyadDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn yasDataGridViewTextBoxColumn;
-        private Label label3;
     }
 }

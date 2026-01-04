@@ -3,9 +3,9 @@ using Kutuphane.BLL.Concrete;
 using Kutuphane.DAL.Concrete;
 using Kutuphane.DAL.Contexes;
 using Kutuphane.Model.Entity;
+using Kutuphane.UI.Theme;
 using Kutuphane.UI.UIMetodlar;
 using System.ComponentModel;
-using System.Windows.Forms;
 
 namespace Kutuphane.UI
 {
@@ -18,9 +18,6 @@ namespace Kutuphane.UI
         private readonly YetkiKontrol _yetkiKontrol;
         private readonly int _personelId;
         private HashSet<string> _userPermissions;
-
-        //public frmDilIslemleri()
-        //{ InitializeComponent(); }
 
         public frmDilIslemleri(int personelId)
         {
@@ -36,10 +33,11 @@ namespace Kutuphane.UI
             if (_userPermissions.Contains("DIL_LISTELE"))
             {
                 Listele();
-                PasifUyeKontrol();
+                PasifKontrol();
             }
             KutulariTemizle();
             dataGrid_Dil.ClearSelection();
+            DataGridThemeManager.Apply(dataGrid_Dil);
         }
         private void YetkiKontrol()
         {
@@ -49,18 +47,18 @@ namespace Kutuphane.UI
             bool sil = _userPermissions.Contains("DIL_SIL");
 
             dataGrid_Dil.Enabled = listele;
-            btnKaydet.Visible = ekle;
-            btnDuzenle.Visible = listele && guncelle;
-            btnSil.Visible = listele && sil;
+            btnKaydet.Enabled = ekle;
+            btnDuzenle.Enabled = listele && guncelle;
+            btnSil.Enabled = listele && sil;
 
-            btnSilinenleriGoster.Visible = listele;
-            btnGeriYukle.Visible = listele && sil;
+            btnSilinenleriGoster.Enabled = listele;
+            btnGeriYukle.Enabled = listele && sil;
 
-            btnTemizle.Visible = ekle || guncelle;
-            groupBox1.Visible = ekle || guncelle || sil;
+            btnTemizle.Enabled = ekle || guncelle;
+            groupBox1.Enabled = ekle || guncelle || sil;
 
-            label_txtAra.Visible = listele;
-            textBox_Ara.Visible = listele;
+            label_txtAra.Enabled = listele;
+            textBox_Ara.Enabled = listele;
         }
         private void Listele()
         {
@@ -79,7 +77,7 @@ namespace Kutuphane.UI
 
             dataGrid_Dil.ClearSelection();
             KutulariTemizle();
-            PasifUyeKontrol();
+            PasifKontrol();
         }
         private void btnKaydet_Click(object sender, EventArgs e)
         {
@@ -148,7 +146,7 @@ namespace Kutuphane.UI
             {
                 MessageBox.Show("Dil başarıyla silindi (pasif edildi).", "Başarılı");
                 Listele();
-                PasifUyeKontrol();
+                PasifKontrol();
             }
             else
                 MessageBox.Show(uyeResult.Message, "Hata");
@@ -165,7 +163,7 @@ namespace Kutuphane.UI
             textBox_DilKodu.Clear();
             dataGrid_Dil.ClearSelection();
         }
-        private void PasifUyeKontrol()
+        private void PasifKontrol()
         {
             bool listele = _userPermissions.Contains("DIL_LISTELE");
             if (!listele)
@@ -241,7 +239,7 @@ namespace Kutuphane.UI
             btnKaydet.Enabled = true;
             btnDuzenle.Enabled = true;
             btnSil.Enabled = true;
-            PasifUyeKontrol();
+            PasifKontrol();
             KutulariTemizle();
             dataGrid_Dil.ClearSelection();
         }
@@ -252,6 +250,7 @@ namespace Kutuphane.UI
             dataGrid_Dil.Refresh();
             dataGrid_Dil.ClearSelection();
         }
+        Dictionary<string, bool> sortDirections = new();
         private void dataGrid_Dil_SelectionChanged(object sender, EventArgs e)
         {
             if (dataGrid_Dil.CurrentRow != null && !dataGrid_Dil.CurrentRow.IsNewRow)
@@ -288,17 +287,16 @@ namespace Kutuphane.UI
             //    }
             //}
         }
-        private void textBox_Ara_TextChanged(object sender, EventArgs e)
-        {
-            Listele();
-            dataGrid_Dil.Refresh();
-        }
-        Dictionary<string, bool> sortDirections = new();
         private void dataGrid_Dil_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             DataGridSortHelper.SortByColumn<Dil>(dataGrid_Dil, bilDil, e.ColumnIndex, sortDirections);
             dataGrid_Dil.ClearSelection();
             KutulariTemizle();
+        }
+        private void textBox_Ara_TextChanged(object sender, EventArgs e)
+        {
+            Listele();
+            dataGrid_Dil.Refresh();
         }
     }
 }

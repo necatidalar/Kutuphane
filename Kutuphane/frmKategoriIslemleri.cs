@@ -1,29 +1,65 @@
 ﻿using Kutuphane.BLL.Abstract;
 using Kutuphane.BLL.Concrete;
 using Kutuphane.DAL.Concrete;
+using Kutuphane.DAL.Contexes;
 using Kutuphane.Model.Entity;
+using Kutuphane.UI.Theme;
+using Kutuphane.UI.UIMetodlar;
 using System.ComponentModel;
 
 namespace Kutuphane.UI
 {
     public partial class frmKategoriIslemleri : Form
     {
-        public frmKategoriIslemleri()
-        {
-            InitializeComponent();
-            dataGrid_Kategori.DataSource = bilKategori;
-        }
 
         BindingList<Kategori> bilKategori = new BindingList<Kategori>();
         IKategoriService kategoriService = new KategoriManager(new KategoriDal());
         bool silinenModu = false;
 
+        private readonly YetkiKontrol _yetkiKontrol;
+        private readonly int _personelId;
+        private HashSet<string> _userPermissions;
+        public frmKategoriIslemleri(int personelId)
+        {
+            InitializeComponent();
+            _personelId = personelId;
+            _yetkiKontrol = new YetkiKontrol(new KutuphaneDbContext());
+            _userPermissions = _yetkiKontrol.KullaniciYetkileriniAl(_personelId);
+
+            dataGrid_Kategori.DataSource = bilKategori;
+        }
         private void frmKategori_Load(object sender, EventArgs e)
         {
-            Listele();
-            PasifUyeKontrol();
+            YetkiKontrol();
+            if (_userPermissions.Contains("KATEGORI_LISTELE"))
+            {
+                Listele();
+                PasifKontrol();
+            }
             KutulariTemizle();
+            DataGridThemeManager.Apply(dataGrid_Kategori);
             dataGrid_Kategori.ClearSelection();
+        }
+        private void YetkiKontrol()
+        {
+            bool listele = _userPermissions.Contains("KATEGORI_LISTELE");
+            bool ekle = _userPermissions.Contains("KATEGORI_EKLE");
+            bool guncelle = _userPermissions.Contains("KATEGORI_GUNCELLE");
+            bool sil = _userPermissions.Contains("KATEGORI_SIL");
+
+            dataGrid_Kategori.Enabled = listele;
+            btnKaydet.Visible = ekle;
+            btnDuzenle.Visible = listele && guncelle;
+            btnSil.Visible = listele && sil;
+
+            btnSilinenleriGoster.Visible = listele;
+            btnGeriYukle.Visible = listele && sil;
+
+            btnTemizle.Visible = ekle || guncelle;
+            groupBox1.Visible = ekle || guncelle || sil;
+
+            label_txtAra.Visible = listele;
+            textBox_Ara.Visible = listele;
         }
         private void Listele()
         {
@@ -44,7 +80,7 @@ namespace Kutuphane.UI
 
             dataGrid_Kategori.ClearSelection();
             KutulariTemizle();
-            PasifUyeKontrol();
+            PasifKontrol();
         }
         private void btnKaydet_Click(object sender, EventArgs e)
         {
@@ -116,7 +152,7 @@ namespace Kutuphane.UI
             {
                 MessageBox.Show("Kategori başarıyla silindi (pasif edildi).", "Başarılı");
                 Listele();
-                PasifUyeKontrol();
+                PasifKontrol();
             }
             else
                 MessageBox.Show(uyeResult.Message, "Hata");
@@ -131,12 +167,15 @@ namespace Kutuphane.UI
             dataGrid_Kategori.ClearSelection();
             KutulariTemizle();
         }
-        private void PasifUyeKontrol()
+        private void PasifKontrol()
         {
-            dataGrid_Kategori.ClearSelection();
-
+            bool listele = _userPermissions.Contains("KATEGORI_LISTELE");
+            if (!listele)
+            {
+                btnSilinenleriGoster.Visible = false;
+                return;
+            }
             var pasifResult = kategoriService.GetListByFilterService(x => x.AktifMi == false);
-
             btnSilinenleriGoster.Visible = pasifResult.IsSuccess && pasifResult.Data.Any();
         }
         private void btnSilinenleriGoster_Click(object sender, EventArgs e)
@@ -204,7 +243,7 @@ namespace Kutuphane.UI
             btnKaydet.Enabled = true;
             btnDuzenle.Enabled = true;
             btnSil.Enabled = true;
-            PasifUyeKontrol();
+            PasifKontrol();
             KutulariTemizle();
             dataGrid_Kategori.ClearSelection();
         }
@@ -264,7 +303,7 @@ namespace Kutuphane.UI
         Dictionary<string, bool> sortDirections = new();
         private void dataGrid_Kategori_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            DataGridSortHelper.SortByColumn<Kategori>(dataGrid_Kategori,bilKategori,e.ColumnIndex, sortDirections);
+            DataGridSortHelper.SortByColumn<Kategori>(dataGrid_Kategori, bilKategori, e.ColumnIndex, sortDirections);
             dataGrid_Kategori.ClearSelection();
             KutulariTemizle();
             //string kolonAdi = dataGrid_Kategori.Columns[e.ColumnIndex].DataPropertyName;
