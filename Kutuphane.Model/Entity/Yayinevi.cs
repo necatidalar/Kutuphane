@@ -7,8 +7,8 @@ namespace Kutuphane.Model.Entity
         public int YayineviId { get; set; }
         public string Ad { get; set; }
         public int? KurulusYili { get; set; }
+        public bool AktifMi { get; set; }
         public ICollection<YayineviKitap> YayineviKitaplari { get; set; }
-
 
     }
 }

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-
-namespace Core.Utility.Results
+﻿namespace Core.Utility.Results
 {
     public class ErrorDataResult<T> : DataResult<T>
     {

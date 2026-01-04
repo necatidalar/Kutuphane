@@ -1,6 +1,4 @@
-﻿
-
-namespace Kutuphane.DAL.Contexes
+﻿namespace Kutuphane.DAL.Contexes
 {
     public enum DbContextType
     {

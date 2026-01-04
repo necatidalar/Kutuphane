@@ -1,17 +1,15 @@
 ﻿using Core.Entity;
 using Core.Interfaces;
-using System.Linq.Expressions;
-using Microsoft.EntityFrameworkCore;
 using Core.Utility.Results;
+using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace Core.DataAccess.Repository
 {
-    public class EfRepositoryBase<TEntity, TContext> : IRepository<TEntity>  
+    public class EfRepositoryBase<TEntity, TContext> : IRepository<TEntity>
         where TEntity : class, IEntity, new()
         where TContext : DbContext, new()
     {
-
-
         public IDataResult<List<TEntity>> GetListByFilter(Expression<Func<TEntity, bool>>? predicate = null)
         {
             try
@@ -25,9 +23,8 @@ namespace Core.DataAccess.Repository
             {
                 return new ErrorDataResult<List<TEntity>>(e.Message);
             }
-            
-        }
 
+        }
         public IDataResult<TEntity?> GetByFilter(Expression<Func<TEntity, bool>>? predicate = null)
         {
             try
@@ -37,14 +34,13 @@ namespace Core.DataAccess.Repository
                 if (predicate != null) query = query.Where(predicate);
                 return new SuccessDataResult<TEntity?>(db.Set<TEntity>().FirstOrDefault(predicate));
             }
-            catch (Exception e )
+            catch (Exception e)
             {
 
                 return new ErrorDataResult<TEntity?>(e.Message);
             }
-            
-        }
 
+        }
         public IResult Add(TEntity entity)
         {
             try
@@ -57,11 +53,10 @@ namespace Core.DataAccess.Repository
             catch (Exception e)
             {
 
-               return new ErrorResult(e.Message);
+                return new ErrorResult(e.Message);
             }
-            
-        }
 
+        }
         public IResult Update(TEntity entity)
         {
             try
@@ -72,13 +67,12 @@ namespace Core.DataAccess.Repository
                 db.SaveChanges();
                 return new SuccessResult();
             }
-            catch (Exception e )
+            catch (Exception e)
             {
                 return new ErrorResult(e.Message);
             }
-            
-        }
 
+        }
         public IResult Delete(TEntity entity)
         {
             try
@@ -92,7 +86,6 @@ namespace Core.DataAccess.Repository
             {
                 return new ErrorResult(e.Message);
             }
-            
         }
     }
 }

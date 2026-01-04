@@ -26,7 +26,7 @@ namespace Kutuphane.DAL.Concrete
                         Ad = x.Ad,
                         Soyad = x.Soyad,
                         CinsiyetId = x.CinsiyetId,
-                        Cinsiyet = x.Cinsiyet.CinsiyetAdi,
+                        Cinsiyet = x.Cinsiyet != null ? x.Cinsiyet.CinsiyetAdi : "",
                         DogumTarihi = x.DogumTarihi,
                         Telefon = x.Telefon,
                         Eposta = x.Eposta,
@@ -38,6 +38,26 @@ namespace Kutuphane.DAL.Concrete
             catch (Exception e)
             {
                 return new ErrorDataResult<List<UyeDto>>(e.Message);
+            }
+        }
+        public IDataResult<List<OduncUyeDto>> OduncUyeListeDetayliGetir(Expression<Func<Uye, bool>>? predicate = null)
+        {
+            try
+            {
+                using var db = new KutuphaneDbContext();
+                var dto = db.Set<Uye>()
+                    .Select(x => new OduncUyeDto
+                    {
+                        UyeId = x.UyeId,
+                        TcPass = x.TcPass,
+                        Ad = x.Ad,
+                        Soyad = x.Soyad
+                    }).ToList();
+                return new SuccessDataResult<List<OduncUyeDto>>(dto);
+            }
+            catch (Exception e)
+            {
+                return new ErrorDataResult<List<OduncUyeDto>>(e.Message);
             }
         }
     }

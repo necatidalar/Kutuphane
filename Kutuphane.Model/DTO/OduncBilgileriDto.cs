@@ -1,7 +1,6 @@
 ﻿
 
 using Core.Entity;
-using Kutuphane.Model.Entity;
 
 namespace Kutuphane.Model.DTO
 {

@@ -25,18 +25,19 @@ namespace Kutuphane.DAL.Concrete
                     .Where(predicate ?? (x => true))
                     .Select(k => new KitapDto
                     {
-                        KitapID = k.KitapId,
+                        KitapId = k.KitapId,
                         KitapAdi = k.KitapAdi,
                         ISBN = k.ISBN ?? string.Empty,
-                        YazarID = k.YazarId,
+                        YazarId = k.YazarId,
                         YazarAd = k.Yazar.Ad,
                         YazarSoyad = k.Yazar.Soyad,
-                        YayineviID = k.YayineviId,
+                        YayineviId = k.YayineviId,
                         YayineviAd = k.Yayinevi.Ad,
-                        KategoriID = k.KategoriId,
+                        KategoriId = k.KategoriId,
                         KategoriAdi = k.Kategori.KategoriAdi,
                         BasimYili = k.BasimYili,
                         SayfaSayisi = k.SayfaSayisi,
+                        DilId = k.Diller.DilId,
                         Dil = k.Diller.DilAdi,
                         Stok = k.Stok,
                         Aktif = k.Aktif
@@ -47,6 +48,32 @@ namespace Kutuphane.DAL.Concrete
             {
                 return new ErrorDataResult<List<KitapDto>>(e.Message);
             }
+        }
+        public IDataResult<List<OduncKitapDto>> OduncIcinListeGetir(Expression<Func<Kitap, bool>>? predicate = null)
+        {
+            try
+            {
+                using var db = new KutuphaneDbContext();
+                var dto = db.Set<Kitap>()
+                    .Include(k => k.Yazar)
+                    .Where(predicate ?? (x => true))
+                    .Select(k => new OduncKitapDto
+                    {
+                        Id = k.KitapId,
+                        KitapAdi = k.KitapAdi,
+                        ISBN = k.ISBN ?? string.Empty,
+                        YazarId = k.YazarId,
+                        Yazar = $"{k.Yazar.Ad} {k.Yazar.Soyad}",
+                        
+                    }).ToList();
+                return new SuccessDataResult<List<OduncKitapDto>>(dto);
+            }
+            catch (Exception e)
+            {
+                return new ErrorDataResult<List<OduncKitapDto>>(e.Message);
+            }
+
+
 
         }
     }

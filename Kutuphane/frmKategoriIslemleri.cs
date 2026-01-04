@@ -3,58 +3,89 @@ using Kutuphane.BLL.Concrete;
 using Kutuphane.DAL.Concrete;
 using Kutuphane.DAL.Contexes;
 using Kutuphane.Model.Entity;
-using Microsoft.EntityFrameworkCore;
+using Kutuphane.UI.Theme;
+using Kutuphane.UI.UIMetodlar;
 using System.ComponentModel;
 
 namespace Kutuphane.UI
 {
     public partial class frmKategoriIslemleri : Form
     {
-        public frmKategoriIslemleri()
-        {
-            InitializeComponent();
-            dataGrid_Kategori.DataSource = bilKategori;
-
-        }
 
         BindingList<Kategori> bilKategori = new BindingList<Kategori>();
         IKategoriService kategoriService = new KategoriManager(new KategoriDal());
         bool silinenModu = false;
 
+        private readonly YetkiKontrol _yetkiKontrol;
+        private readonly int _personelId;
+        private HashSet<string> _userPermissions;
+        public frmKategoriIslemleri(int personelId)
+        {
+            InitializeComponent();
+            _personelId = personelId;
+            _yetkiKontrol = new YetkiKontrol(new KutuphaneDbContext());
+            _userPermissions = _yetkiKontrol.KullaniciYetkileriniAl(_personelId);
+
+            dataGrid_Kategori.DataSource = bilKategori;
+        }
         private void frmKategori_Load(object sender, EventArgs e)
         {
-            Listele();
-            PasifUyeKontrol();
+            YetkiKontrol();
+            if (_userPermissions.Contains("KATEGORI_LISTELE"))
+            {
+                Listele();
+                PasifKontrol();
+            }
             KutulariTemizle();
+            DataGridThemeManager.Apply(dataGrid_Kategori);
             dataGrid_Kategori.ClearSelection();
         }
+        private void YetkiKontrol()
+        {
+            bool listele = _userPermissions.Contains("KATEGORI_LISTELE");
+            bool ekle = _userPermissions.Contains("KATEGORI_EKLE");
+            bool guncelle = _userPermissions.Contains("KATEGORI_GUNCELLE");
+            bool sil = _userPermissions.Contains("KATEGORI_SIL");
 
-       
+            dataGrid_Kategori.Enabled = listele;
+            btnKaydet.Visible = ekle;
+            btnDuzenle.Visible = listele && guncelle;
+            btnSil.Visible = listele && sil;
+
+            btnSilinenleriGoster.Visible = listele;
+            btnGeriYukle.Visible = listele && sil;
+
+            btnTemizle.Visible = ekle || guncelle;
+            groupBox1.Visible = ekle || guncelle || sil;
+
+            label_txtAra.Visible = listele;
+            textBox_Ara.Visible = listele;
+        }
         private void Listele()
         {
-            var kategoriResult = kategoriService.GetListByFilterService(x =>
-                x.AktifMi == true &&
-                (x.KategoriAdi.Contains(textBox_Ara.Text))
+            var result = kategoriService.GetListByFilterService(x =>
+                x.AktifMi &&
+                x.KategoriAdi.Contains(textBox_Ara.Text)
             );
 
-            if (!kategoriResult.IsSuccess)
+            if (!result.IsSuccess)
             {
-                MessageBox.Show(kategoriResult.Message, "Hata");
+                MessageBox.Show(result.Message, "Hata");
                 return;
             }
 
             bilKategori.Clear();
-
-            foreach (var item in kategoriResult.Data)
+            foreach (var item in result.Data)
                 bilKategori.Add(item);
 
             dataGrid_Kategori.ClearSelection();
             KutulariTemizle();
-            PasifUyeKontrol();
+            PasifKontrol();
         }
-
         private void btnKaydet_Click(object sender, EventArgs e)
         {
+            if (!BoslukKontrol()) return;
+
             Kategori yeniKategori = new Kategori
             {
                 KategoriAdi = textBox_KategoriAdi.Text,
@@ -63,17 +94,19 @@ namespace Kutuphane.UI
 
             var kategoriResult = kategoriService.AddService(yeniKategori);
 
-            if (kategoriResult.IsSuccess)
+            if (!kategoriResult.IsSuccess)
             {
-                MessageBox.Show("Kategori başarıyla kaydedildi.", "Başarılı");
-                Listele();
-            }
-            else
                 MessageBox.Show(kategoriResult.Message, "Hata");
-        }
+                return;
+            }
 
+            MessageBox.Show("Kategori başarıyla kaydedildi.", "Başarılı");
+            Listele();
+        }
         private void btnDuzenle_Click(object sender, EventArgs e)
         {
+            if (!BoslukKontrol()) return;
+
             int.TryParse(textBox_KategoriId.Text, out int idResult);
 
             Kategori yeniKategori = new Kategori
@@ -85,15 +118,15 @@ namespace Kutuphane.UI
 
             var kategoriResult = kategoriService.UpdateService(yeniKategori);
 
-            if (kategoriResult.IsSuccess)
+            if (!kategoriResult.IsSuccess)
             {
-                MessageBox.Show("Üye başarıyla güncellendi.", "Başarılı");
-                Listele();
-            }
-            else
                 MessageBox.Show(kategoriResult.Message, "Hata");
-        }
+                return;
+            }
 
+            MessageBox.Show("Kategori başarıyla güncellendi.", "Başarılı");
+            Listele();
+        }
         private void btnSil_Click(object sender, EventArgs e)
         {
             if (!int.TryParse(textBox_KategoriId.Text, out int idResult))
@@ -119,33 +152,32 @@ namespace Kutuphane.UI
             {
                 MessageBox.Show("Kategori başarıyla silindi (pasif edildi).", "Başarılı");
                 Listele();
-                PasifUyeKontrol();
+                PasifKontrol();
             }
             else
                 MessageBox.Show(uyeResult.Message, "Hata");
         }
-
         private void KutulariTemizle()
         {
             textBox_KategoriId.Clear();
             textBox_KategoriAdi.Clear();
         }
-
         private void btnTemizle_Click(object sender, EventArgs e)
         {
             dataGrid_Kategori.ClearSelection();
             KutulariTemizle();
         }
-
-        private void PasifUyeKontrol()
+        private void PasifKontrol()
         {
-            dataGrid_Kategori.ClearSelection();
-
+            bool listele = _userPermissions.Contains("KATEGORI_LISTELE");
+            if (!listele)
+            {
+                btnSilinenleriGoster.Visible = false;
+                return;
+            }
             var pasifResult = kategoriService.GetListByFilterService(x => x.AktifMi == false);
-
             btnSilinenleriGoster.Visible = pasifResult.IsSuccess && pasifResult.Data.Any();
         }
-
         private void btnSilinenleriGoster_Click(object sender, EventArgs e)
         {
             if (!silinenModu)
@@ -176,7 +208,6 @@ namespace Kutuphane.UI
             dataGrid_Kategori.ClearSelection();
             KutulariTemizle();
         }
-
         private void btnGeriYukle_Click(object sender, EventArgs e)
         {
             if (!int.TryParse(textBox_KategoriId.Text, out int id))
@@ -212,17 +243,15 @@ namespace Kutuphane.UI
             btnKaydet.Enabled = true;
             btnDuzenle.Enabled = true;
             btnSil.Enabled = true;
-            PasifUyeKontrol();
+            PasifKontrol();
             KutulariTemizle();
             dataGrid_Kategori.ClearSelection();
         }
-
         private void btnAra_Click(object sender, EventArgs e)
         {
             Listele();
             dataGrid_Kategori.ClearSelection();
         }
-
         private void dataGrid_Kategori_SelectionChanged(object sender, EventArgs e)
         {
             if (dataGrid_Kategori.CurrentRow != null && !dataGrid_Kategori.CurrentRow.IsNewRow)
@@ -235,6 +264,70 @@ namespace Kutuphane.UI
             }
             dataGrid_Kategori.ClearSelection();
             KutulariTemizle();
+        }
+        private bool BoslukKontrol()
+        {
+            if (string.IsNullOrWhiteSpace(textBox_KategoriAdi.Text))
+            {
+                MessageBox.Show("Lütfen kategori adını boş bırakmayınız.", "Uyarı");
+                return false;
+            }
+            return true;
+        }
+        private void dataGrid_Kategori_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            //if (string.IsNullOrWhiteSpace(textBox_Ara.Text))
+            //    return;
+
+            //if (e.Value != null)
+            //{
+            //    string aranan = textBox_Ara.Text.ToLower();
+            //    string hucreMetni = e.Value.ToString().ToLower();
+
+            //    if (hucreMetni.Contains(aranan))
+            //    {
+            //        e.CellStyle.BackColor = Color.Yellow;
+            //        e.CellStyle.ForeColor = Color.Black;
+            //    }
+            //    else
+            //    {
+            //        e.CellStyle.BackColor = Color.White;
+            //        e.CellStyle.ForeColor = Color.Black;
+            //    }
+            //}
+        }
+        private void textBox_Ara_TextChanged(object sender, EventArgs e)
+        {
+            Listele();
+        }
+        Dictionary<string, bool> sortDirections = new();
+        private void dataGrid_Kategori_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            DataGridSortHelper.SortByColumn<Kategori>(dataGrid_Kategori, bilKategori, e.ColumnIndex, sortDirections);
+            dataGrid_Kategori.ClearSelection();
+            KutulariTemizle();
+            //string kolonAdi = dataGrid_Kategori.Columns[e.ColumnIndex].DataPropertyName;
+
+            //if (kolonAdi != nameof(Kategori.KategoriAdi))
+            //    return;
+
+            //IEnumerable<Kategori> liste = bilKategori.ToList();
+
+            //if (kategoriAdiAsc)
+            //    liste = liste.OrderBy(x => x.KategoriAdi);
+            //else
+            //    liste = liste.OrderByDescending(x => x.KategoriAdi);
+
+            //kategoriAdiAsc = !kategoriAdiAsc;
+
+            //bilKategori.Clear();
+            //foreach (var item in liste)
+            //    bilKategori.Add(item);
+
+            //dataGrid_Kategori.Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection =
+            //    kategoriAdiAsc
+            //        ? SortOrder.Descending
+            //        : SortOrder.Ascending;
         }
     }
 }

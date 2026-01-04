@@ -1,7 +1,5 @@
 ﻿using Core.Interfaces;
-using Core.Utility.Results;
 using Kutuphane.Model.Entity;
-using System.Linq.Expressions;
 
 namespace Kutuphane.DAL.Abstract
 {

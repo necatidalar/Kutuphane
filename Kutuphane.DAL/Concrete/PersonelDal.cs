@@ -21,9 +21,11 @@ namespace Kutuphane.DAL.Concrete
                     .Where(predicate ?? (x => true))
                     .Select(x => new PersonelBilgileriDto
                     {
-                        PersonelID = x.PersonelId,
+                        PersonelId = x.PersonelId,
                         Ad = x.Ad,
                         Soyad = x.Soyad,
+                        //KullaniciAdi = x.KullaniciAdi,
+                        //Sifre = x.Sifre,
                         CinsiyetId = x.CinsiyetId,
                         CinsiyetAdi = x.Cinsiyet.CinsiyetAdi,
                         AktifMi = x.AktifMi

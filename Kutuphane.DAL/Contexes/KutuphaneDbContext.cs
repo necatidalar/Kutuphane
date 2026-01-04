@@ -16,17 +16,16 @@ namespace Kutuphane.DAL.Contexes
             {
 
                 //optionsBuilder.UseSqlServer("Server=CLK-STAJERPC\\STAJYERSQL;Database=KutuphaneOtomasyonu;User Id=sa;Password=Yesilyurt.55; TrustServerCertificate=True;");
-                
-                //optionsBuilder.UseSqlServer("Server=localhost;Database=KutuphaneOtomasyonu;Trusted_Connection=True;TrustServerCertificate=True;");
 
-                optionsBuilder.UseSqlServer("Server=YDC-TUNAAKSU-LE\\YDCLENOVO;Database=StajyerKutuphane;User Id=stajyer;Password=Yesilyurt.55; TrustServerCertificate=True;");
+                optionsBuilder.UseSqlServer("Server=localhost;Database=KutuphaneOtomasyonu;Trusted_Connection=True;TrustServerCertificate=True;");
+
+                //optionsBuilder.UseSqlServer("Server=YDC-TUNAKSU\\MSSQL2022;Database=StajyerKutuphane;User Id=stajyer;Password=Yesilyurt.55; TrustServerCertificate=True;");
 
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Fluent API Configuration'ları otomatik yükle
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(KutuphaneDbContext).Assembly);
 
             base.OnModelCreating(modelBuilder);
@@ -43,6 +42,10 @@ namespace Kutuphane.DAL.Contexes
         public DbSet<YayineviKitap> YayineviKitaplari { get; set; }
         public DbSet<Yazar> Yazarlar { get; set; }
         public DbSet<YazarKitap> YazarKitaplari { get; set; }
+        public DbSet<Rol> Roller { get; set; }
+        public DbSet<Yetki> Yetkiler { get; set; }
+        public DbSet<PersonelRol> PersonelRolleri { get; set; }
+        public DbSet<RolYetki> RolYetkileri { get; set; }
 
     }
 }

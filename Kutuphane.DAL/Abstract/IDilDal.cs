@@ -5,6 +5,5 @@ namespace Kutuphane.DAL.Abstract
 {
     public interface IDilDal : IDalVeriCekme<Dil>, IDalVeriOlusturma<Dil>, IDalVeriGunceleme<Dil>
     {
-
     }
 }

@@ -11,6 +11,7 @@ namespace Kutuphane.DAL.Concrete.Configuration
             builder.Property(y => y.Ad).HasMaxLength(200).IsRequired();
             builder.Property(y => y.Soyad).HasMaxLength(200).IsRequired();
             builder.Property(y => y.DogumTarihi).HasColumnType("datetime").IsRequired(false);
+            builder.Property(y => y.OlumTarihi).HasColumnType("datetime").IsRequired(false);
             builder.Property(y => y.AktifMi).IsRequired().HasDefaultValue(true);
         }
     }

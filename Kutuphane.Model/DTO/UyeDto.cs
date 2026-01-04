@@ -2,7 +2,7 @@
 
 namespace Kutuphane.Model.DTO
 {
-    public class UyeDto : IDto 
+    public class UyeDto : IDto
     {
         public int UyeId { get; set; }
         public string TcPass { get; set; }

@@ -27,14 +27,14 @@ namespace Kutuphane.DAL.Concrete.Configuration
                 .HasMaxLength(250);
             builder.Property(p => p.CinsiyetId)
                 .IsRequired();
-            builder.Property(p=> p.AktifMi)
+            builder.Property(p => p.AktifMi)
                 .IsRequired()
                 .HasDefaultValue(true);
 
 
             // Changed from one-to-one to many-to-one so multiple Personel can share a Cinsiyet
             builder.HasOne(p => p.Cinsiyet)
-                .WithMany(c=> c.Personeller)
+                .WithMany(c => c.Personeller)
                 .HasForeignKey(p => p.CinsiyetId);
 
             builder.HasMany(p => p.TeslimEdilenler)
@@ -63,7 +63,7 @@ namespace Kutuphane.DAL.Concrete.Configuration
                     Soyad = "Dalmaz",
                     CinsiyetId = 1,
                     KullaniciAdi = "neci",
-                    Sifre = "MTIz", //base64 12345"
+                    Sifre = "MTIz", //base64 123"
                     AktifMi = true
                 }
             );

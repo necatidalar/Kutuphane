@@ -9,5 +9,6 @@ namespace Kutuphane.BLL.Abstract
     public interface IUyeService : IBLLVeriCekme<Uye>, IBLLVeriGuncelleme<Uye>, IBLLVeriOlusturma<Uye>
     {
         IDataResult<List<UyeDto>> UyeListeDetayliGetirServis(Expression<Func<Uye, bool>>? predicate = null);
+        IDataResult<List<OduncUyeDto>> OduncUyeListeDetayliGetirServis(Expression<Func<Uye, bool>>? predicate = null);
     }
 }

@@ -1,0 +1,122 @@
+using Microsoft.Data.SqlClient;
+using Newtonsoft.Json.Linq;
+
+class Program
+{
+    static async Task Main()
+    {
+        string connectionString = "Server=CLK-STAJERPC\\STAJYERSQL;Database=KutuphaneOtomasyonu;User Id=sa;Password=Yesilyurt.55;TrustServerCertificate=True;";
+        HttpClient client = new HttpClient();
+        Random rnd = new Random();
+
+        int totalBooks = 10000;
+        int limitPerPage = 100; // Open Library maksimum sayfa limiti genelde 100
+        int pages = totalBooks / limitPerPage;
+
+        using (SqlConnection conn = new SqlConnection(connectionString))
+        {
+            await conn.OpenAsync();
+
+            for (int page = 0; page < pages; page++)
+            {
+                string apiUrl = $"https://openlibrary.org/subjects/science_fiction.json?limit={limitPerPage}&offset={page * limitPerPage}";
+
+                HttpResponseMessage response = await client.GetAsync(apiUrl);
+                if (!response.IsSuccessStatusCode)
+                {
+                    Console.WriteLine($"Sayfa {page + 1} çekilemedi.");
+                    continue;
+                }
+
+                string content = await response.Content.ReadAsStringAsync();
+                JObject json = JObject.Parse(content);
+                JArray works = (JArray)json["works"];
+
+                foreach (var work in works)
+                {
+                    try
+                    {
+                        string title = work["title"]?.ToString() ?? "Bilinmeyen";
+                        int firstPublishYear = work["first_publish_year"] != null ? (int)work["first_publish_year"] : 2000;
+
+                        string authorName = work["authors"]?[0]?["name"]?.ToString() ?? "Bilinmeyen";
+                        var nameParts = authorName.Split(' ');
+                        string firstName = nameParts[0];
+                        string lastName = nameParts.Length > 1 ? string.Join(" ", nameParts.Skip(1)) : "";
+
+                        string editionKey = work["cover_edition_key"]?.ToString();
+                        string isbn = "9780000000000";
+                        int pagesCount = 100;
+
+                        if (!string.IsNullOrEmpty(editionKey))
+                        {
+                            string editionUrl = $"https://openlibrary.org/books/{editionKey}.json";
+                            HttpResponseMessage editionResponse = await client.GetAsync(editionUrl);
+                            if (editionResponse.IsSuccessStatusCode)
+                            {
+                                string editionContent = await editionResponse.Content.ReadAsStringAsync();
+                                JObject editionJson = JObject.Parse(editionContent);
+
+                                var isbnArray = editionJson["isbn_13"] ?? editionJson["isbn_10"];
+                                if (isbnArray != null && isbnArray.Type == JTokenType.Array && isbnArray.Any())
+                                    isbn = isbnArray[0].ToString();
+
+                                pagesCount = editionJson["number_of_pages"] != null ? (int)editionJson["number_of_pages"] : pagesCount;
+                            }
+                        }
+
+                        // Yazar ekle
+                        string insertAuthor = @"
+IF NOT EXISTS (SELECT 1 FROM Yazarlar WHERE Ad = @Ad AND Soyad = @Soyad)
+BEGIN
+    INSERT INTO Yazarlar (Ad, Soyad, AktifMi) VALUES (@Ad, @Soyad, 1)
+END";
+                        using (SqlCommand cmd = new SqlCommand(insertAuthor, conn))
+                        {
+                            cmd.Parameters.AddWithValue("@Ad", firstName);
+                            cmd.Parameters.AddWithValue("@Soyad", lastName);
+                            await cmd.ExecuteNonQueryAsync();
+                        }
+
+                        // Random Yayinevi, Kategori, Dil
+                        int yayineviId = rnd.Next(1, 101);
+                        int kategoriId = rnd.Next(1, 21);
+                        int dilId = rnd.Next(1, 21);
+
+                        // Kitap ekle
+                        string insertBook = @"
+INSERT INTO Kitaplar (KitapAdi, ISBN, YazarId, YayineviId, KategoriId, BasimYili, SayfaSayisi, DilId, Stok, Aktif)
+SELECT @KitapAdi, @ISBN, YazarId, @YayineviId, @KategoriId, @BasimYili, @SayfaSayisi, @DilId, 10, 1
+FROM Yazarlar
+WHERE Ad = @Ad AND Soyad = @Soyad";
+
+                        using (SqlCommand cmd = new SqlCommand(insertBook, conn))
+                        {
+                            cmd.Parameters.AddWithValue("@KitapAdi", title);
+                            cmd.Parameters.AddWithValue("@ISBN", isbn);
+                            cmd.Parameters.AddWithValue("@BasimYili", firstPublishYear);
+                            cmd.Parameters.AddWithValue("@SayfaSayisi", pagesCount);
+                            cmd.Parameters.AddWithValue("@Ad", firstName);
+                            cmd.Parameters.AddWithValue("@Soyad", lastName);
+                            cmd.Parameters.AddWithValue("@YayineviId", yayineviId);
+                            cmd.Parameters.AddWithValue("@KategoriId", kategoriId);
+                            cmd.Parameters.AddWithValue("@DilId", dilId);
+                            await cmd.ExecuteNonQueryAsync();
+                        }
+
+                        Console.WriteLine($"{title} eklendi. Sayfa: {pagesCount}, ISBN: {isbn}");
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Hata: {ex.Message}");
+                    }
+                }
+
+                // API limitini aşmamak için kısa bekleme
+                await Task.Delay(500); // yarım saniye bekle
+            }
+        }
+
+        Console.WriteLine("10.000 kitap eklendi.");
+    }
+}

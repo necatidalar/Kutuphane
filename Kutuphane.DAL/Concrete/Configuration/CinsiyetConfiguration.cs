@@ -1,6 +1,4 @@
-﻿
-
-using Kutuphane.Model.Entity;
+﻿using Kutuphane.Model.Entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

@@ -29,7 +29,7 @@ namespace Kutuphane.DAL.Concrete.Configuration
                 .IsRequired();
             builder.Property(o => o.TeslimAlanPersonelId)
                 .IsRequired(false);
-            
+
             builder.HasOne(o => o.Uye)
                 .WithMany(u => u.Oduncler)
                 .HasForeignKey(o => o.UyeId)
