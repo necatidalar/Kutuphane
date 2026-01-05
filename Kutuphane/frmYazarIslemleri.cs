@@ -57,8 +57,8 @@ namespace Kutuphane.UI
             btnDuzenle.Visible = listele && guncelle;
             btnSil.Visible = listele && sil;
 
-            btnSilinenleriGoster.Visible = listele;
-            btnGeriYukle.Visible = listele && sil;
+            btnSilinenleriGoster.Visible = false;
+            btnGeriYukle.Visible = false;
 
             btnTemizle.Visible = ekle || guncelle;
             groupBox1.Visible = ekle || guncelle || sil;
@@ -142,7 +142,7 @@ namespace Kutuphane.UI
 
             if (yazarResult.IsSuccess)
             {
-                MessageBox.Show("Üye başarıyla güncellendi.", "Başarılı");
+                MessageBox.Show("Yazar başarıyla güncellendi.", "Başarılı");
                 Listele();
             }
             else
@@ -203,15 +203,24 @@ namespace Kutuphane.UI
                 btnSilinenleriGoster.Visible = false;
                 return;
             }
+
             dataGrid_Yazar.ClearSelection();
             var pasifResult = yazarService.GetListByFilterService(x => x.AktifMi == false);
-            btnSilinenleriGoster.Visible = pasifResult.IsSuccess && pasifResult.Data.Any();
+
+            bool silinmisVarMi = pasifResult.IsSuccess && pasifResult.Data.Any();
+            btnSilinenleriGoster.Visible = silinmisVarMi;
         }
         private void btnSilinenleriGoster_Click(object sender, EventArgs e)
         {
             if (!silinenModu)
             {
                 var sonuc = yazarService.YazarListeGetirServis(x => x.AktifMi == false);
+
+                if (!sonuc.IsSuccess || !sonuc.Data.Any())
+                {
+                    MessageBox.Show("Silinmiş yazar bulunamadı.", "Bilgi");
+                    return;
+                }
 
                 bilYazar.Clear();
                 foreach (var item in sonuc.Data)
@@ -221,6 +230,7 @@ namespace Kutuphane.UI
                 btnKaydet.Enabled = false;
                 btnDuzenle.Enabled = false;
                 btnSil.Enabled = false;
+
                 silinenModu = true;
                 btnSilinenleriGoster.Text = "Aktif Yazarları Göster";
             }
@@ -231,9 +241,11 @@ namespace Kutuphane.UI
                 btnKaydet.Enabled = true;
                 btnDuzenle.Enabled = true;
                 btnSil.Enabled = true;
+
                 silinenModu = false;
-                btnSilinenleriGoster.Text = "Silinenleri Göster";
+                btnSilinenleriGoster.Text = "🗑️ Silinenleri Göster";
             }
+
             dataGrid_Yazar.ClearSelection();
             KutulariTemizle();
         }
@@ -253,10 +265,10 @@ namespace Kutuphane.UI
                 return;
             }
 
-            var uye = yazarResult.Data;
-            uye.AktifMi = true;
+            var yazar = yazarResult.Data;
+            yazar.AktifMi = true;
 
-            var updateResult = yazarService.UpdateService(uye);
+            var updateResult = yazarService.UpdateService(yazar);
 
             if (!updateResult.IsSuccess)
             {
@@ -265,9 +277,10 @@ namespace Kutuphane.UI
             }
 
             MessageBox.Show("Yazar başarıyla geri yüklendi.");
+
             Listele();
             silinenModu = false;
-            btnSilinenleriGoster.Text = "Silinenleri Göster";
+            btnSilinenleriGoster.Text = "🗑️ Silinenleri Göster";
             btnGeriYukle.Visible = false;
             btnKaydet.Enabled = true;
             btnDuzenle.Enabled = true;
@@ -289,8 +302,6 @@ namespace Kutuphane.UI
                 textBox_YazarId.Text = row.YazarId.ToString();
                 textBox_Ad.Text = row.Ad;
                 textBox_Soyad.Text = row.Soyad;
-                //dateTimePicker_DogumTarihi.Value = row.DogumTarihi.Value;
-                //dateTimePicker_DogumTarihi.Value = row.DogumTarihi ?? DateTime.Today;
 
                 if (row.DogumTarihi.HasValue)
                 {

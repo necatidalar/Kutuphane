@@ -153,7 +153,7 @@ namespace Kutuphane.UI
             var rolResult = rolService.AddService(yeniRol);
             if (rolResult.IsSuccess)
             {
-                MessageBox.Show(rolResult.Message, "Başarılı");
+                MessageBox.Show(rolResult.Message + "Rol başarıyla kaydedildi.", "Başarılı");
                 RolleriYukle();
             }
             else
@@ -218,7 +218,7 @@ namespace Kutuphane.UI
             dbRol.Data.RolKodu = txtRolKodu.Text;
 
             var result = rolService.UpdateService(dbRol.Data);
-            MessageBox.Show(result.Message);
+            MessageBox.Show(result.Message + "Rol başarıyla güncellendi.", "Başarılı");
             RolleriYukle();
         }
         private void btnPersonelRolKaydet_Click(object sender, EventArgs e)
@@ -261,7 +261,7 @@ namespace Kutuphane.UI
 
             dbRol.Data.AktifMi = false;
             var result = rolService.UpdateService(dbRol.Data);
-            MessageBox.Show(result.Message);
+            MessageBox.Show(result.Message + "Rol başarıyla kaydedildi.", "Başarılı");
             RolleriYukle();
         }
         private void btnRolKaldir_Click(object sender, EventArgs e)

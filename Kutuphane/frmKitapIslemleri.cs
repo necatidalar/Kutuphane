@@ -7,7 +7,6 @@ using Kutuphane.Model.Entity;
 using Kutuphane.UI.Theme;
 using Kutuphane.UI.UIMetodlar;
 using System.ComponentModel;
-using static Kutuphane.UI.frmMain;
 
 namespace Kutuphane.UI
 {
@@ -50,8 +49,8 @@ namespace Kutuphane.UI
             btnDuzenle.Visible = listele && guncelle;
             btnSil.Visible = listele && sil;
 
-            btnSilinenleriGoster.Visible = listele;
-            btnGeriYukle.Visible = listele && sil;
+            btnSilinenleriGoster.Visible = false;
+            btnGeriYukle.Visible = false;
 
             btnTemizle.Visible = ekle || guncelle;
             groupBox1.Visible = ekle || guncelle || sil;
@@ -239,24 +238,35 @@ namespace Kutuphane.UI
                 btnSilinenleriGoster.Visible = false;
                 return;
             }
+
             dataGrid_Kitap.ClearSelection();
             var pasifResult = kitapService.GetListByFilterService(x => !x.Aktif);
-            btnSilinenleriGoster.Visible = pasifResult.IsSuccess && pasifResult.Data?.Any() == true;
+
+            bool silinmisVarMi = pasifResult.IsSuccess && pasifResult.Data?.Any() == true;
+            btnSilinenleriGoster.Visible = silinmisVarMi;
         }
         private void btnSilinenleriGoster_Click(object sender, EventArgs e)
         {
             if (!silinenModu)
             {
                 var sonuc = kitapService.KitapListeDetayliGetirServis(x => x.Aktif == false);
+
+                if (!sonuc.IsSuccess || !sonuc.Data.Any())
+                {
+                    MessageBox.Show("Silinmiş kitap bulunamadı.", "Bilgi");
+                    return;
+                }
+
                 dataGrid_Kitap.Rows.Clear();
                 Metodlar.gridDoldur(kitapDtoBindingSource, sonuc.Data);
+
                 btnGeriYukle.Visible = true;
                 btnKaydet.Enabled = false;
                 btnDuzenle.Enabled = false;
                 btnSil.Enabled = false;
+
                 silinenModu = true;
                 btnSilinenleriGoster.Text = "Aktif Kitapları Göster";
-
             }
             else
             {
@@ -265,9 +275,9 @@ namespace Kutuphane.UI
                 btnKaydet.Enabled = true;
                 btnDuzenle.Enabled = true;
                 btnSil.Enabled = true;
+
                 silinenModu = false;
                 btnSilinenleriGoster.Text = "🗑️ Silinenleri Göster";
-
             }
         }
         private void btnGeriYukle_Click(object sender, EventArgs e)
@@ -298,6 +308,7 @@ namespace Kutuphane.UI
             }
 
             MessageBox.Show("Kitap başarıyla geri yüklendi.", "Başarılı");
+
             Listele();
             silinenModu = false;
             btnSilinenleriGoster.Text = "🗑️ Silinenleri Göster";
@@ -331,7 +342,6 @@ namespace Kutuphane.UI
                     textBox_StokMiktari.Text = selectedKitap.Stok.ToString();
                 }
             }
-            //Doldurdum
         }
         private void dataGrid_Kitap_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {

@@ -35,8 +35,6 @@
             textBox_Soyad = new TextBox();
             dateTimePicker_OlumTarihi = new DateTimePicker();
             dateTimePicker_DogumTarihi = new DateTimePicker();
-            btnGeriYukle = new Button();
-            btnSilinenleriGoster = new Button();
             btnTemizle = new Button();
             btnSil = new Button();
             btnDuzenle = new Button();
@@ -58,44 +56,40 @@
             olumTarihiDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             adSoyadDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             yasDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            panel1 = new Panel();
+            flowLayoutPanel1 = new FlowLayoutPanel();
+            btnSilinenleriGoster = new Button();
+            btnGeriYukle = new Button();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)yazarDtoBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGrid_Yazar).BeginInit();
+            panel1.SuspendLayout();
+            flowLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
             // textBox_Ara
             // 
             textBox_Ara.Font = new Font("Segoe UI", 10F);
-            textBox_Ara.Location = new Point(375, 10);
+            textBox_Ara.Location = new Point(453, 17);
+            textBox_Ara.Margin = new Padding(3, 4, 3, 4);
             textBox_Ara.Name = "textBox_Ara";
             textBox_Ara.PlaceholderText = "Yazarın adı ya da soyadıyla arayın";
-            textBox_Ara.Size = new Size(305, 25);
+            textBox_Ara.Size = new Size(348, 30);
             textBox_Ara.TabIndex = 12;
             textBox_Ara.TextChanged += textBox_Ara_TextChanged;
             // 
             // groupBox1
             // 
             groupBox1.BackColor = Color.White;
-            groupBox1.Controls.Add(textBox_Soyad);
-            groupBox1.Controls.Add(dateTimePicker_OlumTarihi);
-            groupBox1.Controls.Add(dateTimePicker_DogumTarihi);
-            groupBox1.Controls.Add(btnGeriYukle);
-            groupBox1.Controls.Add(btnSilinenleriGoster);
-            groupBox1.Controls.Add(btnTemizle);
-            groupBox1.Controls.Add(btnSil);
-            groupBox1.Controls.Add(btnDuzenle);
-            groupBox1.Controls.Add(label6);
-            groupBox1.Controls.Add(btnKaydet);
-            groupBox1.Controls.Add(label4);
-            groupBox1.Controls.Add(label5);
-            groupBox1.Controls.Add(label1);
-            groupBox1.Controls.Add(label2);
-            groupBox1.Controls.Add(textBox_Ad);
-            groupBox1.Controls.Add(textBox_YazarId);
+            groupBox1.Controls.Add(flowLayoutPanel1);
+            groupBox1.Controls.Add(panel1);
             groupBox1.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
-            groupBox1.Location = new Point(12, 12);
+            groupBox1.ForeColor = Color.FromArgb(41, 128, 185);
+            groupBox1.Location = new Point(14, 16);
+            groupBox1.Margin = new Padding(3, 4, 3, 4);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(300, 440);
+            groupBox1.Padding = new Padding(3, 4, 3, 4);
+            groupBox1.Size = new Size(353, 632);
             groupBox1.TabIndex = 8;
             groupBox1.TabStop = false;
             groupBox1.Text = "✍️ Yazar İşlemleri";
@@ -103,59 +97,31 @@
             // textBox_Soyad
             // 
             textBox_Soyad.Font = new Font("Segoe UI", 10F);
-            textBox_Soyad.Location = new Point(93, 90);
+            textBox_Soyad.Location = new Point(124, 100);
+            textBox_Soyad.Margin = new Padding(3, 4, 3, 4);
             textBox_Soyad.Name = "textBox_Soyad";
-            textBox_Soyad.Size = new Size(201, 25);
+            textBox_Soyad.Size = new Size(217, 30);
             textBox_Soyad.TabIndex = 3;
             // 
             // dateTimePicker_OlumTarihi
             // 
             dateTimePicker_OlumTarihi.Font = new Font("Segoe UI", 10F);
             dateTimePicker_OlumTarihi.Format = DateTimePickerFormat.Short;
-            dateTimePicker_OlumTarihi.Location = new Point(93, 150);
+            dateTimePicker_OlumTarihi.Location = new Point(124, 180);
+            dateTimePicker_OlumTarihi.Margin = new Padding(3, 4, 3, 4);
             dateTimePicker_OlumTarihi.Name = "dateTimePicker_OlumTarihi";
-            dateTimePicker_OlumTarihi.Size = new Size(201, 25);
+            dateTimePicker_OlumTarihi.Size = new Size(217, 30);
             dateTimePicker_OlumTarihi.TabIndex = 5;
             // 
             // dateTimePicker_DogumTarihi
             // 
             dateTimePicker_DogumTarihi.Font = new Font("Segoe UI", 10F);
             dateTimePicker_DogumTarihi.Format = DateTimePickerFormat.Short;
-            dateTimePicker_DogumTarihi.Location = new Point(93, 119);
+            dateTimePicker_DogumTarihi.Location = new Point(124, 139);
+            dateTimePicker_DogumTarihi.Margin = new Padding(3, 4, 3, 4);
             dateTimePicker_DogumTarihi.Name = "dateTimePicker_DogumTarihi";
-            dateTimePicker_DogumTarihi.Size = new Size(201, 25);
+            dateTimePicker_DogumTarihi.Size = new Size(217, 30);
             dateTimePicker_DogumTarihi.TabIndex = 4;
-            // 
-            // btnGeriYukle
-            // 
-            btnGeriYukle.BackColor = Color.FromArgb(39, 174, 96);
-            btnGeriYukle.FlatAppearance.BorderSize = 0;
-            btnGeriYukle.FlatStyle = FlatStyle.Flat;
-            btnGeriYukle.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            btnGeriYukle.ForeColor = Color.White;
-            btnGeriYukle.Location = new Point(118, 396);
-            btnGeriYukle.Name = "btnGeriYukle";
-            btnGeriYukle.Size = new Size(150, 35);
-            btnGeriYukle.TabIndex = 11;
-            btnGeriYukle.Text = "♻️ Geri Yükle";
-            btnGeriYukle.UseVisualStyleBackColor = false;
-            btnGeriYukle.Visible = false;
-            btnGeriYukle.Click += btnGeriYukle_Click;
-            // 
-            // btnSilinenleriGoster
-            // 
-            btnSilinenleriGoster.BackColor = Color.FromArgb(52, 73, 94);
-            btnSilinenleriGoster.FlatAppearance.BorderSize = 0;
-            btnSilinenleriGoster.FlatStyle = FlatStyle.Flat;
-            btnSilinenleriGoster.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            btnSilinenleriGoster.ForeColor = Color.White;
-            btnSilinenleriGoster.Location = new Point(118, 355);
-            btnSilinenleriGoster.Name = "btnSilinenleriGoster";
-            btnSilinenleriGoster.Size = new Size(150, 35);
-            btnSilinenleriGoster.TabIndex = 10;
-            btnSilinenleriGoster.Text = "🗑️ Silinenleri Göster";
-            btnSilinenleriGoster.UseVisualStyleBackColor = false;
-            btnSilinenleriGoster.Click += btnSilinenleriGoster_Click;
             // 
             // btnTemizle
             // 
@@ -164,9 +130,10 @@
             btnTemizle.FlatStyle = FlatStyle.Flat;
             btnTemizle.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnTemizle.ForeColor = Color.White;
-            btnTemizle.Location = new Point(118, 314);
+            btnTemizle.Location = new Point(14, 194);
+            btnTemizle.Margin = new Padding(3, 4, 3, 4);
             btnTemizle.Name = "btnTemizle";
-            btnTemizle.Size = new Size(150, 35);
+            btnTemizle.Size = new Size(303, 51);
             btnTemizle.TabIndex = 9;
             btnTemizle.Text = "\U0001f9f9 Temizle";
             btnTemizle.UseVisualStyleBackColor = false;
@@ -179,9 +146,10 @@
             btnSil.FlatStyle = FlatStyle.Flat;
             btnSil.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnSil.ForeColor = Color.White;
-            btnSil.Location = new Point(118, 273);
+            btnSil.Location = new Point(14, 135);
+            btnSil.Margin = new Padding(3, 4, 3, 4);
             btnSil.Name = "btnSil";
-            btnSil.Size = new Size(150, 35);
+            btnSil.Size = new Size(303, 51);
             btnSil.TabIndex = 8;
             btnSil.Text = "❌ Sil";
             btnSil.UseVisualStyleBackColor = false;
@@ -194,9 +162,10 @@
             btnDuzenle.FlatStyle = FlatStyle.Flat;
             btnDuzenle.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnDuzenle.ForeColor = Color.White;
-            btnDuzenle.Location = new Point(118, 232);
+            btnDuzenle.Location = new Point(14, 76);
+            btnDuzenle.Margin = new Padding(3, 4, 3, 4);
             btnDuzenle.Name = "btnDuzenle";
-            btnDuzenle.Size = new Size(150, 35);
+            btnDuzenle.Size = new Size(303, 51);
             btnDuzenle.TabIndex = 7;
             btnDuzenle.Text = "✏️ Düzenle";
             btnDuzenle.UseVisualStyleBackColor = false;
@@ -206,9 +175,10 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
-            label6.Location = new Point(8, 151);
+            label6.ForeColor = Color.FromArgb(64, 64, 64);
+            label6.Location = new Point(11, 180);
             label6.Name = "label6";
-            label6.Size = new Size(86, 19);
+            label6.Size = new Size(101, 23);
             label6.TabIndex = 14;
             label6.Text = "Ölüm Tarihi:";
             // 
@@ -219,9 +189,10 @@
             btnKaydet.FlatStyle = FlatStyle.Flat;
             btnKaydet.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnKaydet.ForeColor = Color.White;
-            btnKaydet.Location = new Point(118, 191);
+            btnKaydet.Location = new Point(14, 17);
+            btnKaydet.Margin = new Padding(3, 4, 3, 4);
             btnKaydet.Name = "btnKaydet";
-            btnKaydet.Size = new Size(150, 35);
+            btnKaydet.Size = new Size(303, 51);
             btnKaydet.TabIndex = 6;
             btnKaydet.Text = "➕ Kaydet";
             btnKaydet.UseVisualStyleBackColor = false;
@@ -231,9 +202,10 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
-            label4.Location = new Point(0, 122);
+            label4.ForeColor = Color.FromArgb(64, 64, 64);
+            label4.Location = new Point(2, 145);
             label4.Name = "label4";
-            label4.Size = new Size(97, 19);
+            label4.Size = new Size(116, 23);
             label4.TabIndex = 14;
             label4.Text = "Doğum Tarihi:";
             // 
@@ -241,9 +213,10 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
-            label5.Location = new Point(41, 93);
+            label5.ForeColor = Color.FromArgb(64, 64, 64);
+            label5.Location = new Point(57, 103);
             label5.Name = "label5";
-            label5.Size = new Size(50, 19);
+            label5.Size = new Size(61, 23);
             label5.TabIndex = 14;
             label5.Text = "Soyad:";
             // 
@@ -251,9 +224,10 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
-            label1.Location = new Point(62, 64);
+            label1.ForeColor = Color.FromArgb(64, 64, 64);
+            label1.Location = new Point(83, 64);
             label1.Name = "label1";
-            label1.Size = new Size(29, 19);
+            label1.Size = new Size(35, 23);
             label1.TabIndex = 14;
             label1.Text = "Ad:";
             // 
@@ -261,27 +235,30 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
-            label2.Location = new Point(27, 35);
+            label2.ForeColor = Color.FromArgb(64, 64, 64);
+            label2.Location = new Point(44, 26);
             label2.Name = "label2";
-            label2.Size = new Size(61, 19);
+            label2.Size = new Size(74, 23);
             label2.TabIndex = 14;
             label2.Text = "Yazar Id:";
             // 
             // textBox_Ad
             // 
             textBox_Ad.Font = new Font("Segoe UI", 10F);
-            textBox_Ad.Location = new Point(93, 61);
+            textBox_Ad.Location = new Point(124, 61);
+            textBox_Ad.Margin = new Padding(3, 4, 3, 4);
             textBox_Ad.Name = "textBox_Ad";
-            textBox_Ad.Size = new Size(201, 25);
+            textBox_Ad.Size = new Size(217, 30);
             textBox_Ad.TabIndex = 2;
             // 
             // textBox_YazarId
             // 
             textBox_YazarId.Enabled = false;
             textBox_YazarId.Font = new Font("Segoe UI", 10F);
-            textBox_YazarId.Location = new Point(93, 32);
+            textBox_YazarId.Location = new Point(124, 23);
+            textBox_YazarId.Margin = new Padding(3, 4, 3, 4);
             textBox_YazarId.Name = "textBox_YazarId";
-            textBox_YazarId.Size = new Size(201, 25);
+            textBox_YazarId.Size = new Size(217, 30);
             textBox_YazarId.TabIndex = 1;
             // 
             // yazarDtoBindingSource
@@ -293,9 +270,9 @@
             label_txtAra.AutoSize = true;
             label_txtAra.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
             label_txtAra.ForeColor = Color.FromArgb(64, 64, 64);
-            label_txtAra.Location = new Point(318, 13);
+            label_txtAra.Location = new Point(387, 21);
             label_txtAra.Name = "label_txtAra";
-            label_txtAra.Size = new Size(51, 17);
+            label_txtAra.Size = new Size(64, 23);
             label_txtAra.TabIndex = 22;
             label_txtAra.Text = "Arama:";
             // 
@@ -306,9 +283,11 @@
             dataGrid_Yazar.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGrid_Yazar.Columns.AddRange(new DataGridViewColumn[] { yazarIdDataGridViewTextBoxColumn, adDataGridViewTextBoxColumn, soyadDataGridViewTextBoxColumn, dogumTarihiDataGridViewTextBoxColumn, olumTarihiDataGridViewTextBoxColumn, adSoyadDataGridViewTextBoxColumn, yasDataGridViewTextBoxColumn });
             dataGrid_Yazar.DataSource = yazarDtoBindingSource;
-            dataGrid_Yazar.Location = new Point(318, 41);
+            dataGrid_Yazar.Location = new Point(385, 55);
+            dataGrid_Yazar.Margin = new Padding(3, 4, 3, 4);
             dataGrid_Yazar.Name = "dataGrid_Yazar";
-            dataGrid_Yazar.Size = new Size(579, 488);
+            dataGrid_Yazar.RowHeadersWidth = 51;
+            dataGrid_Yazar.Size = new Size(640, 589);
             dataGrid_Yazar.TabIndex = 23;
             dataGrid_Yazar.ColumnHeaderMouseClick += dataGrid_Yazar_ColumnHeaderMouseClick;
             dataGrid_Yazar.SelectionChanged += dataGrid_Yazar_SelectionChanged;
@@ -317,68 +296,152 @@
             // 
             yazarIdDataGridViewTextBoxColumn.DataPropertyName = "YazarId";
             yazarIdDataGridViewTextBoxColumn.HeaderText = "YazarId";
+            yazarIdDataGridViewTextBoxColumn.MinimumWidth = 6;
             yazarIdDataGridViewTextBoxColumn.Name = "yazarIdDataGridViewTextBoxColumn";
             yazarIdDataGridViewTextBoxColumn.Visible = false;
+            yazarIdDataGridViewTextBoxColumn.Width = 125;
             // 
             // adDataGridViewTextBoxColumn
             // 
             adDataGridViewTextBoxColumn.DataPropertyName = "Ad";
             adDataGridViewTextBoxColumn.HeaderText = "Adı";
+            adDataGridViewTextBoxColumn.MinimumWidth = 6;
             adDataGridViewTextBoxColumn.Name = "adDataGridViewTextBoxColumn";
+            adDataGridViewTextBoxColumn.Width = 125;
             // 
             // soyadDataGridViewTextBoxColumn
             // 
             soyadDataGridViewTextBoxColumn.DataPropertyName = "Soyad";
             soyadDataGridViewTextBoxColumn.HeaderText = "Soyadı";
+            soyadDataGridViewTextBoxColumn.MinimumWidth = 6;
             soyadDataGridViewTextBoxColumn.Name = "soyadDataGridViewTextBoxColumn";
+            soyadDataGridViewTextBoxColumn.Width = 125;
             // 
             // dogumTarihiDataGridViewTextBoxColumn
             // 
             dogumTarihiDataGridViewTextBoxColumn.DataPropertyName = "DogumTarihi";
             dogumTarihiDataGridViewTextBoxColumn.HeaderText = "Doğum Tarihi";
+            dogumTarihiDataGridViewTextBoxColumn.MinimumWidth = 6;
             dogumTarihiDataGridViewTextBoxColumn.Name = "dogumTarihiDataGridViewTextBoxColumn";
+            dogumTarihiDataGridViewTextBoxColumn.Width = 125;
             // 
             // olumTarihiDataGridViewTextBoxColumn
             // 
             olumTarihiDataGridViewTextBoxColumn.DataPropertyName = "OlumTarihi";
             olumTarihiDataGridViewTextBoxColumn.HeaderText = "Ölüm Tarihi";
+            olumTarihiDataGridViewTextBoxColumn.MinimumWidth = 6;
             olumTarihiDataGridViewTextBoxColumn.Name = "olumTarihiDataGridViewTextBoxColumn";
+            olumTarihiDataGridViewTextBoxColumn.Width = 125;
             // 
             // adSoyadDataGridViewTextBoxColumn
             // 
             adSoyadDataGridViewTextBoxColumn.DataPropertyName = "AdSoyad";
             adSoyadDataGridViewTextBoxColumn.HeaderText = "AdSoyad";
+            adSoyadDataGridViewTextBoxColumn.MinimumWidth = 6;
             adSoyadDataGridViewTextBoxColumn.Name = "adSoyadDataGridViewTextBoxColumn";
             adSoyadDataGridViewTextBoxColumn.ReadOnly = true;
             adSoyadDataGridViewTextBoxColumn.Visible = false;
+            adSoyadDataGridViewTextBoxColumn.Width = 125;
             // 
             // yasDataGridViewTextBoxColumn
             // 
             yasDataGridViewTextBoxColumn.DataPropertyName = "Yas";
             yasDataGridViewTextBoxColumn.HeaderText = "Yaşı";
+            yasDataGridViewTextBoxColumn.MinimumWidth = 6;
             yasDataGridViewTextBoxColumn.Name = "yasDataGridViewTextBoxColumn";
             yasDataGridViewTextBoxColumn.ReadOnly = true;
+            yasDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // panel1
+            // 
+            panel1.Controls.Add(textBox_Soyad);
+            panel1.Controls.Add(textBox_YazarId);
+            panel1.Controls.Add(dateTimePicker_OlumTarihi);
+            panel1.Controls.Add(textBox_Ad);
+            panel1.Controls.Add(dateTimePicker_DogumTarihi);
+            panel1.Controls.Add(label2);
+            panel1.Controls.Add(label1);
+            panel1.Controls.Add(label5);
+            panel1.Controls.Add(label4);
+            panel1.Controls.Add(label6);
+            panel1.Dock = DockStyle.Top;
+            panel1.Location = new Point(3, 29);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(347, 219);
+            panel1.TabIndex = 24;
+            // 
+            // flowLayoutPanel1
+            // 
+            flowLayoutPanel1.Controls.Add(btnKaydet);
+            flowLayoutPanel1.Controls.Add(btnDuzenle);
+            flowLayoutPanel1.Controls.Add(btnSil);
+            flowLayoutPanel1.Controls.Add(btnTemizle);
+            flowLayoutPanel1.Controls.Add(btnSilinenleriGoster);
+            flowLayoutPanel1.Controls.Add(btnGeriYukle);
+            flowLayoutPanel1.Dock = DockStyle.Fill;
+            flowLayoutPanel1.Location = new Point(3, 248);
+            flowLayoutPanel1.Name = "flowLayoutPanel1";
+            flowLayoutPanel1.Padding = new Padding(11, 13, 11, 13);
+            flowLayoutPanel1.Size = new Size(347, 380);
+            flowLayoutPanel1.TabIndex = 24;
+            // 
+            // btnSilinenleriGoster
+            // 
+            btnSilinenleriGoster.BackColor = Color.FromArgb(236, 240, 241);
+            btnSilinenleriGoster.Cursor = Cursors.Hand;
+            btnSilinenleriGoster.FlatAppearance.BorderColor = Color.FromArgb(41, 128, 185);
+            btnSilinenleriGoster.FlatStyle = FlatStyle.Flat;
+            btnSilinenleriGoster.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
+            btnSilinenleriGoster.ForeColor = Color.FromArgb(41, 128, 185);
+            btnSilinenleriGoster.Location = new Point(14, 253);
+            btnSilinenleriGoster.Margin = new Padding(3, 4, 3, 4);
+            btnSilinenleriGoster.Name = "btnSilinenleriGoster";
+            btnSilinenleriGoster.Size = new Size(303, 51);
+            btnSilinenleriGoster.TabIndex = 10;
+            btnSilinenleriGoster.Text = "🗑️ Silinen Yazarları Göster";
+            btnSilinenleriGoster.UseVisualStyleBackColor = false;
+            btnSilinenleriGoster.Click += btnSilinenleriGoster_Click;
+            // 
+            // btnGeriYukle
+            // 
+            btnGeriYukle.BackColor = Color.FromArgb(52, 73, 94);
+            btnGeriYukle.Cursor = Cursors.Hand;
+            btnGeriYukle.FlatAppearance.BorderSize = 0;
+            btnGeriYukle.FlatStyle = FlatStyle.Flat;
+            btnGeriYukle.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
+            btnGeriYukle.ForeColor = Color.White;
+            btnGeriYukle.Location = new Point(14, 312);
+            btnGeriYukle.Margin = new Padding(3, 4, 3, 4);
+            btnGeriYukle.Name = "btnGeriYukle";
+            btnGeriYukle.Size = new Size(303, 51);
+            btnGeriYukle.TabIndex = 11;
+            btnGeriYukle.Text = "↩️ Seçili Yazarı Geri Yükle";
+            btnGeriYukle.UseVisualStyleBackColor = false;
+            btnGeriYukle.Visible = false;
+            btnGeriYukle.Click += btnGeriYukle_Click;
             // 
             // frmYazarIslemleri
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(909, 541);
+            ClientSize = new Size(1039, 656);
             Controls.Add(dataGrid_Yazar);
             Controls.Add(label_txtAra);
             Controls.Add(textBox_Ara);
             Controls.Add(groupBox1);
             Icon = (Icon)resources.GetObject("$this.Icon");
-            MinimumSize = new Size(925, 580);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "frmYazarIslemleri";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Kütüphane Otomasyonu - Yazar İşlemleri";
             Load += frmYazarIslemleri_Load;
             groupBox1.ResumeLayout(false);
-            groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)yazarDtoBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGrid_Yazar).EndInit();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            flowLayoutPanel1.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
 
@@ -387,8 +450,6 @@
         #endregion
         private TextBox textBox_Ara;
         private GroupBox groupBox1;
-        private Button btnGeriYukle;
-        private Button btnSilinenleriGoster;
         private Button btnTemizle;
         private Button btnSil;
         private Button btnDuzenle;
@@ -413,5 +474,9 @@
         private DataGridViewTextBoxColumn olumTarihiDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn adSoyadDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn yasDataGridViewTextBoxColumn;
+        private Panel panel1;
+        private FlowLayoutPanel flowLayoutPanel1;
+        private Button btnSilinenleriGoster;
+        private Button btnGeriYukle;
     }
 }

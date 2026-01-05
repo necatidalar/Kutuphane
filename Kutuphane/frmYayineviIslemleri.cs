@@ -48,8 +48,8 @@ namespace Kutuphane.UI
             btnDuzenle.Visible = listele && guncelle;
             btnSil.Visible = listele && sil;
 
-            btnSilinenleriGoster.Visible = listele;
-            btnGeriYukle.Visible = listele && sil;
+            btnSilinenleriGoster.Visible = false;
+            btnGeriYukle.Visible = false;
 
             btnTemizle.Visible = ekle || guncelle;
             groupBox1.Visible = ekle || guncelle || sil;
@@ -172,15 +172,24 @@ namespace Kutuphane.UI
                 btnSilinenleriGoster.Visible = false;
                 return;
             }
+
             dataGrid_Yayinevi.ClearSelection();
             var pasifResult = yayineviService.GetListByFilterService(x => x.AktifMi == false);
-            btnSilinenleriGoster.Visible = pasifResult.IsSuccess && pasifResult.Data.Any();
+
+            bool silinmisVarMi = pasifResult.IsSuccess && pasifResult.Data.Any();
+            btnSilinenleriGoster.Visible = silinmisVarMi;
         }
         private void btnSilinenleriGoster_Click(object sender, EventArgs e)
         {
             if (!silinenModu)
             {
                 var sonuc = yayineviService.GetListByFilterService(x => x.AktifMi == false);
+
+                if (!sonuc.IsSuccess || !sonuc.Data.Any())
+                {
+                    MessageBox.Show("Silinmiş yayınevi bulunamadı.", "Bilgi");
+                    return;
+                }
 
                 bilYayinevi.Clear();
                 foreach (var item in sonuc.Data)
@@ -190,8 +199,9 @@ namespace Kutuphane.UI
                 btnKaydet.Enabled = false;
                 btnDuzenle.Enabled = false;
                 btnSil.Enabled = false;
+
                 silinenModu = true;
-                btnSilinenleriGoster.Text = "Yayınevilerini Göster";
+                btnSilinenleriGoster.Text = "Aktif Yayınevilerini Göster";
             }
             else
             {
@@ -200,9 +210,11 @@ namespace Kutuphane.UI
                 btnKaydet.Enabled = true;
                 btnDuzenle.Enabled = true;
                 btnSil.Enabled = true;
+
                 silinenModu = false;
                 btnSilinenleriGoster.Text = "🗑️ Silinenleri Göster";
             }
+
             dataGrid_Yayinevi.ClearSelection();
             KutulariTemizle();
         }
@@ -210,7 +222,7 @@ namespace Kutuphane.UI
         {
             if (!int.TryParse(textBox_YayineviId.Text, out int id))
             {
-                MessageBox.Show("Lütfen bir Yayinevi seçiniz.");
+                MessageBox.Show("Lütfen bir Yayınevi seçiniz.");
                 return;
             }
 
@@ -218,14 +230,14 @@ namespace Kutuphane.UI
 
             if (!YayineviResult.IsSuccess || YayineviResult.Data == null)
             {
-                MessageBox.Show("Yayinevi bulunamadı.");
+                MessageBox.Show("Yayınevi bulunamadı.");
                 return;
             }
 
-            var uye = YayineviResult.Data;
-            uye.AktifMi = true;
+            var yayinevi = YayineviResult.Data;
+            yayinevi.AktifMi = true;
 
-            var updateResult = yayineviService.UpdateService(uye);
+            var updateResult = yayineviService.UpdateService(yayinevi);
 
             if (!updateResult.IsSuccess)
             {
@@ -233,7 +245,7 @@ namespace Kutuphane.UI
                 return;
             }
 
-            MessageBox.Show("Yayinevi başarıyla geri yüklendi.");
+            MessageBox.Show("Yayınevi başarıyla geri yüklendi.");
             Listele();
             silinenModu = false;
             btnSilinenleriGoster.Text = "🗑️ Silinenleri Göster";

@@ -27,6 +27,7 @@ namespace Kutuphane.UI
             _yetkiKontrol = new YetkiKontrol(new KutuphaneDbContext());
             _userPermissions = _yetkiKontrol.KullaniciYetkileriniAl(_personelId);
         }
+
         private void frmUyeIslemleri_Load(object sender, EventArgs e)
         {
             YetkiKontrol();
@@ -50,8 +51,8 @@ namespace Kutuphane.UI
             btnDuzenle.Visible = listele && guncelle;
             btnSil.Visible = listele && sil;
 
-            btnSilinenleriGoster.Visible = listele;
-            btnGeriYukle.Visible = listele && sil;
+            btnSilinenleriGoster.Visible = false;
+            btnGeriYukle.Visible = false;
 
             btnTemizle.Visible = ekle || guncelle;
             groupBox1.Visible = ekle || guncelle || sil;
@@ -283,15 +284,24 @@ namespace Kutuphane.UI
                 btnSilinenleriGoster.Visible = false;
                 return;
             }
+
             dataGrid_Uye.ClearSelection();
             var pasifResult = uyeService.GetListByFilterService(x => x.AktifMi == false);
-            btnSilinenleriGoster.Visible = pasifResult.IsSuccess && pasifResult.Data.Any();
+
+            bool silinmisVarMi = pasifResult.IsSuccess && pasifResult.Data.Any();
+            btnSilinenleriGoster.Visible = silinmisVarMi;
         }
         private void btnSilinenleriGoster_Click(object sender, EventArgs e)
         {
             if (!silinenModu)
             {
                 var sonuc = uyeService.UyeListeDetayliGetirServis(x => x.AktifMi == false);
+
+                if (!sonuc.IsSuccess || !sonuc.Data.Any())
+                {
+                    MessageBox.Show("Silinmiş üye bulunamadı.", "Bilgi");
+                    return;
+                }
 
                 bilUyeDto.Clear();
                 foreach (var item in sonuc.Data)
@@ -301,6 +311,7 @@ namespace Kutuphane.UI
                 btnKaydet.Enabled = false;
                 btnDuzenle.Enabled = false;
                 btnSil.Enabled = false;
+
                 silinenModu = true;
                 btnSilinenleriGoster.Text = "Aktif Üyeleri Göster";
             }
@@ -311,8 +322,9 @@ namespace Kutuphane.UI
                 btnKaydet.Enabled = true;
                 btnDuzenle.Enabled = true;
                 btnSil.Enabled = true;
+
                 silinenModu = false;
-                btnSilinenleriGoster.Text = "Silinen Üyeleri Göster";
+                btnSilinenleriGoster.Text = "🗑️ Silinen Üyeleri Göster";
             }
         }
         private void btnGeriYukle_Click(object sender, EventArgs e)
@@ -345,7 +357,7 @@ namespace Kutuphane.UI
             MessageBox.Show("Üye başarıyla geri yüklendi.");
             Listele();
             silinenModu = false;
-            btnSilinenleriGoster.Text = "Silinen Üyeleri Göster";
+            btnSilinenleriGoster.Text = "🗑️ Silinen Üyeleri Göster";
             btnGeriYukle.Visible = false;
             btnKaydet.Enabled = true;
             btnDuzenle.Enabled = true;

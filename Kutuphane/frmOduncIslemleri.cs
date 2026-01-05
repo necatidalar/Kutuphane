@@ -55,20 +55,20 @@ namespace Kutuphane.UI
             groupBox_UyeIslemleri.Enabled = oduncVer || iade;
 
             groupBox_KitapSecimi_OduncVerme.Enabled = oduncVer;
-            button_OduncVer.Enabled = oduncVer;
+            btnOduncVer.Enabled = oduncVer;
 
             groupBox_IadeIslemleri.Enabled = iade;
-            button_IadeAl.Enabled = iade;
+            btnIadeAl.Enabled = iade;
 
             groupBox_TumOduncler.Visible = listele || iade;
-            button_TumIadeAl.Enabled = iade;
+            btnTumIadeAl.Enabled = iade;
         }
         private void InitializeDataLoads()
         {
-            var odunckitapresult = _kitapService.OduncIcinListeGetir(k=> k.Aktif==true);
+            var odunckitapresult = _kitapService.OduncIcinListeGetir(k => k.Aktif == true);
             oduncKitapListe = odunckitapresult.Data;
 
-            var oduncUyeresult = _uyeService.OduncUyeListeDetayliGetirServis(x => x.AktifMi==true);
+            var oduncUyeresult = _uyeService.OduncUyeListeDetayliGetirServis(x => x.AktifMi == true);
             oduncUyeListe = oduncUyeresult.Data;
         }
         private void InitialieUIComponents()
@@ -425,7 +425,7 @@ namespace Kutuphane.UI
         private void textBox_KitapAra_TextChanged(object sender, EventArgs e)
         {
             string aramaMetni = textBox_KitapAra.Text.Trim().ToLower();
-            if(string.IsNullOrWhiteSpace(textBox_KitapAra.Text))
+            if (string.IsNullOrWhiteSpace(textBox_KitapAra.Text))
                 listView_KitapListesi.Items.Clear();
 
             if (textBox_KitapAra.Text.Trim().Length < 3)
@@ -435,9 +435,9 @@ namespace Kutuphane.UI
             try
             {
                 listView_KitapListesi.Items.Clear();
-                foreach (var kitap in oduncKitapListe.FindAll(k=> 
-                     k.ISBN.ToLower().Contains(aramaMetni)||
-                     k.KitapAdi.ToLower().Contains(aramaMetni)||
+                foreach (var kitap in oduncKitapListe.FindAll(k =>
+                     k.ISBN.ToLower().Contains(aramaMetni) ||
+                     k.KitapAdi.ToLower().Contains(aramaMetni) ||
                      k.Yazar.ToLower().Contains(aramaMetni)))
                 {
                     var item = new ListViewItem(kitap.KitapAdi);

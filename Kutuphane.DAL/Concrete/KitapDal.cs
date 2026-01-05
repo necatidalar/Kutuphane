@@ -64,7 +64,7 @@ namespace Kutuphane.DAL.Concrete
                         ISBN = k.ISBN ?? string.Empty,
                         YazarId = k.YazarId,
                         Yazar = $"{k.Yazar.Ad} {k.Yazar.Soyad}",
-                        
+
                     }).ToList();
                 return new SuccessDataResult<List<OduncKitapDto>>(dto);
             }

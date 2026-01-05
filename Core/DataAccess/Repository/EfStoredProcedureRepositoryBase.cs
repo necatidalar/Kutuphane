@@ -8,7 +8,7 @@ namespace Core.DataAccess.Repository
     public class EfStoredProcedureRepositoryBase<TContext> : IStoredProcedureRepository
         where TContext : DbContext, new()
     {
-        
+
         public IResult ExecuteStoredProcedureNoReturn(string spName, params object[] parameters)
         {
             try
@@ -21,7 +21,7 @@ namespace Core.DataAccess.Repository
             catch (Exception e)
             {
                 return new ErrorResult(e.Message);
-            }            
+            }
         }
 
         public IDataResult<List<T>> ExecuteStoredProcedure<T>(string spName, params object[] parameters) where T : class, IDto, new()

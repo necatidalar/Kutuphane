@@ -1,7 +1,6 @@
 ﻿using Core.Utility.Results;
 using Kutuphane.BLL.Abstract;
 using Kutuphane.DAL.Abstract;
-using Kutuphane.DAL.Concrete;
 using Kutuphane.Model.DTO;
 using Kutuphane.Model.Entity;
 using System.Linq.Expressions;

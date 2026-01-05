@@ -52,8 +52,8 @@ namespace Kutuphane.UI
             btnDuzenle.Visible = listele && guncelle;
             btnSil.Visible = listele && sil;
 
-            btnSilinenleriGoster.Visible = listele;
-            btnGeriYukle.Visible = listele && sil;
+            btnSilinenleriGoster.Visible = false;
+            btnGeriYukle.Visible = false;
 
             btnTemizle.Visible = ekle || guncelle;
             groupBox1.Visible = ekle || guncelle || sil;
@@ -176,13 +176,21 @@ namespace Kutuphane.UI
                 return;
             }
             var pasifResult = kategoriService.GetListByFilterService(x => x.AktifMi == false);
-            btnSilinenleriGoster.Visible = pasifResult.IsSuccess && pasifResult.Data.Any();
+
+            bool silinmisVarMi = pasifResult.IsSuccess && pasifResult.Data.Any();
+            btnSilinenleriGoster.Visible = silinmisVarMi;
         }
         private void btnSilinenleriGoster_Click(object sender, EventArgs e)
         {
             if (!silinenModu)
             {
                 var sonuc = kategoriService.GetListByFilterService(x => x.AktifMi == false);
+
+                if (!sonuc.IsSuccess || !sonuc.Data.Any())
+                {
+                    MessageBox.Show("Silinmiş kategori bulunamadı.", "Bilgi");
+                    return;
+                }
 
                 bilKategori.Clear();
                 foreach (var item in sonuc.Data)
@@ -192,6 +200,7 @@ namespace Kutuphane.UI
                 btnKaydet.Enabled = false;
                 btnDuzenle.Enabled = false;
                 btnSil.Enabled = false;
+
                 silinenModu = true;
                 btnSilinenleriGoster.Text = "Aktif Kategorileri Göster";
             }
@@ -203,7 +212,7 @@ namespace Kutuphane.UI
                 btnDuzenle.Enabled = true;
                 btnSil.Enabled = true;
                 silinenModu = false;
-                btnSilinenleriGoster.Text = "Silinenleri Göster";
+                btnSilinenleriGoster.Text = "🗑️ Silinenleri Göster";
             }
             dataGrid_Kategori.ClearSelection();
             KutulariTemizle();
@@ -238,7 +247,7 @@ namespace Kutuphane.UI
             MessageBox.Show("Kategori başarıyla geri yüklendi.");
             Listele();
             silinenModu = false;
-            btnSilinenleriGoster.Text = "Silinenleri Göster";
+            btnSilinenleriGoster.Text = "🗑️ Silinenleri Göster";
             btnGeriYukle.Visible = false;
             btnKaydet.Enabled = true;
             btnDuzenle.Enabled = true;
@@ -306,28 +315,6 @@ namespace Kutuphane.UI
             DataGridSortHelper.SortByColumn<Kategori>(dataGrid_Kategori, bilKategori, e.ColumnIndex, sortDirections);
             dataGrid_Kategori.ClearSelection();
             KutulariTemizle();
-            //string kolonAdi = dataGrid_Kategori.Columns[e.ColumnIndex].DataPropertyName;
-
-            //if (kolonAdi != nameof(Kategori.KategoriAdi))
-            //    return;
-
-            //IEnumerable<Kategori> liste = bilKategori.ToList();
-
-            //if (kategoriAdiAsc)
-            //    liste = liste.OrderBy(x => x.KategoriAdi);
-            //else
-            //    liste = liste.OrderByDescending(x => x.KategoriAdi);
-
-            //kategoriAdiAsc = !kategoriAdiAsc;
-
-            //bilKategori.Clear();
-            //foreach (var item in liste)
-            //    bilKategori.Add(item);
-
-            //dataGrid_Kategori.Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection =
-            //    kategoriAdiAsc
-            //        ? SortOrder.Descending
-            //        : SortOrder.Ascending;
         }
     }
 }

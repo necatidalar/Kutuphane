@@ -23,7 +23,7 @@ namespace Kutuphane.UI
         private readonly YetkiKontrol _yetkiKontrol;
         private readonly IPersonelService _personelService;
         private HashSet<string> _userPermissions = new HashSet<string>();
-    
+
         public frmMain()
         {
             InitializeComponent();
@@ -39,7 +39,8 @@ namespace Kutuphane.UI
         }
         private void frmMain_Load(object sender, EventArgs e)
         {
-            panel_Giris.Location = new Point(0, 0);
+            //panel_Giris.Location = new Point(0, 0);
+            panel_Giris.Anchor = AnchorStyles.None;
             CheckDatabaseConnection();
 
             if (Properties.Settings.Default.RememberMe)
@@ -48,6 +49,11 @@ namespace Kutuphane.UI
                 textBox_Sifre.Text = Properties.Settings.Default.SavedPassword;
                 checkBox_BeniHatirla.Checked = true;
             }
+            this.Resize += (s, e) =>
+            {
+                if (panel_Giris.Visible)
+                    CenterLoginPanel();
+            };
         }
         private void btnGiris_Click(object sender, EventArgs e)
         {
@@ -245,22 +251,28 @@ namespace Kutuphane.UI
 
             if (login)
             {
+                MinimumSize = new Size(635, 350);
                 ClientSize = new Size(635, 350);
                 WindowState = FormWindowState.Normal;
                 StartPosition = FormStartPosition.CenterScreen;
-                //FormBorderStyle = FormBorderStyle.None;
-                MaximizeBox = false;
-                FormBorderStyle = FormBorderStyle.FixedSingle;
+                MaximizeBox = true;
+                FormBorderStyle = FormBorderStyle.Sizable;
+                CenterLoginPanel();
             }
             else
             {
+                MinimumSize = new Size(1024, 768);
                 MaximizeBox = true;
-                //FormBorderStyle = FormBorderStyle.Sizable;
                 WindowState = FormWindowState.Maximized;
                 FormBorderStyle = FormBorderStyle.Sizable;
             }
 
             AutoSize = false;
+        }
+        private void CenterLoginPanel()
+        {
+            panel_Giris.Left = (this.ClientSize.Width - panel_Giris.Width) / 2;
+            panel_Giris.Top = (this.ClientSize.Height - panel_Giris.Height) / 2;
         }
         private void Logout()
         {

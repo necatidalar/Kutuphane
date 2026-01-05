@@ -2,17 +2,15 @@
 using Core.Interfaces;
 using Core.Utility.Results;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.SqlServer;
-using System;
 
 namespace Core.DataAccess.Repository
 {
 
     public class EfFunctionRepositoryBase<TContext> : IFunctionRepository
-       
+
         where TContext : DbContext, new()
     {
-        public IDataResult<T> ExecuteScalarFunction<T>(string functionName, params object[] parameters) 
+        public IDataResult<T> ExecuteScalarFunction<T>(string functionName, params object[] parameters)
         {
             try
             {
@@ -49,7 +47,7 @@ namespace Core.DataAccess.Repository
             }
         }
 
-        public IDataResult<List<T>> ExecuteTableFunction<T>(string functionName, params object[] parameters) where T : class,IDto ,new()
+        public IDataResult<List<T>> ExecuteTableFunction<T>(string functionName, params object[] parameters) where T : class, IDto, new()
         {
             try
             {

@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -8,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Kutuphane.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class ff : Migration
+    public partial class ss : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

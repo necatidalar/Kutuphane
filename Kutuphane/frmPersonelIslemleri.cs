@@ -30,7 +30,7 @@ namespace Kutuphane.UI
         private void frmPersonelIslemleri_Load(object sender, EventArgs e)
         {
             YetkiKontrol();
-            if (_userPermissions.Contains("KATEGORI_LISTELE"))
+            if (_userPermissions.Contains("PERSONEL_LISTELE"))
             {
                 Listele();
                 ComboDoldur();
@@ -41,18 +41,18 @@ namespace Kutuphane.UI
         }
         private void YetkiKontrol()
         {
-            bool listele = _userPermissions.Contains("KATEGORI_LISTELE");
-            bool ekle = _userPermissions.Contains("KATEGORI_EKLE");
-            bool guncelle = _userPermissions.Contains("KATEGORI_GUNCELLE");
-            bool sil = _userPermissions.Contains("KATEGORI_SIL");
+            bool listele = _userPermissions.Contains("PERSONEL_LISTELE");
+            bool ekle = _userPermissions.Contains("PERSONEL_EKLE");
+            bool guncelle = _userPermissions.Contains("PERSONEL_GUNCELLE");
+            bool sil = _userPermissions.Contains("PERSONEL_SIL");
 
             dataGrid_Personel.Enabled = listele;
             btnKaydet.Visible = ekle;
             btnDuzenle.Visible = listele && guncelle;
             btnSil.Visible = listele && sil;
 
-            btnSilinenleriGoster.Visible = listele;
-            btnGeriYukle.Visible = listele && sil;
+            btnSilinenleriGoster.Visible = false;
+            btnGeriYukle.Visible = false;
 
             btnTemizle.Visible = ekle || guncelle;
             groupBox1.Visible = ekle || guncelle || sil;
@@ -231,7 +231,7 @@ namespace Kutuphane.UI
         }
         private void btnTemizle_Click(object sender, EventArgs e)
         {
-            KutulariTemizle();   
+            KutulariTemizle();
         }
         private void KutulariTemizle()
         {
@@ -245,21 +245,30 @@ namespace Kutuphane.UI
         }
         private void PasifKontrol()
         {
-            bool listele = _userPermissions.Contains("KATEGORI_LISTELE");
+            bool listele = _userPermissions.Contains("PERSONEL_LISTELE");
             if (!listele)
             {
                 btnSilinenleriGoster.Visible = false;
                 return;
             }
+
             dataGrid_Personel.ClearSelection();
             var pasifResult = personelService.GetListByFilterService(x => x.AktifMi == false);
-            btnSilinenleriGoster.Visible = pasifResult.IsSuccess && pasifResult.Data.Any();
+
+            bool silinmisVarMi = pasifResult.IsSuccess && pasifResult.Data.Any();
+            btnSilinenleriGoster.Visible = silinmisVarMi;
         }
         private void btnSilinenleriGoster_Click(object sender, EventArgs e)
         {
             if (!silinenModu)
             {
                 var sonuc = personelService.PersonelBilgiGetirServis(x => x.AktifMi == false);
+
+                if (!sonuc.IsSuccess || !sonuc.Data.Any())
+                {
+                    MessageBox.Show("Silinmiş personel bulunamadı.", "Bilgi");
+                    return;
+                }
 
                 bilPersonel.Clear();
                 foreach (var item in sonuc.Data)
@@ -269,6 +278,7 @@ namespace Kutuphane.UI
                 btnKaydet.Enabled = false;
                 btnDuzenle.Enabled = false;
                 btnSil.Enabled = false;
+
                 silinenModu = true;
                 btnSilinenleriGoster.Text = "Aktif Personelleri Göster";
             }
@@ -279,8 +289,9 @@ namespace Kutuphane.UI
                 btnKaydet.Enabled = true;
                 btnDuzenle.Enabled = true;
                 btnSil.Enabled = true;
+
                 silinenModu = false;
-                btnSilinenleriGoster.Text = "Silinen Personelleri Göster";
+                btnSilinenleriGoster.Text = "🗑️ Silinen Personelleri Göster";
             }
         }
         private void btnGeriYukle_Click(object sender, EventArgs e)
@@ -289,7 +300,7 @@ namespace Kutuphane.UI
             {
                 if (!int.TryParse(textBox_PersonelId.Text, out int id))
                 {
-                    MessageBox.Show("Lütfen bir üye seçiniz.");
+                    MessageBox.Show("Lütfen bir personel seçiniz.");
                     return;
                 }
 
@@ -297,14 +308,14 @@ namespace Kutuphane.UI
 
                 if (!personelResult.IsSuccess || personelResult.Data == null)
                 {
-                    MessageBox.Show("Üye bulunamadı.");
+                    MessageBox.Show("Personel bulunamadı.");
                     return;
                 }
 
-                var uye = personelResult.Data;
-                uye.AktifMi = true;
+                var personel = personelResult.Data;
+                personel.AktifMi = true;
 
-                var updateResult = personelService.UpdateService(uye);
+                var updateResult = personelService.UpdateService(personel);
 
                 if (!updateResult.IsSuccess)
                 {
@@ -312,21 +323,20 @@ namespace Kutuphane.UI
                     return;
                 }
 
-                MessageBox.Show("Üye başarıyla geri yüklendi.");
+                MessageBox.Show("Personel başarıyla geri yüklendi.");
                 Listele();
                 silinenModu = false;
-                btnSilinenleriGoster.Text = "Silinen Üyeleri Göster";
+                btnSilinenleriGoster.Text = "🗑️ Silinen Personelleri Göster";
                 btnGeriYukle.Visible = false;
                 btnKaydet.Enabled = true;
                 btnDuzenle.Enabled = true;
                 btnSil.Enabled = true;
                 PasifKontrol();
                 btnTemizle.PerformClick();
-                btnTemizle.PerformClick();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Üye geri yüklenirken hata oluştu:\n" + ex.Message);
+                MessageBox.Show("Personel geri yüklenirken hata oluştu:\n" + ex.Message);
             }
         }
         private void btnAra_Click(object sender, EventArgs e)
@@ -413,6 +423,10 @@ namespace Kutuphane.UI
             DataGridSortHelper.SortByColumn<PersonelBilgileriDto>(dataGrid_Personel, bilPersonel, e.ColumnIndex, sortDirections);
             dataGrid_Personel.ClearSelection();
             KutulariTemizle();
+        }
+        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
