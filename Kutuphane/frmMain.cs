@@ -297,6 +297,14 @@ namespace Kutuphane.UI
         }
         private void Listele()
         {
+            if (WindowState != FormWindowState.Maximized)
+            {
+                menuStrip1.Dock = DockStyle.Left;
+            }
+            else
+            {
+                menuStrip1.Dock = DockStyle.Top;
+            }
             var kitapResult = _kitapManager.GetListByFilterService(x => x.Aktif == true);
             label_KitapSayisi.Text = kitapResult.IsSuccess
                 ? kitapResult.Data.Count.ToString()

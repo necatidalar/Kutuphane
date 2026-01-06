@@ -13,11 +13,12 @@ namespace Kutuphane.UI
     public partial class frmKitapIslemleri : Form
     {
         private readonly IKitapService kitapService = new KitapManager(new KitapDal());
-        private bool silinenModu = false;
+        private List<KitapDto> _tumKitaplar = new();
 
         private readonly YetkiKontrol _yetkiKontrol;
         private readonly int _personelId;
         private HashSet<string> _userPermissions;
+        private bool silinenModu = false;
         public frmKitapIslemleri(int personelId)
         {
             InitializeComponent();
@@ -30,7 +31,7 @@ namespace Kutuphane.UI
             YetkiKontrol();
             if (_userPermissions.Contains("KITAP_LISTELE"))
             {
-                Listele();
+                 KitaplariYukle();
                 PasifKontrol();
             }
             ComboDoldur();
@@ -58,45 +59,37 @@ namespace Kutuphane.UI
             label_txtAra.Visible = listele;
             textBox_Ara.Visible = listele;
         }
-        private void Listele(string? aramaMetni = null)
+        private void KitaplariYukle()
         {
-            dataGrid_Kitap.Rows.Clear();
+            var result = kitapService.KitapListeDetayliGetirServis(x => x.Aktif);
 
-            aramaMetni ??= textBox_Ara.Text.Trim();
-
-            var kitapResult = kitapService.KitapListeDetayliGetirServis(x => x.Aktif);
-
-            if (!kitapResult.IsSuccess)
+            if (!result.IsSuccess)
             {
-                MessageBox.Show(kitapResult.Message, "Hata",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(result.Message);
                 return;
             }
 
-            var liste = kitapResult.Data;
+            _tumKitaplar = result.Data;
+            Metodlar.gridDoldur(kitapDtoBindingSource, _tumKitaplar);
+        }
+        private void Ara()
+        {
+            string arama = textBox_Ara.Text.Trim().ToLower();
 
-            if (!string.IsNullOrWhiteSpace(aramaMetni))
-            {
-                aramaMetni = aramaMetni.ToLower();
-
-                liste = liste.Where(x =>
-                     x.KitapAdi.ToLower().Contains(aramaMetni) ||
-                     x.ISBN.ToLower().Contains(aramaMetni) ||
-                     x.YazarAd.ToLower().Contains(aramaMetni) ||
-                     x.YazarSoyad.ToLower().Contains(aramaMetni) ||
-                     x.KategoriAdi.ToLower().Contains(aramaMetni) ||
-                     x.YayineviAd.ToLower().Contains(aramaMetni) ||
-                     (x.BasimYili.HasValue &&
-                      x.BasimYili.Value.ToString().Contains(aramaMetni)) ||
-                     x.Dil.ToLower().Contains(aramaMetni)
+            var filtreliListe = string.IsNullOrWhiteSpace(arama)
+                ? _tumKitaplar
+                : _tumKitaplar.Where(x =>
+                    x.KitapAdi.ToLower().Contains(arama) ||
+                    x.ISBN.ToLower().Contains(arama) ||
+                    x.YazarAd.ToLower().Contains(arama) ||
+                    x.YazarSoyad.ToLower().Contains(arama) ||
+                    x.KategoriAdi.ToLower().Contains(arama) ||
+                    x.YayineviAd.ToLower().Contains(arama) ||
+                    (x.BasimYili?.ToString().Contains(arama) ?? false) ||
+                    x.Dil.ToLower().Contains(arama)
                 ).ToList();
 
-            }
-
-            Metodlar.gridDoldur(kitapDtoBindingSource, liste);
-
-            dataGrid_Kitap.ClearSelection();
-            dataGrid_Kitap.CurrentCell = null;
+            Metodlar.gridDoldur(kitapDtoBindingSource, filtreliListe);
         }
         private void ComboDoldur()
         {
@@ -149,7 +142,7 @@ namespace Kutuphane.UI
             }
 
             MessageBox.Show("Kitap başarıyla eklendi.", "Başarılı");
-            Listele();
+             KitaplariYukle();
             Temizle();
         }
         private void btnDuzenle_Click(object sender, EventArgs e)
@@ -170,7 +163,7 @@ namespace Kutuphane.UI
             }
 
             MessageBox.Show("Kitap başarıyla güncellendi.", "Başarılı");
-            Listele();
+             KitaplariYukle();
             Temizle();
         }
         private void btnSil_Click(object sender, EventArgs e)
@@ -207,7 +200,7 @@ namespace Kutuphane.UI
             }
 
             MessageBox.Show("Kitap başarıyla silindi (pasif edildi).", "Başarılı");
-            Listele();
+             KitaplariYukle();
             Temizle();
             PasifKontrol();
         }
@@ -270,7 +263,7 @@ namespace Kutuphane.UI
             }
             else
             {
-                Listele();
+                 KitaplariYukle();
                 btnGeriYukle.Visible = false;
                 btnKaydet.Enabled = true;
                 btnDuzenle.Enabled = true;
@@ -309,7 +302,7 @@ namespace Kutuphane.UI
 
             MessageBox.Show("Kitap başarıyla geri yüklendi.", "Başarılı");
 
-            Listele();
+             KitaplariYukle();
             silinenModu = false;
             btnSilinenleriGoster.Text = "🗑️ Silinenleri Göster";
             btnGeriYukle.Visible = false;
@@ -317,10 +310,6 @@ namespace Kutuphane.UI
             btnDuzenle.Enabled = true;
             btnSil.Enabled = true;
             PasifKontrol();
-        }
-        private void btnAra_Click(object sender, EventArgs e)
-        {
-            Listele();
         }
         private void dataGrid_Kitap_SelectionChanged(object sender, EventArgs e)
         {
@@ -395,7 +384,7 @@ namespace Kutuphane.UI
         }
         private void textBox_Ara_TextChanged(object sender, EventArgs e)
         {
-            Listele();
+            Ara();
         }
         Dictionary<string, bool> sortDirections = new();
         private void dataGrid_Kitap_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)

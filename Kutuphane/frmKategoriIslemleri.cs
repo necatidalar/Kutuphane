@@ -11,8 +11,8 @@ namespace Kutuphane.UI
 {
     public partial class frmKategoriIslemleri : Form
     {
-
         BindingList<Kategori> bilKategori = new BindingList<Kategori>();
+        private List<Kategori> _tumKategoriler = new();
         IKategoriService kategoriService = new KategoriManager(new KategoriDal());
         bool silinenModu = false;
 
@@ -33,7 +33,7 @@ namespace Kutuphane.UI
             YetkiKontrol();
             if (_userPermissions.Contains("KATEGORI_LISTELE"))
             {
-                Listele();
+                KategorileriYukle();
                 PasifKontrol();
             }
             KutulariTemizle();
@@ -61,12 +61,9 @@ namespace Kutuphane.UI
             label_txtAra.Visible = listele;
             textBox_Ara.Visible = listele;
         }
-        private void Listele()
+        private void KategorileriYukle()
         {
-            var result = kategoriService.GetListByFilterService(x =>
-                x.AktifMi &&
-                x.KategoriAdi.Contains(textBox_Ara.Text)
-            );
+            var result = kategoriService.GetListByFilterService(x => x.AktifMi);
 
             if (!result.IsSuccess)
             {
@@ -74,13 +71,23 @@ namespace Kutuphane.UI
                 return;
             }
 
-            bilKategori.Clear();
-            foreach (var item in result.Data)
-                bilKategori.Add(item);
+            _tumKategoriler = result.Data.ToList();
 
-            dataGrid_Kategori.ClearSelection();
-            KutulariTemizle();
-            PasifKontrol();
+            bilKategori.Clear();
+            foreach (var kategori in _tumKategoriler)
+                bilKategori.Add(kategori);
+        }
+        private void Ara()
+        {
+            string arama = textBox_Ara.Text.Trim().ToLower();
+
+            var filtreliListe = string.IsNullOrWhiteSpace(arama)
+                ? _tumKategoriler
+                : _tumKategoriler.Where(x => x.KategoriAdi.ToLower().Contains(arama)).ToList();
+
+            bilKategori.Clear();
+            foreach (var kategori in filtreliListe)
+                bilKategori.Add(kategori);
         }
         private void btnKaydet_Click(object sender, EventArgs e)
         {
@@ -101,7 +108,7 @@ namespace Kutuphane.UI
             }
 
             MessageBox.Show("Kategori başarıyla kaydedildi.", "Başarılı");
-            Listele();
+            KategorileriYukle();
         }
         private void btnDuzenle_Click(object sender, EventArgs e)
         {
@@ -125,7 +132,7 @@ namespace Kutuphane.UI
             }
 
             MessageBox.Show("Kategori başarıyla güncellendi.", "Başarılı");
-            Listele();
+            KategorileriYukle();
         }
         private void btnSil_Click(object sender, EventArgs e)
         {
@@ -151,7 +158,7 @@ namespace Kutuphane.UI
             if (uyeResult.IsSuccess)
             {
                 MessageBox.Show("Kategori başarıyla silindi (pasif edildi).", "Başarılı");
-                Listele();
+                KategorileriYukle();
                 PasifKontrol();
             }
             else
@@ -184,13 +191,7 @@ namespace Kutuphane.UI
         {
             if (!silinenModu)
             {
-                var sonuc = kategoriService.GetListByFilterService(x => x.AktifMi == false);
-
-                if (!sonuc.IsSuccess || !sonuc.Data.Any())
-                {
-                    MessageBox.Show("Silinmiş kategori bulunamadı.", "Bilgi");
-                    return;
-                }
+                var sonuc = kategoriService.GetListByFilterService(x => !x.AktifMi);
 
                 bilKategori.Clear();
                 foreach (var item in sonuc.Data)
@@ -200,19 +201,18 @@ namespace Kutuphane.UI
                 btnKaydet.Enabled = false;
                 btnDuzenle.Enabled = false;
                 btnSil.Enabled = false;
-
                 silinenModu = true;
                 btnSilinenleriGoster.Text = "Aktif Kategorileri Göster";
             }
             else
             {
-                Listele();
+                KategorileriYukle();
                 btnGeriYukle.Visible = false;
                 btnKaydet.Enabled = true;
                 btnDuzenle.Enabled = true;
                 btnSil.Enabled = true;
                 silinenModu = false;
-                btnSilinenleriGoster.Text = "🗑️ Silinenleri Göster";
+                btnSilinenleriGoster.Text = "Silinenleri Göster";
             }
             dataGrid_Kategori.ClearSelection();
             KutulariTemizle();
@@ -245,7 +245,7 @@ namespace Kutuphane.UI
             }
 
             MessageBox.Show("Kategori başarıyla geri yüklendi.");
-            Listele();
+            KategorileriYukle();
             silinenModu = false;
             btnSilinenleriGoster.Text = "🗑️ Silinenleri Göster";
             btnGeriYukle.Visible = false;
@@ -258,7 +258,7 @@ namespace Kutuphane.UI
         }
         private void btnAra_Click(object sender, EventArgs e)
         {
-            Listele();
+            KategorileriYukle();
             dataGrid_Kategori.ClearSelection();
         }
         private void dataGrid_Kategori_SelectionChanged(object sender, EventArgs e)
@@ -307,7 +307,7 @@ namespace Kutuphane.UI
         }
         private void textBox_Ara_TextChanged(object sender, EventArgs e)
         {
-            Listele();
+            Ara();
         }
         Dictionary<string, bool> sortDirections = new();
         private void dataGrid_Kategori_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)

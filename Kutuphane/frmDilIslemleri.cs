@@ -12,6 +12,7 @@ namespace Kutuphane.UI
     public partial class frmDilIslemleri : Form
     {
         BindingList<Dil> bilDil = new BindingList<Dil>();
+        private List<Dil> _tumDiller = new();
         IDilService dilService = new DilManager(new DilDal());
         bool silinenModu = false;
 
@@ -32,7 +33,7 @@ namespace Kutuphane.UI
             YetkiKontrol();
             if (_userPermissions.Contains("DIL_LISTELE"))
             {
-                Listele();
+                DilleriYukle();
                 PasifKontrol();
             }
             KutulariTemizle();
@@ -60,24 +61,36 @@ namespace Kutuphane.UI
             label_txtAra.Enabled = listele;
             textBox_Ara.Enabled = listele;
         }
-        private void Listele()
+        private void DilleriYukle()
         {
-            var dilResult = dilService.GetListByFilterService(x => x.AktifMi == true &&
-            (x.DilAdi.Contains(textBox_Ara.Text) || x.DilKodu.Contains(textBox_Ara.Text)));
+            var result = dilService.GetListByFilterService(x => x.AktifMi);
 
-            if (!dilResult.IsSuccess)
+            if (!result.IsSuccess)
             {
-                MessageBox.Show(dilResult.Message, "Hata");
+                MessageBox.Show(result.Message);
                 return;
             }
 
-            bilDil.Clear();
-            foreach (var item in dilResult.Data)
-                bilDil.Add(item);
+            _tumDiller = result.Data.ToList();
 
-            dataGrid_Dil.ClearSelection();
-            KutulariTemizle();
-            PasifKontrol();
+            bilDil.Clear();
+            foreach (var dil in _tumDiller)
+                bilDil.Add(dil);
+        }
+        private void Ara()
+        {
+            string arama = textBox_Ara.Text.Trim().ToLower();
+
+            var filtreliListe = string.IsNullOrWhiteSpace(arama)
+                ? _tumDiller
+                : _tumDiller.Where(x =>
+                    x.DilAdi.ToLower().Contains(arama) ||
+                    x.DilKodu.ToLower().Contains(arama)
+                ).ToList();
+
+            bilDil.Clear();
+            foreach (var dil in filtreliListe)
+                bilDil.Add(dil);
         }
         private void btnKaydet_Click(object sender, EventArgs e)
         {
@@ -93,7 +106,7 @@ namespace Kutuphane.UI
             if (dilResult.IsSuccess)
             {
                 MessageBox.Show("Dil başarıyla kaydedildi.", "Başarılı");
-                Listele();
+                DilleriYukle();
             }
             else
                 MessageBox.Show(dilResult.Message, "Hata");
@@ -116,7 +129,7 @@ namespace Kutuphane.UI
             if (dilResult.IsSuccess)
             {
                 MessageBox.Show("Dil başarıyla güncellendi.", "Başarılı");
-                Listele();
+                DilleriYukle();
             }
             else
                 MessageBox.Show(dilResult.Message, "Hata");
@@ -145,7 +158,7 @@ namespace Kutuphane.UI
             if (uyeResult.IsSuccess)
             {
                 MessageBox.Show("Dil başarıyla silindi (pasif edildi).", "Başarılı");
-                Listele();
+                DilleriYukle();
                 PasifKontrol();
             }
             else
@@ -193,7 +206,7 @@ namespace Kutuphane.UI
             }
             else
             {
-                Listele();
+                DilleriYukle();
                 btnGeriYukle.Visible = false;
                 btnKaydet.Enabled = true;
                 btnDuzenle.Enabled = true;
@@ -232,7 +245,7 @@ namespace Kutuphane.UI
             }
 
             MessageBox.Show("Yazar başarıyla geri yüklendi.");
-            Listele();
+            DilleriYukle();
             silinenModu = false;
             btnSilinenleriGoster.Text = "Silinenleri Göster";
             btnGeriYukle.Visible = false;
@@ -245,7 +258,7 @@ namespace Kutuphane.UI
         }
         private void btnAra_Click(object sender, EventArgs e)
         {
-            Listele();
+            DilleriYukle();
             dataGrid_Dil.ClearSelection();
             dataGrid_Dil.Refresh();
             dataGrid_Dil.ClearSelection();
@@ -295,8 +308,7 @@ namespace Kutuphane.UI
         }
         private void textBox_Ara_TextChanged(object sender, EventArgs e)
         {
-            Listele();
-            dataGrid_Dil.Refresh();
+            Ara();
         }
     }
 }

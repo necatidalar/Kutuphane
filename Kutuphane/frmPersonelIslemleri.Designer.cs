@@ -400,7 +400,6 @@
             flowLayoutPanel1.Padding = new Padding(11, 13, 11, 13);
             flowLayoutPanel1.Size = new Size(337, 381);
             flowLayoutPanel1.TabIndex = 14;
-            flowLayoutPanel1.Paint += flowLayoutPanel1_Paint;
             // 
             // btnSilinenleriGoster
             // 

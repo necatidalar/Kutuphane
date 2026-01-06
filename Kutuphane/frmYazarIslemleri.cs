@@ -13,6 +13,7 @@ namespace Kutuphane.UI
     public partial class frmYazarIslemleri : Form
     {
         BindingList<YazarDto> bilYazar = new BindingList<YazarDto>();
+        private List<YazarDto> _tumYazarlar = new();
         IYazarService yazarService = new YazarManager(new YazarDal());
         bool silinenModu = false;
 
@@ -38,7 +39,7 @@ namespace Kutuphane.UI
             YetkiKontrol();
             if (_userPermissions.Contains("YAZAR_LISTELE"))
             {
-                Listele();
+                YazarlariYukle();
                 PasifKontrol();
             }
             KutulariTemizle();
@@ -66,30 +67,36 @@ namespace Kutuphane.UI
             label_txtAra.Visible = listele;
             textBox_Ara.Visible = listele;
         }
-        private void Listele()
+        private void YazarlariYukle()
         {
-            var yazarResult = yazarService.YazarListeGetirServis(x =>
-                x.AktifMi == true &&
-                (
-                    x.Ad.Contains(textBox_Ara.Text) ||
-                    x.Soyad.Contains(textBox_Ara.Text)
-                )
-            );
+            var result = yazarService.YazarListeGetirServis(x => x.AktifMi);
 
-            if (!yazarResult.IsSuccess)
+            if (!result.IsSuccess)
             {
-                MessageBox.Show(yazarResult.Message, "Hata");
+                MessageBox.Show(result.Message);
                 return;
             }
 
+            _tumYazarlar = result.Data.ToList();
+
             bilYazar.Clear();
+            foreach (var y in _tumYazarlar)
+                bilYazar.Add(y);
+        }
+        private void Ara()
+        {
+            string arama = textBox_Ara.Text.Trim().ToLower();
 
-            foreach (var item in yazarResult.Data)
-                bilYazar.Add(item);
+            var filtreliListe = string.IsNullOrWhiteSpace(arama)
+                ? _tumYazarlar
+                : _tumYazarlar.Where(x =>
+                    x.Ad.ToLower().Contains(arama) ||
+                    x.Soyad.ToLower().Contains(arama)
+                ).ToList();
 
-            dataGrid_Yazar.ClearSelection();
-            KutulariTemizle();
-            PasifKontrol();
+            bilYazar.Clear();
+            foreach (var y in filtreliListe)
+                bilYazar.Add(y);
         }
         private void btnKaydet_Click(object sender, EventArgs e)
         {
@@ -113,7 +120,7 @@ namespace Kutuphane.UI
             if (yazarResult.IsSuccess)
             {
                 MessageBox.Show("Yazar başarıyla kaydedildi.", "Başarılı");
-                Listele();
+                YazarlariYukle();
             }
             else
                 MessageBox.Show(yazarResult.Message, "Hata");
@@ -143,7 +150,7 @@ namespace Kutuphane.UI
             if (yazarResult.IsSuccess)
             {
                 MessageBox.Show("Yazar başarıyla güncellendi.", "Başarılı");
-                Listele();
+                YazarlariYukle();
             }
             else
                 MessageBox.Show(yazarResult.Message, "Hata");
@@ -172,7 +179,7 @@ namespace Kutuphane.UI
             if (uyeResult.IsSuccess)
             {
                 MessageBox.Show("Yazar başarıyla silindi (pasif edildi).", "Başarılı");
-                Listele();
+                YazarlariYukle();
                 PasifKontrol();
             }
             else
@@ -236,7 +243,7 @@ namespace Kutuphane.UI
             }
             else
             {
-                Listele();
+                YazarlariYukle();
                 btnGeriYukle.Visible = false;
                 btnKaydet.Enabled = true;
                 btnDuzenle.Enabled = true;
@@ -278,7 +285,7 @@ namespace Kutuphane.UI
 
             MessageBox.Show("Yazar başarıyla geri yüklendi.");
 
-            Listele();
+            YazarlariYukle();
             silinenModu = false;
             btnSilinenleriGoster.Text = "🗑️ Silinenleri Göster";
             btnGeriYukle.Visible = false;
@@ -287,11 +294,6 @@ namespace Kutuphane.UI
             btnSil.Enabled = true;
             PasifKontrol();
             KutulariTemizle();
-            dataGrid_Yazar.ClearSelection();
-        }
-        private void btnAra_Click(object sender, EventArgs e)
-        {
-            Listele();
             dataGrid_Yazar.ClearSelection();
         }
         private void dataGrid_Yazar_SelectionChanged(object sender, EventArgs e)
@@ -330,11 +332,11 @@ namespace Kutuphane.UI
         }
         private void textBox_Ara_TextChanged(object sender, EventArgs e)
         {
-            Listele();
+            Ara();
         }
         private void comboBox_Sirala_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Listele();
+            YazarlariYukle();
         }
         Dictionary<String, bool> sortDirections = new();
         private void dataGrid_Yazar_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)

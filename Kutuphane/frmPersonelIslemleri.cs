@@ -13,6 +13,7 @@ namespace Kutuphane.UI
     public partial class frmPersonelIslemleri : Form
     {
         BindingList<PersonelBilgileriDto> bilPersonel = new BindingList<PersonelBilgileriDto>();
+        private List<PersonelBilgileriDto> _tumPersoneller = new();
         IPersonelService personelService = new PersonelManager(new PersonelDal());
         bool silinenModu = false;
 
@@ -32,7 +33,7 @@ namespace Kutuphane.UI
             YetkiKontrol();
             if (_userPermissions.Contains("PERSONEL_LISTELE"))
             {
-                Listele();
+                PersonelleriYukle();
                 ComboDoldur();
                 PasifKontrol();
             }
@@ -60,32 +61,36 @@ namespace Kutuphane.UI
             label_txtAra.Visible = listele;
             textBox_Ara.Visible = listele;
         }
-        private void Listele()
+        private void PersonelleriYukle()
         {
-            try
+            var result = personelService.PersonelBilgiGetirServis(x => x.AktifMi);
+
+            if (!result.IsSuccess)
             {
-                var personelResult = personelService.PersonelBilgiGetirServis(x =>
-                    x.AktifMi == true &&
-                    (x.Ad.Contains(textBox_Ara.Text) ||
-                     x.Soyad.Contains(textBox_Ara.Text))
-                );
-
-                if (!personelResult.IsSuccess)
-                {
-                    MessageBox.Show(personelResult.Message, "Hata");
-                    return;
-                }
-
-                bilPersonel.Clear();
-                foreach (var item in personelResult.Data)
-                    bilPersonel.Add(item);
-
-                dataGrid_Personel.ClearSelection();
+                MessageBox.Show(result.Message, "Hata");
+                return;
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Listeleme sırasında hata oluştu:\n" + ex.Message);
-            }
+
+            _tumPersoneller = result.Data.ToList();
+
+            bilPersonel.Clear();
+            foreach (var p in _tumPersoneller)
+                bilPersonel.Add(p);
+        }
+        private void Ara()
+        {
+            string arama = textBox_Ara.Text.Trim().ToLower();
+
+            var filtreliListe = string.IsNullOrWhiteSpace(arama)
+                ? _tumPersoneller
+                : _tumPersoneller.Where(x =>
+                    x.Ad.ToLower().Contains(arama) ||
+                    x.Soyad.ToLower().Contains(arama)
+                ).ToList();
+
+            bilPersonel.Clear();
+            foreach (var p in filtreliListe)
+                bilPersonel.Add(p);
         }
         private void ComboDoldur()
         {
@@ -130,7 +135,7 @@ namespace Kutuphane.UI
                 if (personelResult.IsSuccess)
                 {
                     MessageBox.Show("Personel başarıyla kaydedildi.", "Başarılı");
-                    Listele();
+                    PersonelleriYukle();
                 }
                 else
                     MessageBox.Show(personelResult.Message, "Hata");
@@ -174,7 +179,7 @@ namespace Kutuphane.UI
                 if (personelResult.IsSuccess)
                 {
                     MessageBox.Show("Personel başarıyla güncellendi.", "Başarılı");
-                    Listele();
+                    PersonelleriYukle();
                 }
                 else
                     MessageBox.Show(personelResult.Message, "Hata");
@@ -217,7 +222,7 @@ namespace Kutuphane.UI
                 if (personelResult.IsSuccess)
                 {
                     MessageBox.Show("Personel başarıyla silindi.", "Başarılı");
-                    Listele();
+                    PersonelleriYukle();
                     PasifKontrol();
 
                 }
@@ -284,7 +289,7 @@ namespace Kutuphane.UI
             }
             else
             {
-                Listele();
+                PersonelleriYukle();
                 btnGeriYukle.Visible = false;
                 btnKaydet.Enabled = true;
                 btnDuzenle.Enabled = true;
@@ -324,7 +329,7 @@ namespace Kutuphane.UI
                 }
 
                 MessageBox.Show("Personel başarıyla geri yüklendi.");
-                Listele();
+                PersonelleriYukle();
                 silinenModu = false;
                 btnSilinenleriGoster.Text = "🗑️ Silinen Personelleri Göster";
                 btnGeriYukle.Visible = false;
@@ -338,10 +343,6 @@ namespace Kutuphane.UI
             {
                 MessageBox.Show("Personel geri yüklenirken hata oluştu:\n" + ex.Message);
             }
-        }
-        private void btnAra_Click(object sender, EventArgs e)
-        {
-            Listele();
         }
         private void dataGrid_Personel_SelectionChanged(object sender, EventArgs e)
         {
@@ -415,7 +416,7 @@ namespace Kutuphane.UI
         }
         private void textBox_Ara_TextChanged(object sender, EventArgs e)
         {
-            Listele();
+            Ara();
         }
         Dictionary<string, bool> sortDirections = new();
         private void dataGrid_Personel_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -423,10 +424,6 @@ namespace Kutuphane.UI
             DataGridSortHelper.SortByColumn<PersonelBilgileriDto>(dataGrid_Personel, bilPersonel, e.ColumnIndex, sortDirections);
             dataGrid_Personel.ClearSelection();
             KutulariTemizle();
-        }
-        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
         }
     }
 }
