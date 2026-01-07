@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Kutuphane.DAL.Migrations
 {
     [DbContext(typeof(KutuphaneDbContext))]
-    [Migration("20260105055910_ss")]
+    [Migration("20260107045841_ss")]
     partial class ss
     {
         /// <inheritdoc />

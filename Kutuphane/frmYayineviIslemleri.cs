@@ -12,7 +12,7 @@ namespace Kutuphane.UI
     public partial class frmYayineviIslemleri : Form
     {
         BindingList<Yayinevi> bilYayinevi = new BindingList<Yayinevi>();
-        private List<Yayinevi> _tumYayinevleri = new(); 
+        private List<Yayinevi> _tumYayinevleri = new();
         IYayineviService yayineviService = new YayineviManager(new YayineviDal());
         bool silinenModu = false;
 

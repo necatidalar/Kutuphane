@@ -104,9 +104,9 @@ namespace Kutuphane.UI
             panel_Ust.Controls.Add(label_Mesaj);
             panel_Ust.Controls.Add(lblKullaniciAdi);
             panel_Ust.Dock = DockStyle.Top;
-            panel_Ust.Location = new Point(0, 28);
+            panel_Ust.Location = new Point(0, 52);
             panel_Ust.Name = "panel_Ust";
-            panel_Ust.Size = new Size(1521, 60);
+            panel_Ust.Size = new Size(1133, 60);
             panel_Ust.TabIndex = 4;
             // 
             // label_Mesaj
@@ -289,11 +289,11 @@ namespace Kutuphane.UI
             flowLayoutPanel_Kartlar.Controls.Add(panel_Odunc);
             flowLayoutPanel_Kartlar.Controls.Add(panel_Geciklis);
             flowLayoutPanel_Kartlar.Dock = DockStyle.Fill;
-            flowLayoutPanel_Kartlar.Location = new Point(0, 88);
+            flowLayoutPanel_Kartlar.Location = new Point(0, 112);
             flowLayoutPanel_Kartlar.Margin = new Padding(6);
             flowLayoutPanel_Kartlar.Name = "flowLayoutPanel_Kartlar";
             flowLayoutPanel_Kartlar.Padding = new Padding(10);
-            flowLayoutPanel_Kartlar.Size = new Size(1521, 623);
+            flowLayoutPanel_Kartlar.Size = new Size(1133, 599);
             flowLayoutPanel_Kartlar.TabIndex = 7;
             // 
             // panel_Kitap
@@ -403,7 +403,7 @@ namespace Kutuphane.UI
             panel_Uye.Controls.Add(label_UyeErkekSayisi);
             panel_Uye.Controls.Add(label_UyeSayisi);
             panel_Uye.Controls.Add(label2);
-            panel_Uye.Location = new Point(920, 20);
+            panel_Uye.Location = new Point(20, 200);
             panel_Uye.Margin = new Padding(10);
             panel_Uye.Name = "panel_Uye";
             panel_Uye.Size = new Size(280, 160);
@@ -456,7 +456,7 @@ namespace Kutuphane.UI
             panel_Odunc.BackColor = Color.FromArgb(230, 126, 34);
             panel_Odunc.Controls.Add(label_OduncSayisi);
             panel_Odunc.Controls.Add(label3);
-            panel_Odunc.Location = new Point(1220, 20);
+            panel_Odunc.Location = new Point(320, 200);
             panel_Odunc.Margin = new Padding(10);
             panel_Odunc.Name = "panel_Odunc";
             panel_Odunc.Size = new Size(280, 160);
@@ -489,7 +489,7 @@ namespace Kutuphane.UI
             panel_Geciklis.BackColor = Color.FromArgb(192, 57, 43);
             panel_Geciklis.Controls.Add(label_GecikmisUyeSayisi);
             panel_Geciklis.Controls.Add(label4);
-            panel_Geciklis.Location = new Point(20, 200);
+            panel_Geciklis.Location = new Point(620, 200);
             panel_Geciklis.Margin = new Padding(10);
             panel_Geciklis.Name = "panel_Geciklis";
             panel_Geciklis.Size = new Size(280, 160);
@@ -527,10 +527,11 @@ namespace Kutuphane.UI
             menuStrip1.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 162);
             menuStrip1.ImageScalingSize = new Size(20, 20);
             menuStrip1.Items.AddRange(new ToolStripItem[] { gostergePaneliToolStripMenuItem, yerlesimAyarlariToolStripMenuItem, kitapIslemleriToolStripMenuItem, oduncToolStripMenuItem, uyeToolStripMenuItem, personelToolStripMenuItem, raporlamaToolStripMenuItem, yonetimToolStripMenuItem, ayarlarToolStripMenuItem, cikisToolStripMenuItem });
+            menuStrip1.LayoutStyle = ToolStripLayoutStyle.Flow;
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.RenderMode = ToolStripRenderMode.Professional;
-            menuStrip1.Size = new Size(1521, 28);
+            menuStrip1.Size = new Size(1133, 52);
             menuStrip1.TabIndex = 3;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -672,7 +673,7 @@ namespace Kutuphane.UI
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(1521, 711);
+            ClientSize = new Size(1133, 711);
             Controls.Add(panel_Giris);
             Controls.Add(flowLayoutPanel_Kartlar);
             Controls.Add(panel_Ust);

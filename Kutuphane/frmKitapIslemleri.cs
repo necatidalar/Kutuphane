@@ -31,7 +31,7 @@ namespace Kutuphane.UI
             YetkiKontrol();
             if (_userPermissions.Contains("KITAP_LISTELE"))
             {
-                 KitaplariYukle();
+                KitaplariYukle();
                 PasifKontrol();
             }
             ComboDoldur();
@@ -142,7 +142,7 @@ namespace Kutuphane.UI
             }
 
             MessageBox.Show("Kitap başarıyla eklendi.", "Başarılı");
-             KitaplariYukle();
+            KitaplariYukle();
             Temizle();
         }
         private void btnDuzenle_Click(object sender, EventArgs e)
@@ -163,7 +163,7 @@ namespace Kutuphane.UI
             }
 
             MessageBox.Show("Kitap başarıyla güncellendi.", "Başarılı");
-             KitaplariYukle();
+            KitaplariYukle();
             Temizle();
         }
         private void btnSil_Click(object sender, EventArgs e)
@@ -200,7 +200,7 @@ namespace Kutuphane.UI
             }
 
             MessageBox.Show("Kitap başarıyla silindi (pasif edildi).", "Başarılı");
-             KitaplariYukle();
+            KitaplariYukle();
             Temizle();
             PasifKontrol();
         }
@@ -263,7 +263,7 @@ namespace Kutuphane.UI
             }
             else
             {
-                 KitaplariYukle();
+                KitaplariYukle();
                 btnGeriYukle.Visible = false;
                 btnKaydet.Enabled = true;
                 btnDuzenle.Enabled = true;
@@ -302,7 +302,7 @@ namespace Kutuphane.UI
 
             MessageBox.Show("Kitap başarıyla geri yüklendi.", "Başarılı");
 
-             KitaplariYukle();
+            KitaplariYukle();
             silinenModu = false;
             btnSilinenleriGoster.Text = "🗑️ Silinenleri Göster";
             btnGeriYukle.Visible = false;
