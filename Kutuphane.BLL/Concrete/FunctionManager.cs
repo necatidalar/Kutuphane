@@ -16,7 +16,7 @@ namespace Kutuphane.BLL.Concrete
             _iDal = iDal;
         }
 
-        public IDataResult<T> ExecuteScalarFunctionService<T>(string functionName, params object[] parameters) 
+        public IDataResult<T> ExecuteScalarFunctionService<T>(string functionName, params object[] parameters)
         {
             return _iDal.ExecuteScalarFunction<T>(functionName, parameters);
         }

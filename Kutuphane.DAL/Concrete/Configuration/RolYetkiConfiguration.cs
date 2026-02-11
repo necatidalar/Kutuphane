@@ -1,5 +1,4 @@
-﻿    using Kutuphane.Model.Entity;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Kutuphane.DAL.Concrete.Configuration

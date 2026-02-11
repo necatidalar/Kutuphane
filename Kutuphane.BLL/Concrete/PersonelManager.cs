@@ -5,16 +5,14 @@ using Kutuphane.DAL.Abstract;
 using Kutuphane.DAL.Concrete;
 using Kutuphane.Model.DTO;
 using Kutuphane.Model.Entity;
-using Microsoft.IdentityModel.Tokens;
 using System.Linq.Expressions;
-using System.Reflection.Metadata;
 
 namespace Kutuphane.BLL.Concrete
 {
     public class PersonelManager : IPersonelService
     {
         readonly IPersonelDal _personelDal;
-        
+
 
         public PersonelManager(IPersonelDal personelDal)
         {
@@ -125,7 +123,7 @@ namespace Kutuphane.BLL.Concrete
             if (string.IsNullOrWhiteSpace(kullanici.KullaniciAdi) || string.IsNullOrWhiteSpace(kullanici.Sifre))
                 return new ErrorResult("Kullanıcı adı veya şifre boş olamaz.");
 
-           IFunctionService  _functionService = new FunctionManager( new FunctionDal());
+            IFunctionService _functionService = new FunctionManager(new FunctionDal());
             var funcResult = _functionService.ExecuteScalarFunctionService<bool>("fn_LoginKontrol", new object[] { kullanici.KullaniciAdi, kullanici.Sifre });
 
             if (!funcResult.IsSuccess)

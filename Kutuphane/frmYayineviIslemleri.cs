@@ -12,6 +12,7 @@ namespace Kutuphane.UI
     public partial class frmYayineviIslemleri : Form
     {
         BindingList<Yayinevi> bilYayinevi = new BindingList<Yayinevi>();
+        private List<Yayinevi> _tumYayinevleri = new();
         IYayineviService yayineviService = new YayineviManager(new YayineviDal());
         bool silinenModu = false;
 
@@ -31,7 +32,7 @@ namespace Kutuphane.UI
             YetkiKontrol();
             if (_userPermissions.Contains("YAYINEVI_LISTELE"))
             {
-                Listele();
+                YayinevleriniYukle();
                 PasifKontrol();
             }
             DataGridThemeManager.Apply(dataGrid_Yayinevi);
@@ -48,8 +49,8 @@ namespace Kutuphane.UI
             btnDuzenle.Visible = listele && guncelle;
             btnSil.Visible = listele && sil;
 
-            btnSilinenleriGoster.Visible = listele;
-            btnGeriYukle.Visible = listele && sil;
+            btnSilinenleriGoster.Visible = false;
+            btnGeriYukle.Visible = false;
 
             btnTemizle.Visible = ekle || guncelle;
             groupBox1.Visible = ekle || guncelle || sil;
@@ -57,27 +58,36 @@ namespace Kutuphane.UI
             label_txtAra.Visible = listele;
             textBox_Ara.Visible = listele;
         }
-        private void Listele()
+        private void YayinevleriniYukle()
         {
-            var yayineviResult = yayineviService.GetListByFilterService(x =>
-                x.AktifMi == true &&
-                x.Ad.Contains(textBox_Ara.Text)
-            );
+            var result = yayineviService.GetListByFilterService(x => x.AktifMi);
 
-            if (!yayineviResult.IsSuccess)
+            if (!result.IsSuccess)
             {
-                MessageBox.Show(yayineviResult.Message, "Hata");
+                MessageBox.Show(result.Message, "Hata");
                 return;
             }
 
+            _tumYayinevleri = result.Data.ToList();
+
             bilYayinevi.Clear();
+            foreach (var y in _tumYayinevleri)
+                bilYayinevi.Add(y);
+        }
+        private void Ara()
+        {
+            string arama = textBox_Ara.Text.Trim().ToLower();
 
-            foreach (var item in yayineviResult.Data)
-                bilYayinevi.Add(item);
+            var filtreliListe = string.IsNullOrWhiteSpace(arama)
+                ? _tumYayinevleri
+                : _tumYayinevleri.Where(x =>
+                    x.Ad.ToLower().Contains(arama) ||
+                    (x.KurulusYili != null && x.KurulusYili.ToString().Contains(arama))
+                ).ToList();
 
-            dataGrid_Yayinevi.ClearSelection();
-            KutulariTemizle();
-            PasifKontrol();
+            bilYayinevi.Clear();
+            foreach (var y in filtreliListe)
+                bilYayinevi.Add(y);
         }
         private void btnKaydet_Click(object sender, EventArgs e)
         {
@@ -97,7 +107,7 @@ namespace Kutuphane.UI
             }
 
             MessageBox.Show("Yayınevi başarıyla kaydedildi.", "Başarılı");
-            Listele();
+            YayinevleriniYukle();
         }
         private void btnDuzenle_Click(object sender, EventArgs e)
         {
@@ -120,7 +130,7 @@ namespace Kutuphane.UI
             }
 
             MessageBox.Show("Yayınevi başarıyla güncellendi.", "Başarılı");
-            Listele();
+            YayinevleriniYukle();
         }
         private void btnSil_Click(object sender, EventArgs e)
         {
@@ -146,7 +156,7 @@ namespace Kutuphane.UI
             if (uyeResult.IsSuccess)
             {
                 MessageBox.Show("Yayınevi başarıyla silindi (pasif edildi).", "Başarılı");
-                Listele();
+                YayinevleriniYukle();
                 PasifKontrol();
             }
             else
@@ -172,9 +182,12 @@ namespace Kutuphane.UI
                 btnSilinenleriGoster.Visible = false;
                 return;
             }
+
             dataGrid_Yayinevi.ClearSelection();
             var pasifResult = yayineviService.GetListByFilterService(x => x.AktifMi == false);
-            btnSilinenleriGoster.Visible = pasifResult.IsSuccess && pasifResult.Data.Any();
+
+            bool silinmisVarMi = pasifResult.IsSuccess && pasifResult.Data.Any();
+            btnSilinenleriGoster.Visible = silinmisVarMi;
         }
         private void btnSilinenleriGoster_Click(object sender, EventArgs e)
         {
@@ -190,19 +203,23 @@ namespace Kutuphane.UI
                 btnKaydet.Enabled = false;
                 btnDuzenle.Enabled = false;
                 btnSil.Enabled = false;
+
                 silinenModu = true;
-                btnSilinenleriGoster.Text = "Yayınevilerini Göster";
+                btnSilinenleriGoster.Text = "Aktif Yayınevlerini Göster";
             }
             else
             {
-                Listele();
+                YayinevleriniYukle();
+
                 btnGeriYukle.Visible = false;
                 btnKaydet.Enabled = true;
                 btnDuzenle.Enabled = true;
                 btnSil.Enabled = true;
+
                 silinenModu = false;
                 btnSilinenleriGoster.Text = "🗑️ Silinenleri Göster";
             }
+
             dataGrid_Yayinevi.ClearSelection();
             KutulariTemizle();
         }
@@ -210,7 +227,7 @@ namespace Kutuphane.UI
         {
             if (!int.TryParse(textBox_YayineviId.Text, out int id))
             {
-                MessageBox.Show("Lütfen bir Yayinevi seçiniz.");
+                MessageBox.Show("Lütfen bir Yayınevi seçiniz.");
                 return;
             }
 
@@ -218,14 +235,14 @@ namespace Kutuphane.UI
 
             if (!YayineviResult.IsSuccess || YayineviResult.Data == null)
             {
-                MessageBox.Show("Yayinevi bulunamadı.");
+                MessageBox.Show("Yayınevi bulunamadı.");
                 return;
             }
 
-            var uye = YayineviResult.Data;
-            uye.AktifMi = true;
+            var yayinevi = YayineviResult.Data;
+            yayinevi.AktifMi = true;
 
-            var updateResult = yayineviService.UpdateService(uye);
+            var updateResult = yayineviService.UpdateService(yayinevi);
 
             if (!updateResult.IsSuccess)
             {
@@ -233,8 +250,8 @@ namespace Kutuphane.UI
                 return;
             }
 
-            MessageBox.Show("Yayinevi başarıyla geri yüklendi.");
-            Listele();
+            MessageBox.Show("Yayınevi başarıyla geri yüklendi.");
+            YayinevleriniYukle();
             silinenModu = false;
             btnSilinenleriGoster.Text = "🗑️ Silinenleri Göster";
             btnGeriYukle.Visible = false;
@@ -247,7 +264,7 @@ namespace Kutuphane.UI
         }
         private void btnAra_Click(object sender, EventArgs e)
         {
-            Listele();
+            YayinevleriniYukle();
             dataGrid_Yayinevi.ClearSelection();
         }
         private void dataGrid_Yayinevi_SelectionChanged(object sender, EventArgs e)
@@ -265,7 +282,7 @@ namespace Kutuphane.UI
         }
         private void textBox_Ara_TextChanged(object sender, EventArgs e)
         {
-            Listele();
+            Ara();
         }
         Dictionary<string, bool> sortDirections = new();
         private void dataGrid_Yayinevi_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)

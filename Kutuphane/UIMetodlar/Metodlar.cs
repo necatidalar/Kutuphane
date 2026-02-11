@@ -1,7 +1,4 @@
-﻿
-
-using Microsoft.VisualBasic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace Kutuphane.UI.UIMetodlar
 {
@@ -15,7 +12,7 @@ namespace Kutuphane.UI.UIMetodlar
             comboBox.SelectedIndex = -1; // Hiçbir öğe seçilmemiş olarak başlat
         }
 
-        public static void ComboItemDoldur<T>(ComboBox comboBox, ICollection<T> dataSource, string displayMember, string valueMember) 
+        public static void ComboItemDoldur<T>(ComboBox comboBox, ICollection<T> dataSource, string displayMember, string valueMember)
         {
             comboBox.Items.Clear();
             foreach (T item in dataSource)

@@ -11,8 +11,8 @@ namespace Kutuphane.UI
 {
     public partial class frmKategoriIslemleri : Form
     {
-
         BindingList<Kategori> bilKategori = new BindingList<Kategori>();
+        private List<Kategori> _tumKategoriler = new();
         IKategoriService kategoriService = new KategoriManager(new KategoriDal());
         bool silinenModu = false;
 
@@ -33,7 +33,7 @@ namespace Kutuphane.UI
             YetkiKontrol();
             if (_userPermissions.Contains("KATEGORI_LISTELE"))
             {
-                Listele();
+                KategorileriYukle();
                 PasifKontrol();
             }
             KutulariTemizle();
@@ -52,8 +52,8 @@ namespace Kutuphane.UI
             btnDuzenle.Visible = listele && guncelle;
             btnSil.Visible = listele && sil;
 
-            btnSilinenleriGoster.Visible = listele;
-            btnGeriYukle.Visible = listele && sil;
+            btnSilinenleriGoster.Visible = false;
+            btnGeriYukle.Visible = false;
 
             btnTemizle.Visible = ekle || guncelle;
             groupBox1.Visible = ekle || guncelle || sil;
@@ -61,12 +61,9 @@ namespace Kutuphane.UI
             label_txtAra.Visible = listele;
             textBox_Ara.Visible = listele;
         }
-        private void Listele()
+        private void KategorileriYukle()
         {
-            var result = kategoriService.GetListByFilterService(x =>
-                x.AktifMi &&
-                x.KategoriAdi.Contains(textBox_Ara.Text)
-            );
+            var result = kategoriService.GetListByFilterService(x => x.AktifMi);
 
             if (!result.IsSuccess)
             {
@@ -74,13 +71,23 @@ namespace Kutuphane.UI
                 return;
             }
 
-            bilKategori.Clear();
-            foreach (var item in result.Data)
-                bilKategori.Add(item);
+            _tumKategoriler = result.Data.ToList();
 
-            dataGrid_Kategori.ClearSelection();
-            KutulariTemizle();
-            PasifKontrol();
+            bilKategori.Clear();
+            foreach (var kategori in _tumKategoriler)
+                bilKategori.Add(kategori);
+        }
+        private void Ara()
+        {
+            string arama = textBox_Ara.Text.Trim().ToLower();
+
+            var filtreliListe = string.IsNullOrWhiteSpace(arama)
+                ? _tumKategoriler
+                : _tumKategoriler.Where(x => x.KategoriAdi.ToLower().Contains(arama)).ToList();
+
+            bilKategori.Clear();
+            foreach (var kategori in filtreliListe)
+                bilKategori.Add(kategori);
         }
         private void btnKaydet_Click(object sender, EventArgs e)
         {
@@ -101,7 +108,7 @@ namespace Kutuphane.UI
             }
 
             MessageBox.Show("Kategori başarıyla kaydedildi.", "Başarılı");
-            Listele();
+            KategorileriYukle();
         }
         private void btnDuzenle_Click(object sender, EventArgs e)
         {
@@ -125,7 +132,7 @@ namespace Kutuphane.UI
             }
 
             MessageBox.Show("Kategori başarıyla güncellendi.", "Başarılı");
-            Listele();
+            KategorileriYukle();
         }
         private void btnSil_Click(object sender, EventArgs e)
         {
@@ -151,7 +158,7 @@ namespace Kutuphane.UI
             if (uyeResult.IsSuccess)
             {
                 MessageBox.Show("Kategori başarıyla silindi (pasif edildi).", "Başarılı");
-                Listele();
+                KategorileriYukle();
                 PasifKontrol();
             }
             else
@@ -176,13 +183,15 @@ namespace Kutuphane.UI
                 return;
             }
             var pasifResult = kategoriService.GetListByFilterService(x => x.AktifMi == false);
-            btnSilinenleriGoster.Visible = pasifResult.IsSuccess && pasifResult.Data.Any();
+
+            bool silinmisVarMi = pasifResult.IsSuccess && pasifResult.Data.Any();
+            btnSilinenleriGoster.Visible = silinmisVarMi;
         }
         private void btnSilinenleriGoster_Click(object sender, EventArgs e)
         {
             if (!silinenModu)
             {
-                var sonuc = kategoriService.GetListByFilterService(x => x.AktifMi == false);
+                var sonuc = kategoriService.GetListByFilterService(x => !x.AktifMi);
 
                 bilKategori.Clear();
                 foreach (var item in sonuc.Data)
@@ -197,7 +206,7 @@ namespace Kutuphane.UI
             }
             else
             {
-                Listele();
+                KategorileriYukle();
                 btnGeriYukle.Visible = false;
                 btnKaydet.Enabled = true;
                 btnDuzenle.Enabled = true;
@@ -236,9 +245,9 @@ namespace Kutuphane.UI
             }
 
             MessageBox.Show("Kategori başarıyla geri yüklendi.");
-            Listele();
+            KategorileriYukle();
             silinenModu = false;
-            btnSilinenleriGoster.Text = "Silinenleri Göster";
+            btnSilinenleriGoster.Text = "🗑️ Silinenleri Göster";
             btnGeriYukle.Visible = false;
             btnKaydet.Enabled = true;
             btnDuzenle.Enabled = true;
@@ -249,7 +258,7 @@ namespace Kutuphane.UI
         }
         private void btnAra_Click(object sender, EventArgs e)
         {
-            Listele();
+            KategorileriYukle();
             dataGrid_Kategori.ClearSelection();
         }
         private void dataGrid_Kategori_SelectionChanged(object sender, EventArgs e)
@@ -298,7 +307,7 @@ namespace Kutuphane.UI
         }
         private void textBox_Ara_TextChanged(object sender, EventArgs e)
         {
-            Listele();
+            Ara();
         }
         Dictionary<string, bool> sortDirections = new();
         private void dataGrid_Kategori_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -306,28 +315,6 @@ namespace Kutuphane.UI
             DataGridSortHelper.SortByColumn<Kategori>(dataGrid_Kategori, bilKategori, e.ColumnIndex, sortDirections);
             dataGrid_Kategori.ClearSelection();
             KutulariTemizle();
-            //string kolonAdi = dataGrid_Kategori.Columns[e.ColumnIndex].DataPropertyName;
-
-            //if (kolonAdi != nameof(Kategori.KategoriAdi))
-            //    return;
-
-            //IEnumerable<Kategori> liste = bilKategori.ToList();
-
-            //if (kategoriAdiAsc)
-            //    liste = liste.OrderBy(x => x.KategoriAdi);
-            //else
-            //    liste = liste.OrderByDescending(x => x.KategoriAdi);
-
-            //kategoriAdiAsc = !kategoriAdiAsc;
-
-            //bilKategori.Clear();
-            //foreach (var item in liste)
-            //    bilKategori.Add(item);
-
-            //dataGrid_Kategori.Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection =
-            //    kategoriAdiAsc
-            //        ? SortOrder.Descending
-            //        : SortOrder.Ascending;
         }
     }
 }

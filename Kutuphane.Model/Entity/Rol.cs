@@ -8,7 +8,7 @@ namespace Kutuphane.Model.Entity
         public string RolAdi { get; set; }
         public string RolKodu { get; set; }
         public bool AktifMi { get; set; } = true;
- 
+
         public ICollection<PersonelRol> PersonelRolleri { get; set; }
         public ICollection<RolYetki> RolYetkileri { get; set; }
     }

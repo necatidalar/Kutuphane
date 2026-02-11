@@ -21,6 +21,7 @@
             grid.GridColor = Color.FromArgb(231, 229, 255);
 
             // HEADER
+            grid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             grid.ColumnHeadersHeight = 35;
             grid.ColumnHeadersDefaultCellStyle = new DataGridViewCellStyle
             {
