@@ -15,9 +15,9 @@ namespace Kutuphane.DAL.Contexes
             if (!optionsBuilder.IsConfigured)
             {
 
-                optionsBuilder.UseSqlServer("Server=CLK-STAJERPC\\STAJYERSQL;Database=KutuphaneOtomasyonu;User Id=sa;Password=Yesilyurt.55; TrustServerCertificate=True;");
+                //optionsBuilder.UseSqlServer("Server=CLK-STAJERPC\\STAJYERSQL;Database=KutuphaneOtomasyonu;User Id=sa;Password=Yesilyurt.55; TrustServerCertificate=True;");
 
-                //optionsBuilder.UseSqlServer("Server=localhost;Database=KutuphaneOtomasyonu;Trusted_Connection=True;TrustServerCertificate=True;");
+                optionsBuilder.UseSqlServer("Server=localhost;Database=KutuphaneOtomasyonu;Trusted_Connection=True;TrustServerCertificate=True;");
 
                 //optionsBuilder.UseSqlServer("Server=YDC-TUNAKSU\\MSSQL2022;Database=stajyerkutuphane;User Id=stajyer;Password=Yesilyurt.55; TrustServerCertificate=true;");
 
