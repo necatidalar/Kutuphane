@@ -142,7 +142,7 @@ namespace Kutuphane.UI
             panel_Giris.Controls.Add(textBox_Sifre);
             panel_Giris.Controls.Add(textBox_KullaniciAdi);
             panel_Giris.Controls.Add(label9);
-            panel_Giris.Location = new Point(700, 341);
+            panel_Giris.Location = new Point(0, 0);
             panel_Giris.MaximumSize = new Size(635, 350);
             panel_Giris.Name = "panel_Giris";
             panel_Giris.Size = new Size(635, 350);
