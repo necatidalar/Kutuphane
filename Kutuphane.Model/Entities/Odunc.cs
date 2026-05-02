@@ -13,6 +13,13 @@ namespace Kutuphane.Model.Entity
         public int TeslimEdenPersonelId { get; set; }
         public int? TeslimAlanPersonelId { get; set; }
 
+        // V2 - İade / durum altyapısı
+        public DateTime? PlanlananIadeTarihi { get; set; }
+        public DateTime? GercekIadeTarihi { get; set; }
+        public string? OduncDurum { get; set; }
+        public string? IadeNotu { get; set; }
+        public int? GecikmeGunSayisi { get; set; }
+
         public Uye Uye { get; set; }
         public Kitap Kitap { get; set; }
         public Personel TeslimEdenPersonel { get; set; }

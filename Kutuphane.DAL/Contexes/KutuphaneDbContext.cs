@@ -47,5 +47,25 @@ namespace Kutuphane.DAL.Contexes
         public DbSet<PersonelRol> PersonelRolleri { get; set; }
         public DbSet<RolYetki> RolYetkileri { get; set; }
 
+
+        public DbSet<Kurum> Kurumlar { get; set; }
+        public DbSet<UyeTipi> UyeTipleri { get; set; }
+        public DbSet<OduncKural> OduncKurallari { get; set; }
+
+        public DbSet<AlanTanim> AlanTanimlari { get; set; }
+        public DbSet<AlanSecenek> AlanSecenekleri { get; set; }
+        public DbSet<FormAlanAyari> FormAlanAyarlari { get; set; }
+        public DbSet<EntityEkAlanDegeri> EntityEkAlanDegerleri { get; set; }
+
+        public DbSet<DashboardWidget> DashboardWidgetlari { get; set; }
+        public DbSet<DashboardWidgetAyari> DashboardWidgetAyarlari { get; set; }
+        public DbSet<DashboardWidgetRol> DashboardWidgetRolleri { get; set; }
+
+        public DbSet<MenuTanim> MenuTanimlari { get; set; }
+        public DbSet<MenuAyari> MenuAyarlari { get; set; }
+
+        public DbSet<SistemAyari> SistemAyarlari { get; set; }
+        public DbSet<AuditLog> AuditLoglari { get; set; }
+        public DbSet<VeritabaniSurum> VeritabaniSurumleri { get; set; }
     }
 }

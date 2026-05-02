@@ -15,7 +15,14 @@ namespace Kutuphane.Model.Entity
         public string Adres { get; set; }
         public string AdresDetay { get; set; }
         public bool AktifMi { get; set; }
+
+        // V2 - Kurum / Üye tipi altyapısı
+        public int KurumId { get; set; }
+        public int UyeTipiId { get; set; }
+
         public ICollection<Odunc> Oduncler { get; set; }
         public Cinsiyet? Cinsiyet { get; set; }
+        public Kurum? Kurum { get; set; }
+        public UyeTipi? UyeTipi { get; set; }
     }
 }

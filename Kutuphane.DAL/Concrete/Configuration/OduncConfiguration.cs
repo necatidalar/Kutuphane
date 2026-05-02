@@ -1,6 +1,4 @@
-﻿
-
-using Kutuphane.Model.Entity;
+﻿using Kutuphane.Model.Entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -10,35 +8,75 @@ namespace Kutuphane.DAL.Concrete.Configuration
     {
         public void Configure(EntityTypeBuilder<Odunc> builder)
         {
+            builder.ToTable("Oduncler");
+
             builder.HasKey(o => o.OduncId);
+
             builder.Property(o => o.UyeId)
-                .IsRequired();
+                   .IsRequired();
+
             builder.Property(o => o.KitapId)
-                .IsRequired();
+                   .IsRequired();
+
             builder.Property(o => o.AlisTarihi)
-                .HasColumnType("datetime")
-                .HasDefaultValueSql("GETDATE()")
-                .IsRequired();
+                   .HasColumnType("datetime")
+                   .HasDefaultValueSql("GETDATE()")
+                   .IsRequired();
+
             builder.Property(o => o.TeslimTarihi)
-                .HasColumnType("datetime")
-                .IsRequired(false);
+                   .HasColumnType("datetime")
+                   .IsRequired(false);
+
             builder.Property(o => o.TeslimEdildi)
-                .IsRequired()
-                .HasDefaultValue(false);
+                   .IsRequired()
+                   .HasDefaultValue(false);
+
             builder.Property(o => o.TeslimEdenPersonelId)
-                .IsRequired();
+                   .IsRequired();
+
             builder.Property(o => o.TeslimAlanPersonelId)
-                .IsRequired(false);
+                   .IsRequired(false);
+
+            builder.Property(o => o.PlanlananIadeTarihi)
+                   .HasColumnType("datetime")
+                   .IsRequired(false);
+
+            builder.Property(o => o.GercekIadeTarihi)
+                   .HasColumnType("datetime")
+                   .IsRequired(false);
+
+            builder.Property(o => o.OduncDurum)
+                   .HasColumnType("varchar")
+                   .HasMaxLength(30)
+                   .IsRequired(false);
+
+            builder.Property(o => o.IadeNotu)
+                   .HasColumnType("nvarchar")
+                   .HasMaxLength(500)
+                   .IsRequired(false);
+
+            builder.Property(o => o.GecikmeGunSayisi)
+                   .IsRequired(false);
 
             builder.HasOne(o => o.Uye)
-                .WithMany(u => u.Oduncler)
-                .HasForeignKey(o => o.UyeId)
-                .OnDelete(DeleteBehavior.Restrict);
-            builder.HasOne(o => o.Kitap)
-                .WithMany(k => k.Oduncler)
-                .HasForeignKey(o => o.KitapId)
-                .OnDelete(DeleteBehavior.Restrict);
+                   .WithMany(u => u.Oduncler)
+                   .HasForeignKey(o => o.UyeId)
+                   .OnDelete(DeleteBehavior.Restrict);
 
+            builder.HasOne(o => o.Kitap)
+                   .WithMany(k => k.Oduncler)
+                   .HasForeignKey(o => o.KitapId)
+                   .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasOne(o => o.TeslimEdenPersonel)
+                   .WithMany()
+                   .HasForeignKey(o => o.TeslimEdenPersonelId)
+                   .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasOne(o => o.TeslimAlanPersonel)
+                   .WithMany()
+                   .HasForeignKey(o => o.TeslimAlanPersonelId)
+                   .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
