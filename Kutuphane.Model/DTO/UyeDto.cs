@@ -30,6 +30,7 @@ namespace Kutuphane.Model.DTO
         public string? OkulNo { get; set; }
         public string? Sinif { get; set; }
         public string? Sube { get; set; }
+        public string? VeliAdi { get; set; }
         public string? VeliTelefonu { get; set; }
         public string? Brans { get; set; }
     }

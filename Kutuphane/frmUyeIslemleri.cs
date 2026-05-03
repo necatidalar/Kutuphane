@@ -5,6 +5,7 @@ using Kutuphane.DAL.Contexes;
 using Kutuphane.Model.DTO;
 using Kutuphane.Model.Entity;
 using Kutuphane.UI.Theme;
+using Kutuphane.UI.Helpers;
 using Kutuphane.UI.UIMetodlar;
 using System.ComponentModel;
 
@@ -35,6 +36,7 @@ namespace Kutuphane.UI
             {
                 UyeleriYukle();
                 ComboDoldur();
+                V2DinamikAlanSisteminiHazirla();
                 PasifKontrol();
             }
             DataGridThemeManager.Apply(dataGrid_Uye);
@@ -150,7 +152,9 @@ namespace Kutuphane.UI
                 Adres = textBox_Adres.Text.Trim(),
                 AdresDetay = richTextBox_AdresDetay.Text.Trim(),
                 DogumTarihi = dateTimePicker1.Value,
-                AktifMi = true
+                AktifMi = true,
+                KurumId = V2SeciliKurumIdGetir(),
+                UyeTipiId = V2SeciliUyeTipiIdGetir()
             };
 
             var result = uyeService.AddService(yeniUye);
@@ -160,6 +164,8 @@ namespace Kutuphane.UI
                 MessageBox.Show(result.Message, "Hata");
                 return;
             }
+
+            V2DinamikAlanDegerleriniKaydet(V2UyeIdGuvenliGetir(yeniUye));
 
             MessageBox.Show("Üye başarıyla kaydedildi.");
             UyeleriYukle();
@@ -187,7 +193,9 @@ namespace Kutuphane.UI
                 Adres = textBox_Adres.Text.Trim(),
                 AdresDetay = richTextBox_AdresDetay.Text.Trim(),
                 DogumTarihi = dateTimePicker1.Value,
-                AktifMi = true
+                AktifMi = true,
+                KurumId = V2SeciliKurumIdGetir(),
+                UyeTipiId = V2SeciliUyeTipiIdGetir()
             };
 
             var result = uyeService.UpdateService(yeniUye);
@@ -197,6 +205,8 @@ namespace Kutuphane.UI
                 MessageBox.Show(result.Message, "Hata");
                 return;
             }
+
+            V2DinamikAlanDegerleriniKaydet(id);
 
             MessageBox.Show("Üye güncellendi.");
             UyeleriYukle();
@@ -254,6 +264,7 @@ namespace Kutuphane.UI
             richTextBox_AdresDetay.Clear();
             comboBox_Cinsiyet.SelectedIndex = -1;
             dateTimePicker1.Value = DateTime.Now;
+            V2DinamikAlanlariTemizle();
         }
         private void dataGrid_Uye_SelectionChanged(object sender, EventArgs e)
         {
@@ -271,6 +282,8 @@ namespace Kutuphane.UI
                 textBox_Adres.Text = row.Adres;
                 richTextBox_AdresDetay.Text = row.AdresDetay;
                 dateTimePicker1.Value = row.DogumTarihi;
+                V2UyeTipiSec(row.UyeTipiId);
+                V2DinamikAlanDegerleriniYukle(row.UyeId);
 
                 return;
             }
@@ -401,6 +414,10 @@ namespace Kutuphane.UI
                 MessageBox.Show("Adres Detay boş bırakılamaz.");
                 return false;
             }
+
+            if (!V2DinamikAlanZorunluKontrol())
+                return false;
+
             return true;
         }
         private void textBox_Ara_TextChanged(object sender, EventArgs e)

@@ -1,4 +1,4 @@
-﻿using Kutuphane.Model.Entity;
+using Kutuphane.Model.Entity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Kutuphane.DAL.Contexes
@@ -6,6 +6,10 @@ namespace Kutuphane.DAL.Contexes
     public class KutuphaneDbContext : DbContext
     {
         public KutuphaneDbContext()
+        {
+        }
+
+        public KutuphaneDbContext(DbContextOptions<KutuphaneDbContext> options) : base(options)
         {
         }
 
@@ -26,9 +30,45 @@ namespace Kutuphane.DAL.Contexes
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(KutuphaneDbContext).Assembly);
 
-            base.OnModelCreating(modelBuilder);
+            // =========================
+            // Trigger bulunan tablolar
+            // EF Core OUTPUT hatasını engeller
+            // =========================
+
+            modelBuilder.Entity<Uye>()
+                .ToTable("Uyeler", tb =>
+                {
+                    tb.HasTrigger("trg_Uyeler_Audit");
+                });
+
+            modelBuilder.Entity<Kitap>()
+                .ToTable("Kitaplar", tb =>
+                {
+                    tb.HasTrigger("trg_Kitaplar_Audit");
+                    tb.HasTrigger("trg_Kitaplar_StokNegatifEngelle");
+                });
+
+            modelBuilder.Entity<Odunc>()
+                .ToTable("Oduncler", tb =>
+                {
+                    tb.HasTrigger("trg_Oduncler_Audit");
+                });
+
+            modelBuilder.Entity<FormAlanAyari>()
+                .ToTable("FormAlanAyarlari", tb =>
+                {
+                    tb.HasTrigger("trg_FormAlanAyarlari_Audit");
+                });
+
+            modelBuilder.Entity<OduncKural>()
+                .ToTable("OduncKurallari", tb =>
+                {
+                    tb.HasTrigger("trg_OduncKurallari_Audit");
+                });
         }
 
         public DbSet<Cinsiyet> Cinsiyetler { get; set; }

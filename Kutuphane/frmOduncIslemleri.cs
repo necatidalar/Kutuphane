@@ -5,6 +5,7 @@ using Kutuphane.DAL.Contexes;
 using Kutuphane.Model.DTO;
 using Kutuphane.Model.Entity;
 using Kutuphane.UI.UIMetodlar;
+using Kutuphane.UI.Helpers;
 
 namespace Kutuphane.UI
 {
@@ -13,6 +14,7 @@ namespace Kutuphane.UI
         private readonly IUyeService _uyeService;
         private readonly IKitapService _kitapService;
         private readonly OduncManager _oduncManager;
+        private readonly IV2OduncIslemService _v2OduncIslemService;
 
         private int _secilenUyeId = 0;
         private int _girisYapanPersonelId = 0;
@@ -34,7 +36,9 @@ namespace Kutuphane.UI
             _uyeService = new UyeManager(new UyeDal());
             _kitapService = new KitapManager(new KitapDal());
             _oduncManager = new OduncManager(new OduncDal());
+            _v2OduncIslemService = V2ServiceFactory.OduncIslemService();
 
+            _girisYapanPersonelId = personelId;
             _personelId = personelId;
             _yetkiKontrol = new YetkiKontrol(new KutuphaneDbContext());
             _userPermissions = _yetkiKontrol.KullaniciYetkileriniAl(_personelId);
@@ -175,27 +179,39 @@ namespace Kutuphane.UI
             }
 
             int basarili = 0;
+            int basarisiz = 0;
+            var hataMesajlari = new List<string>();
 
             foreach (var item in secili)
             {
                 int oduncId = (int)item.Tag;
 
-                var odunc = _oduncManager.GetByFilterService(x => x.OduncId == oduncId).Data;
-                odunc.TeslimEdildi = true;
-                odunc.TeslimTarihi = DateTime.Now;
-                odunc.TeslimAlanPersonelId = _girisYapanPersonelId;
+                var sonuc = _v2OduncIslemService.IadeAl(
+                    oduncId,
+                    _girisYapanPersonelId,
+                    "IADE_EDILDI",
+                    null,
+                    DateTime.Now,
+                    null);
 
-                _oduncManager.UpdateService(odunc);
-
-                var kitap = _kitapService.GetByFilterService(x => x.KitapId == odunc.KitapId).Data;
-                kitap.Stok++;
-                _kitapService.UpdateService(kitap);
-
-                basarili++;
+                if (sonuc.IsSuccess && sonuc.Data?.Any() == true && sonuc.Data.First().Basarili)
+                {
+                    basarili++;
+                }
+                else
+                {
+                    basarisiz++;
+                    hataMesajlari.Add($"Ödünç #{oduncId}: {sonuc.Message}");
+                }
             }
 
-            MessageBox.Show($"✅ {basarili} kitap topluca iade alındı.");
+            string mesaj = $"✅ {basarili} kitap topluca iade alındı.";
+            if (basarisiz > 0)
+                mesaj += $"\n❌ {basarisiz} kitap alınamadı.\n" + string.Join("\n", hataMesajlari.Take(5));
 
+            MessageBox.Show(mesaj);
+
+            InitializeDataLoads();
             TumOduncleriListele();
             UyeninAldigiKitaplarıListele();
         }
@@ -294,6 +310,7 @@ namespace Kutuphane.UI
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+
             if (dateTimePicker_TeslimTarihi.Value.Date < DateTime.Today)
             {
                 MessageBox.Show("Teslim tarihi bugünden önce olamaz.", "Uyarı",
@@ -305,40 +322,24 @@ namespace Kutuphane.UI
             {
                 int basariSayisi = 0;
                 int basarisizSayisi = 0;
+                var hataMesajlari = new List<string>();
 
-                foreach (var kitap in _sepetiKitaplar)
+                foreach (var kitap in _sepetiKitaplar.ToList())
                 {
-                    var kitapResult = _kitapService.GetByFilterService(x => x.KitapId == kitap.Id);
+                    var sonuc = _v2OduncIslemService.OduncVer(
+                        _secilenUyeId,
+                        kitap.Id,
+                        _girisYapanPersonelId,
+                        dateTimePicker_TeslimTarihi.Value.Date);
 
-                    if (!kitapResult.IsSuccess || kitapResult.Data == null || kitapResult.Data.Stok <= 0)
+                    if (sonuc.IsSuccess && sonuc.Data?.Any() == true && sonuc.Data.First().Basarili)
                     {
-                        basarisizSayisi++;
-                        continue;
-                    }
-
-                    var odunc = new Odunc
-                    {
-                        UyeId = _secilenUyeId,
-                        KitapId = kitap.Id,
-                        AlisTarihi = DateTime.Now,
-                        //TeslimTarihi = DateTime.Now.AddDays(45),
-                        TeslimTarihi = dateTimePicker_TeslimTarihi.Value.Date,
-                        TeslimEdildi = false,
-                        TeslimEdenPersonelId = _girisYapanPersonelId
-                    };
-
-                    var result = _oduncManager.AddService(odunc);
-
-                    if (result.IsSuccess)
-                    {
-                        kitapResult.Data.Stok--;
-                        _kitapService.UpdateService(kitapResult.Data);
-
                         basariSayisi++;
                     }
                     else
                     {
                         basarisizSayisi++;
+                        hataMesajlari.Add($"{kitap.KitapAdi}: {sonuc.Message}");
                     }
                 }
 
@@ -347,10 +348,11 @@ namespace Kutuphane.UI
 
                 string mesaj = $"✅ {basariSayisi} kitap ödünç verildi.";
                 if (basarisizSayisi > 0)
-                    mesaj += $"\n❌ {basarisizSayisi} kitap stok yetersizliği veya hata nedeniyle verilemedi.";
+                    mesaj += $"\n❌ {basarisizSayisi} kitap verilemedi.\n" + string.Join("\n", hataMesajlari.Take(5));
 
                 MessageBox.Show(mesaj, "Sonuç", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+                InitializeDataLoads();
                 UyeninAldigiKitaplarıListele();
                 TumOduncleriListele();
             }
@@ -377,43 +379,38 @@ namespace Kutuphane.UI
             {
                 int basarili = 0;
                 int basarisiz = 0;
+                var hataMesajlari = new List<string>();
 
                 foreach (var item in seciliItemler)
                 {
                     int oduncId = (int)item.Tag;
 
-                    var oduncResult = _oduncManager.GetByFilterService(x => x.OduncId == oduncId);
-                    if (!oduncResult.IsSuccess || oduncResult.Data == null || oduncResult.Data.TeslimEdildi)
+                    var sonuc = _v2OduncIslemService.IadeAl(
+                        oduncId,
+                        _girisYapanPersonelId,
+                        "IADE_EDILDI",
+                        null,
+                        DateTime.Now,
+                        null);
+
+                    if (sonuc.IsSuccess && sonuc.Data?.Any() == true && sonuc.Data.First().Basarili)
+                    {
+                        basarili++;
+                    }
+                    else
                     {
                         basarisiz++;
-                        continue;
+                        hataMesajlari.Add($"Ödünç #{oduncId}: {sonuc.Message}");
                     }
-
-                    var odunc = oduncResult.Data;
-                    odunc.TeslimTarihi = DateTime.Now;
-                    odunc.TeslimEdildi = true;
-                    odunc.TeslimAlanPersonelId = _girisYapanPersonelId;
-
-                    if (!_oduncManager.UpdateService(odunc).IsSuccess)
-                    {
-                        basarisiz++;
-                        continue;
-                    }
-
-                    var kitapResult = _kitapService.GetByFilterService(x => x.KitapId == odunc.KitapId);
-                    if (kitapResult.IsSuccess && kitapResult.Data != null)
-                    {
-                        kitapResult.Data.Stok++;
-                        _kitapService.UpdateService(kitapResult.Data);
-                    }
-
-                    basarili++;
                 }
 
-                MessageBox.Show(
-                    $"✅ {basarili} kitap teslim alındı.\n❌ {basarisiz} kitap teslim alınamadı.",
-                    "Sonuç", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                string mesaj = $"✅ {basarili} kitap teslim alındı.\n❌ {basarisiz} kitap teslim alınamadı.";
+                if (hataMesajlari.Count > 0)
+                    mesaj += "\n" + string.Join("\n", hataMesajlari.Take(5));
 
+                MessageBox.Show(mesaj, "Sonuç", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                InitializeDataLoads();
                 UyeninAldigiKitaplarıListele();
                 TumOduncleriListele();
             }

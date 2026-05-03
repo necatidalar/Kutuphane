@@ -34,6 +34,24 @@ namespace Kutuphane.Model.DTO
         public bool AktifMi { get; set; }
     }
 
+    public class OduncVerSonucDto : IDto
+    {
+        public bool Basarili { get; set; }
+        public string Mesaj { get; set; } = string.Empty;
+        public int OduncId { get; set; }
+        public DateTime PlanlananIadeTarihi { get; set; }
+    }
+
+    public class IadeAlSonucDto : IDto
+    {
+        public bool Basarili { get; set; }
+        public string Mesaj { get; set; } = string.Empty;
+        public int OduncId { get; set; }
+        public string IadeDurum { get; set; } = string.Empty;
+        public int GecikmeGunSayisi { get; set; }
+        public bool StokArtirildiMi { get; set; }
+    }
+
     public class AlanTanimDto : IDto
     {
         public int AlanTanimId { get; set; }
@@ -60,7 +78,9 @@ namespace Kutuphane.Model.DTO
     {
         public int FormAlanAyariId { get; set; }
         public int KurumId { get; set; }
+        public string? KurumAdi { get; set; }
         public int? UyeTipiId { get; set; }
+        public string? UyeTipiAdi { get; set; }
         public string FormKodu { get; set; } = string.Empty;
         public int AlanTanimId { get; set; }
         public string EntityAdi { get; set; } = string.Empty;

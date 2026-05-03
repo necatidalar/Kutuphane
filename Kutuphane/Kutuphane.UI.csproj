@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
@@ -25,6 +25,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj" />
     <ProjectReference Include="..\Kutuphane.BLL\Kutuphane.BLL.csproj" />
+    <ProjectReference Include="..\Kutuphane.DAL\Kutuphane.DAL.csproj" />
     <ProjectReference Include="..\Kutuphane.Model\Kutuphane.Model.csproj" />
   </ItemGroup>
 
