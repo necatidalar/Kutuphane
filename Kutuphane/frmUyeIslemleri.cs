@@ -37,6 +37,7 @@ namespace Kutuphane.UI
                 UyeleriYukle();
                 ComboDoldur();
                 V2DinamikAlanSisteminiHazirla();
+                V2ListeDetayHizliAraclariniHazirla();
                 PasifKontrol();
             }
             DataGridThemeManager.Apply(dataGrid_Uye);
@@ -77,6 +78,9 @@ namespace Kutuphane.UI
             bilUyeDto.Clear();
             foreach (var uye in _tumUyeler)
                 bilUyeDto.Add(uye);
+
+            V2DinamikListeDegerleriniYukle(_tumUyeler);
+            dataGrid_Uye.Refresh();
         }
         private void Ara()
         {
@@ -91,7 +95,8 @@ namespace Kutuphane.UI
                     x.Adres.ToLower().Contains(arama) ||
                     x.AdresDetay.ToLower().Contains(arama) ||
                     x.Eposta.ToLower().Contains(arama) ||
-                    x.Telefon.ToLower().Contains(arama)
+                    x.Telefon.ToLower().Contains(arama) ||
+                    V2DinamikListeDegerlerindeAra(x.UyeId, arama)
                 ).ToList();
 
             // Combo filtre
@@ -146,12 +151,12 @@ namespace Kutuphane.UI
                 TcPass = textBox_TcPass.Text.Trim(),
                 Ad = textBox_Ad.Text.Trim(),
                 Soyad = textBox_Soyad.Text.Trim(),
-                CinsiyetId = ((Cinsiyet)comboBox_Cinsiyet.SelectedItem).Id,
+                CinsiyetId = (byte)V2CinsiyetIdGuvenliAl(),
                 Telefon = textBox_Telefon.Text.Trim(),
                 Eposta = textBox_Eposta.Text.Trim(),
                 Adres = textBox_Adres.Text.Trim(),
                 AdresDetay = richTextBox_AdresDetay.Text.Trim(),
-                DogumTarihi = dateTimePicker1.Value,
+                DogumTarihi = V2DogumTarihiGuvenliAl(),
                 AktifMi = true,
                 KurumId = V2SeciliKurumIdGetir(),
                 UyeTipiId = V2SeciliUyeTipiIdGetir()
@@ -187,12 +192,12 @@ namespace Kutuphane.UI
                 TcPass = textBox_TcPass.Text.Trim(),
                 Ad = textBox_Ad.Text.Trim(),
                 Soyad = textBox_Soyad.Text.Trim(),
-                CinsiyetId = ((Cinsiyet)comboBox_Cinsiyet.SelectedItem).Id,
+                CinsiyetId = (byte)V2CinsiyetIdGuvenliAl(),
                 Telefon = textBox_Telefon.Text.Trim(),
                 Eposta = textBox_Eposta.Text.Trim(),
                 Adres = textBox_Adres.Text.Trim(),
                 AdresDetay = richTextBox_AdresDetay.Text.Trim(),
-                DogumTarihi = dateTimePicker1.Value,
+                DogumTarihi = V2DogumTarihiGuvenliAl(),
                 AktifMi = true,
                 KurumId = V2SeciliKurumIdGetir(),
                 UyeTipiId = V2SeciliUyeTipiIdGetir()
@@ -315,6 +320,9 @@ namespace Kutuphane.UI
                 foreach (var item in sonuc.Data)
                     bilUyeDto.Add(item);
 
+                V2DinamikListeDegerleriniYukle(sonuc.Data.ToList());
+                dataGrid_Uye.Refresh();
+
                 btnGeriYukle.Visible = true;
                 btnKaydet.Enabled = false;
                 btnDuzenle.Enabled = false;
@@ -374,46 +382,8 @@ namespace Kutuphane.UI
         }
         private bool BoslukKontrol()
         {
-            if (string.IsNullOrWhiteSpace(textBox_TcPass.Text))
-            {
-                MessageBox.Show("Tc Pass boş bırakılamaz.");
+            if (!V2SabitAlanZorunluKontrol())
                 return false;
-            }
-            if (string.IsNullOrWhiteSpace(textBox_Ad.Text))
-            {
-                MessageBox.Show("Ad boş bırakılamaz.");
-                return false;
-            }
-            if (string.IsNullOrWhiteSpace(textBox_Soyad.Text))
-            {
-                MessageBox.Show("Soyad boş bırakılamaz.");
-                return false;
-            }
-            if (comboBox_Cinsiyet.SelectedIndex == -1)
-            {
-                MessageBox.Show("Lütfen bir cinsiyet seçiniz.");
-                return false;
-            }
-            if (string.IsNullOrWhiteSpace(textBox_Telefon.Text))
-            {
-                MessageBox.Show("Telefon boş bırakılamaz.");
-                return false;
-            }
-            if (string.IsNullOrWhiteSpace(textBox_Eposta.Text))
-            {
-                MessageBox.Show("Eposta boş bırakılamaz.");
-                return false;
-            }
-            if (string.IsNullOrWhiteSpace(textBox_Adres.Text))
-            {
-                MessageBox.Show("Adres boş bırakılamaz.");
-                return false;
-            }
-            if (string.IsNullOrWhiteSpace(richTextBox_AdresDetay.Text))
-            {
-                MessageBox.Show("Adres Detay boş bırakılamaz.");
-                return false;
-            }
 
             if (!V2DinamikAlanZorunluKontrol())
                 return false;
@@ -430,6 +400,8 @@ namespace Kutuphane.UI
         }
         private void dataGrid_Uye_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
+            V2DinamikListeHucreDegeriniYaz(e);
+
             if (string.IsNullOrWhiteSpace(textBox_Ara.Text))
                 return;
 
@@ -458,10 +430,11 @@ namespace Kutuphane.UI
             if (string.IsNullOrWhiteSpace(textBox_Ara.Text))
                 return;
 
-            if (e.Value == null)
+            object? hucreDegeri = e.Value ?? V2DinamikListeHucreDegeriniAl(e.RowIndex, e.ColumnIndex);
+            if (hucreDegeri == null)
                 return;
 
-            string hucreMetni = e.Value.ToString();
+            string hucreMetni = hucreDegeri.ToString() ?? string.Empty;
             string aranan = textBox_Ara.Text;
 
             int index = hucreMetni.IndexOf(aranan, StringComparison.OrdinalIgnoreCase);

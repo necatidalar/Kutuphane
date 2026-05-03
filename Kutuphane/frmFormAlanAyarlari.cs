@@ -77,7 +77,7 @@ namespace Kutuphane.UI
             {
                 AutoSize = false,
                 Dock = DockStyle.Fill,
-                Text = "Dinamik alanların görünürlük, zorunluluk, düzenlenebilirlik, liste görünürlüğü ve sıra ayarlarını yönet.",
+                Text = "Dinamik alanların görünürlük, zorunluluk, düzenlenebilirlik, liste görünürlüğü, hızlı kayıt ve sıra ayarlarını yönet.",
                 Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 162),
                 ForeColor = Color.FromArgb(236, 240, 241)
             };
@@ -392,7 +392,8 @@ namespace Kutuphane.UI
         {
             comboBox_FormKodu.DataSource = new List<FormSecim>
             {
-                new FormSecim { FormKodu = "UYE_FORM", FormAdi = "Üye Formu" }
+                new FormSecim { FormKodu = "UYE_FORM", FormAdi = "Üye Formu" },
+                new FormSecim { FormKodu = "UYE_HIZLI_KAYIT", FormAdi = "Hızlı Kayıt Formu" }
             };
             comboBox_FormKodu.DisplayMember = nameof(FormSecim.FormAdi);
             comboBox_FormKodu.ValueMember = nameof(FormSecim.FormKodu);
