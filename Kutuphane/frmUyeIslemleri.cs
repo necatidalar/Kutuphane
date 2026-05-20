@@ -1,10 +1,9 @@
-﻿using Kutuphane.BLL.Abstract;
+using Kutuphane.BLL.Abstract;
 using Kutuphane.BLL.Concrete;
 using Kutuphane.DAL.Concrete;
 using Kutuphane.DAL.Contexes;
 using Kutuphane.Model.DTO;
 using Kutuphane.Model.Entity;
-using Kutuphane.UI.Theme;
 using Kutuphane.UI.UIMetodlar;
 using System.ComponentModel;
 
@@ -12,14 +11,15 @@ namespace Kutuphane.UI
 {
     public partial class frmUyeIslemleri : Form
     {
-        BindingList<UyeDto> bilUyeDto = new BindingList<UyeDto>();
+        private readonly BindingList<UyeDto> bilUyeDto = new();
         private List<UyeDto> _tumUyeler = new();
-        IUyeService uyeService = new UyeManager(new UyeDal());
-        bool silinenModu = false;
+        private readonly IUyeService uyeService = new UyeManager(new UyeDal());
+        private bool silinenModu = false;
 
         private readonly YetkiKontrol _yetkiKontrol;
         private readonly int _personelId;
-        private HashSet<string> _userPermissions;
+        private readonly HashSet<string> _userPermissions;
+
         public frmUyeIslemleri(int personelId)
         {
             InitializeComponent();
@@ -28,6 +28,7 @@ namespace Kutuphane.UI
             _yetkiKontrol = new YetkiKontrol(new KutuphaneDbContext());
             _userPermissions = _yetkiKontrol.KullaniciYetkileriniAl(_personelId);
         }
+
         private void frmUyeIslemleri_Load(object sender, EventArgs e)
         {
             YetkiKontrol();
@@ -39,6 +40,7 @@ namespace Kutuphane.UI
             }
             DataGridThemeManager.Apply(dataGrid_Uye);
         }
+
         private void YetkiKontrol()
         {
             bool listele = _userPermissions.Contains("UYE_LISTELE");
@@ -59,7 +61,9 @@ namespace Kutuphane.UI
 
             label_txtAra.Visible = listele;
             textBox_Ara.Visible = listele;
+            comboBox_Filtre.Visible = listele;
         }
+
         private void UyeleriYukle()
         {
             var result = uyeService.UyeListeDetayliGetirServis(x => x.AktifMi);
@@ -70,29 +74,43 @@ namespace Kutuphane.UI
                 return;
             }
 
-            _tumUyeler = result.Data.ToList();
+            _tumUyeler = result.Data.OrderBy(x => x.OkulNo).ThenBy(x => x.Ad).ToList();
+            GridiDoldur(_tumUyeler);
+        }
 
+        private void GridiDoldur(IEnumerable<UyeDto> liste)
+        {
             bilUyeDto.Clear();
-            foreach (var uye in _tumUyeler)
+            foreach (var uye in liste)
                 bilUyeDto.Add(uye);
         }
+
+        private static bool ContainsText(string? value, string search)
+        {
+            return !string.IsNullOrWhiteSpace(value) && value.Contains(search, StringComparison.OrdinalIgnoreCase);
+        }
+
         private void Ara()
         {
-            string arama = textBox_Ara.Text.Trim().ToLower();
+            string arama = textBox_Ara.Text.Trim();
 
             var filtreliListe = string.IsNullOrWhiteSpace(arama)
                 ? _tumUyeler
                 : _tumUyeler.Where(x =>
-                    x.TcPass.ToLower().Contains(arama) ||
-                    x.Ad.ToLower().Contains(arama) ||
-                    x.Soyad.ToLower().Contains(arama) ||
-                    x.Adres.ToLower().Contains(arama) ||
-                    x.AdresDetay.ToLower().Contains(arama) ||
-                    x.Eposta.ToLower().Contains(arama) ||
-                    x.Telefon.ToLower().Contains(arama)
+                    ContainsText(x.OkulNo, arama) ||
+                    ContainsText(x.Sinif, arama) ||
+                    ContainsText(x.Sube, arama) ||
+                    ContainsText(x.TcPass, arama) ||
+                    ContainsText(x.Ad, arama) ||
+                    ContainsText(x.Soyad, arama) ||
+                    ContainsText(x.Adres, arama) ||
+                    ContainsText(x.AdresDetay, arama) ||
+                    ContainsText(x.Eposta, arama) ||
+                    ContainsText(x.Telefon, arama) ||
+                    ContainsText(x.VeliAdSoyad, arama) ||
+                    ContainsText(x.VeliTelefon, arama)
                 ).ToList();
 
-            // Combo filtre
             switch (comboBox_Filtre.SelectedItem?.ToString())
             {
                 case "Erkek":
@@ -106,13 +124,11 @@ namespace Kutuphane.UI
                     break;
             }
 
-            bilUyeDto.Clear();
-            foreach (var uye in filtreliListe)
-                bilUyeDto.Add(uye);
+            GridiDoldur(filtreliListe);
         }
+
         private void ComboDoldur()
         {
-            // FİLTRE
             comboBox_Filtre.Items.Clear();
             comboBox_Filtre.Items.Add("Tümü");
             comboBox_Filtre.Items.Add("Erkek");
@@ -134,26 +150,40 @@ namespace Kutuphane.UI
             comboBox_Cinsiyet.ValueMember = "Id";
             comboBox_Cinsiyet.SelectedIndex = -1;
         }
+
+        private Uye FormdanUyeOlustur(int uyeId = 0, bool aktifMi = true)
+        {
+            string okulNo = textBox_OkulNo.Text.Trim();
+            string tcPass = string.IsNullOrWhiteSpace(textBox_TcPass.Text) ? okulNo : textBox_TcPass.Text.Trim();
+
+            return new Uye
+            {
+                UyeId = uyeId,
+                OkulNo = okulNo,
+                Sinif = textBox_Sinif.Text.Trim(),
+                Sube = textBox_Sube.Text.Trim().ToUpper(),
+                TcPass = tcPass,
+                Ad = textBox_Ad.Text.Trim(),
+                Soyad = textBox_Soyad.Text.Trim(),
+                CinsiyetId = ((Cinsiyet)comboBox_Cinsiyet.SelectedItem).Id,
+                Telefon = textBox_Telefon.Text.Trim(),
+                Eposta = textBox_Eposta.Text.Trim(),
+                VeliAdSoyad = textBox_VeliAdSoyad.Text.Trim(),
+                VeliTelefon = textBox_VeliTelefon.Text.Trim(),
+                Adres = textBox_Adres.Text.Trim(),
+                AdresDetay = richTextBox_AdresDetay.Text.Trim(),
+                DogumTarihi = dateTimePicker1.Value,
+                AktifMi = aktifMi
+            };
+        }
+
         private void btnKaydet_Click(object sender, EventArgs e)
         {
             if (!BoslukKontrol())
                 return;
 
-            Uye yeniUye = new Uye
-            {
-                TcPass = textBox_TcPass.Text.Trim(),
-                Ad = textBox_Ad.Text.Trim(),
-                Soyad = textBox_Soyad.Text.Trim(),
-                CinsiyetId = ((Cinsiyet)comboBox_Cinsiyet.SelectedItem).Id,
-                Telefon = textBox_Telefon.Text.Trim(),
-                Eposta = textBox_Eposta.Text.Trim(),
-                Adres = textBox_Adres.Text.Trim(),
-                AdresDetay = richTextBox_AdresDetay.Text.Trim(),
-                DogumTarihi = dateTimePicker1.Value,
-                AktifMi = true
-            };
-
-            var result = uyeService.AddService(yeniUye);
+            var yeniOgrenci = FormdanUyeOlustur();
+            var result = uyeService.AddService(yeniOgrenci);
 
             if (!result.IsSuccess)
             {
@@ -161,36 +191,26 @@ namespace Kutuphane.UI
                 return;
             }
 
-            MessageBox.Show("Üye başarıyla kaydedildi.");
+            MessageBox.Show("Öğrenci başarıyla kaydedildi.");
             UyeleriYukle();
+            KutulariTemizle();
         }
+
         private void btnDuzenle_Click(object sender, EventArgs e)
         {
             if (!int.TryParse(textBox_UyeId.Text, out int id))
             {
-                MessageBox.Show("Geçerli bir üye seçiniz.");
+                MessageBox.Show("Geçerli bir öğrenci seçiniz.");
                 return;
             }
 
             if (!BoslukKontrol())
                 return;
 
-            Uye yeniUye = new Uye
-            {
-                UyeId = id,
-                TcPass = textBox_TcPass.Text.Trim(),
-                Ad = textBox_Ad.Text.Trim(),
-                Soyad = textBox_Soyad.Text.Trim(),
-                CinsiyetId = ((Cinsiyet)comboBox_Cinsiyet.SelectedItem).Id,
-                Telefon = textBox_Telefon.Text.Trim(),
-                Eposta = textBox_Eposta.Text.Trim(),
-                Adres = textBox_Adres.Text.Trim(),
-                AdresDetay = richTextBox_AdresDetay.Text.Trim(),
-                DogumTarihi = dateTimePicker1.Value,
-                AktifMi = true
-            };
-
-            var result = uyeService.UpdateService(yeniUye);
+            var mevcut = uyeService.GetByFilterService(x => x.UyeId == id);
+            bool aktifMi = mevcut.IsSuccess && mevcut.Data != null ? mevcut.Data.AktifMi : true;
+            var ogrenci = FormdanUyeOlustur(id, aktifMi);
+            var result = uyeService.UpdateService(ogrenci);
 
             if (!result.IsSuccess)
             {
@@ -198,14 +218,16 @@ namespace Kutuphane.UI
                 return;
             }
 
-            MessageBox.Show("Üye güncellendi.");
+            MessageBox.Show("Öğrenci güncellendi.");
             UyeleriYukle();
+            KutulariTemizle();
         }
+
         private void btnSil_Click(object sender, EventArgs e)
         {
             if (!int.TryParse(textBox_UyeId.Text, out int idResult))
             {
-                MessageBox.Show("Lütfen geçerli bir üye seçiniz.", "Hata");
+                MessageBox.Show("Lütfen geçerli bir öğrenci seçiniz.", "Hata");
                 return;
             }
 
@@ -213,15 +235,13 @@ namespace Kutuphane.UI
 
             if (!uyeFromDbResult.IsSuccess || uyeFromDbResult.Data == null)
             {
-                MessageBox.Show("Üye bulunamadı.", "Hata");
+                MessageBox.Show("Öğrenci bulunamadı.", "Hata");
                 return;
             }
-            var soru = MessageBox.Show("Bu üyeyi silmek istediğine emin misin?", "Onay", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
+            var soru = MessageBox.Show("Bu öğrenciyi pasif etmek istediğine emin misin?", "Onay", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (soru == DialogResult.No)
-            {
                 return;
-            }
 
             var uyeFromDb = uyeFromDbResult.Data;
             uyeFromDb.AktifMi = false;
@@ -230,53 +250,66 @@ namespace Kutuphane.UI
 
             if (uyeResult.IsSuccess)
             {
-                MessageBox.Show("Üye başarıyla silindi (pasif edildi).", "Başarılı");
+                MessageBox.Show("Öğrenci başarıyla pasif edildi.", "Başarılı");
                 UyeleriYukle();
                 PasifKontrol();
             }
             else
+            {
                 MessageBox.Show(uyeResult.Message, "Hata");
+            }
         }
+
         private void btnTemizle_Click(object sender, EventArgs e)
         {
             dataGrid_Uye.ClearSelection();
             KutulariTemizle();
         }
+
         private void KutulariTemizle()
         {
             textBox_UyeId.Clear();
+            textBox_OkulNo.Clear();
+            textBox_Sinif.Clear();
+            textBox_Sube.Clear();
             textBox_TcPass.Clear();
             textBox_Ad.Clear();
             textBox_Soyad.Clear();
             textBox_Telefon.Clear();
             textBox_Eposta.Clear();
+            textBox_VeliAdSoyad.Clear();
+            textBox_VeliTelefon.Clear();
             textBox_Adres.Clear();
             richTextBox_AdresDetay.Clear();
             comboBox_Cinsiyet.SelectedIndex = -1;
             dateTimePicker1.Value = DateTime.Now;
         }
+
         private void dataGrid_Uye_SelectionChanged(object sender, EventArgs e)
         {
-            if (dataGrid_Uye.CurrentRow != null && !dataGrid_Uye.CurrentRow.IsNewRow)
+            if (dataGrid_Uye.CurrentRow != null && !dataGrid_Uye.CurrentRow.IsNewRow && dataGrid_Uye.CurrentRow.DataBoundItem is UyeDto row)
             {
-                UyeDto row = (UyeDto)dataGrid_Uye.CurrentRow.DataBoundItem;
-
                 textBox_UyeId.Text = row.UyeId.ToString();
-                textBox_TcPass.Text = row.TcPass;
+                textBox_OkulNo.Text = row.OkulNo ?? string.Empty;
+                textBox_Sinif.Text = row.Sinif ?? string.Empty;
+                textBox_Sube.Text = row.Sube ?? string.Empty;
+                textBox_TcPass.Text = row.TcPass ?? string.Empty;
                 textBox_Ad.Text = row.Ad;
                 textBox_Soyad.Text = row.Soyad;
                 comboBox_Cinsiyet.SelectedValue = row.CinsiyetId;
                 textBox_Telefon.Text = row.Telefon;
                 textBox_Eposta.Text = row.Eposta;
+                textBox_VeliAdSoyad.Text = row.VeliAdSoyad ?? string.Empty;
+                textBox_VeliTelefon.Text = row.VeliTelefon ?? string.Empty;
                 textBox_Adres.Text = row.Adres;
                 richTextBox_AdresDetay.Text = row.AdresDetay;
-                dateTimePicker1.Value = row.DogumTarihi;
-
+                dateTimePicker1.Value = row.DogumTarihi == default ? DateTime.Now : row.DogumTarihi;
                 return;
             }
 
             KutulariTemizle();
         }
+
         private void PasifKontrol()
         {
             bool listele = _userPermissions.Contains("UYE_LISTELE");
@@ -288,26 +321,28 @@ namespace Kutuphane.UI
 
             dataGrid_Uye.ClearSelection();
             var pasifResult = uyeService.GetListByFilterService(x => x.AktifMi == false);
-
             bool silinmisVarMi = pasifResult.IsSuccess && pasifResult.Data.Any();
             btnSilinenleriGoster.Visible = silinmisVarMi;
         }
+
         private void btnSilinenleriGoster_Click(object sender, EventArgs e)
         {
             if (!silinenModu)
             {
                 var sonuc = uyeService.UyeListeDetayliGetirServis(x => x.AktifMi == false);
+                if (!sonuc.IsSuccess)
+                {
+                    MessageBox.Show(sonuc.Message, "Hata");
+                    return;
+                }
 
-                bilUyeDto.Clear();
-                foreach (var item in sonuc.Data)
-                    bilUyeDto.Add(item);
-
+                GridiDoldur(sonuc.Data);
                 btnGeriYukle.Visible = true;
                 btnKaydet.Enabled = false;
                 btnDuzenle.Enabled = false;
                 btnSil.Enabled = false;
                 silinenModu = true;
-                btnSilinenleriGoster.Text = "Aktif Üyeleri Göster";
+                btnSilinenleriGoster.Text = "Aktif Öğrencileri Göster";
             }
             else
             {
@@ -317,16 +352,18 @@ namespace Kutuphane.UI
                 btnDuzenle.Enabled = true;
                 btnSil.Enabled = true;
                 silinenModu = false;
-                btnSilinenleriGoster.Text = "🗑️ Silinen Üyeleri Göster";
+                btnSilinenleriGoster.Text = "🗑️ Pasif Öğrencileri Göster";
             }
+
             dataGrid_Uye.ClearSelection();
             KutulariTemizle();
         }
+
         private void btnGeriYukle_Click(object sender, EventArgs e)
         {
             if (!int.TryParse(textBox_UyeId.Text, out int id))
             {
-                MessageBox.Show("Lütfen bir üye seçiniz.");
+                MessageBox.Show("Lütfen bir öğrenci seçiniz.");
                 return;
             }
 
@@ -334,7 +371,7 @@ namespace Kutuphane.UI
 
             if (!uyeResult.IsSuccess || uyeResult.Data == null)
             {
-                MessageBox.Show("Üye bulunamadı.");
+                MessageBox.Show("Öğrenci bulunamadı.");
                 return;
             }
 
@@ -349,21 +386,22 @@ namespace Kutuphane.UI
                 return;
             }
 
-            MessageBox.Show("Üye başarıyla geri yüklendi.");
+            MessageBox.Show("Öğrenci başarıyla geri yüklendi.");
             UyeleriYukle();
             silinenModu = false;
-            btnSilinenleriGoster.Text = "🗑️ Silinen Üyeleri Göster";
+            btnSilinenleriGoster.Text = "🗑️ Pasif Öğrencileri Göster";
             btnGeriYukle.Visible = false;
             btnKaydet.Enabled = true;
             btnDuzenle.Enabled = true;
             btnSil.Enabled = true;
             PasifKontrol();
         }
+
         private bool BoslukKontrol()
         {
-            if (string.IsNullOrWhiteSpace(textBox_TcPass.Text))
+            if (string.IsNullOrWhiteSpace(textBox_OkulNo.Text))
             {
-                MessageBox.Show("Tc Pass boş bırakılamaz.");
+                MessageBox.Show("Okul numarası boş bırakılamaz.");
                 return false;
             }
             if (string.IsNullOrWhiteSpace(textBox_Ad.Text))
@@ -374,6 +412,16 @@ namespace Kutuphane.UI
             if (string.IsNullOrWhiteSpace(textBox_Soyad.Text))
             {
                 MessageBox.Show("Soyad boş bırakılamaz.");
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(textBox_Sinif.Text))
+            {
+                MessageBox.Show("Sınıf boş bırakılamaz.");
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(textBox_Sube.Text))
+            {
+                MessageBox.Show("Şube boş bırakılamaz.");
                 return false;
             }
             if (comboBox_Cinsiyet.SelectedIndex == -1)
@@ -388,7 +436,17 @@ namespace Kutuphane.UI
             }
             if (string.IsNullOrWhiteSpace(textBox_Eposta.Text))
             {
-                MessageBox.Show("Eposta boş bırakılamaz.");
+                MessageBox.Show("E-posta boş bırakılamaz.");
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(textBox_VeliAdSoyad.Text))
+            {
+                MessageBox.Show("Veli adı soyadı boş bırakılamaz.");
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(textBox_VeliTelefon.Text))
+            {
+                MessageBox.Show("Veli telefonu boş bırakılamaz.");
                 return false;
             }
             if (string.IsNullOrWhiteSpace(textBox_Adres.Text))
@@ -398,92 +456,43 @@ namespace Kutuphane.UI
             }
             if (string.IsNullOrWhiteSpace(richTextBox_AdresDetay.Text))
             {
-                MessageBox.Show("Adres Detay boş bırakılamaz.");
+                MessageBox.Show("Adres detay boş bırakılamaz.");
                 return false;
             }
             return true;
         }
+
         private void textBox_Ara_TextChanged(object sender, EventArgs e)
         {
             Ara();
         }
+
         private void comboBox_Filtre_SelectedIndexChanged(object sender, EventArgs e)
         {
             Ara();
         }
+
         private void dataGrid_Uye_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(textBox_Ara.Text))
+            if (string.IsNullOrWhiteSpace(textBox_Ara.Text) || e.Value == null)
                 return;
 
-            if (e.Value != null)
-            {
-                string aranan = textBox_Ara.Text.ToLower();
-                string hucreMetni = e.Value.ToString().ToLower();
+            string aranan = textBox_Ara.Text.ToLower();
+            string hucreMetni = e.Value.ToString()?.ToLower() ?? string.Empty;
 
-                if (hucreMetni.Contains(aranan))
-                {
-                    e.CellStyle.BackColor = Color.Yellow;
-                    e.CellStyle.ForeColor = Color.Black;
-                }
-                else
-                {
-                    e.CellStyle.BackColor = Color.White;
-                    e.CellStyle.ForeColor = Color.Black;
-                }
+            if (hucreMetni.Contains(aranan))
+            {
+                e.CellStyle.BackColor = Color.Yellow;
+                e.CellStyle.ForeColor = Color.Black;
             }
         }
+
         private void dataGrid_Uye_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            if (e.RowIndex < 0 || e.ColumnIndex < 0)
-                return;
-
-            if (string.IsNullOrWhiteSpace(textBox_Ara.Text))
-                return;
-
-            if (e.Value == null)
-                return;
-
-            string hucreMetni = e.Value.ToString();
-            string aranan = textBox_Ara.Text;
-
-            int index = hucreMetni.IndexOf(aranan, StringComparison.OrdinalIgnoreCase);
-            if (index < 0)
-                return;
-
-            e.Handled = true;
-
-            e.PaintBackground(e.ClipBounds, true);
-
-            Font font = e.CellStyle.Font;
-            Color normalRenk = e.CellStyle.ForeColor;
-            Color bulunanRenk = Color.DarkRed;
-
-            string once = hucreMetni.Substring(0, index);
-            string bulunan = hucreMetni.Substring(index, aranan.Length);
-            string sonra = hucreMetni.Substring(index + aranan.Length);
-
-            float x = e.CellBounds.X + 2;
-            float y = e.CellBounds.Y + 4;
-
-            using (Brush normalBrush = new SolidBrush(normalRenk))
-            using (Brush bulunanBrush = new SolidBrush(bulunanRenk))
-            {
-                // önceki metin
-                e.Graphics.DrawString(once, font, normalBrush, x, y);
-                x += e.Graphics.MeasureString(once, font).Width;
-
-                // bulunan metin
-                e.Graphics.DrawString(bulunan, font, bulunanBrush, x, y);
-                x += e.Graphics.MeasureString(bulunan, font).Width;
-
-                // sonrası
-                e.Graphics.DrawString(sonra, font, normalBrush, x, y);
-            }
-
-            e.Paint(e.ClipBounds, DataGridViewPaintParts.Border);
+            // Hücre biçimlendirme DataGrid temasını bozmasın diye vurgulama CellFormatting üzerinden tutuldu.
         }
-        Dictionary<string, bool> sortDirections = new();
+
+        private readonly Dictionary<string, bool> sortDirections = new();
         private void dataGrid_Uye_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             DataGridSortHelper.SortByColumn<UyeDto>(dataGrid_Uye, bilUyeDto, e.ColumnIndex, sortDirections);

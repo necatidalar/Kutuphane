@@ -19,25 +19,25 @@ namespace Kutuphane.BLL.Concrete
         private IResult Validate(Odunc odunc)
         {
             if (odunc == null)
-                return new ErrorResult("Ödünç bilgisi boş olamaz.");
+                return new ErrorResult("Ã–dÃ¼nÃ§ bilgisi boÅŸ olamaz.");
 
             if (odunc.UyeId <= 0)
-                return new ErrorResult("Üye seçilmelidir.");
+                return new ErrorResult("Ã–ÄŸrenci seÃ§ilmelidir.");
 
             if (odunc.KitapId <= 0)
-                return new ErrorResult("Kitap seçilmelidir.");
+                return new ErrorResult("Kitap seÃ§ilmelidir.");
 
             if (odunc.TeslimEdenPersonelId <= 0)
                 return new ErrorResult("Teslim eden personel bilgisi eksiktir.");
 
-            if (odunc.AlisTarihi == default || odunc.AlisTarihi > DateTime.Now)
-                return new ErrorResult("Alış tarihi geçersizdir.");
+            if (odunc.AlisTarihi == default || odunc.AlisTarihi > DateTime.Now.AddMinutes(1))
+                return new ErrorResult("AlÄ±ÅŸ tarihi geÃ§ersizdir.");
 
-            if (odunc.TeslimTarihi.HasValue && odunc.TeslimTarihi < odunc.AlisTarihi)
-                return new ErrorResult("Teslim tarihi alış tarihinden önce olamaz.");
+            if (odunc.TeslimTarihi.HasValue && odunc.TeslimTarihi < odunc.AlisTarihi.Date)
+                return new ErrorResult("Teslim tarihi alÄ±ÅŸ tarihinden Ã¶nce olamaz.");
 
             if (odunc.TeslimEdildi && !odunc.TeslimTarihi.HasValue)
-                return new ErrorResult("Teslim edildi işaretlenmiş ama teslim tarihi girilmemiştir.");
+                return new ErrorResult("Teslim edildi iÅŸaretlenmiÅŸ ama teslim tarihi girilmemiÅŸtir.");
 
             if (odunc.TeslimEdildi && odunc.TeslimAlanPersonelId <= 0)
                 return new ErrorResult("Teslim alan personel bilgisi eksiktir.");
@@ -51,16 +51,24 @@ namespace Kutuphane.BLL.Concrete
             if (!validationResult.IsSuccess)
                 return validationResult;
 
+            var aktifKayitVarMi = _oduncDal.GetListByFilter(x =>
+                x.UyeId == entity.UyeId &&
+                x.KitapId == entity.KitapId &&
+                x.TeslimEdildi == false).Data.Any();
+
+            if (aktifKayitVarMi)
+                return new ErrorResult("Bu kitap aynÄ± Ã¶ÄŸrenci Ã¼zerinde zaten Ã¶dÃ¼nÃ§te gÃ¶rÃ¼nÃ¼yor.");
+
             return _oduncDal.Add(entity);
         }
 
         public IResult UpdateService(Odunc entity)
         {
             if (entity == null)
-                return new ErrorResult("Ödünç bilgisi boş olamaz.");
+                return new ErrorResult("Ã–dÃ¼nÃ§ bilgisi boÅŸ olamaz.");
 
             if (entity.OduncId <= 0)
-                return new ErrorResult("Geçersiz ödünç seçimi.");
+                return new ErrorResult("GeÃ§ersiz Ã¶dÃ¼nÃ§ seÃ§imi.");
 
             var validationResult = Validate(entity);
             if (!validationResult.IsSuccess)
@@ -68,7 +76,7 @@ namespace Kutuphane.BLL.Concrete
 
             var dbOdunc = _oduncDal.GetByFilter(x => x.OduncId == entity.OduncId);
             if (!dbOdunc.IsSuccess || dbOdunc.Data == null)
-                return new ErrorResult("Güncellenecek ödünç kaydı bulunamadı.");
+                return new ErrorResult("GÃ¼ncellenecek Ã¶dÃ¼nÃ§ kaydÄ± bulunamadÄ±.");
 
             return _oduncDal.Update(entity);
         }

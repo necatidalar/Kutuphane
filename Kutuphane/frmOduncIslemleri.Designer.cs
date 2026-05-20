@@ -142,7 +142,7 @@
             btnOduncVer.Name = "btnOduncVer";
             btnOduncVer.Size = new Size(622, 60);
             btnOduncVer.TabIndex = 10;
-            btnOduncVer.Text = "✅ SEPETTEKİLERİ ÖDÜNÇ VER";
+            btnOduncVer.Text = "✅ SEÇİLİ ÖĞRENCİYE ÖDÜNÇ VER";
             btnOduncVer.UseVisualStyleBackColor = false;
             btnOduncVer.Click += button_OduncVer_Click;
             // 
@@ -223,7 +223,7 @@
             textBox_KitapAra.Location = new Point(15, 71);
             textBox_KitapAra.Margin = new Padding(3, 4, 3, 4);
             textBox_KitapAra.Name = "textBox_KitapAra";
-            textBox_KitapAra.PlaceholderText = "🔍 ISBN / Kitap Adı / Yazar ile arayın";
+            textBox_KitapAra.PlaceholderText = "🔍 Kitap adı, ISBN veya yazar ile ara; çift tıkla sepete ekle";
             textBox_KitapAra.Size = new Size(621, 32);
             textBox_KitapAra.TabIndex = 2;
             textBox_KitapAra.TextChanged += textBox_KitapAra_TextChanged;
@@ -246,7 +246,7 @@
             groupBox_UyeIslemleri.Size = new Size(653, 411);
             groupBox_UyeIslemleri.TabIndex = 2;
             groupBox_UyeIslemleri.TabStop = false;
-            groupBox_UyeIslemleri.Text = "👤 Üye İşlemleri";
+            groupBox_UyeIslemleri.Text = "🎓 Öğrenci Seçimi";
             // 
             // listView_Uyeler
             // 
@@ -297,7 +297,7 @@
             label_AdSoyad.Name = "label_AdSoyad";
             label_AdSoyad.Size = new Size(205, 32);
             label_AdSoyad.TabIndex = 11;
-            label_AdSoyad.Text = "Seçili Üye: -YOK-";
+            label_AdSoyad.Text = "Seçili Öğrenci: -YOK-";
             // 
             // label1
             // 
@@ -308,7 +308,7 @@
             label1.Name = "label1";
             label1.Size = new Size(75, 23);
             label1.TabIndex = 1;
-            label1.Text = "Üye Ara:";
+            label1.Text = "Okul No / Öğrenci Ara:";
             // 
             // textBox_UyeAra
             // 
@@ -317,7 +317,7 @@
             textBox_UyeAra.Location = new Point(21, 67);
             textBox_UyeAra.Margin = new Padding(3, 4, 3, 4);
             textBox_UyeAra.Name = "textBox_UyeAra";
-            textBox_UyeAra.PlaceholderText = "TC Kimlik No / Pasaport No / Ad Soyad ile arayın";
+            textBox_UyeAra.PlaceholderText = "Okul numarası yazınca öğrenci otomatik seçilir";
             textBox_UyeAra.Size = new Size(616, 32);
             textBox_UyeAra.TabIndex = 0;
             textBox_UyeAra.TextChanged += textBox_UyeAra_TextChanged;
@@ -401,7 +401,7 @@
             groupBox_IadeIslemleri.Size = new Size(654, 485);
             groupBox_IadeIslemleri.TabIndex = 4;
             groupBox_IadeIslemleri.TabStop = false;
-            groupBox_IadeIslemleri.Text = "↩️ İade Alma İşlemi (Üye Üzerindekiler)";
+            groupBox_IadeIslemleri.Text = "↩️ İade Alma İşlemi (Öğrencinin Ödünçleri)";
             // 
             // btnIadeAl
             // 
@@ -453,7 +453,7 @@
             MinimumSize = new Size(1083, 918);
             Name = "frmOduncIslemleri";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Kütüphane Otomasyonu - Ödünç ve İade Yönetimi";
+            Text = "Kütüphane Otomasyonu - Okul No ile Ödünç ve İade Yönetimi";
             Load += frmOduncIslemleri_Load;
             mainLayout.ResumeLayout(false);
             panelLeft.ResumeLayout(false);

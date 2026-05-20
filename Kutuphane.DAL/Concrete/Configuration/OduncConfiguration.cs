@@ -1,4 +1,4 @@
-﻿
+
 
 using Kutuphane.Model.Entity;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +10,9 @@ namespace Kutuphane.DAL.Concrete.Configuration
     {
         public void Configure(EntityTypeBuilder<Odunc> builder)
         {
+            // Ödünç/iade işlemlerinde trigger varsa EF Core OUTPUT clause hatasını engeller.
+            builder.ToTable("Oduncler", tb => tb.UseSqlOutputClause(false));
+
             builder.HasKey(o => o.OduncId);
             builder.Property(o => o.UyeId)
                 .IsRequired();

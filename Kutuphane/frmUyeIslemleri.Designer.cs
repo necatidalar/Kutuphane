@@ -1,18 +1,9 @@
-﻿using System.Globalization;
-
 namespace Kutuphane.UI
 {
     partial class frmUyeIslemleri
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -24,17 +15,42 @@ namespace Kutuphane.UI
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmUyeIslemleri));
-            uyeDtoBindingSource = new BindingSource(components);
-            textBox_Ara = new TextBox();
             groupBox1 = new GroupBox();
+            formLayout = new TableLayoutPanel();
+            label2 = new Label();
+            textBox_UyeId = new TextBox();
+            labelOkulNo = new Label();
+            textBox_OkulNo = new TextBox();
+            labelSinif = new Label();
+            textBox_Sinif = new TextBox();
+            labelSube = new Label();
+            textBox_Sube = new TextBox();
+            label8 = new Label();
+            textBox_TcPass = new TextBox();
+            label3 = new Label();
+            textBox_Ad = new TextBox();
+            label4 = new Label();
+            textBox_Soyad = new TextBox();
+            label5 = new Label();
+            comboBox_Cinsiyet = new ComboBox();
+            label6 = new Label();
+            dateTimePicker1 = new DateTimePicker();
+            label7 = new Label();
+            textBox_Telefon = new TextBox();
+            label9 = new Label();
+            textBox_Eposta = new TextBox();
+            labelVeliAdSoyad = new Label();
+            textBox_VeliAdSoyad = new TextBox();
+            labelVeliTelefon = new Label();
+            textBox_VeliTelefon = new TextBox();
+            label10 = new Label();
+            textBox_Adres = new TextBox();
+            label11 = new Label();
+            richTextBox_AdresDetay = new RichTextBox();
             flowLayoutPanel1 = new FlowLayoutPanel();
             btnKaydet = new Button();
             btnDuzenle = new Button();
@@ -42,80 +58,156 @@ namespace Kutuphane.UI
             btnTemizle = new Button();
             btnSilinenleriGoster = new Button();
             btnGeriYukle = new Button();
-            panel1 = new Panel();
-            dateTimePicker1 = new DateTimePicker();
-            textBox_UyeId = new TextBox();
-            textBox_TcPass = new TextBox();
-            textBox_Ad = new TextBox();
-            comboBox_Cinsiyet = new ComboBox();
-            textBox_Soyad = new TextBox();
-            textBox_Telefon = new TextBox();
-            textBox_Eposta = new TextBox();
-            textBox_Adres = new TextBox();
-            label2 = new Label();
-            richTextBox_AdresDetay = new RichTextBox();
-            label3 = new Label();
-            label11 = new Label();
-            label4 = new Label();
-            label10 = new Label();
-            label5 = new Label();
-            label9 = new Label();
-            label6 = new Label();
-            label8 = new Label();
-            label7 = new Label();
-            comboBox_Filtre = new ComboBox();
+            panelTop = new Panel();
             label_txtAra = new Label();
+            textBox_Ara = new TextBox();
+            comboBox_Filtre = new ComboBox();
             dataGrid_Uye = new DataGridView();
             uyeIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            tcPassDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            okulNoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            sinifDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            subeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             adDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             soyadDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            cinsiyetIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            cinsiyetDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            dogumTarihiDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             telefonDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             epostaDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            veliAdSoyadDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            veliTelefonDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            cinsiyetDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            dogumTarihiDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             adresDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             adresDetayDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            tcPassDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            cinsiyetIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             aktifMiDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)uyeDtoBindingSource).BeginInit();
+            uyeDtoBindingSource = new BindingSource(components);
+            panel1 = new Panel();
             groupBox1.SuspendLayout();
+            formLayout.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
-            panel1.SuspendLayout();
+            panelTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGrid_Uye).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)uyeDtoBindingSource).BeginInit();
             SuspendLayout();
-            // 
-            // uyeDtoBindingSource
-            // 
-            uyeDtoBindingSource.DataSource = typeof(Model.DTO.UyeDto);
-            // 
-            // textBox_Ara
-            // 
-            textBox_Ara.Font = new Font("Segoe UI", 10F);
-            textBox_Ara.Location = new Point(392, 12);
-            textBox_Ara.Name = "textBox_Ara";
-            textBox_Ara.PlaceholderText = "Arama metni giriniz";
-            textBox_Ara.Size = new Size(280, 25);
-            textBox_Ara.TabIndex = 17;
-            textBox_Ara.TextChanged += textBox_Ara_TextChanged;
             // 
             // groupBox1
             // 
-            groupBox1.AutoSize = true;
-            groupBox1.Controls.Add(flowLayoutPanel1);
-            groupBox1.Controls.Add(panel1);
-            groupBox1.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
-            groupBox1.ForeColor = Color.FromArgb(41, 128, 185);
-            groupBox1.Location = new Point(12, 12);
-            groupBox1.MinimumSize = new Size(300, 652);
+            groupBox1.Controls.Add(formLayout);
+            groupBox1.Dock = DockStyle.Top;
+            groupBox1.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            groupBox1.ForeColor = Color.FromArgb(44, 62, 80);
+            groupBox1.Location = new Point(0, 0);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(320, 652);
-            groupBox1.TabIndex = 3;
+            groupBox1.Padding = new Padding(12);
+            groupBox1.Size = new Size(1320, 315);
+            groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
-            groupBox1.Text = "👤 Üye Kayıt İşlemleri";
+            groupBox1.Text = "🎓 Öğrenci Bilgileri";
+            // 
+            // formLayout
+            // 
+            formLayout.ColumnCount = 8;
+            formLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 115F));
+            formLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            formLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 85F));
+            formLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            formLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 105F));
+            formLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            formLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 110F));
+            formLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            formLayout.Controls.Add(label2, 0, 0);
+            formLayout.Controls.Add(textBox_UyeId, 1, 0);
+            formLayout.Controls.Add(labelOkulNo, 2, 0);
+            formLayout.Controls.Add(textBox_OkulNo, 3, 0);
+            formLayout.Controls.Add(labelSinif, 4, 0);
+            formLayout.Controls.Add(textBox_Sinif, 5, 0);
+            formLayout.Controls.Add(labelSube, 6, 0);
+            formLayout.Controls.Add(textBox_Sube, 7, 0);
+            formLayout.Controls.Add(label8, 0, 1);
+            formLayout.Controls.Add(textBox_TcPass, 1, 1);
+            formLayout.Controls.Add(label3, 2, 1);
+            formLayout.Controls.Add(textBox_Ad, 3, 1);
+            formLayout.Controls.Add(label4, 4, 1);
+            formLayout.Controls.Add(textBox_Soyad, 5, 1);
+            formLayout.Controls.Add(label5, 6, 1);
+            formLayout.Controls.Add(comboBox_Cinsiyet, 7, 1);
+            formLayout.Controls.Add(label6, 0, 2);
+            formLayout.Controls.Add(dateTimePicker1, 1, 2);
+            formLayout.Controls.Add(label7, 2, 2);
+            formLayout.Controls.Add(textBox_Telefon, 3, 2);
+            formLayout.Controls.Add(label9, 4, 2);
+            formLayout.Controls.Add(textBox_Eposta, 5, 2);
+            formLayout.Controls.Add(labelVeliAdSoyad, 6, 2);
+            formLayout.Controls.Add(textBox_VeliAdSoyad, 7, 2);
+            formLayout.Controls.Add(labelVeliTelefon, 0, 3);
+            formLayout.Controls.Add(textBox_VeliTelefon, 1, 3);
+            formLayout.Controls.Add(label10, 2, 3);
+            formLayout.Controls.Add(textBox_Adres, 3, 3);
+            formLayout.Controls.Add(label11, 4, 3);
+            formLayout.Controls.Add(richTextBox_AdresDetay, 5, 3);
+            formLayout.Controls.Add(flowLayoutPanel1, 0, 4);
+            formLayout.Dock = DockStyle.Fill;
+            formLayout.Location = new Point(12, 30);
+            formLayout.Name = "formLayout";
+            formLayout.RowCount = 5;
+            formLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 46F));
+            formLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 46F));
+            formLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 46F));
+            formLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 82F));
+            formLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 45F));
+            formLayout.Size = new Size(1296, 273);
+            formLayout.TabIndex = 0;
+            // common label settings
+            label2.Text = "Kayıt Id";
+            labelOkulNo.Text = "Okul No *";
+            labelSinif.Text = "Sınıf *";
+            labelSube.Text = "Şube *";
+            label8.Text = "TC/Pass";
+            label3.Text = "Ad *";
+            label4.Text = "Soyad *";
+            label5.Text = "Cinsiyet *";
+            label6.Text = "Doğum Tarihi";
+            label7.Text = "Telefon *";
+            label9.Text = "E-posta *";
+            labelVeliAdSoyad.Text = "Veli *";
+            labelVeliTelefon.Text = "Veli Tel *";
+            label10.Text = "Adres *";
+            label11.Text = "Adres Detay *";
+            foreach (Control c in new Control[] { label2, labelOkulNo, labelSinif, labelSube, label8, label3, label4, label5, label6, label7, label9, labelVeliAdSoyad, labelVeliTelefon, label10, label11 })
+            {
+                c.Anchor = AnchorStyles.Left;
+                c.AutoSize = true;
+                c.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
+                c.ForeColor = Color.FromArgb(52, 73, 94);
+            }
+            textBox_UyeId.ReadOnly = true;
+            textBox_UyeId.BackColor = Color.Gainsboro;
+            textBox_TcPass.PlaceholderText = "Boşsa okul no kullanılır";
+            textBox_OkulNo.PlaceholderText = "Örn: 1345";
+            textBox_Sinif.PlaceholderText = "Örn: 12";
+            textBox_Sube.PlaceholderText = "Örn: C";
+            textBox_Telefon.PlaceholderText = "05XXXXXXXXX";
+            textBox_Eposta.PlaceholderText = "ogrenci@okul.com";
+            textBox_VeliAdSoyad.PlaceholderText = "Veli adı soyadı";
+            textBox_VeliTelefon.PlaceholderText = "05XXXXXXXXX";
+            textBox_Adres.PlaceholderText = "Mahalle / ilçe / il";
+            foreach (Control c in new Control[] { textBox_UyeId, textBox_OkulNo, textBox_Sinif, textBox_Sube, textBox_TcPass, textBox_Ad, textBox_Soyad, comboBox_Cinsiyet, dateTimePicker1, textBox_Telefon, textBox_Eposta, textBox_VeliAdSoyad, textBox_VeliTelefon, textBox_Adres })
+            {
+                c.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+                c.Font = new Font("Segoe UI", 10F);
+                c.Margin = new Padding(3, 5, 10, 5);
+            }
+            textBox_Sube.CharacterCasing = CharacterCasing.Upper;
+            comboBox_Cinsiyet.DropDownStyle = ComboBoxStyle.DropDownList;
+            dateTimePicker1.Format = DateTimePickerFormat.Short;
+            formLayout.SetColumnSpan(textBox_Adres, 1);
+            richTextBox_AdresDetay.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
+            richTextBox_AdresDetay.Font = new Font("Segoe UI", 10F);
+            formLayout.SetColumnSpan(richTextBox_AdresDetay, 3);
             // 
             // flowLayoutPanel1
             // 
+            formLayout.SetColumnSpan(flowLayoutPanel1, 8);
             flowLayoutPanel1.Controls.Add(btnKaydet);
             flowLayoutPanel1.Controls.Add(btnDuzenle);
             flowLayoutPanel1.Controls.Add(btnSil);
@@ -123,500 +215,195 @@ namespace Kutuphane.UI
             flowLayoutPanel1.Controls.Add(btnSilinenleriGoster);
             flowLayoutPanel1.Controls.Add(btnGeriYukle);
             flowLayoutPanel1.Dock = DockStyle.Fill;
-            flowLayoutPanel1.Location = new Point(3, 362);
-            flowLayoutPanel1.Margin = new Padding(3, 2, 3, 2);
+            flowLayoutPanel1.FlowDirection = FlowDirection.LeftToRight;
+            flowLayoutPanel1.Location = new Point(3, 223);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Padding = new Padding(20, 10, 10, 10);
-            flowLayoutPanel1.Size = new Size(314, 287);
-            flowLayoutPanel1.TabIndex = 26;
+            flowLayoutPanel1.Size = new Size(1290, 47);
+            flowLayoutPanel1.TabIndex = 30;
             // 
-            // btnKaydet
+            // buttons
             // 
-            btnKaydet.BackColor = Color.FromArgb(39, 174, 96);
-            btnKaydet.FlatAppearance.BorderSize = 0;
-            btnKaydet.FlatStyle = FlatStyle.Flat;
-            btnKaydet.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            btnKaydet.ForeColor = Color.White;
-            btnKaydet.Location = new Point(23, 13);
-            btnKaydet.Name = "btnKaydet";
-            btnKaydet.Size = new Size(265, 38);
-            btnKaydet.TabIndex = 11;
-            btnKaydet.Text = "💾 KAYDET";
-            btnKaydet.UseVisualStyleBackColor = false;
+            ConfigureButton(btnKaydet, "💾 Kaydet", Color.FromArgb(39, 174, 96));
+            ConfigureButton(btnDuzenle, "✏️ Güncelle", Color.FromArgb(41, 128, 185));
+            ConfigureButton(btnSil, "🗑️ Pasif Et", Color.FromArgb(192, 57, 43));
+            ConfigureButton(btnTemizle, "🧹 Temizle", Color.FromArgb(127, 140, 141));
+            ConfigureButton(btnSilinenleriGoster, "🗑️ Pasif Öğrencileri Göster", Color.FromArgb(243, 156, 18));
+            ConfigureButton(btnGeriYukle, "↩️ Geri Yükle", Color.FromArgb(22, 160, 133));
             btnKaydet.Click += btnKaydet_Click;
-            // 
-            // btnDuzenle
-            // 
-            btnDuzenle.BackColor = Color.FromArgb(41, 128, 185);
-            btnDuzenle.FlatAppearance.BorderSize = 0;
-            btnDuzenle.FlatStyle = FlatStyle.Flat;
-            btnDuzenle.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            btnDuzenle.ForeColor = Color.White;
-            btnDuzenle.Location = new Point(23, 57);
-            btnDuzenle.Name = "btnDuzenle";
-            btnDuzenle.Size = new Size(265, 38);
-            btnDuzenle.TabIndex = 12;
-            btnDuzenle.Text = "✏️ Düzenle";
-            btnDuzenle.UseVisualStyleBackColor = false;
             btnDuzenle.Click += btnDuzenle_Click;
-            // 
-            // btnSil
-            // 
-            btnSil.BackColor = Color.FromArgb(192, 57, 43);
-            btnSil.FlatAppearance.BorderSize = 0;
-            btnSil.FlatStyle = FlatStyle.Flat;
-            btnSil.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            btnSil.ForeColor = Color.White;
-            btnSil.Location = new Point(23, 101);
-            btnSil.Name = "btnSil";
-            btnSil.Size = new Size(265, 38);
-            btnSil.TabIndex = 13;
-            btnSil.Text = "❌ Sil";
-            btnSil.UseVisualStyleBackColor = false;
             btnSil.Click += btnSil_Click;
-            // 
-            // btnTemizle
-            // 
-            btnTemizle.BackColor = Color.FromArgb(149, 165, 166);
-            btnTemizle.FlatAppearance.BorderSize = 0;
-            btnTemizle.FlatStyle = FlatStyle.Flat;
-            btnTemizle.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            btnTemizle.ForeColor = Color.White;
-            btnTemizle.Location = new Point(23, 145);
-            btnTemizle.Name = "btnTemizle";
-            btnTemizle.Size = new Size(265, 38);
-            btnTemizle.TabIndex = 14;
-            btnTemizle.Text = "\U0001f9f9 Temizle";
-            btnTemizle.UseVisualStyleBackColor = false;
             btnTemizle.Click += btnTemizle_Click;
-            // 
-            // btnSilinenleriGoster
-            // 
-            btnSilinenleriGoster.BackColor = Color.FromArgb(236, 240, 241);
-            btnSilinenleriGoster.Cursor = Cursors.Hand;
-            btnSilinenleriGoster.FlatAppearance.BorderColor = Color.FromArgb(41, 128, 185);
-            btnSilinenleriGoster.FlatStyle = FlatStyle.Flat;
-            btnSilinenleriGoster.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
-            btnSilinenleriGoster.ForeColor = Color.FromArgb(41, 128, 185);
-            btnSilinenleriGoster.Location = new Point(23, 189);
-            btnSilinenleriGoster.Name = "btnSilinenleriGoster";
-            btnSilinenleriGoster.Size = new Size(265, 38);
-            btnSilinenleriGoster.TabIndex = 15;
-            btnSilinenleriGoster.Text = "🗑️ Silinen Üyeleri Göster";
-            btnSilinenleriGoster.UseVisualStyleBackColor = false;
             btnSilinenleriGoster.Click += btnSilinenleriGoster_Click;
-            // 
-            // btnGeriYukle
-            // 
-            btnGeriYukle.BackColor = Color.FromArgb(52, 73, 94);
-            btnGeriYukle.Cursor = Cursors.Hand;
-            btnGeriYukle.FlatAppearance.BorderSize = 0;
-            btnGeriYukle.FlatStyle = FlatStyle.Flat;
-            btnGeriYukle.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
-            btnGeriYukle.ForeColor = Color.White;
-            btnGeriYukle.Location = new Point(23, 233);
-            btnGeriYukle.Name = "btnGeriYukle";
-            btnGeriYukle.Size = new Size(265, 38);
-            btnGeriYukle.TabIndex = 16;
-            btnGeriYukle.Text = "↩️ Seçili Üyeyi Geri Yükle";
-            btnGeriYukle.UseVisualStyleBackColor = false;
-            btnGeriYukle.Visible = false;
             btnGeriYukle.Click += btnGeriYukle_Click;
             // 
-            // panel1
+            // panelTop
             // 
-            panel1.Controls.Add(dateTimePicker1);
-            panel1.Controls.Add(textBox_UyeId);
-            panel1.Controls.Add(textBox_TcPass);
-            panel1.Controls.Add(textBox_Ad);
-            panel1.Controls.Add(comboBox_Cinsiyet);
-            panel1.Controls.Add(textBox_Soyad);
-            panel1.Controls.Add(textBox_Telefon);
-            panel1.Controls.Add(textBox_Eposta);
-            panel1.Controls.Add(textBox_Adres);
-            panel1.Controls.Add(label2);
-            panel1.Controls.Add(richTextBox_AdresDetay);
-            panel1.Controls.Add(label3);
-            panel1.Controls.Add(label11);
-            panel1.Controls.Add(label4);
-            panel1.Controls.Add(label10);
-            panel1.Controls.Add(label5);
-            panel1.Controls.Add(label9);
-            panel1.Controls.Add(label6);
-            panel1.Controls.Add(label8);
-            panel1.Controls.Add(label7);
-            panel1.Dock = DockStyle.Top;
-            panel1.Location = new Point(3, 23);
-            panel1.Margin = new Padding(3, 2, 3, 2);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(314, 339);
-            panel1.TabIndex = 25;
-            // 
-            // dateTimePicker1
-            // 
-            dateTimePicker1.Font = new Font("Segoe UI", 10F);
-            dateTimePicker1.Location = new Point(101, 157);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(201, 25);
-            dateTimePicker1.TabIndex = 6;
-            // 
-            // textBox_UyeId
-            // 
-            textBox_UyeId.Enabled = false;
-            textBox_UyeId.Font = new Font("Segoe UI", 10F);
-            textBox_UyeId.Location = new Point(101, 11);
-            textBox_UyeId.Name = "textBox_UyeId";
-            textBox_UyeId.Size = new Size(201, 25);
-            textBox_UyeId.TabIndex = 1;
-            // 
-            // textBox_TcPass
-            // 
-            textBox_TcPass.Font = new Font("Segoe UI", 10F);
-            textBox_TcPass.Location = new Point(101, 40);
-            textBox_TcPass.Name = "textBox_TcPass";
-            textBox_TcPass.Size = new Size(201, 25);
-            textBox_TcPass.TabIndex = 2;
-            // 
-            // textBox_Ad
-            // 
-            textBox_Ad.Font = new Font("Segoe UI", 10F);
-            textBox_Ad.Location = new Point(101, 70);
-            textBox_Ad.Name = "textBox_Ad";
-            textBox_Ad.Size = new Size(201, 25);
-            textBox_Ad.TabIndex = 3;
-            // 
-            // comboBox_Cinsiyet
-            // 
-            comboBox_Cinsiyet.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBox_Cinsiyet.Font = new Font("Segoe UI", 10F);
-            comboBox_Cinsiyet.FormattingEnabled = true;
-            comboBox_Cinsiyet.Location = new Point(101, 128);
-            comboBox_Cinsiyet.Name = "comboBox_Cinsiyet";
-            comboBox_Cinsiyet.Size = new Size(201, 25);
-            comboBox_Cinsiyet.TabIndex = 5;
-            // 
-            // textBox_Soyad
-            // 
-            textBox_Soyad.Font = new Font("Segoe UI", 10F);
-            textBox_Soyad.Location = new Point(101, 98);
-            textBox_Soyad.Name = "textBox_Soyad";
-            textBox_Soyad.Size = new Size(201, 25);
-            textBox_Soyad.TabIndex = 4;
-            // 
-            // textBox_Telefon
-            // 
-            textBox_Telefon.Font = new Font("Segoe UI", 10F);
-            textBox_Telefon.Location = new Point(101, 187);
-            textBox_Telefon.Name = "textBox_Telefon";
-            textBox_Telefon.Size = new Size(201, 25);
-            textBox_Telefon.TabIndex = 7;
-            // 
-            // textBox_Eposta
-            // 
-            textBox_Eposta.Font = new Font("Segoe UI", 10F);
-            textBox_Eposta.Location = new Point(101, 215);
-            textBox_Eposta.Name = "textBox_Eposta";
-            textBox_Eposta.Size = new Size(201, 25);
-            textBox_Eposta.TabIndex = 8;
-            // 
-            // textBox_Adres
-            // 
-            textBox_Adres.Font = new Font("Segoe UI", 10F);
-            textBox_Adres.Location = new Point(101, 244);
-            textBox_Adres.Name = "textBox_Adres";
-            textBox_Adres.Size = new Size(201, 25);
-            textBox_Adres.TabIndex = 9;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
-            label2.ForeColor = Color.FromArgb(64, 64, 64);
-            label2.Location = new Point(45, 14);
-            label2.Name = "label2";
-            label2.Size = new Size(52, 19);
-            label2.TabIndex = 1;
-            label2.Text = "Üye Id:";
-            // 
-            // richTextBox_AdresDetay
-            // 
-            richTextBox_AdresDetay.Font = new Font("Segoe UI", 10F);
-            richTextBox_AdresDetay.Location = new Point(101, 275);
-            richTextBox_AdresDetay.Name = "richTextBox_AdresDetay";
-            richTextBox_AdresDetay.Size = new Size(201, 53);
-            richTextBox_AdresDetay.TabIndex = 10;
-            richTextBox_AdresDetay.Text = "";
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
-            label3.ForeColor = Color.FromArgb(64, 64, 64);
-            label3.Location = new Point(21, 44);
-            label3.Name = "label3";
-            label3.Size = new Size(78, 19);
-            label3.TabIndex = 1;
-            label3.Text = "TC/Pas No:";
-            // 
-            // label11
-            // 
-            label11.AutoSize = true;
-            label11.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
-            label11.ForeColor = Color.FromArgb(64, 64, 64);
-            label11.Location = new Point(9, 278);
-            label11.Name = "label11";
-            label11.Size = new Size(87, 19);
-            label11.TabIndex = 1;
-            label11.Text = "Adres Detay:";
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
-            label4.ForeColor = Color.FromArgb(64, 64, 64);
-            label4.Location = new Point(72, 73);
-            label4.Name = "label4";
-            label4.Size = new Size(29, 19);
-            label4.TabIndex = 1;
-            label4.Text = "Ad:";
-            // 
-            // label10
-            // 
-            label10.AutoSize = true;
-            label10.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
-            label10.ForeColor = Color.FromArgb(64, 64, 64);
-            label10.Location = new Point(49, 248);
-            label10.Name = "label10";
-            label10.Size = new Size(47, 19);
-            label10.TabIndex = 1;
-            label10.Text = "Adres:";
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
-            label5.ForeColor = Color.FromArgb(64, 64, 64);
-            label5.Location = new Point(51, 101);
-            label5.Name = "label5";
-            label5.Size = new Size(50, 19);
-            label5.TabIndex = 1;
-            label5.Text = "Soyad:";
-            // 
-            // label9
-            // 
-            label9.AutoSize = true;
-            label9.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
-            label9.ForeColor = Color.FromArgb(64, 64, 64);
-            label9.Location = new Point(37, 218);
-            label9.Name = "label9";
-            label9.Size = new Size(59, 19);
-            label9.TabIndex = 1;
-            label9.Text = "E-Posta:";
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
-            label6.ForeColor = Color.FromArgb(64, 64, 64);
-            label6.Location = new Point(38, 130);
-            label6.Name = "label6";
-            label6.Size = new Size(62, 19);
-            label6.TabIndex = 1;
-            label6.Text = "Cinsiyet:";
-            // 
-            // label8
-            // 
-            label8.AutoSize = true;
-            label8.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
-            label8.ForeColor = Color.FromArgb(64, 64, 64);
-            label8.Location = new Point(42, 190);
-            label8.Name = "label8";
-            label8.Size = new Size(58, 19);
-            label8.TabIndex = 1;
-            label8.Text = "Telefon:";
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
-            label7.ForeColor = Color.FromArgb(64, 64, 64);
-            label7.Location = new Point(10, 160);
-            label7.Name = "label7";
-            label7.Size = new Size(93, 19);
-            label7.TabIndex = 1;
-            label7.Text = "Doğum Tarih:";
-            // 
-            // comboBox_Filtre
-            // 
-            comboBox_Filtre.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            comboBox_Filtre.Font = new Font("Segoe UI", 10F);
-            comboBox_Filtre.FormattingEnabled = true;
-            comboBox_Filtre.Location = new Point(997, 12);
-            comboBox_Filtre.Name = "comboBox_Filtre";
-            comboBox_Filtre.Size = new Size(134, 25);
-            comboBox_Filtre.TabIndex = 22;
-            comboBox_Filtre.SelectedIndexChanged += comboBox_Filtre_SelectedIndexChanged;
+            panelTop.Controls.Add(comboBox_Filtre);
+            panelTop.Controls.Add(textBox_Ara);
+            panelTop.Controls.Add(label_txtAra);
+            panelTop.Dock = DockStyle.Top;
+            panelTop.Location = new Point(0, 315);
+            panelTop.Name = "panelTop";
+            panelTop.Padding = new Padding(12, 8, 12, 8);
+            panelTop.Size = new Size(1320, 56);
+            panelTop.TabIndex = 1;
             // 
             // label_txtAra
             // 
             label_txtAra.AutoSize = true;
-            label_txtAra.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
-            label_txtAra.ForeColor = Color.FromArgb(64, 64, 64);
-            label_txtAra.Location = new Point(335, 15);
+            label_txtAra.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            label_txtAra.Location = new Point(14, 18);
             label_txtAra.Name = "label_txtAra";
-            label_txtAra.Size = new Size(51, 17);
-            label_txtAra.TabIndex = 23;
-            label_txtAra.Text = "Arama:";
+            label_txtAra.Size = new Size(132, 19);
+            label_txtAra.TabIndex = 0;
+            label_txtAra.Text = "Öğrenci ara:";
+            // 
+            // textBox_Ara
+            // 
+            textBox_Ara.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            textBox_Ara.Font = new Font("Segoe UI", 10F);
+            textBox_Ara.Location = new Point(145, 14);
+            textBox_Ara.Name = "textBox_Ara";
+            textBox_Ara.PlaceholderText = "Okul no, ad, soyad, sınıf, şube, veli veya telefon ile ara";
+            textBox_Ara.Size = new Size(930, 25);
+            textBox_Ara.TabIndex = 1;
+            textBox_Ara.TextChanged += textBox_Ara_TextChanged;
+            // 
+            // comboBox_Filtre
+            // 
+            comboBox_Filtre.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            comboBox_Filtre.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBox_Filtre.Font = new Font("Segoe UI", 10F);
+            comboBox_Filtre.Location = new Point(1090, 13);
+            comboBox_Filtre.Name = "comboBox_Filtre";
+            comboBox_Filtre.Size = new Size(216, 25);
+            comboBox_Filtre.TabIndex = 2;
+            comboBox_Filtre.SelectedIndexChanged += comboBox_Filtre_SelectedIndexChanged;
             // 
             // dataGrid_Uye
             // 
-            dataGrid_Uye.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dataGrid_Uye.AllowUserToAddRows = false;
+            dataGrid_Uye.AllowUserToDeleteRows = false;
             dataGrid_Uye.AutoGenerateColumns = false;
+            dataGrid_Uye.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGrid_Uye.BackgroundColor = Color.White;
             dataGrid_Uye.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGrid_Uye.Columns.AddRange(new DataGridViewColumn[] { uyeIdDataGridViewTextBoxColumn, tcPassDataGridViewTextBoxColumn, adDataGridViewTextBoxColumn, soyadDataGridViewTextBoxColumn, cinsiyetIdDataGridViewTextBoxColumn, cinsiyetDataGridViewTextBoxColumn, dogumTarihiDataGridViewTextBoxColumn, telefonDataGridViewTextBoxColumn, epostaDataGridViewTextBoxColumn, adresDataGridViewTextBoxColumn, adresDetayDataGridViewTextBoxColumn, aktifMiDataGridViewCheckBoxColumn });
+            dataGrid_Uye.Columns.AddRange(new DataGridViewColumn[] { uyeIdDataGridViewTextBoxColumn, okulNoDataGridViewTextBoxColumn, sinifDataGridViewTextBoxColumn, subeDataGridViewTextBoxColumn, adDataGridViewTextBoxColumn, soyadDataGridViewTextBoxColumn, telefonDataGridViewTextBoxColumn, epostaDataGridViewTextBoxColumn, veliAdSoyadDataGridViewTextBoxColumn, veliTelefonDataGridViewTextBoxColumn, cinsiyetDataGridViewTextBoxColumn, dogumTarihiDataGridViewTextBoxColumn, adresDataGridViewTextBoxColumn, adresDetayDataGridViewTextBoxColumn, tcPassDataGridViewTextBoxColumn, cinsiyetIdDataGridViewTextBoxColumn, aktifMiDataGridViewCheckBoxColumn });
             dataGrid_Uye.DataSource = uyeDtoBindingSource;
-            dataGrid_Uye.Location = new Point(335, 43);
+            dataGrid_Uye.Dock = DockStyle.Fill;
+            dataGrid_Uye.Location = new Point(0, 371);
+            dataGrid_Uye.MultiSelect = false;
             dataGrid_Uye.Name = "dataGrid_Uye";
+            dataGrid_Uye.ReadOnly = true;
             dataGrid_Uye.RowHeadersWidth = 51;
-            dataGrid_Uye.Size = new Size(795, 611);
-            dataGrid_Uye.TabIndex = 24;
+            dataGrid_Uye.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGrid_Uye.Size = new Size(1320, 399);
+            dataGrid_Uye.TabIndex = 2;
             dataGrid_Uye.CellFormatting += dataGrid_Uye_CellFormatting;
             dataGrid_Uye.CellPainting += dataGrid_Uye_CellPainting;
-            dataGrid_Uye.ColumnHeaderMouseClick += dataGrid_Uye_ColumnHeaderMouseClick;
             dataGrid_Uye.SelectionChanged += dataGrid_Uye_SelectionChanged;
-            // 
-            // uyeIdDataGridViewTextBoxColumn
-            // 
+            dataGrid_Uye.ColumnHeaderMouseClick += dataGrid_Uye_ColumnHeaderMouseClick;
+            // columns
             uyeIdDataGridViewTextBoxColumn.DataPropertyName = "UyeId";
-            uyeIdDataGridViewTextBoxColumn.HeaderText = "UyeId";
-            uyeIdDataGridViewTextBoxColumn.MinimumWidth = 6;
+            uyeIdDataGridViewTextBoxColumn.HeaderText = "Id";
             uyeIdDataGridViewTextBoxColumn.Name = "uyeIdDataGridViewTextBoxColumn";
             uyeIdDataGridViewTextBoxColumn.Visible = false;
-            uyeIdDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // tcPassDataGridViewTextBoxColumn
-            // 
-            tcPassDataGridViewTextBoxColumn.DataPropertyName = "TcPass";
-            tcPassDataGridViewTextBoxColumn.HeaderText = "TC No / Pasaport No ";
-            tcPassDataGridViewTextBoxColumn.MinimumWidth = 6;
-            tcPassDataGridViewTextBoxColumn.Name = "tcPassDataGridViewTextBoxColumn";
-            tcPassDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // adDataGridViewTextBoxColumn
-            // 
+            okulNoDataGridViewTextBoxColumn.DataPropertyName = "OkulNo";
+            okulNoDataGridViewTextBoxColumn.HeaderText = "Okul No";
+            okulNoDataGridViewTextBoxColumn.Name = "okulNoDataGridViewTextBoxColumn";
+            sinifDataGridViewTextBoxColumn.DataPropertyName = "Sinif";
+            sinifDataGridViewTextBoxColumn.HeaderText = "Sınıf";
+            sinifDataGridViewTextBoxColumn.Name = "sinifDataGridViewTextBoxColumn";
+            subeDataGridViewTextBoxColumn.DataPropertyName = "Sube";
+            subeDataGridViewTextBoxColumn.HeaderText = "Şube";
+            subeDataGridViewTextBoxColumn.Name = "subeDataGridViewTextBoxColumn";
             adDataGridViewTextBoxColumn.DataPropertyName = "Ad";
-            adDataGridViewTextBoxColumn.HeaderText = "Adı";
-            adDataGridViewTextBoxColumn.MinimumWidth = 6;
+            adDataGridViewTextBoxColumn.HeaderText = "Ad";
             adDataGridViewTextBoxColumn.Name = "adDataGridViewTextBoxColumn";
-            adDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // soyadDataGridViewTextBoxColumn
-            // 
             soyadDataGridViewTextBoxColumn.DataPropertyName = "Soyad";
-            soyadDataGridViewTextBoxColumn.HeaderText = "Soyadı";
-            soyadDataGridViewTextBoxColumn.MinimumWidth = 6;
+            soyadDataGridViewTextBoxColumn.HeaderText = "Soyad";
             soyadDataGridViewTextBoxColumn.Name = "soyadDataGridViewTextBoxColumn";
-            soyadDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // cinsiyetIdDataGridViewTextBoxColumn
-            // 
-            cinsiyetIdDataGridViewTextBoxColumn.DataPropertyName = "CinsiyetId";
-            cinsiyetIdDataGridViewTextBoxColumn.HeaderText = "CinsiyetId";
-            cinsiyetIdDataGridViewTextBoxColumn.MinimumWidth = 6;
-            cinsiyetIdDataGridViewTextBoxColumn.Name = "cinsiyetIdDataGridViewTextBoxColumn";
-            cinsiyetIdDataGridViewTextBoxColumn.Visible = false;
-            cinsiyetIdDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // cinsiyetDataGridViewTextBoxColumn
-            // 
-            cinsiyetDataGridViewTextBoxColumn.DataPropertyName = "Cinsiyet";
-            cinsiyetDataGridViewTextBoxColumn.HeaderText = "Cinsiyet";
-            cinsiyetDataGridViewTextBoxColumn.MinimumWidth = 6;
-            cinsiyetDataGridViewTextBoxColumn.Name = "cinsiyetDataGridViewTextBoxColumn";
-            cinsiyetDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // dogumTarihiDataGridViewTextBoxColumn
-            // 
-            dogumTarihiDataGridViewTextBoxColumn.DataPropertyName = "DogumTarihi";
-            dogumTarihiDataGridViewTextBoxColumn.HeaderText = "Doğum Tarihi";
-            dogumTarihiDataGridViewTextBoxColumn.MinimumWidth = 6;
-            dogumTarihiDataGridViewTextBoxColumn.Name = "dogumTarihiDataGridViewTextBoxColumn";
-            dogumTarihiDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // telefonDataGridViewTextBoxColumn
-            // 
             telefonDataGridViewTextBoxColumn.DataPropertyName = "Telefon";
             telefonDataGridViewTextBoxColumn.HeaderText = "Telefon";
-            telefonDataGridViewTextBoxColumn.MinimumWidth = 6;
             telefonDataGridViewTextBoxColumn.Name = "telefonDataGridViewTextBoxColumn";
-            telefonDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // epostaDataGridViewTextBoxColumn
-            // 
             epostaDataGridViewTextBoxColumn.DataPropertyName = "Eposta";
-            epostaDataGridViewTextBoxColumn.HeaderText = "E-Posta";
-            epostaDataGridViewTextBoxColumn.MinimumWidth = 6;
+            epostaDataGridViewTextBoxColumn.HeaderText = "E-posta";
             epostaDataGridViewTextBoxColumn.Name = "epostaDataGridViewTextBoxColumn";
-            epostaDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // adresDataGridViewTextBoxColumn
-            // 
+            veliAdSoyadDataGridViewTextBoxColumn.DataPropertyName = "VeliAdSoyad";
+            veliAdSoyadDataGridViewTextBoxColumn.HeaderText = "Veli";
+            veliAdSoyadDataGridViewTextBoxColumn.Name = "veliAdSoyadDataGridViewTextBoxColumn";
+            veliTelefonDataGridViewTextBoxColumn.DataPropertyName = "VeliTelefon";
+            veliTelefonDataGridViewTextBoxColumn.HeaderText = "Veli Tel";
+            veliTelefonDataGridViewTextBoxColumn.Name = "veliTelefonDataGridViewTextBoxColumn";
+            cinsiyetDataGridViewTextBoxColumn.DataPropertyName = "Cinsiyet";
+            cinsiyetDataGridViewTextBoxColumn.HeaderText = "Cinsiyet";
+            cinsiyetDataGridViewTextBoxColumn.Name = "cinsiyetDataGridViewTextBoxColumn";
+            dogumTarihiDataGridViewTextBoxColumn.DataPropertyName = "DogumTarihi";
+            dogumTarihiDataGridViewTextBoxColumn.HeaderText = "Doğum Tarihi";
+            dogumTarihiDataGridViewTextBoxColumn.Name = "dogumTarihiDataGridViewTextBoxColumn";
             adresDataGridViewTextBoxColumn.DataPropertyName = "Adres";
             adresDataGridViewTextBoxColumn.HeaderText = "Adres";
-            adresDataGridViewTextBoxColumn.MinimumWidth = 6;
             adresDataGridViewTextBoxColumn.Name = "adresDataGridViewTextBoxColumn";
-            adresDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // adresDetayDataGridViewTextBoxColumn
-            // 
             adresDetayDataGridViewTextBoxColumn.DataPropertyName = "AdresDetay";
             adresDetayDataGridViewTextBoxColumn.HeaderText = "Adres Detay";
-            adresDetayDataGridViewTextBoxColumn.MinimumWidth = 6;
             adresDetayDataGridViewTextBoxColumn.Name = "adresDetayDataGridViewTextBoxColumn";
-            adresDetayDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // aktifMiDataGridViewCheckBoxColumn
-            // 
+            tcPassDataGridViewTextBoxColumn.DataPropertyName = "TcPass";
+            tcPassDataGridViewTextBoxColumn.HeaderText = "TC/Pass";
+            tcPassDataGridViewTextBoxColumn.Name = "tcPassDataGridViewTextBoxColumn";
+            tcPassDataGridViewTextBoxColumn.Visible = false;
+            cinsiyetIdDataGridViewTextBoxColumn.DataPropertyName = "CinsiyetId";
+            cinsiyetIdDataGridViewTextBoxColumn.HeaderText = "CinsiyetId";
+            cinsiyetIdDataGridViewTextBoxColumn.Name = "cinsiyetIdDataGridViewTextBoxColumn";
+            cinsiyetIdDataGridViewTextBoxColumn.Visible = false;
             aktifMiDataGridViewCheckBoxColumn.DataPropertyName = "AktifMi";
-            aktifMiDataGridViewCheckBoxColumn.HeaderText = "AktifMi";
-            aktifMiDataGridViewCheckBoxColumn.MinimumWidth = 6;
+            aktifMiDataGridViewCheckBoxColumn.HeaderText = "Aktif";
             aktifMiDataGridViewCheckBoxColumn.Name = "aktifMiDataGridViewCheckBoxColumn";
             aktifMiDataGridViewCheckBoxColumn.Visible = false;
-            aktifMiDataGridViewCheckBoxColumn.Width = 125;
             // 
             // frmUyeIslemleri
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(1144, 672);
+            ClientSize = new Size(1320, 770);
             Controls.Add(dataGrid_Uye);
-            Controls.Add(label_txtAra);
-            Controls.Add(comboBox_Filtre);
+            Controls.Add(panelTop);
             Controls.Add(groupBox1);
-            Controls.Add(textBox_Ara);
             Icon = (Icon)resources.GetObject("$this.Icon");
-            MinimumSize = new Size(1160, 711);
+            MinimumSize = new Size(1180, 720);
             Name = "frmUyeIslemleri";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Kütüphane Otomasyonu - Üye İşlemleri";
+            Text = "Kütüphane Otomasyonu - Öğrenci İşlemleri";
             Load += frmUyeIslemleri_Load;
-            ((System.ComponentModel.ISupportInitialize)uyeDtoBindingSource).EndInit();
             groupBox1.ResumeLayout(false);
+            formLayout.ResumeLayout(false);
+            formLayout.PerformLayout();
             flowLayoutPanel1.ResumeLayout(false);
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
+            panelTop.ResumeLayout(false);
+            panelTop.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGrid_Uye).EndInit();
+            ((System.ComponentModel.ISupportInitialize)uyeDtoBindingSource).EndInit();
             ResumeLayout(false);
-            PerformLayout();
+        }
 
+        private static void ConfigureButton(Button button, string text, Color color)
+        {
+            button.BackColor = color;
+            button.Cursor = Cursors.Hand;
+            button.FlatAppearance.BorderSize = 0;
+            button.FlatStyle = FlatStyle.Flat;
+            button.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
+            button.ForeColor = Color.White;
+            button.Margin = new Padding(3, 5, 8, 5);
+            button.Size = new Size(160, 36);
+            button.Text = text;
+            button.UseVisualStyleBackColor = false;
         }
 
         #endregion
-        private DataGridViewTextBoxColumn cinsiyetIDDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn dogumYiliDataGridViewTextBoxColumn;
         private TextBox textBox_Ara;
         private GroupBox groupBox1;
+        private TableLayoutPanel formLayout;
         private Label label2;
         private TextBox textBox_UyeId;
         private Label label8;
@@ -646,20 +433,36 @@ namespace Kutuphane.UI
         private Label label_txtAra;
         private DataGridView dataGrid_Uye;
         private DataGridViewTextBoxColumn uyeIdDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn tcPassDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn okulNoDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn sinifDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn subeDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn adDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn soyadDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn cinsiyetIdDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn cinsiyetDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn dogumTarihiDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn telefonDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn epostaDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn veliAdSoyadDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn veliTelefonDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn cinsiyetDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn dogumTarihiDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn adresDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn adresDetayDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn tcPassDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn cinsiyetIdDataGridViewTextBoxColumn;
         private DataGridViewCheckBoxColumn aktifMiDataGridViewCheckBoxColumn;
         private Panel panel1;
         private FlowLayoutPanel flowLayoutPanel1;
         private Button btnSilinenleriGoster;
         private Button btnGeriYukle;
+        private Panel panelTop;
+        private Label labelOkulNo;
+        private Label labelSinif;
+        private Label labelSube;
+        private Label labelVeliAdSoyad;
+        private Label labelVeliTelefon;
+        private TextBox textBox_OkulNo;
+        private TextBox textBox_Sinif;
+        private TextBox textBox_Sube;
+        private TextBox textBox_VeliAdSoyad;
+        private TextBox textBox_VeliTelefon;
     }
 }

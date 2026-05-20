@@ -1,4 +1,4 @@
-﻿using Core.Utility.Results;
+using Core.Utility.Results;
 using Kutuphane.BLL.Abstract;
 using Kutuphane.DAL.Abstract;
 using Kutuphane.Model.DTO;
@@ -22,42 +22,57 @@ namespace Kutuphane.BLL.Concrete
 
         private IResult Validate(Uye uye)
         {
-            if (string.IsNullOrWhiteSpace(uye.TcPass))
-                return new ErrorResult("TC/Pass boş bırakılamaz.");
+            if (uye == null)
+                return new ErrorResult("Öğrenci bilgisi boş olamaz.");
 
-            if (uye.TcPass.Length < 5)
-                return new ErrorResult("TC/Pass en az 5 karakter olmalıdır.");
+            uye.OkulNo = uye.OkulNo?.Trim();
+            uye.Sinif = uye.Sinif?.Trim();
+            uye.Sube = uye.Sube?.Trim();
+            uye.VeliAdSoyad = uye.VeliAdSoyad?.Trim();
+            uye.VeliTelefon = uye.VeliTelefon?.Trim();
+            uye.TcPass = string.IsNullOrWhiteSpace(uye.TcPass) ? (uye.OkulNo ?? string.Empty) : uye.TcPass.Trim();
 
-            var tcVarMi = _uyeDal
-                .GetListByFilter(x => x.TcPass == uye.TcPass && x.UyeId != uye.UyeId)
-                .Data.Any();
+            if (string.IsNullOrWhiteSpace(uye.OkulNo))
+                return new ErrorResult("Okul numarası boş bırakılamaz.");
 
-            if (tcVarMi)
-                return new ErrorResult("Bu TC/Pass zaten kayıtlı!");
+            if (uye.OkulNo.Length < 2 || uye.OkulNo.Length > 20)
+                return new ErrorResult("Okul numarası 2-20 karakter aralığında olmalıdır.");
 
-            if (string.IsNullOrWhiteSpace(uye.Ad) || uye.Ad.Length < 2)
+            var okulNoKontrol = _uyeDal.GetListByFilter(x => x.OkulNo == uye.OkulNo && x.UyeId != uye.UyeId);
+            if (okulNoKontrol.IsSuccess && okulNoKontrol.Data.Any())
+                return new ErrorResult("Bu okul numarası ile kayıtlı başka bir öğrenci var.");
+
+            if (string.IsNullOrWhiteSpace(uye.Ad) || uye.Ad.Trim().Length < 2)
                 return new ErrorResult("Ad en az 2 karakter olmalıdır.");
 
             if (string.IsNullOrWhiteSpace(uye.Soyad))
                 return new ErrorResult("Soyad zorunludur.");
 
+            if (string.IsNullOrWhiteSpace(uye.Sinif))
+                return new ErrorResult("Sınıf boş bırakılamaz.");
+
+            if (string.IsNullOrWhiteSpace(uye.Sube))
+                return new ErrorResult("Şube boş bırakılamaz.");
+
             if (uye.CinsiyetId <= 0)
                 return new ErrorResult("Cinsiyet seçilmelidir.");
 
-            if (uye.DogumTarihi == default ||
-                uye.DogumTarihi.Year < 1900 ||
-                uye.DogumTarihi > DateTime.Now)
+            if (uye.DogumTarihi == default || uye.DogumTarihi.Year < 1900 || uye.DogumTarihi > DateTime.Now)
                 return new ErrorResult("Doğum tarihi geçersiz.");
 
-            if (string.IsNullOrWhiteSpace(uye.Telefon) ||
-                !PhoneRegex.IsMatch(uye.Telefon))
-                return new ErrorResult("Telefon formatı hatalı. (05XXXXXXXXX)");
+            if (string.IsNullOrWhiteSpace(uye.Telefon) || !PhoneRegex.IsMatch(uye.Telefon))
+                return new ErrorResult("Telefon formatı hatalı. Örnek: 05XXXXXXXXX");
 
-            if (!string.IsNullOrWhiteSpace(uye.Eposta) &&
-                !MailRegex.IsMatch(uye.Eposta))
+            if (!string.IsNullOrWhiteSpace(uye.Eposta) && !MailRegex.IsMatch(uye.Eposta))
                 return new ErrorResult("E-posta formatı geçersiz.");
 
-            if (string.IsNullOrWhiteSpace(uye.Adres) || uye.Adres.Length < 5)
+            if (string.IsNullOrWhiteSpace(uye.VeliAdSoyad))
+                return new ErrorResult("Veli adı soyadı boş bırakılamaz.");
+
+            if (string.IsNullOrWhiteSpace(uye.VeliTelefon) || !PhoneRegex.IsMatch(uye.VeliTelefon))
+                return new ErrorResult("Veli telefonu formatı hatalı. Örnek: 05XXXXXXXXX");
+
+            if (string.IsNullOrWhiteSpace(uye.Adres) || uye.Adres.Trim().Length < 5)
                 return new ErrorResult("Adres çok kısa veya boş.");
 
             if (string.IsNullOrWhiteSpace(uye.AdresDetay))
@@ -65,30 +80,43 @@ namespace Kutuphane.BLL.Concrete
 
             return new SuccessResult();
         }
+
         public IResult AddService(Uye entity)
         {
             var valid = Validate(entity);
             if (!valid.IsSuccess)
                 return valid;
 
+            entity.AktifMi = true;
             return _uyeDal.Add(entity);
         }
+
         public IResult UpdateService(Uye entity)
         {
+            if (entity == null)
+                return new ErrorResult("Öğrenci bilgisi boş olamaz.");
+
+            // Pasife alma işleminde eski kayıtlarda okul alanları eksik olabilir; veri kaybı olmaması için sadece durum güncellenir.
+            if (entity.AktifMi == false)
+                return _uyeDal.Update(entity);
+
             var valid = Validate(entity);
             if (!valid.IsSuccess)
                 return valid;
 
             return _uyeDal.Update(entity);
         }
+
         public IDataResult<Uye> GetByFilterService(Expression<Func<Uye, bool>>? predicate = null)
         {
             return _uyeDal.GetByFilter(predicate);
         }
+
         public IDataResult<List<Uye>> GetListByFilterService(Expression<Func<Uye, bool>>? predicate = null)
         {
             return _uyeDal.GetListByFilter(predicate);
         }
+
         public IDataResult<List<UyeDto>> UyeListeDetayliGetirServis(Expression<Func<Uye, bool>>? predicate = null)
         {
             return _uyeDal.UyeListeDetayliGetir(predicate);

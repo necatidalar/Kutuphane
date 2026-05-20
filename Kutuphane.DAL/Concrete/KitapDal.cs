@@ -1,4 +1,4 @@
-﻿using Core.DataAccess.Repository;
+using Core.DataAccess.Repository;
 using Core.Utility.Results;
 using Kutuphane.DAL.Abstract;
 using Kutuphane.DAL.Contexes;
@@ -11,7 +11,6 @@ namespace Kutuphane.DAL.Concrete
 {
     public class KitapDal : EfRepositoryBase<Kitap, KutuphaneDbContext>, IKitapDal
     {
-
         public IDataResult<List<KitapDto>> KitapListeDetayliGetir(Expression<Func<Kitap, bool>>? predicate = null)
         {
             try
@@ -42,6 +41,7 @@ namespace Kutuphane.DAL.Concrete
                         Stok = k.Stok,
                         Aktif = k.Aktif
                     }).ToList();
+
                 return new SuccessDataResult<List<KitapDto>>(dto);
             }
             catch (Exception e)
@@ -49,6 +49,7 @@ namespace Kutuphane.DAL.Concrete
                 return new ErrorDataResult<List<KitapDto>>(e.Message);
             }
         }
+
         public IDataResult<List<OduncKitapDto>> OduncIcinListeGetir(Expression<Func<Kitap, bool>>? predicate = null)
         {
             try
@@ -64,17 +65,15 @@ namespace Kutuphane.DAL.Concrete
                         ISBN = k.ISBN ?? string.Empty,
                         YazarId = k.YazarId,
                         Yazar = $"{k.Yazar.Ad} {k.Yazar.Soyad}",
-
+                        Stok = k.Stok
                     }).ToList();
+
                 return new SuccessDataResult<List<OduncKitapDto>>(dto);
             }
             catch (Exception e)
             {
                 return new ErrorDataResult<List<OduncKitapDto>>(e.Message);
             }
-
-
-
         }
     }
 }

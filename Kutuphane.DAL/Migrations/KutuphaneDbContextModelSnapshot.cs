@@ -801,6 +801,18 @@ namespace Kutuphane.DAL.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar");
 
+                    b.Property<string>("OkulNo")
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar");
+
+                    b.Property<string>("Sinif")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar");
+
+                    b.Property<string>("Sube")
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar");
+
                     b.Property<string>("Soyad")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -816,9 +828,21 @@ namespace Kutuphane.DAL.Migrations
                         .HasMaxLength(15)
                         .HasColumnType("varchar");
 
+                    b.Property<string>("VeliAdSoyad")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar");
+
+                    b.Property<string>("VeliTelefon")
+                        .HasMaxLength(15)
+                        .HasColumnType("varchar");
+
                     b.HasKey("UyeId");
 
                     b.HasIndex("CinsiyetId");
+
+                    b.HasIndex("OkulNo")
+                        .IsUnique()
+                        .HasFilter("[OkulNo] IS NOT NULL AND [OkulNo] <> ''");
 
                     b.ToTable("Uyeler");
                 });

@@ -1,4 +1,4 @@
-﻿namespace Kutuphane.UI.Theme
+﻿namespace Kutuphane.UI.UIMetodlar
 {
     public static class DataGridThemeManager
     {

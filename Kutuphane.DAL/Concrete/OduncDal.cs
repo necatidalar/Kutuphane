@@ -24,6 +24,9 @@ namespace Kutuphane.DAL.Concrete
                     {
                         OduncId = o.OduncId,
                         UyeId = o.UyeId,
+                        UyeOkulNo = o.Uye.OkulNo,
+                        UyeSinif = o.Uye.Sinif,
+                        UyeSube = o.Uye.Sube,
                         UyeAd = o.Uye.Ad,
                         UyeSoyad = o.Uye.Soyad,
                         UyeTelefon = o.Uye.Telefon,

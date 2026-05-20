@@ -3,7 +3,6 @@ using Kutuphane.BLL.Concrete;
 using Kutuphane.DAL.Concrete;
 using Kutuphane.DAL.Contexes;
 using Kutuphane.Model.Entity;
-using Kutuphane.UI.Theme;
 using Kutuphane.UI.UIMetodlar;
 using System.ComponentModel;
 

@@ -1,4 +1,4 @@
-﻿using Kutuphane.Model.Entity;
+using Kutuphane.Model.Entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -8,6 +8,9 @@ namespace Kutuphane.DAL.Concrete.Configuration
     {
         public void Configure(EntityTypeBuilder<Kitap> builder)
         {
+            // Stok güncellemelerinde trigger varsa EF Core OUTPUT clause hatasını engeller.
+            builder.ToTable("Kitaplar", tb => tb.UseSqlOutputClause(false));
+
             builder.HasKey(k => k.KitapId);
             builder.Property(k => k.KitapAdi).IsRequired().HasColumnType("nvarchar").HasMaxLength(200);
             builder.Property(k => k.ISBN).IsRequired(false).HasColumnType("nvarchar").HasMaxLength(25);

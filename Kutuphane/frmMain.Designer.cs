@@ -449,7 +449,7 @@ namespace Kutuphane.UI
             label2.Name = "label2";
             label2.Size = new Size(136, 25);
             label2.TabIndex = 1;
-            label2.Text = "👥 Toplam Üye";
+            label2.Text = "👥 Toplam Öğrenci";
             // 
             // panel_Odunc
             // 
@@ -621,7 +621,7 @@ namespace Kutuphane.UI
             uyeToolStripMenuItem.Name = "uyeToolStripMenuItem";
             uyeToolStripMenuItem.Size = new Size(138, 24);
             uyeToolStripMenuItem.Tag = "frmUyeIslemleri";
-            uyeToolStripMenuItem.Text = "👥 Üye İşlemleri";
+            uyeToolStripMenuItem.Text = "👥 Öğrenci İşlemleri";
             uyeToolStripMenuItem.Click += menuStrip_Click;
             // 
             // personelToolStripMenuItem
